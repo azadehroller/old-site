@@ -1,0 +1,508 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+
+{# Cards #}
+{% set cards = module.cards %}
+
+{# Fees #}
+{% set fees = module.table %}
+
+{# Content #}
+{% set eyebrow  = module.content.eyebrow %}
+{% set title  = module.content.title %}
+{% set text  = module.content.text %}
+
+{# Styles #}
+{% set theme = module.styles.content.theme %}
+{% set heading_type = module.styles.content.heading_type %}
+{% set alignment = module.styles.content.textalignment.text_align %}
+{% set text_type = module.styles.content.text_type %}
+{% set eyebrow_type = module.styles.content.eyebrow_type %}
+{% set display_type = module.styles.content.display_type %}
+
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='') %}
+    {% set textColor = (themeColor == 'light') ? onDarkColor : (themeColor == 'gxscore') ? gxColor : defaultColor %}
+{{ textColor }}
+{% endmacro %}
+
+{% macro heading(tag, title, display_tag)%}
+<{{tag || "h1"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {% if tag == 'h1'%}text-balance{%endif%}">{{title || "ROLLER Payments"}}</{{tag || "h1"}}>
+{% endmacro%}
+
+{% macro eyebrow(tag, eyebrow_type)%}
+<{{tag || "div"}} class="{{ setTextColor(theme, 'text-secondary-50', '', 'text-gx-90') }} uppercase font-extrabold {% if eyebrow_type %}small{% endif %}">{{ eyebrow || "Pricing"}}</{{tag || "div"}}>
+{% endmacro%}
+
+{# Styles #}
+{% set button_styles_kind = module.styles.button.kind %}
+{% set button_styles_icon_position = module.styles.button.icon_position %}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+
+        #js-rp-prices-{{name}} > span {
+            display: none;
+        }
+
+        #js-rp-prices-{{name}} > span.-active {
+            display: inline;
+        }
+
+        .fee-title:hover .tooltip {
+            opacity: 1;
+            transition-timing-function: cubic-bezier(.165,.84,.44,1);
+            transform: translateY(calc(-100% - 1px));
+        }
+
+        .tooltip {
+            opacity: 0;
+            position: absolute;
+            left: -16px;
+            right: -10px;
+            top: 0;
+            border-radius: 8px;
+            pointer-events: none;
+            background: #fff;
+            color: #033180;
+            font-weight: 600;
+            transition: transform, opacity, .15s ease-in-out;
+            transform-origin: 20px calc(100% + 12px);
+            transform: translateY(calc(-100% + 10px)) scale(.75);
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+        }
+
+        .tooltip:before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 34px;
+            width: 12px;
+            height: 12px;
+            transform: rotate(45deg);
+            border-radius: 0 0 4px 0;
+            background-color: inherit;
+            box-shadow: 3px 3px 5px rgba(82,95,127,.04);
+        }
+
+        .tooltip-right {
+            width: fit-content;
+            transform-origin: right calc(100% + 20px);
+        }
+        
+        .tooltip-right:before {
+            content: "";
+            position: absolute;
+            left: calc(100% - 40px);
+        }
+
+        .tooltip-middle {
+            left: -40px;
+            right: -40px;
+            width: fit-content;
+            transform-origin: center bottom;
+        }
+
+        .tooltip-middle:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+        }
+
+      {# Button wrapper #}
+      {% if alignment %}
+        .button-wrapper {
+          text-align: {{ alignment.horizontal_align }};
+        }
+      {% endif %}
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+<section id="rp-pricing-{{name}}" class="grid gap-5 scroll-mt-10">
+    <div class="flex items-center flex-col lg:grid lg:grid-cols-4 gap-5">
+        <header class="grid gap-4 text-{{alignment|lower || "left"}} {{ setTextColor(theme, 'text-neutral-white"', 'text-primary-50', 'text-gx-80') }}">
+            {% if eyebrow %}
+                <div>
+                    {{ eyebrow(eyebrow_type, eyebrow) }}
+                </div>
+            {% endif %}
+            {{ heading(heading_type, title, display_type) }}
+            {% if text %}
+                <div class="text-{{text_type}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4 [&>ul>li]:ml-2">{{ text || "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice & guided training sessions to get the most value from ROLLER." }}</div>
+            {% endif %}
+        </header>
+        <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 justify-center gap-4 md:gap-3 lg:gap-5 md:mx-auto mb-4">
+            {% for card in cards %}
+
+                {% set card_data = {
+                    'header': {
+                        'title': card.header.content.title,
+                        'subtitle': card.header.content.subtitle,
+                    },
+                    'price': {
+                        'display_pricing': card.header.price.display_pricing,
+                        'annually': {
+                            'usd': card.header.price.annually_fees.usd,
+                            'aud': card.header.price.annually_fees.aud,
+                            'eur': card.header.price.annually_fees.eur,
+                            'gbp': card.header.price.annually_fees.gbp,
+                            'cad': card.header.price.annually_fees.cad
+                        },
+                        'monthly': {
+                            'usd': card.header.price.monthly_fees.usd,
+                            'aud': card.header.price.monthly_fees.aud,
+                            'eur': card.header.price.monthly_fees.eur,
+                            'gbp': card.header.price.monthly_fees.gbp,
+                            'cad': card.header.price.monthly_fees.cad
+                        }
+                    },
+                    'tooltip': {
+                        'annually': {
+                            'fee': card.header.price.annually_fees.tooltip,
+                        },
+                        'monthly': {
+                            'fee': card.header.price.monthly_fees.tooltip,
+                        },
+                    },
+                    'features': {
+                        'feature_items': card.features.feature_items,
+                        'icon': card.features.icon,
+                        'heading': card.features.heading
+                    },
+                    'button': {
+                        'label': card.header.cta.cta_label,
+                        'url': {
+                            "type": card.header.cta.cta_link.url.type,
+                            "href": card.header.cta.cta_link.url.href,
+                            'no_follow': card.header.cta.cta_link.no_follow,
+                            'open_in_new_tab': card.header.cta.cta_link.open_in_new_tab
+                        },
+                        'icon': card.header.cta.icon
+                    }
+                } %}
+
+                {% if card_data.button.url is equalto 'EMAIL_ADDRESS' %}
+                {% set {% set card_data.button.url.href = card_data.button.url.href %}
+                = 'mailto:' + href %}
+                {% endif %}
+                {% if card_data.button.url.no_follow %}
+                {% do rel.append('nofollow') %}
+                {% endif %}
+                {% if card_data.button.url.open_in_new_tab %}
+                {% do rel.append('noopener') %}
+                {% endif %}
+
+            <div class="text-center bg-neutral-white rounded-[32px] box-gx-score p-5 relative flex flex-col justify-center gap-5">
+                <div class="flex flex-col gap-y-2">
+                    <div class="text-lg uppercase font-extrabold {{ setTextColor(theme, 'text-secondary-50', '', 'text-gx-90') }}">{{ card_data.header.title }}</div>
+                    <div class="text-base {{ setTextColor(theme, 'text-primary-50', '', 'text-gx-80') }}">{{ card_data.header.subtitle }}</div>
+                    {% if card_data.price.display_pricing %}
+                    <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2">
+                            <h2 class="flex flex-col justify-center tracking-tighter">
+                                <span id="js-rp-prices-{{name}}" class="{{ setTextColor(theme, 'text-primary-50', '', 'text-gx-80') }} fee-title relative">
+                                    <span class="-usd -active">{{ card_data.price.annually.usd is not none ? '$' ~ card_data.price.annually.usd ~ '<span class="text-[2rem]">/mo</span>' : '' }}</span>
+                                    <span class="-aud">{{ card_data.price.annually.aud is not none ? '$' ~ card_data.price.annually.aud ~ '<span class="text-[2rem]">/mo</span>' : '' }}</span>
+                                    <span class="-gbp">{{ card_data.price.annually.gbp is not none ? '$' ~ card_data.price.annually.gbp ~ '<span class="text-[2rem]">/mo</span>' : '' }}</span>
+                                    <span class="-eur">{{ card_data.price.annually.eur is not none ? '$' ~ card_data.price.annually.eur ~ '<span class="text-[2rem]">/mo</span>' : '' }}</span>
+                                    <span class="-ca">{{ card_data.price.annually.cad is not none ? '$' ~ card_data.price.annually.cad ~ '<span class="text-[2rem]">/mo</span>' : '' }}</span>
+                                    {% if card_data.tooltip.annually.fee %}
+                                        <div class="tooltip tooltip-middle box-shadow-onlight">{{ card_data.tooltip.annually.fee || 'Visa & Mastercard fees' }}</div>
+                                    {% endif %}
+                                </span>
+                            </h2>
+                            <span id="js-rp-prices-{{name}}" class="{{ setTextColor(theme, 'text-primary-50', '', 'text-gx-80') }} fee-title relative">
+                                <span class="-usd -active">{{ card_data.price.monthly.usd | default('') != '' ? 'billed annually or $' ~ card_data.price.monthly.usd : '' }}</span>
+                                <span class="-aud">{{ card_data.price.monthly.aud | default('') != '' ? 'billed annually or $' ~ card_data.price.monthly.aud ~ ' billed monthly' : '' }}</span>
+                                <span class="-gbp">{{ card_data.price.monthly.gbp | default('') != '' ? 'billed annually or $' ~ card_data.price.monthly.gbp ~ ' billed monthly' : '' }}</span>
+                                <span class="-eur">{{ card_data.price.monthly.eur | default('') != '' ? 'billed annually or $' ~ card_data.price.monthly.eur ~ ' billed monthly' : '' }}</span>
+                                <span class="-ca">{{ card_data.price.monthly.cad | default('') != '' ? 'billed annually or $' ~ card_data.price.monthly.cad ~ ' billed monthly' : '' }}</span>
+                                {% if  card_data.price.monthly.tooltip %}
+                                    <div class="tooltip tooltip-middle box-shadow-onlight">{{  card_data.price.monthly.tooltip || 'Transaction fee' }}</div>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    {% endif%}
+                </div>
+                {% if card_data.button.label %}
+                    <div class="mt-auto">
+                        <a class="{{ button.buttons_settings(button_styles_kind || 'primary') }} font-serif" href="{{ card_data.button.url.href }}"
+                        id="button_{{name}}"
+                        {% if card_data.button.url.open_in_new_tab %}target="_blank"{% endif %}
+                        {% if button_rel %}rel="{{ button_rel|join(" ") }}"{% endif %}
+                        >
+                            {% if svg_icon %}
+                            <div class="flex justify-center items-center {% if button_styles_icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+                                {{svg_icon}}
+                            </div>
+                            {% endif %}
+                            {# Button label #}
+                            <span>{{ card_data.button.label }}</span>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="hidden lg:block">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div></div>
+            <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-5">
+            {% for card in cards %}
+                {% set title = card.header.content.title %}
+                <div class="py-2 px-3 text-gx-70 font-semibold capitalize text-center text-lg">{{title}}</div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="border-l-2 border-gx-11">
+            {% for fee in fees %}
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-4 transition ease-in{% if !fee.content.heading %} notHeadingElem row-item hover:bg-[#ECDEFF]{% else %} pt-4{% endif%}">
+                <div class="relative grid gap-4 text-gx-70 fee-title {% if fee.content.heading %}border-l-2 py-2 px-3 font-semibold {%  else %}py-2 px-3{% endif %}">
+                    <div class="flex items-center">
+                        {{fee.content.title || 'Item name in here'}}
+                        {% if fee.content.tooltip %}<span class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="#6ba0fa" fill-rule="evenodd" d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z" clip-rule="evenodd"/></svg></span>{% endif %}
+                        {% if fee.content.tooltip %}
+                            <div class="tooltip tooltip-right box-shadow-onlight">{{ fee.content.tooltip }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 justify-center gap-5 md:mx-auto text-center text-sm text-gx-80">
+                    {#TODO: re-thing how to improve this code  #}
+                    {% for package in ['free', 'gxs_lite', 'gxs_pro'] %}
+                        {% if fee[package] %}
+                            <div class="flex justify-center items-center py-2 px-3">
+                                {% if package == 'free' %}
+                                    {% if fee.free_label %}
+                                        {{ fee.free_label }}
+                                    {% else %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.205 5.59229L11.625 16.1723L7.445 12.0023L6.035 13.4123L11.625 19.0023L23.625 7.00229L22.205 5.59229ZM17.965 7.00229L16.555 5.59229L10.215 11.9323L11.625 13.3423L17.965 7.00229ZM5.965 19.0023L0.375 13.4123L1.795 12.0023L7.375 17.5923L5.965 19.0023Z" fill="#C980FF"/>
+                                        </svg>
+                                    {% endif %}
+                                {% elif package == 'gxs_lite' %}
+                                    {% if fee.gxs_lite_label %}
+                                        {{ fee.gxs_lite_label }}
+                                    {% else %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.205 5.59229L11.625 16.1723L7.445 12.0023L6.035 13.4123L11.625 19.0023L23.625 7.00229L22.205 5.59229ZM17.965 7.00229L16.555 5.59229L10.215 11.9323L11.625 13.3423L17.965 7.00229ZM5.965 19.0023L0.375 13.4123L1.795 12.0023L7.375 17.5923L5.965 19.0023Z" fill="#C980FF"/>
+                                        </svg>
+                                    {% endif %}
+                                {% elif package == 'gxs_pro' %}
+                                    {% if fee.gxs_pro_label %}
+                                        {{ fee.gxs_pro_label }}
+                                    {% else %}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.205 5.59229L11.625 16.1723L7.445 12.0023L6.035 13.4123L11.625 19.0023L23.625 7.00229L22.205 5.59229ZM17.965 7.00229L16.555 5.59229L10.215 11.9323L11.625 13.3423L17.965 7.00229ZM5.965 19.0023L0.375 13.4123L1.795 12.0023L7.375 17.5923L5.965 19.0023Z" fill="#C980FF"/>
+                                        </svg>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            {% else %}
+                            <div class="py-2 px-3">-</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="block lg:hidden">
+        {% for fee in fees %}
+            <div class="row-item relative grid gap-4 text-gx-80 {% if !fee.content.heading %}notHeadingElem{% endif %} {% if fee.content.heading %}border-l-2 py-2 px-3 font-semibold {%  else %}py-3 px-0{% endif %}">
+                <div class="flex flex-col">
+                    <div id="js-fee-heading" class="flex {% if !fee.content.heading %}cursor-pointer px-3 font-semibold text-lg items-center border-l-2{% endif %}">
+                    <span aria-controls="faq-{{loop.index}}" aria-expanded="false">
+                            {{fee.content.title}}
+                        </span>
+                        {% if !fee.content.heading %}
+                        <span class="ml-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4.94 5.72668L8 8.78002L11.06 5.72668L12 6.66668L8 10.6667L4 6.66668L4.94 5.72668Z" fill="#3C0091"/>
+                            </svg>
+                            <svg class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4.94 10.2733L8 7.21998L11.06 10.2733L12 9.33331L8 5.33331L4 9.33331L4.94 10.2733Z" fill="#3C0091"/>
+                            </svg>
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="hidden">
+                        <div class="grid grid-cols-5 mt-3">
+                            <div class="col-span-2">
+                            {% for card in cards %}
+                                {% set title = card.header.content.title %}
+                                <div class="py-2 px-3 text-gx-80 capitalize">{{title}}</div>
+                            {% endfor %}
+                            </div>
+                            <div class="grid justify-end text-sm col-span-3">
+                                {% for package in ['free', 'gxs_lite', 'gxs_pro'] %}
+                                    {% if fee[package] %}
+                                        <div class="flex justify-center items-center py-2 px-3">
+                                            {% if package == 'free' %}
+                                                {% if fee.free_label %}
+                                                    {{ fee.free_label }}
+                                                {% else %}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.205 5.59229L11.625 16.1723L7.445 12.0023L6.035 13.4123L11.625 19.0023L23.625 7.00229L22.205 5.59229ZM17.965 7.00229L16.555 5.59229L10.215 11.9323L11.625 13.3423L17.965 7.00229ZM5.965 19.0023L0.375 13.4123L1.795 12.0023L7.375 17.5923L5.965 19.0023Z" fill="#C980FF"/>
+                                                    </svg>
+                                                {% endif %}
+                                            {% elif package == 'gxs_lite' %}
+                                                {% if fee.gxs_lite_label %}
+                                                    {{ fee.gxs_lite_label }}
+                                                {% else %}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.205 5.59229L11.625 16.1723L7.445 12.0023L6.035 13.4123L11.625 19.0023L23.625 7.00229L22.205 5.59229ZM17.965 7.00229L16.555 5.59229L10.215 11.9323L11.625 13.3423L17.965 7.00229ZM5.965 19.0023L0.375 13.4123L1.795 12.0023L7.375 17.5923L5.965 19.0023Z" fill="#C980FF"/>
+                                                    </svg>
+                                                {% endif %}
+                                            {% elif package == 'gxs_pro' %}
+                                                {% if fee.gxs_pro_label %}
+                                                    {{ fee.gxs_pro_label }}
+                                                {% else %}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.205 5.59229L11.625 16.1723L7.445 12.0023L6.035 13.4123L11.625 19.0023L23.625 7.00229L22.205 5.59229ZM17.965 7.00229L16.555 5.59229L10.215 11.9323L11.625 13.3423L17.965 7.00229ZM5.965 19.0023L0.375 13.4123L1.795 12.0023L7.375 17.5923L5.965 19.0023Z" fill="#C980FF"/>
+                                                    </svg>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                        {% else %}
+                                        <div class="py-2 px-3 text-center">-</div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="py-2 flex justify-center gap-2 text-gx-70 font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 8L6 14L7.41 15.41L12 10.83L16.59 15.41L18 14L12 8Z" fill="#3C0091"/>
+        </svg>
+        <span id="js-back-to-top-{{name}}" class="cursor-pointer">Back to top</span>
+    </div>
+</section>
+
+{# JavaScript #}
+{% require_js %}
+    <script>
+        const btnBacktoTopEl = document.querySelector('#js-back-to-top-{{name}}');
+
+        /**
+         * Toggles the presence of a specified class on an HTML element based on a given condition.
+         * 
+         * @param {HTMLElement} element - The HTML element on which the class will be toggled.
+         * @param {string} className - The name of the class to be toggled.
+         * @param {boolean} condition - The condition that determines whether the class should be added or removed.
+         * @returns {void}
+         */
+        const toggleClass = (element, className, condition) => {
+            if (condition) {
+                element.classList.add(className);
+            } else {
+                element.classList.remove(className);
+            }
+        };
+
+        /**
+         * Toggles the visibility of an accordion element.
+         * 
+         * @param {HTMLElement} accordionHeader - The header element of the accordion.
+         */
+        const toggleAccordion = (accordionHeader) => {
+            const target = accordionHeader.nextElementSibling;
+            const svgElements = accordionHeader.querySelectorAll('svg');
+            const expanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+
+            accordionHeader.setAttribute('aria-expanded', !expanded);
+            target.classList.toggle("hidden");
+            accordionHeader.classList.add("-open");
+            accordionHeader.classList.remove("-closed");
+            target.hidden = expanded;
+
+            svgElements.forEach((svgElement) => {
+                svgElement.classList.toggle("hidden");
+            });
+        };
+
+        /**
+         * Function to toggle fees.
+         * Adds event listeners to elements with the id 'js-fee-heading'.
+         * When one of these elements is clicked, it calls the 'toggleAccordion' function passing the clicked element as an argument.
+         */
+        const toggleFees = () => {
+            const feeHeadingElems = document.querySelectorAll('#js-fee-heading');
+
+            feeHeadingElems.forEach((accordionHeader) => {
+                accordionHeader.addEventListener('click', () => {
+                    toggleAccordion(accordionHeader);
+                });
+            });
+        };
+
+        /**
+         * Handles the click event on an accordion header.
+         * @param {HTMLElement} accordionHeader - The header element of an accordion.
+         */
+        const handleAccordionClick = (accordionHeader) => {
+            toggleAccordion(accordionHeader);
+        };
+
+        /**
+         * Function to handle the loading of data and perform currency conversion and UI updates.
+         * @param {string} startingCurrency - The starting currency.
+         */
+        const handleLoad = () => {
+            if (startingCurrency) {
+                const selectPricesElements = document.querySelectorAll('#js-rp-prices-{{name}} > span');
+
+                selectPricesElements.forEach((el) => {
+                    const isCurrencyMatch = el.classList.contains('-' + startingCurrency);
+                    toggleClass(el, '-active', isCurrencyMatch);
+                });
+            }
+        }
+
+        /**
+         * This code snippet defines a function called `handleBackToTopClick` that is responsible for scrolling the page to a specific element when a button is clicked.
+         *
+         * @example
+         * handleBackToTopClick();
+         */
+        const handleBackToTopClick = () => {
+            const scrollToElement = (elId) => {
+                const targetEl = document.getElementById(elId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ block: "start", behavior: 'smooth'});
+                } else {
+                    console.error(`Element with id ${elId} not found`);
+                }
+            };
+
+            scrollToElement("rp-pricing-{{name}}");
+        };
+
+
+        /**
+         * @name initialize
+         * @description Initializes the code by adding a 'load' event listener to the window object.
+         * When the 'load' event is triggered, the 'handleLoad' function will be called.
+         */
+        const initialize = () => {
+            window.addEventListener('load', handleLoad);
+            window.addEventListener('load', toggleFees);
+            btnBacktoTopEl.addEventListener("click", handleBackToTopClick);
+        };
+
+        // Call the main initialize function
+        initialize();
+
+    </script>
+{% end_require_js %}

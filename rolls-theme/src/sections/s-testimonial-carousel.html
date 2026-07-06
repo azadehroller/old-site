@@ -1,0 +1,28 @@
+<!--
+    templateType: section
+    label: Testimonial Carousel
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/testimonial-carousel.png
+    description: "Stand alone section withe the testimonial carousel module"
+-->
+
+{% dnd_section 
+     background_linear_gradient={
+        "direction": "to right",
+        "colors": [
+        "#EBF2FE",
+        "#F5F8FF"
+        ]
+    }
+    class="s-layout s-testimonial-carousel"
+%}
+    {% {% dnd_module 'name'
+        path='../modules/testimonial-carousel',
+        label="Module: Testimonial Carousel",
+        heading={
+            "eyebrow": context.eyebrow || 'TRUSTED PARTNER FOR ATTRACTION VENUES AROUND THE WORLD'
+        }
+    %}
+    {% end_dnd_module %}%}
+
+{% end_dnd_section %}

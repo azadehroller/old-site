@@ -1,0 +1,12 @@
+{% require_css %}
+    <style>
+        {% scope_css %}
+        {% end_scope_css %}
+    </style>
+{% end_require_css %}
+
+<div id="confetti-container" class="absolute inset-0 flex h-full w-full flex-col items-center justify-center overflow-hidden">
+  <div class="h-4 w-full absolute top-0 bg-announcement"></div>
+</div>
+
+{{ require_js('https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"', "head") }} 

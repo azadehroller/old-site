@@ -1,0 +1,72 @@
+<div class="pulse-wave-container absolute bottom-0 left-0 right-0 h-64 pointer-events-none z-0" 
+     data-speed="{{ module.wave_speed or 'medium' }}" 
+     data-color="{{ module.wave_color or 'rgba(255,255,255,0.1)' }}">
+  
+  <!-- SVG Wave Animation -->
+  <svg class="absolute bottom-0 w-full h-full" viewBox="0 0 1200 320" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="waveGradient{{ module.id }}" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style="stop-color:{{ module.wave_color or 'rgba(255,255,255,0.2)' }};stop-opacity:1" />
+        <stop offset="100%" style="stop-color:{{ module.wave_color or 'rgba(255,255,255,0.05)' }};stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    
+    {% set wave_count = module.wave_count or 3 %}
+    {% for i in range(wave_count) %}
+      <path class="pulse-wave-path" 
+            data-wave="{{ i }}"
+            d="M0,160 C300,100 600,220 900,160 C1050,120 1150,180 1200,160 L1200,320 L0,320 Z"
+            fill="url(#waveGradient{{ module.id }})"
+            opacity="{{ (0.8 - i * 0.2) | max(0.2) }}"
+            style="animation-delay: {{ i * 0.5 }}s;">
+        <animateTransform 
+          attributeName="transform" 
+          type="translate"
+          values="0,0; 50,0; 0,0"
+          dur="{{ 8 + i * 2 }}s"
+          repeatCount="indefinite"/>
+      </path>
+    {% endfor %}
+  </svg>
+  
+  <!-- Additional particle effects -->
+  {% if module.show_particles %}
+    <div class="wave-particles absolute inset-0">
+      {% for i in range(12) %}
+        <div class="wave-particle absolute w-1 h-1 bg-white/30 rounded-full"
+             style="left: {{ (i * 8 + 5) }}%; 
+                    bottom: {{ 20 + (i % 3) * 15 }}px;
+                    animation-delay: {{ i * 0.3 }}s;"></div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.pulse-wave-path {
+  filter: blur({{ module.wave_blur or 0 }}px);
+}
+
+.wave-particle {
+  animation: floatUp {{ 4 + (loop.index0 % 3) }}s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+    opacity: 0.3; 
+  }
+  50% { 
+    transform: translateY(-20px) scale(1.2); 
+    opacity: 0.8; 
+  }
+}
+
+.pulse-wave-container[data-speed="slow"] .pulse-wave-path animateTransform {
+  dur: 12s;
+}
+
+.pulse-wave-container[data-speed="fast"] .pulse-wave-path animateTransform {
+  dur: 4s;
+}
+</style>

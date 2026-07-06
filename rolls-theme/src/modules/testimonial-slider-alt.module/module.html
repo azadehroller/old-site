@@ -1,0 +1,126 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+{% set slides = module.slides %}
+{% set filter = module.display_filter %}
+{% set spacing = module.styles.layout.spacing.css %}
+
+{# Styles #}
+{% require_css %}
+    <style>
+    {% scope_css %}
+      {#
+        #testimonial-slider-{{name}} {
+            --container-size: 1247px;
+        }
+        
+        .slide-center {
+            transform: translateX(calc(max(var(--container-size), 100vw) / 2 - calc(var(--container-size) / 2)))
+        }
+        #}
+    {% end_scope_css %}
+    </style>
+{% end_require_css%}
+
+{# Section Markup #}
+<section id="testimonial-slider-{{name}}" class="relative testiminial-slider-alt">
+  {% if  module.heading %}
+  <header>
+    <h2>
+      {{module.heading}}
+    </h2>
+  </header>
+  {% endif %}
+    <div class="h-[463px] w-screen relative {#right-[50%] left-[50%] ml-[-50vw] mr-[-50vw]#}">
+        <ul id="js-testimonial-slider-{{name}}" class="slider flex mt-0 list-none h-[540px] overflow-x-auto snap-x snap-mandatory cards-slider">
+        {% for item in slides %}
+            {# Button Variables #}
+            {% set btn_label = item.settings.button_text %}
+            {% set href = item.settings.link.url.href %}
+            {% set rel = [] %}
+            {% set url_type = item.settings.link.url.type %}
+            {% set no_follow = item.settings.link.no_follow %}
+            {% set new_tab = item.settings.link.open_in_new_tab %}
+            {% set isAlternateCard = item.alternate_card %}
+            
+            {% set logo = item.image %}
+
+            {% set svg_icon = item.settings.svg %}
+            {% set icon_position = item.settings.icon_position %}
+
+
+            {# Sets attributes used for the link field #}
+            {% if url_type is equalto 'EMAIL_ADDRESS' %}
+            {% set href = 'mailto:' + href %}
+            {% endif %}
+            {% if no_follow %}
+              {% do rel.append('nofollow') %}
+            {% endif %}
+            {% if new_tab %}
+              {% do rel.append('noopener') %}
+              {% do rel.append('noreferrer') %}
+            {% endif %}
+            <li id="js-testimonial-item" class="slide snap-start snap-always shrink-0 {#mr-5 last:mr-0#} h-[460px]">
+                <div class="testimonial-card shadow-2xl {% if isAlternateCard %}alt-card{% else %}bg-[#0960F6]{% endif %} slide-center relative flex flex-col rounded-2xl mo-card-md">
+                    <div class="flex flex-col gap-{% if isAlternateCard %}2{% else %}4{% endif %} h-full">
+                      {% if logo.img.src %}
+                        <div>
+                            {% set sizeAttrs = 'width="88" height="48"' %}
+                            {% set loadingAttr = logo.img.loading != 'disabled' ? 'loading="{{ logo.img.loading }}"' : '' %}
+                            <img src="{{ logo.img.src }}" alt="{{ logo.img.alt }}" {{ loadingAttr }} {{ sizeAttrs }} class="object-fill h-[2.75rem] w-[5rem]">
+                        </div>
+                      {% endif %}
+                        <div class="content mb-xs {% if isAlternateCard %}text-[#0960F6]{% else %}text-neutral-white{% endif %} relative">
+                            {{ item.content.text || '<p>“We’ve seen about a <b>25% increase in sales</b> from our online checkout since moving to ROLLER. The ROLLER platform is more professional, easier to use, and helps us to sell more party bookings and gift cards.”</p>' }}
+                        </div>
+                        <div class="button-wrapper {% if not isAlternateCard %}pb-3{% endif %} flex items-end grow">
+                            <a class="ghost font-serif {% if isAlternateCard %}flex flex-col text-[#0960F6]{% else %}text-neutral-white{% endif %} flex gap-2 {% if isAlternateCard %} external-link-with-arrow {% else %} link-with-arrow{% endif %}   " href="{{ href }}"
+                            id="button_{{name}}"
+                            {% if new_tab %}target="_blank"{% endif %}
+                            {% if rel|length %}rel="{{ rel|join(' ') }}"{% endif %}
+                            >
+                                {# Button label #}
+                                <span>{{ btn_label || "Read the full story" }}</span>
+                              {% if isAlternateCard %}
+                              <div class="arrow-container">
+                              <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="104" height="104" fill="none"><g stroke="#0960F6" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" clip-path="url(#clip0_11118_79189)"><path class="path"  d="M21 82.868 100.868 3M21 3h80v80"/></g><defs><clipPath id="clip0_11118_79189"><path fill="#fff" d="M0 0h104v104H0z"/></clipPath></defs></svg>
+                              <svg class="arrow-duplicate" xmlns="http://www.w3.org/2000/svg" width="104" height="104" fill="none"><g stroke="#0960F6" stroke-linecap="round" stroke-linejoin="round" stroke-width="5" clip-path="url(#clip0_11118_79189)"><path class="path"  d="M21 82.868 100.868 3M21 3h80v80"/></g><defs><clipPath id="clip0_11118_79189"><path fill="#fff" d="M0 0h104v104H0z"/></clipPath></defs></svg>
+                              </div>
+<!--     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="arrow">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
+</svg> -->
+<!-- <svg xmlns="http://www.w3.org/2000/svg" width="201" height="201" viewBox="0 0 201 201" fill="none">  <path d="M82.505 116C83.885 116 85.005 117.12 85.005 118.5V198.5C85.005 199.88 83.885 201 82.505 201C81.125 201 80.005 199.88 80.005 198.5V124.4L4.275 200.14C3.295 201.12 1.715 201.12 0.735 200.14C-0.245 199.16 -0.245 197.58 0.735 196.6L76.335 121H2.505C1.125 121 0.005 119.88 0.005 118.5C0.005 117.12 1.125 116 2.505 116H82.505ZM191.505 7C192.885 7 194.005 8.12 194.005 9.5V89.5C194.005 90.88 192.885 92 191.505 92C190.125 92 189.005 90.88 189.005 89.5V15.4L113.275 91.13C112.295 92.11 110.715 92.11 109.735 91.13C108.755 90.15 108.755 88.57 109.735 87.59L185.335 12H111.505C110.125 12 109.005 10.88 109.005 9.5C109.005 8.12 110.125 7 111.505 7H191.505Z" fill="#0960F6"/> </svg> -->
+                          {% else %}
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#fff" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6Z"/></svg>
+                              {% endif %}  
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="prev-next-button-wrapper gap-2">
+        <button
+            id="js-button-previous"
+                class="inline-flex items-center cursor-pointer text-md sm:w-auto justify-center whitespace-nowrap bg-neutral-white rounded-3xl py-2 px-2 border-[1px] text-[#0960F6] border-[#0960F6] arrow-button"
+        >
+            <span class="sr-only">Previous slide</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <path fill="#0960F6" d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8Z"></path>
+            </svg>
+      </button>
+        <button
+            id="js-button-next"
+                class="inline-flex items-center cursor-pointer text-md sm:w-auto justify-center whitespace-nowrap bg-neutral-white rounded-3xl py-2 px-2 border-[1px] text-[#0960F6] border-[#0960F6] arrow-button"
+        >
+            <span class="sr-only">Next slide</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <path fill="#0960F6" d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8Z"></path>
+            </svg>
+      </button>
+    </div>
+</section>
+

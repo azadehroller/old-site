@@ -1,0 +1,80 @@
+[ {
+  "id" : "d2e8f808-da30-15a9-4226-ce095edcf7fe",
+  "name" : "badges",
+  "label" : "Badges",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : 4,
+    "sorting_label_field" : null,
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "6e37716a-c501-20ca-dd5a-4297f6e547f4",
+    "name" : "badge",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto_custom_max",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/G2-review-badge-1.png",
+      "alt" : "G2-review-badge-1",
+      "loading" : "lazy",
+      "width" : 150,
+      "height" : 101,
+      "max_width" : 150,
+      "max_height" : 101
+    }
+  }, {
+    "id" : "bd988480-c0d3-7d07-bdbd-26edf1490d38",
+    "name" : "badge_link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : true,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "badge" : {
+      "size_type" : "auto_custom_max",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/G2-review-badge-1.png",
+      "alt" : "G2-review-badge-1",
+      "loading" : "lazy",
+      "width" : 150,
+      "height" : 101,
+      "max_width" : 150,
+      "max_height" : 101
+    },
+    "badge_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : true,
+      "no_follow" : false
+    }
+  }
+} ]

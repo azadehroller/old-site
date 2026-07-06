@@ -1,0 +1,32 @@
+#js-button-stack {
+    list-style: none;
+}
+.button-all{
+  justify-content: center;
+  border-radius: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 980px;
+    padding: 8px 24px;
+  font-size: 16px;
+}
+.btn-list{padding-left:0;} 
+.button-all.transparent{background-color: transparent;border: 1px solid white; color: white;padding-top: .5rem;
+    padding-bottom: .5rem;
+  &:hover{    background-color: var(--primary-70); }
+}
+ .button-all.bright-blue{
+    background-color: #0960f6;
+    color: var(--neutral-white);
+    &:hover{
+      background-color: #011840;
+    }
+  }
+ .button-all.blue-10{
+    background-color: transparent;
+    color: #011840;
+    border: 1px solid #011840;
+    &:hover{
+      background-color: #D9E0EC;
+    }
+  }

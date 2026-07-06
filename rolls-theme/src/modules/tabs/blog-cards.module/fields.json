@@ -1,0 +1,204 @@
+[ {
+  "id" : "blog_sections",
+  "name" : "blog_sections",
+  "label" : "Blog Sections",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "blog_sections.section_title",
+    "name" : "section_title",
+    "label" : "Section Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Title"
+  }, {
+    "id" : "blog_sections.section_subtitle",
+    "name" : "section_subtitle",
+    "label" : "Section Subtitle",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "blog_sections.section_description",
+    "name" : "section_description",
+    "label" : "Section Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null
+  }, {
+    "id" : "ec009b19-cc69-513e-f040-b251fe4926ab",
+    "name" : "section_blog_types",
+    "label" : "Section blog types",
+    "help_text" : "The default type is trends.",
+    "inline_help_text" : "The default type is trends.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "v1", "Trends" ], [ "v2", "Analytics" ], [ "v3", "Ebooks" ], [ "v4", "Videos" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "v1"
+  }, {
+    "id" : "blog_sections.post_slugs",
+    "name" : "post_slugs",
+    "label" : "Blog Post Slugs",
+    "inline_help_text" : "When you want to add a new slug, go to the blog post you want to add in Hubspot. If the url in the Hubspot starts with: \n\"https://app.hubspot.com/blog/3375779/editor/6346243116/content\"\nThe 6346243116 number ( the number between the editor and content ) is used as the Blog Post Slug.\n\n",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "2d16b8d0-12ad-60d8-af09-7730c21a9d92",
+      "name" : "title",
+      "label" : "Title",
+      "help_text" : "If your page is not a blog post, you need to provide a title.",
+      "inline_help_text" : "If your page is not a blog post, you need to provide a title.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "65e72087-03d0-b8eb-9d52-54c243e4ab03",
+      "name" : "image",
+      "label" : "Image",
+      "help_text" : "If your page is not a blog post, you need to provide an image.",
+      "inline_help_text" : "If your page is not a blog post, you need to provide an image.",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : false,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }
+    }, {
+      "id" : "285beae0-cfc0-5b45-01cf-84b5d617ea0c",
+      "name" : "summary",
+      "label" : "Summary",
+      "help_text" : "If your page is not a blog post, you need to provide a summary text.",
+      "inline_help_text" : "If your page is not a blog post, you need to provide a summary text.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "0f6edb98-bb34-60d5-e781-5d58bcc01484",
+      "name" : "link",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "id" : "blog_sections.post_slugs.slug",
+      "name" : "slug",
+      "label" : "Slug",
+      "help_text" : "This is only needed if you do not provide the image, text and link.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "98a60714-6379-e768-f0eb-3c68d4064bef",
+      "name" : "page_field",
+      "label" : "Page",
+      "required" : false,
+      "locked" : false,
+      "type" : "page",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "image" : {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      },
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  }, {
+    "id" : "61c8f380-f62c-cae8-eec6-b63b8225db8b",
+    "name" : "icon",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "section_title" : "Title",
+    "section_blog_types" : "v1",
+    "post_slugs" : [ { } ],
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  } ]
+} ]

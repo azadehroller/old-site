@@ -1,0 +1,6 @@
+{% if module.svg_content %}
+  <figure class="interactive-svg block max-w-[769px]{% if module.enable_animation == true %} active{% endif %}">
+    {{ module.svg_content }}
+  </figure>
+{% endif %}
+

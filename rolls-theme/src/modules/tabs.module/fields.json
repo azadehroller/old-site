@@ -1,0 +1,552 @@
+[ {
+  "id" : "d5d18eef-75b8-8e48-e2eb-1e52b7346df8",
+  "name" : "tab_type",
+  "label" : "Tab type",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "regular", "Regular" ], [ "jobs", "Jobs Embedded" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "regular"
+}, {
+  "id" : "tabs",
+  "name" : "tabs",
+  "label" : "Tabs",
+  "inline_help_text" : "For Jobs mode: the first tab's heading, description, CTA and image will be used as the default for any tab that doesn't have its own content specified.",
+  "required" : true,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 10,
+    "sorting_label_field" : null,
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "tab_label",
+    "name" : "tab_label",
+    "label" : "Tab Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "heading",
+    "name" : "heading",
+    "label" : "Heading",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Lorem ipsum dolaris"
+  }, {
+    "id" : "description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Our purpose is to help create experiences that bring joy and happiness to the world. We achieve this by building technology for leisure and attractions businesses, helping them to deliver amazing experiences for their guests.</p>"
+  }, {
+    "id" : "92c025ab-8fbb-14fe-3977-e5407c509e3c",
+    "name" : "inner_description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "tabs.side_content",
+      "controlling_value_regex" : "content",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Our purpose is to help create experiences that bring joy and happiness to the world. We achieve this by building technology for leisure and attractions businesses, helping them to deliver amazing experiences for their guests.</p>"
+  }, {
+    "id" : "cta",
+    "name" : "cta",
+    "label" : "CTA Button",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "cta_text",
+      "name" : "cta_text",
+      "label" : "Button Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Work with us"
+    }, {
+      "id" : "cta_link",
+      "name" : "cta_link",
+      "label" : "Button Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      }
+    }, {
+      "id" : "show_icon",
+      "name" : "show_icon",
+      "label" : "Show Arrow Icon",
+      "required" : false,
+      "locked" : false,
+      "display" : "checkbox",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : true
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : true,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "cta_text" : "Work with us",
+      "cta_link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      },
+      "show_icon" : true
+    }
+  }, {
+    "id" : "5e6831c9-4f3b-011e-b3a9-65d979728752",
+    "name" : "inner_button",
+    "label" : "CTA Button",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "tabs.side_content",
+      "controlling_value_regex" : "content",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "children" : [ {
+      "id" : "4aaf55c9-3d5d-698d-8e2b-b600d2330d2d",
+      "name" : "cta_text",
+      "label" : "Button Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Work with us"
+    }, {
+      "id" : "c3d4e6e9-4b1d-855a-e541-0fd3995419f4",
+      "name" : "cta_link",
+      "label" : "Button Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      }
+    }, {
+      "id" : "f6ac1191-5934-40ef-a6ae-0e6ca3b1921c",
+      "name" : "show_icon",
+      "label" : "Show Arrow Icon",
+      "required" : false,
+      "locked" : false,
+      "display" : "checkbox",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : true
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : true,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "cta_text" : "Work with us",
+      "cta_link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      },
+      "show_icon" : true
+    }
+  }, {
+    "id" : "6713cb06-c86e-d764-5596-8f80bd8b746e",
+    "name" : "side_content",
+    "label" : "Side Content",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "tab_type",
+      "controlling_value_regex" : "regular",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "display" : "select",
+    "choices" : [ [ "image", "Image" ], [ "stacked", "Stacked Images" ], [ "content", "Content" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "image"
+  }, {
+    "id" : "4d6e186a-7203-4c17-7455-b15f5c25bec8",
+    "name" : "side_image",
+    "label" : "Side Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "b09debbf-4312-ed97-6a2f-8e516728bcdb",
+    "name" : "stacked_images",
+    "label" : "Stacked Images",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "11035502-004c-ed0c-0c08-0296dd854b31",
+      "name" : "images",
+      "label" : "Images",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : 3,
+        "max" : 9,
+        "sorting_label_field" : null,
+        "default" : 3
+      },
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "tabs.side_content",
+        "controlling_value_regex" : "stacked",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : [ {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      } ]
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "images" : [ {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      } ]
+    }
+  }, {
+    "id" : "c3dcaf4c-8954-4595-f2a3-90c7a805f39d",
+    "name" : "inner_heading",
+    "label" : "Heading",
+    "required" : true,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "tabs.side_content",
+      "controlling_value_regex" : "content",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Lorem ipsum dolaris"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "tab_label" : "",
+    "heading" : "Lorem ipsum dolaris",
+    "description" : "<p>Our purpose is to help create experiences that bring joy and happiness to the world. We achieve this by building technology for leisure and attractions businesses, helping them to deliver amazing experiences for their guests.</p>",
+    "inner_description" : "<p>Our purpose is to help create experiences that bring joy and happiness to the world. We achieve this by building technology for leisure and attractions businesses, helping them to deliver amazing experiences for their guests.</p>",
+    "cta" : {
+      "cta_text" : "Work with us",
+      "cta_link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      },
+      "show_icon" : true
+    },
+    "inner_button" : {
+      "cta_text" : "Work with us",
+      "cta_link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      },
+      "show_icon" : true
+    },
+    "side_content" : "image",
+    "side_image" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    },
+    "stacked_images" : {
+      "inner_heading" : "Lorem ipsum dolaris",
+      "images" : [ {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      } ]
+    },
+    "inner_heading" : "Lorem ipsum dolaris"
+  }, {
+    "tab_label" : "",
+    "heading" : "Our core values",
+    "description" : "<p>We believe in creating exceptional experiences through innovation, collaboration, and dedication to our craft.</p>",
+    "inner_description" : "<p>Our purpose is to help create experiences that bring joy and happiness to the world. We achieve this by building technology for leisure and attractions businesses, helping them to deliver amazing experiences for their guests.</p>",
+    "cta" : {
+      "cta_text" : "Learn more",
+      "cta_link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      },
+      "show_icon" : true
+    },
+    "inner_button" : {
+      "cta_text" : "Work with us",
+      "cta_link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      },
+      "show_icon" : true
+    },
+    "side_content" : "image",
+    "side_image" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    },
+    "stacked_images" : {
+      "inner_heading" : "Lorem ipsum dolaris",
+      "images" : [ {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      }, {
+        "size_type" : "auto",
+        "src" : "",
+        "alt" : null,
+        "loading" : "lazy"
+      } ]
+    },
+    "inner_heading" : "Lorem ipsum dolaris"
+  } ]
+}, {
+  "id" : "default_active_tab",
+  "name" : "default_active_tab",
+  "label" : "Default Active Tab",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "tab_type",
+    "controlling_value_regex" : "regular",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "display" : "text",
+  "min" : 1,
+  "max" : 10,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 1
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "07741d0a-5e12-ff48-1222-cb0f365662bf",
+  "name" : "board_token",
+  "label" : " Greenhouse Board Token",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "tab_type",
+    "controlling_value_regex" : "jobs",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "b879d228-d21e-39f3-f42d-d5ea382c2302",
+  "name" : "jobs_limit",
+  "label" : "Jobs Per Tab",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "tab_type",
+    "controlling_value_regex" : "jobs",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "56ce0068-e954-bacf-c381-d9d8942ebb8d",
+  "name" : "all_filter_label",
+  "label" : "All Filter Label",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "tab_type",
+    "controlling_value_regex" : "jobs",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "9719749f-2fad-56a1-d3e6-f4e76b547259",
+  "name" : "job_category_groups",
+  "label" : " Job category groups",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "sales", "Sales" ], [ "gtm", "GTM" ], [ "product", "Product" ], [ "engineering", "Engineering" ], [ "corporate", "Corporate" ] ],
+  "multiple" : true,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : [ ]
+} ]

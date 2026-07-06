@@ -1,0 +1,152 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as thumbnail %}
+
+  {# Variables #}
+  {% set eyebrow = module.heading.eyebrow %}
+  {% set images = module.images %}
+  
+  {# Styles + Markup + JS in one file #}
+  {% require_css %}
+  <style>
+    {% scope_css %}
+  
+    .image-carousel--wrapper {
+      overflow: hidden;
+      position: relative;
+    }
+  
+    .image-carousel--wrapper__inner {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .image-carousel--wrapper[data-animated="true"] {
+      -webkit-mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+      mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+    }
+  
+    .image-carousel--wrapper[data-animated="true"] .image-carousel--wrapper__inner {
+      width: fit-content;
+      flex-wrap: nowrap;
+      animation: scroll 110s linear infinite;
+    }
+  
+    .image-carousel--list {
+      display: flex;
+      flex-wrap: nowrap;
+  /*     gap: 24px; */
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+  
+    .image-carousel--item {
+      --carousel-height: 300px;
+      flex: 0 0 auto;
+      margin: 0;
+      margin-right: 24px;
+      width: calc(var(--img-ratio) * var(--carousel-height));
+    }
+  
+    /* Image container */
+    .image-carousel {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+  /*     height: 300px;
+      width: fit-content; */
+      height: var(--carousel-height);
+    }
+  
+    /* Image styling */
+    .image-carousel--img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+  
+    /* 433px – 767px: medium screens */
+    @media (min-width: 433px) and (max-width: 767px) {
+      .image-carousel--item {
+        --carousel-height: 250px;
+      }
+    }
+
+    /* ≤ 432px: small screens */
+    @media (max-width: 432px) {
+      .image-carousel--item {
+        --carousel-height: 180px;
+      }
+      .image-carousel {
+        border-radius: 8px;
+      }
+    }
+  
+    @keyframes scroll {
+      to {
+        transform: translate(calc(-50% - 0.5rem));
+      }
+    }
+  
+    {% end_scope_css %}
+  </style>
+  {% end_require_css %}
+  
+  <section
+    id="image-carousel-{{ name }}"
+    class="pt-7 overflow-hidden w-screen relative right-[50%] left-[50%] ml-[-50vw] mr-[-50vw] flex flex-col gap-6"
+  >
+    <div class="image-carousel--wrapper">
+      <div class="image-carousel--wrapper__inner">
+        <ul class="image-carousel--list" role="list">
+          {% for image in images %}
+            {% set logo = image.image %}
+  
+            {# Calculate the proportional width based on fixed height 300px #}
+            {% set scaled_width = (logo.width / logo.height) * 300 %}
+  
+            <li role="listitem"
+                class="image-carousel--item"
+                style="--img-ratio: {{ logo.width / logo.height }};">
+                <div class="image-carousel" style="aspect-ratio: {{ logo.width }} / {{ logo.height }};">
+                {{ thumbnail.image(logo, "class='image-carousel--img'") }}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  {% require_js %}
+  <script>
+    (function () {
+      const wrappers = document.querySelectorAll('.image-carousel--wrapper');
+  
+      const addImageAnimation = () => {
+        wrappers.forEach((wrapper) => {
+          const inner = wrapper.querySelector('.image-carousel--wrapper__inner');
+          if (!inner) return;
+  
+          wrapper.setAttribute('data-animated', 'true');
+  
+          const contents = Array.from(inner.children);
+          contents.forEach((content) => {
+            const clone = content.cloneNode(true);
+            clone.setAttribute('aria-hidden', 'true');
+            inner.appendChild(clone);
+          });
+        });
+      };
+  
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        addImageAnimation();
+      }
+    })();
+  </script>
+  {% end_require_js %}
+  

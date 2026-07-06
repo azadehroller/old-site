@@ -1,0 +1,343 @@
+.interactive-hero-module .interactive-hero__svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* ── Hero ── */
+.interactive-hero-module .interactive-hero {
+  position: relative;
+  width: 100%;
+  height: 751px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Gradient container ── */
+.interactive-hero-module .interactive-hero__gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #011840;
+}
+
+/* ── Orb base ── */
+.interactive-hero-module .interactive-hero__orb {
+  position: absolute;
+  left: 50%;
+  top: 2100px;
+  border-radius: 50%;
+  transform-origin: center center;
+  transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0);
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+/* Orb 1 — outer blue */
+.interactive-hero-module .interactive-hero__orb--1 {
+  width: 3840px;
+  height: 3840px;
+  background: radial-gradient(circle at 50% 50%,
+    #0960F6 0%,
+    #0960F6 85%,
+    transparent 100%
+  );
+  animation: interactiveHeroGrow 2.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+/* Orb 2 — lavender */
+.interactive-hero-module .interactive-hero__orb--2 {
+  width: 3264px;
+  height: 3264px;
+  background: radial-gradient(circle at 50% 50%,
+    #C8BBFF 0%,
+    #C8BBFF 85%,
+    transparent 100%
+  );
+  animation: interactiveHeroGrow 3.0s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+}
+
+/* Orb 3 — purple core */
+.interactive-hero-module .interactive-hero__orb--3 {
+  width: 2688px;
+  height: 2688px;
+  background: radial-gradient(circle at 50% 50%,
+    #603FF5 0%,
+    #603FF5 85%,
+    transparent 100%
+  );
+  animation: interactiveHeroGrow 2.8s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+}
+
+/* Grow animation */
+@keyframes interactiveHeroGrow {
+  0% {
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0);
+    opacity: 0;
+  }
+  15% { opacity: 0.6; }
+  100% {
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Breathing — 3 phased loops */
+@keyframes interactiveHeroBreathe1 {
+  0%   { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  28%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0.98); }
+  50%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0.98); }
+  78%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  100% { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+}
+@keyframes interactiveHeroBreathe2 {
+  0%   { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  11%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  39%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0.96); }
+  61%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0.96); }
+  89%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  100% { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+}
+@keyframes interactiveHeroBreathe3 {
+  0%   { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  22%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+  50%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0.96); }
+  72%  { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(0.96); }
+  100% { transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1); }
+}
+.interactive-hero-module .interactive-hero__orb--1.is-breathing {
+  animation: interactiveHeroBreathe1 4.3s ease-in-out infinite;
+  opacity: 1;
+}
+.interactive-hero-module .interactive-hero__orb--2.is-breathing {
+  animation: interactiveHeroBreathe2 4.3s ease-in-out infinite;
+  opacity: 1;
+}
+.interactive-hero-module .interactive-hero__orb--3.is-breathing {
+  animation: interactiveHeroBreathe3 4.3s ease-in-out infinite;
+  opacity: 1;
+}
+
+/* ── Hero Content (Pulse Report / Figma: node 1864:2754) ── */
+.interactive-hero-module .interactive-hero__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  box-sizing: border-box;
+  max-width: 1312px;
+}
+
+/* Figma "OnLight /Heading Comp": column gap 24px */
+.interactive-hero-module .interactive-hero__heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Eyebrow — 18px / 27px (all breakpoints), weight 800 */
+.interactive-hero-module .interactive-hero__eyebrow {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 27px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: #6BA0FA;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: interactiveHeroFadeUp 0.8s ease-out 1.4s forwards;
+}
+
+/* Title — mobile: 40 / 50 / -0.4px; desktop (768+): 64 / 72 / -0.64px */
+.interactive-hero-module .interactive-hero__title {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 50px;
+  letter-spacing: -0.4px;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: interactiveHeroFadeUp 0.8s ease-out 1.6s forwards;
+}
+
+.interactive-hero-module .interactive-hero__title p {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+/* Description — 18px / 27px at all breakpoints */
+.interactive-hero-module .interactive-hero__desc {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 27px;
+  color: #ffffff;
+/*   max-width: 680px; */
+  margin: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: interactiveHeroFadeUp 0.8s ease-out 1.8s forwards;
+}
+
+.interactive-hero-module .interactive-hero__desc p {
+  margin: 0;
+  font-size: 16px;
+  line-height: inherit;
+}
+
+/* CTA — 16px / 24px / 600, padding 8px 24px */
+.interactive-hero-module .interactive-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+  border-radius: 980px;
+  background: #011840;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+  border: none;
+  transition: background 0.2s ease, opacity 0.2s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: interactiveHeroFadeUp 0.8s ease-out 2s forwards;
+}
+
+.interactive-hero-module .interactive-hero__cta:hover,
+.interactive-hero-module .interactive-hero__cta:focus-visible {
+  background: #000C20;
+  outline: none;
+}
+
+/* ── Noise overlay ── */
+.interactive-hero-module .interactive-hero__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.25;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 15%);
+}
+@keyframes interactiveHeroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .interactive-hero-module .interactive-hero__orb {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1) !important;
+  }
+  .interactive-hero-module .interactive-hero__eyebrow,
+  .interactive-hero-module .interactive-hero__title,
+  .interactive-hero-module .interactive-hero__desc,
+  .interactive-hero-module .interactive-hero__cta {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Responsive: 768px+ centered copy; 767px and below left-aligned + full-width CTA ── */
+@media (min-width: 768px) {
+  .interactive-hero-module .interactive-hero__desc p{
+    font-size: 18px;
+  }
+  .interactive-hero-module .interactive-hero__content {
+    align-items: center;
+    text-align: center;
+    gap: 48px;
+  }
+
+  .interactive-hero-module .interactive-hero__heading-group {
+    align-items: center;
+    text-align: center;
+  }
+
+  .interactive-hero-module .interactive-hero__title {
+    font-size: 64px;
+    line-height: 72px;
+    letter-spacing: -0.64px;
+  }
+}
+
+@media (max-width: 767px) {
+  .interactive-hero-module .interactive-hero {
+    height: auto;
+  }
+
+  .interactive-hero-module .interactive-hero__content {
+    align-items: stretch;
+    text-align: left;
+  }
+
+  .interactive-hero-module .interactive-hero__heading-group {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .interactive-hero-module .interactive-hero__eyebrow,
+  .interactive-hero-module .interactive-hero__title,
+  .interactive-hero-module .interactive-hero__desc {
+    text-align: left;
+    width: 100%;
+  }
+
+  .interactive-hero-module .interactive-hero__title * {
+    text-align: left;
+  }
+
+  .interactive-hero-module .interactive-hero__desc {
+    max-width: none;
+  }
+
+  .interactive-hero-module .interactive-hero__desc * {
+    text-align: left;
+  }
+
+  .interactive-hero-module .interactive-hero__cta {
+    align-self: stretch;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.dnd-section .dnd-column:has(.interactive-hero-module) {
+  padding: 0 ;
+}
+
+.dnd-section .dnd-column .interactive-hero-module .interactive-hero__content {
+  padding: 64px 32px;
+}
+
+@media screen and (min-width: 721px) {
+  .dnd-section .dnd-column:has(.interactive-hero-module) {
+    padding: 0 ;
+  }
+
+  .dnd-section .dnd-column .interactive-hero-module .interactive-hero__content {
+    padding: 80px 48px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  .dnd-section .dnd-column .interactive-hero-module .interactive-hero__content {
+    padding: 80px 0 0;
+  }
+}

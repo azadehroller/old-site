@@ -1,0 +1,16 @@
+[ {
+  "id" : "76c69d90-6e55-79b7-5d77-3eb398d35ca0",
+  "name" : "theme",
+  "label" : "Theme",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "placeholder" : "",
+  "choices" : [ [ "dark", "Dark" ], [ "light", "Light" ], [ "industry_report", "Industry Report" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "dark"
+} ]

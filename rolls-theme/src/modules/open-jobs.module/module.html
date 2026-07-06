@@ -1,0 +1,89 @@
+{# Open Jobs Tabs Module #}
+
+{% set tabs = module.tabs %}
+{% set tab_style = module.styles.tab_style %}
+{% set module_id = "open-jobs-" ~ name %}
+
+<div class="tabs-container open-jobs"
+     data-module-instance="{{ name }}"
+     id="{{ module_id }}"
+     data-board-token="{{ module.board_token }}"
+     data-jobs-limit="{{ module.jobs_limit }}"
+     data-show-filters="{{ module.show_filters }}"
+     data-all-label="{{ module.all_filter_label }}"
+     data-more-details="{{ module.more_details_text }}"
+     data-no-jobs="{{ module.no_jobs_message }}"
+     data-loading="{{ module.loading_message }}">
+
+  {# Tab Buttons #}
+  <div class="tabs-wrapper">
+  <div class="tabs-selector open-jobs-selector" role="tablist">
+    {# ALWAYS show "All" tab first #}
+    <button
+      class="tab-button {{ tab_style }} active"
+      role="tab"
+      aria-selected="true"
+      aria-controls="tab-panel-{{ name }}-all"
+      data-tab-index="all"
+      id="tab-{{ name }}-all"
+      data-keywords=""  {# empty = show all #}
+    >
+      {{ module.all_filter_label }}
+    </button>
+
+    {# Department tabs from module.departments #}
+    {% for dept in module.departments %}
+      <button
+        class="tab-button {{ tab_style }}"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tab-panel-{{ name }}-{{ loop.index }}"
+        data-tab-index="{{ loop.index }}"
+        id="tab-{{ name }}-{{ loop.index }}"
+        data-keywords="{{ dept.keywords }}"
+      >
+        {{ dept.tab_name }}
+      </button>
+    {% endfor %}
+  </div>
+ </div>
+
+  {# Tab Content Panels #}
+  <div class="tabs-panels">
+    {# Panel for "All" tab #}
+    <div
+      class="tab-content active"
+      role="tabpanel"
+      aria-labelledby="tab-{{ name }}-all"
+      id="tab-panel-{{ name }}-all"
+      data-tab-panel="all"
+    >
+      <div class="tab-description open-jobs__description">
+        {{ module.loading_message }}
+      </div>
+    </div>
+
+    {# Panels for each department #}
+    {% for dept in module.departments %}
+      <div
+        class="tab-content"
+        role="tabpanel"
+        aria-labelledby="tab-{{ name }}-{{ loop.index }}"
+        id="tab-panel-{{ name }}-{{ loop.index }}"
+        data-tab-panel="{{ loop.index }}"
+      >
+<!--         <h2 class="tab-heading">
+          {{ dept.heading or dept.tab_name }}
+        </h2> -->
+        <div class="tab-description open-jobs__description">
+          {{ module.loading_message }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  {# Embed departments data for JS #}
+  <script type="application/json" class="open-jobs__departments-data">
+    {{ module.departments|tojson }}
+  </script>
+</div>

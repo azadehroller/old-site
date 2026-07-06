@@ -1,0 +1,268 @@
+/* =========================
+   BASE SECTION
+   ========================= */
+
+.text-banner {
+  color: #033180;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden; /* ensure absolute image doesn't overflow */
+  .eyebrow{
+    color: #3A80F8;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: 27px;
+text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+}
+
+/* Text heading */
+.text-banner h2 {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 40px; 
+  letter-spacing: -0.32px;
+  text-wrap: pretty;
+}
+
+/* Text container & inner layout */
+.text-banner .row-fluid {
+  position: relative;
+  z-index: 1; /* above image background */
+}
+
+.text-banner .inner-container {
+/*   max-width: 1312px;      /* adjust to your grid width if needed */ */
+/*   margin: 0 auto; */
+}
+
+/* By default, leave space for the image on the right (desktop) */
+.text-banner .text-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 701px;
+/*   padding-right: 33vw;    /* reserve half viewport for right-side image */ */
+}
+
+/* When image is on the left, move padding (desktop) */
+.text-banner.image-on-left .text-container {
+  padding-right: 0;
+/*   padding-left: 40vw;     /* reserve half viewport for left-side image */ */
+}
+
+/* Body text & buttons wrapper */
+.text-banner .content {
+  margin-top: 24px;
+}
+
+.text-banner .button-container {
+  margin-top: 48px;
+  display: flex;
+  gap: 16px;
+}
+
+/* =========================
+   IMAGE BACKGROUND
+   ========================= */
+
+/* Desktop: image as half-viewport background, absolute */
+.text-banner .image {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;               /* default: image on the right */
+  width: 50vw;            /* half of viewport width */
+  background-size: cover;
+  background-position: right center;
+}
+
+/* Swap: image goes to the left side on desktop */
+.text-banner.image-on-left .image {
+  right: auto;
+  left: 0;
+  background-position: center center;
+      left: auto;
+}
+
+/* Gradient overlay edge on desktop */
+.text-banner .image:before {
+  content:'';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 104px;
+}
+.text-banner.image-on-left .image:before {
+  right:0;
+  bottom: 0;
+  left: inherit;
+}
+.text-banner.image-on-left.dark-theme .image:before {
+background: linear-gradient(270deg, rgba(1, 24, 64, 1) 0%, rgba(1, 24, 64, 0.70) 50%, rgba(1, 24, 64, 0.45) 75%, rgba(1, 24, 64, 0) 100%) !important;
+    background: linear-gradient(270deg, #011840 0%, rgb(1 24 64 / 0%) 100%)!important;
+}
+.text-banner.image-on-left.dark-theme .image:after {
+    content: none;
+}
+  /* =========================
+   BUTTONS
+   ========================= */
+
+.text-banner a.rounded-3xl {
+  color: #ffffff;
+  background-color: #0960F6;
+  transition: all .3s ease-in-out;
+}
+
+.text-banner a.rounded-3xl:hover {
+  background-color: #032A6E;
+}
+
+.text-banner a.rounded-3xl + a.rounded-3xl {
+  background-color: transparent;
+  border: 1px solid #0960F6;
+  color: #0960F6;
+}
+
+/* Dark theme buttons */
+.text-banner.dark-theme a.rounded-3xl {
+  background-color: #ffffff;
+  color: #033180;
+}
+
+.text-banner.dark-theme a.rounded-3xl:first-child:hover {
+  background-color: #E5E5E4 !important;
+}
+
+.text-banner.dark-theme a.rounded-3xl + a.rounded-3xl {
+  border: 1px solid #ffffff;
+  color: #ffffff;
+}
+
+/* Dark theme hover for your utility class */
+.text-banner.dark-theme .button-in-dark-bg:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Overall dark theme text color */
+.text-banner.dark-theme {
+  color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+.text-banner.image-on-left .text-container{max-width: 701px;}
+@media screen and (min-width: 769px){
+  .text-banner.image-on-left .row-fluid{
+    margin-left: auto;
+    justify-content: flex-end;
+}
+  .text-banner .image:before{width: 50%;}
+  .text-banner.image-on-left.dark-theme .image:after {
+  top: 50%;
+        content:'';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 173px;
+background: linear-gradient(0deg, #011840 10%, rgba(1, 24, 64, 0.00) 100%);
+
+}
+}
+@media screen and (min-width: 1024px){
+  .text-banner .image:before{width: 104px}
+  .text-banner.image-on-left .text-container{max-width: 650px;}
+  .text-banner .image{height: 320px; }
+  .text-banner.image-on-left .image{height: 451px; }
+  .text-banner.image-on-left.dark-theme .image:after{height: 148px;}
+}
+@media screen and (min-width: 1440px){
+  .text-banner .image:before{width: 80px;}
+  .text-banner.image-on-left .text-container{max-width: 701px;}
+}
+
+@media screen and (max-width: 768px){
+    .text-banner {
+    padding-bottom: 48px;
+
+    padding-top: 0px;
+      .row-fluid{display:grid;}
+  
+  }
+  .dnd-section:has(.text-banner) + .dnd-section:has(.text-banner){
+     .text-banner {
+    padding-top: 0px;
+  }
+  }
+
+
+  /* MOBILE IMAGE BEHAVIOR
+     - Image becomes a normal block above text
+     - Full width, responsive height
+     - Always visible (no dark-theme hiding) */
+  .text-banner .image {
+/*     display: none; */
+    position: relative;
+    width: 100%;
+    height: 323px;              /* you can change to min-height if you want more flexible aspect */
+    right: auto;
+    left: auto;
+    margin-bottom: 32px;
+    background-position: center;
+  }
+
+  /* Gradient bar on mobile */
+  .text-banner .image:before{
+/*     background: linear-gradient(
+      0deg, 
+      rgba(245, 248, 255, 1) 0%, 
+      rgba(245, 248, 255, 0.70) 50%, 
+      rgba(245, 248, 255, 0.45) 75%, 
+      rgba(245, 248, 255, 0) 100%
+    ) !important; */
+    width: 100%;
+    top: auto;
+    height: 64px;
+  }
+  .text-banner.dark-theme  .image:before{ 
+    background: linear-gradient(0deg, #011840 10%, rgba(1, 24, 64, 0.00) 100%)!important;
+  }
+  .text-banner.image-on-left.dark-theme .image:before {
+    background: linear-gradient(0deg, #011840 10%, rgba(1, 24, 64, 0.00) 100%)!important;
+  }
+  /* IMPORTANT:
+     - Do NOT hide the image on dark theme anymore */
+  /* .text-banner.dark-theme .image { display: none; }  <-- removed */
+
+  /* Text container goes full width with simple padding;
+     we remove reserved padding for image on mobile */
+  .text-banner .text-container {
+    padding: 0 24px;
+  }
+
+  .text-banner.image-on-left .text-container {
+    padding: 0 24px;
+  }
+
+  .text-banner h2 {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 30px;
+  }
+
+  .text-banner .button-container{
+/*     margin-top: 32px; */
+  }
+    .text-banner .button-container{
+    display: grid;
+  }
+  .text-banner .button-container > a{width: 100%}
+}

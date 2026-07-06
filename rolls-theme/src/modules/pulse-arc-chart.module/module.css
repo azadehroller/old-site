@@ -1,0 +1,163 @@
+.pulse-arc-chart {
+  background-color: rgba(30, 27, 58, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.pulse-arc-chart.chart-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background-color: rgba(40, 35, 78, 0.8);
+  border-color: rgba(168, 139, 250, 0.3);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(168, 139, 250, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pulse-arc-chart h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-arc-chart .inline-flex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(88, 28, 135, 0.5);
+  margin-right: 0.75rem;
+}
+
+.pulse-arc-chart .inline-flex svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #d8b4fe;
+}
+
+/* Fade in animation */
+.pulse-arc-chart.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.pulse-arc-chart.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Arc chart styles */
+.pulse-arc-chart .relative {
+  position: relative;
+  width: 12rem;
+  height: 8rem;
+  margin-bottom: 1rem;
+}
+
+.pulse-arc-chart .chart-arc {
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+/* Center text styles */
+.pulse-arc-chart .absolute {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.pulse-arc-chart .text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: #a78bfa;
+}
+
+.pulse-arc-chart .text-purple-400 {
+  color: #a78bfa;
+}
+
+.pulse-arc-chart .text-gray-400 {
+  color: #9ca3af;
+}
+
+/* Layout utilities */
+.pulse-arc-chart.flex {
+  display: flex;
+}
+
+.pulse-arc-chart.flex-col {
+  flex-direction: column;
+}
+
+.pulse-arc-chart.items-center {
+  align-items: center;
+}
+
+.pulse-arc-chart.justify-center {
+  justify-content: center;
+}
+
+.pulse-arc-chart.text-center {
+  text-align: center;
+}
+
+/* Tooltip styles */
+.pulse-arc-chart path[data-tooltip] {
+  cursor: pointer;
+  position: relative;
+}
+
+.pulse-arc-chart path[data-tooltip]:hover {
+  filter: brightness(1.2);
+}
+
+/* Add tooltip on hover for the arc */
+.pulse-arc-chart svg {
+  position: relative;
+}
+
+.pulse-arc-chart path[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: rgba(17, 15, 41, 0.95);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+}
+
+.pulse-arc-chart path[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pulse-arc-chart .text-4xl {
+    font-size: 2rem;
+  }
+}

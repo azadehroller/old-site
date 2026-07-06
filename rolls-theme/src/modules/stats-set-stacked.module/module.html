@@ -1,0 +1,24 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macro %}
+
+{# Variables #}
+{% set stats = module.stats %}
+{% set theme = module.styles.theme %}
+{% set text_column_width = module.styles.text_column_width %}
+
+{# Section Markup #}
+<section id="stats-set-stacked-{{name}}" class="grid-{{ text_column_width }}">
+    <div class="stats-set-non-global  flex flex-col justify-start content-start m-auto w-full divide-y divide-navy-80 {{ macro.setTextColor(theme, 'divide-navy-80', 'divide-neutral-white', '') }} grid-{{ text_column_width }}-inner"">
+        {% for stat in stats %}
+            {% set stat_data = {
+                'title': stat.title,
+                'number': stat.stats_number,
+                'text': stat.stats_text,
+            }%}
+            <div class="stats-set-stacked-wrapper flex flex-col items-start py-4 {{ macro.setTextColor(theme, 'text-[#0960F6]', 'text-neutral-white', '') }}"> 
+                <strong class="stats-set-stacked-title font-extrabold text-3xl md:text-5xl leading-8 md:leading-[3.75rem]">{{ stat_data.number }}</strong>
+                <div class="stats-set-stacked-title-text text-xl {{ macro.setTextColor(theme, 'text-neutral-white', 'text-primary-50', '') }}">{{ stat_data.text }}</div>
+            </div>
+        {% endfor %}
+    </div>
+</section>

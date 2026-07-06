@@ -1,0 +1,204 @@
+[ {
+  "id" : "19e7199b-0d16-b6cf-ad8f-3de43143b60c",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "8dc50340-6bc8-8898-5de5-1205490a42bc",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "d7b9b2ee-7478-792c-70e8-f29639ac46fa",
+  "name" : "testimonial",
+  "label" : "Testimonial",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : null,
+    "sorting_label_field" : "9e63f75e-8343-2afe-450f-88c85d1cead2",
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "4a695bb5-087b-927c-4b4b-e69e48af670b",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "We are making money while we sleep! We get an extra $600-$700 per day from online bookings, and we don’t have to chase them up since all of it is straightforward for the guest.”"
+  }, {
+    "id" : "9e63f75e-8343-2afe-450f-88c85d1cead2",
+    "name" : "author",
+    "label" : "Author",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "John Dowry"
+  }, {
+    "id" : "c706e651-436f-4c9b-db1b-30d6400344d6",
+    "name" : "position",
+    "label" : "Position",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Head of marketing, Urban Planet Jump"
+  }, {
+    "id" : "60f48148-66eb-7545-7d92-73d85ff5600d",
+    "name" : "logo",
+    "label" : "Logo",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/ROLLER_Competitor_Logo.svg",
+      "alt" : "ROLLER",
+      "loading" : "lazy",
+      "width" : 78,
+      "height" : 60,
+      "max_width" : 78,
+      "max_height" : 60
+    }
+  }, {
+    "id" : "6474b710-5d3c-da64-7660-aacaf13ca9c1",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "content" : "We are making money while we sleep! We get an extra $600-$700 per day from online bookings, and we don’t have to chase them up since all of it is straightforward for the guest.”",
+    "author" : "John Dowry",
+    "position" : "Head of marketing, Urban Planet Jump",
+    "logo" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/ROLLER_Competitor_Logo.svg",
+      "alt" : "ROLLER",
+      "loading" : "lazy",
+      "width" : 78,
+      "height" : 60,
+      "max_width" : 78,
+      "max_height" : 60
+    },
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "content" : "We are making money while we sleep! We get an extra $600-$700 per day from online bookings, and we don’t have to chase them up since all of it is straightforward for the guest.”",
+    "author" : "John Dowry",
+    "position" : "Head of marketing, Urban Planet Jump",
+    "logo" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/ROLLER_Competitor_Logo.svg",
+      "alt" : "ROLLER",
+      "loading" : "lazy",
+      "width" : 78,
+      "height" : 60,
+      "max_width" : 78,
+      "max_height" : 60
+    },
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "content" : "We are making money while we sleep! We get an extra $600-$700 per day from online bookings, and we don’t have to chase them up since all of it is straightforward for the guest.”",
+    "author" : "John Dowry",
+    "position" : "Head of marketing, Urban Planet Jump",
+    "logo" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/ROLLER_Competitor_Logo.svg",
+      "alt" : "ROLLER",
+      "loading" : "lazy",
+      "width" : 78,
+      "height" : 60,
+      "max_width" : 78,
+      "max_height" : 60
+    },
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "content" : "We are making money while we sleep! We get an extra $600-$700 per day from online bookings, and we don’t have to chase them up since all of it is straightforward for the guest.”",
+    "author" : "John Dowry",
+    "position" : "Head of marketing, Urban Planet Jump",
+    "logo" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/ROLLER_Competitor_Logo.svg",
+      "alt" : "ROLLER",
+      "loading" : "lazy",
+      "width" : 78,
+      "height" : 60,
+      "max_width" : 78,
+      "max_height" : 60
+    },
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

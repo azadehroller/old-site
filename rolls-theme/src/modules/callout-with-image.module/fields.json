@@ -1,0 +1,332 @@
+[ {
+  "id" : "0e8bbdc3-91f1-238b-e14c-9e7bc1925a14",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "604e9ed7-6675-da26-d943-d3da367315c3",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ENTERPRISE"
+  }, {
+    "id" : "e1e5face-6473-bc62-80ff-bfd9837d4bb4",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Need something more?"
+  }, {
+    "id" : "b12bc19c-4ff6-d2cb-a3ab-07f1b8dc8b9c",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "Our Enterprise plan offers competitive rates for venues that process large volumes of guest visits. Contact us to learn more."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "ENTERPRISE",
+    "title" : "Need something more?",
+    "text" : "Our Enterprise plan offers competitive rates for venues that process large volumes of guest visits. Contact us to learn more."
+  }
+}, {
+  "id" : "39d52338-1c41-7133-1280-22dd83a952b8",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "3a9385dd-333b-c143-28af-f5b54b18b545",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "9effb834-0a8d-6234-f1fa-198f02b4c660",
+      "name" : "theme",
+      "label" : "Theme",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "light", "OnDark" ], [ "dark", "OnLight" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "dark"
+    }, {
+      "id" : "043e22fb-24c4-cdb0-fe22-864d60e8e36f",
+      "name" : "textalignment",
+      "label" : "Text alignment",
+      "required" : false,
+      "locked" : false,
+      "type" : "textalignment",
+      "display_width" : null,
+      "default" : {
+        "text_align" : "CENTER"
+      }
+    }, {
+      "id" : "043e56a1-65c7-e52b-7901-cff250e7ef01",
+      "name" : "eyebrow_type",
+      "label" : "Eyebrow Type",
+      "inline_help_text" : "Select the Heading Type, H1, H2, H3, H4 and etc. <br>\nFor more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ], [ "div", "div" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "div"
+    }, {
+      "id" : "32c95fdd-88ff-a364-baf1-7927b1f0463b",
+      "name" : "heading_type",
+      "label" : "Heading Type",
+      "inline_help_text" : "Select the Heading Type, H1, H2, H3, H4 and etc. <br>\nFor more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "471b852e-ff35-4196-444a-a10152104124",
+      "name" : "display_type",
+      "label" : "Display Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "df85fcef-35c0-44fc-b772-66ff6d2ee95b",
+      "name" : "text_type",
+      "label" : "Text Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "2xl", "S3" ], [ "lg", "S2" ], [ "base", "S1" ], [ "sm", "S0" ], [ "xs", "s00" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "lg"
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "theme" : "dark",
+      "textalignment" : {
+        "text_align" : "CENTER"
+      },
+      "eyebrow_type" : "div",
+      "text_type" : "lg"
+    }
+  }, {
+    "id" : "5a72cd78-d1b4-e4bf-8550-5e2b2990cde1",
+    "name" : "cta",
+    "label" : "CTA",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "30d78e41-86c4-2634-ceea-c68dad714dbe",
+      "name" : "bg_kind",
+      "label" : "Kind",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "primary", "Primary" ], [ "secondary", "Secondary" ], [ "tertiary", "Tertiary" ], [ "ghost", "Ghost" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "primary"
+    }, {
+      "id" : "590f47c6-b0c2-0daa-bdd3-99aef19947b3",
+      "name" : "alignment",
+      "label" : "Alignment",
+      "required" : false,
+      "locked" : false,
+      "alignment_direction" : "BOTH",
+      "type" : "alignment",
+      "display_width" : null,
+      "default" : { }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "bg_kind" : "primary"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "content" : {
+      "theme" : "dark",
+      "textalignment" : {
+        "text_align" : "CENTER"
+      },
+      "eyebrow_type" : "div",
+      "text_type" : "lg"
+    },
+    "cta" : {
+      "bg_kind" : "primary"
+    }
+  }
+}, {
+  "id" : "a9670797-3a57-750a-3b91-f127a5f01310",
+  "name" : "cta",
+  "label" : "CTA",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7864caf8-6308-6ff5-b26e-df44761ef08a",
+    "name" : "button_link",
+    "label" : "Button link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "id" : "091995a8-f16c-e74f-f62f-6b33aa583caf",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Add a button link here"
+  }, {
+    "id" : "189019e3-9922-0108-ee19-620998d7ffa9",
+    "name" : "svg_icon_code",
+    "label" : "SVG icon code",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "9b29f93f-a7fb-bc4c-6750-b88c07919951",
+    "name" : "icon_position",
+    "label" : "Icon Position",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "left", "Left" ], [ "right", "Right" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    },
+    "button_text" : "Add a button link here"
+  }
+}, {
+  "id" : "56cddb1e-6691-42a9-c7bb-f5ce0cc0382d",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "95e80cee-7e70-4aa0-e7c3-68908abb1588",
+    "name" : "image_src",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/office-chat@2x.png",
+      "alt" : "office-chat",
+      "loading" : "lazy",
+      "width" : 1280,
+      "height" : 714,
+      "max_width" : 1280,
+      "max_height" : 714
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image_src" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/office-chat@2x.png",
+      "alt" : "office-chat",
+      "loading" : "lazy",
+      "width" : 1280,
+      "height" : 714,
+      "max_width" : 1280,
+      "max_height" : 714
+    }
+  }
+} ]

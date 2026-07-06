@@ -1,0 +1,355 @@
+[ {
+  "id" : "a6d10218-12f5-1b76-69e8-8715b75ddf63",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "5f2e4ec8-306d-f0dc-973d-b823720f82f1",
+    "name" : "layout",
+    "label" : "Layout",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "853da8b5-e4db-4919-c396-9eb84d66e02c",
+      "name" : "spacing",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : { }
+    }, {
+      "id" : "c2648c97-49a7-6ed7-7f53-9093d83568e3",
+      "name" : "alignment",
+      "label" : "Alignment",
+      "required" : false,
+      "locked" : false,
+      "alignment_direction" : "BOTH",
+      "type" : "alignment",
+      "display_width" : null,
+      "default" : {
+        "horizontal_align" : "CENTER"
+      }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing" : { },
+      "alignment" : {
+        "horizontal_align" : "CENTER"
+      }
+    }
+  }, {
+    "id" : "133c6cdc-8c41-a814-3b7e-e6005585eee5",
+    "name" : "animation",
+    "label" : "Animation",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "e40810d4-b090-76a3-30d5-83820802d4a2",
+      "name" : "type",
+      "label" : "Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "none", "None" ], [ "pulse", "Pulse" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "none"
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "type" : "none"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "layout" : {
+      "spacing" : { },
+      "alignment" : {
+        "horizontal_align" : "CENTER"
+      }
+    },
+    "animation" : {
+      "type" : "none"
+    }
+  }
+}, {
+  "id" : "012b6fbf-aa76-06c8-186c-2b9f68777635",
+  "name" : "button_list",
+  "label" : "Button Stack",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "c2aaa8f8-0ee7-b91f-c72b-fe8a89224590",
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "c2aaa8f8-0ee7-b91f-c72b-fe8a89224590",
+    "name" : "button_settings",
+    "label" : "Button settings",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "668e675a-9e38-ea87-4960-771115c23ff6",
+      "name" : "modal_trigger",
+      "label" : "Modal Form Trigger",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    }, {
+      "id" : "9c3daf0b-b9c0-cbcd-1231-ed831a8ad05b",
+      "name" : "modal_trigger_video",
+      "label" : "Modal Video",
+      "help_text" : "Once enabled this will overwrite the Button link field.",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    }, {
+      "id" : "a10b1dac-2fd5-03cb-218d-caeef50dfb10",
+      "name" : "form",
+      "label" : "Form",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "button_list.button_settings.modal_trigger",
+        "controlling_value_regex" : "true",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "type" : "form",
+      "display_width" : null,
+      "default" : {
+        "response_type" : "inline",
+        "message" : "Thanks for submitting the form."
+      }
+    }, {
+      "id" : "89165ea0-0209-894d-0c0b-33b2e002161e",
+      "name" : "video_id",
+      "label" : "Video ID",
+      "help_text" : "",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "button_list.button_settings.modal_trigger_video",
+        "controlling_value_regex" : "true",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "placeholder" : "i.e. 7m36ou6gdt",
+      "allow_new_line" : false,
+      "show_emoji_picker" : true,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    }, {
+      "id" : "dc45849f-52a2-05ad-5031-350de539039c",
+      "name" : "btn_label",
+      "label" : "Label",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "show_emoji_picker" : true,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Get started"
+    }, {
+      "id" : "6e1f045e-82ec-bd55-30b2-c5fa96e07b13",
+      "name" : "button_link",
+      "label" : "Button Link",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "button_list.button_settings.modal_trigger",
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : true,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "modal_trigger" : false,
+      "modal_trigger_video" : false,
+      "form" : {
+        "response_type" : "inline",
+        "message" : "Thanks for submitting the form."
+      },
+      "video_id" : "",
+      "btn_label" : "Get started",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }, {
+    "id" : "26c8205f-a87e-5969-f496-c22cef0a25f6",
+    "name" : "btn_icon",
+    "label" : "Icon",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "76a462a4-a461-86de-a5a3-739429bec0a1",
+      "name" : "icon_field_svg",
+      "label" : "SVG icon code",
+      "help_text" : "To remove the icon, leave this field empty.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "3eab2ea5-c339-044b-58b7-33b5f41e1eb5",
+      "name" : "icon_position",
+      "label" : "Position",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "left", "Left" ], [ "right", "Right" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : { }
+  }, {
+    "id" : "0f125023-5dac-d566-72ec-9849e3c4bad4",
+    "name" : "button_styles",
+    "label" : "Button Styles",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "bba17dc4-1f1a-0a46-06ad-7b238af3b49a",
+      "name" : "bg_kind",
+      "label" : "Kind",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "primary", "Primary" ], [ "secondary", "Secondary" ], [ "tertiary", "Tertiary" ], [ "ghost", "Ghost" ], [ "primary-inverted", "Primary-Inverted" ], [ "gx_score", "GX Score" ], [ "gx_score_inverted", "GX Score Inverted" ], [ "industry_report", "Industry Report" ], [ "transparent", "Transparent" ], [ "blue-10", "Blue 10" ], [ "bright-blue", "Bright Blue" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "primary"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "bg_kind" : "primary"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "button_settings" : {
+      "modal_trigger" : false,
+      "modal_trigger_video" : false,
+      "form" : {
+        "response_type" : "inline",
+        "message" : "Thanks for submitting the form."
+      },
+      "video_id" : "",
+      "btn_label" : "Get started",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "btn_icon" : { },
+    "button_styles" : {
+      "bg_kind" : "primary"
+    }
+  }, {
+    "button_settings" : {
+      "modal_trigger" : false,
+      "modal_trigger_video" : false,
+      "form" : {
+        "response_type" : "inline",
+        "message" : "Thanks for submitting the form."
+      },
+      "video_id" : "",
+      "btn_label" : "Get started",
+      "button_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    },
+    "btn_icon" : { },
+    "button_styles" : {
+      "bg_kind" : "primary"
+    }
+  } ]
+} ]

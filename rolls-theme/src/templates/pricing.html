@@ -1,0 +1,39 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Pricing
+  screenshotPath: ../images/template-previews/pricing.png
+-->
+{% extends "./layouts/base.html" %}
+{% require_js position="head" %}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "{{ page_meta.canonical_url or 'https://www.roller.software/get-started/' }}",
+        "url": "{{ page_meta.canonical_url or 'https://www.roller.software/get-started/' }}",
+        "name": "{{ page_meta.html_title or 'Get Started with ROLLER' }}",
+        "description": "{{ page_meta.meta_description or 'Get started with ROLLER - the complete venue management platform' }}",
+        "isPartOf": {
+          "@id": "https://www.roller.software/#website"
+        },
+        "potentialAction": {
+          "@type": "Action",
+          "name": "ROLLER Pricing",
+          "target": "https://www.roller.software/get-started/"
+        }
+      }
+</script>
+{% end_require_js %}
+{% block body %}
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--pricing"
+%}
+
+  {# Pricing #}
+
+  {% include_dnd_partial path="../sections/pricing.html" %}
+
+{% end_dnd_area %}
+{% endblock body %}

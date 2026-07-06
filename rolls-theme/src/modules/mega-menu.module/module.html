@@ -1,0 +1,780 @@
+{# Variables #}
+{% set link_color = module.styles.text.color %}
+{% set link_color_hover = module.styles.text.color_hover %}
+
+{% macro dropTriggerButton() %}
+  <button class="drop-trigger no-underline">
+  <p class="main-nav__item-label font-semibold mt-0 mb-0 ml-0 mr-2">{{ child.label }}</p>
+  <svg class='main-nav__item-icon fill-white' viewBox="0 0 19 18" fill="currentcolor"><path d="M9.1878 13.2325L4.1811 8.22575C3.93963 7.98428 3.93963 7.59279 4.1811 7.35135L4.76505 6.7674C5.00611 6.52634 5.39679 6.52588 5.63842 6.76637L9.62501 10.7343L13.6116 6.76637C13.8532 6.52588 14.2439 6.52634 14.4849 6.7674L15.0689 7.35135C15.3104 7.59282 15.3104 7.9843 15.0689 8.22575L10.0622 13.2325C9.82075 13.4739 9.42927 13.4739 9.1878 13.2325Z"/></svg>
+  </button>
+{% endmacro%}
+
+{% macro mega_drop(drop_obj, icon)  %}
+   {{dropTriggerButton ()}}
+    <div class="menu-drop-panel mega-drop">
+      <div class="mega-drop-wrapper maxmd:bg-neutral-white">
+        <div class="mega-drop-container container">
+          {% for child in drop_obj.mega_drop %}
+            <a href="{{child.link.url.href}}" class="mega-drop__item" target="{{ child.link.open_in_new_tab ? '_blank' : '' }}">
+              <img src="{{ child.mega_image.src }}" alt="{{ child.mega_image.alt }}" width=100 loading="{{ child.mega_image.loading }}">
+              <div class="mega-drop__item-text">
+                <h5 class="text-primary-50">{{ child.mega_title }}</h5>
+                <p class="paragraph--sm text-primary-50">{{ child.mega_description }}</p>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endmacro %} 
+
+{# Styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      .mega-drop__item--blog p {
+        color: var(--primary-50, '#033180');
+      }
+
+      .mega-drop__item--blog p:hover {
+        color: var(--secondary-50, '#ff290c');
+      }
+
+      .mega-drop__item--blog p:hover svg path {
+        fill: var(--secondary-50, '#ff290c');
+      }
+
+      /* General menu styles */
+
+      .main-nav-list {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        list-style: none;
+        padding: 0;
+        width: 100%;
+      }
+
+      .main-nav__item {
+        cursor: pointer;
+        flex-grow: 0;
+        margin-left:  0.45em;
+        margin-right: 0.45em;
+        line-height: 1;
+        position: relative;
+        padding: 0.5em 0 0.5em 1em;
+      }
+
+      .main-nav__item.is-active {
+        max-height: 10000px;
+      }
+
+      .main-nav__item,
+      .main-nav__item button {
+        font-size: 1.33rem;
+      }
+
+      .main-nav__item a,
+      .main-nav__item > button {
+        fill: var(--header-nav-color);
+      }
+
+      .main-nav__item button {
+        display: flex;
+        align-items: center;
+        padding: 0.5em 0;
+        text-align: inherit;
+      }
+
+      .main-nav__item.menu-drop {
+        padding: 0;
+        position: static;
+        transition: var(--transition);
+      }
+
+      .main-nav__item.mega-link {
+        position: static;
+      }
+
+      /* Menu item with mega dropdown */
+
+      .mega-link > a {
+        align-items: center;
+        display: flex;
+        position: relative;
+      }
+
+   .hs-blog-post .mega-link .main-nav__item-label, .hs-blog-post .main-nav__item .font-semibold{
+        color: #023180;
+    }
+
+      /* Mega dropdown */
+
+      .mega-drop {
+        position: static;
+        width: 100vw;
+      }
+
+      .mega-drop__item {
+        display: block;
+      }
+
+      .mega-drop__item img {
+        display: none;
+      }
+
+      .menu-drop-panel {
+        overflow: hidden;
+        transition-property: height, visibility;
+        transition-timing-function: ease;
+        height: 0;
+        cursor: auto;
+      }
+
+      .menu-drop-panel {
+        visibility: hidden;
+      }
+
+      .menu-drop.is-active .menu-drop-panel {
+        visibility: visible;
+      }
+
+      /* Dropdown icon */
+
+      .main-nav__item-icon {
+        display: inline-block;
+        margin-right: 0.2em;
+        transition: transform .2s ease; 
+        width:  1em;
+      }
+
+      .header.light .mega-link .main-nav__item-icon,
+      .drop-link .main-nav__item-icon {
+       color: #043180;
+      }
+
+      .mega-link.is-active .main-nav__item-icon,
+      .drop-link.is-active .main-nav__item-icon {
+        transform: translateY(2px) rotate(180deg);
+      }
+
+      /* Regular dropdown menu */
+
+      .sub-menu-drop {
+        height: auto;
+        position: static;
+      }
+
+      .sub-menu-drop li {
+        padding-left: 1rem;
+      }
+
+      .sub-menu-drop a {
+        padding-bottom: 0.8em;
+        padding-top:    0.8em;
+        display: block;
+      }
+
+      /* Mobile-only styles */
+
+      @media screen and (max-width: 992px) {
+        .main-nav__item.is-active .mega-drop {
+          display: block;
+        }
+
+        .main-nav__item.mega-link,
+        .main-nav__item.drop-link {
+          padding-left: 1em;
+          padding-bottom: .5em;
+        }
+
+        .mega-drop__item p {
+          padding-bottom: 0.8em;
+          padding-top:    0.8em;
+        }
+
+        .mega-drop__item h6,
+        .sub-menu-drop a {
+          font-size: 1rem;
+          font-weight: 400;
+        }
+
+        .mega-drop__item:hover h5,
+        .sub-menu-drop a:hover {
+          color: var(--header-nav-color-hover);
+        }
+
+        .sub-menu-drop li:last-of-type{
+          padding-bottom: 1rem;
+        }
+      }
+
+      .mega-drop-wrapper >.container, .mega-drop-wrapper >.container > div {
+        padding: 0;
+      }
+
+      /* Desktop-only styles */
+/*     @media screen and (min-width: 1300px) {
+    .main-nav-list {
+          background-color: transparent;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          position: static;
+          height: auto;
+        }
+    } */
+      @media screen and (min-width: 992px) {
+        .main-nav-list {
+          background-color: transparent;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          position: static;
+          height: auto;
+        }
+
+        .main-nav__item {
+          font-size: 0.89rem;
+          padding: 0.2em 0;
+        }
+
+        .main-nav__item button {
+          font-size: 0.875rem;
+          padding-top: 0.25em;
+          padding-bottom: 0.25em;
+        }
+
+        .main-nav__item-icon {
+          margin-right: 0;
+        }
+
+        .mega-link.is-active {
+          box-shadow: 0 1px var(--dark-primary);
+        }
+        
+        .mega-link.is-active .main-nav__item-icon {
+          transform: translateY(1px) rotate(180deg);
+        }
+
+        .mega-drop {
+          position: absolute;
+          top: var(--content-offset-desktop);
+          left: 0;
+          z-index: 9;
+        }
+
+        .mega-drop-wrapper {
+          padding: 3rem 2rem 4rem;
+        }
+
+        .mega-drop-container {
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .mega-drop__item:hover {
+          background-color: var(--mega-menu-item-hover);
+        }
+
+        .mega-drop__item img {
+          display: block;
+          flex-shrink: 0;
+          margin-right: 1.875rem;
+          max-width: 60px;
+        }
+
+        .mega-drop__item-text h5 {
+          flex-shrink: 0;
+        }
+
+        .main-nav__item:hover .sub-menu-drop {
+            display: block;
+        }
+
+        /* Regular dropdown menu */
+
+        .sub-menu-drop {
+          background-color: var(--mega-menu-bg);
+          position: absolute;
+          top: var(--content-offset-desktop);
+          width: 180px;
+          z-index: 9;
+        }
+
+        .sub-menu-drop li {
+          padding-left: 1.5rem;
+        }
+
+        .sub-menu-drop li:first-of-type {
+          margin-top: 1rem;
+        }
+
+        .sub-menu-drop li:last-of-type {
+          margin-bottom: 1rem;
+        }
+
+        .sub-menu-drop li a {
+          color: var(--mega-menu-title-color);
+          font-size: 0.89rem;
+        }
+
+        .sub-menu-drop li:hover {
+          background-color: var(--mega-menu-item-hover);
+        }
+      }
+
+      /* Large screen layout */
+
+      @media only screen and (min-width: 860px){
+        .main-nav__item {
+          margin-left:  1em;
+          margin-right: 1em;
+        }
+      }
+
+      .main-nav__item-label {
+        font-size: 1.33rem;
+      }
+
+      @media only screen and (min-width: 992px) {
+        .main-nav__item,
+        .main-nav__item button {
+          font-size: 1rem;
+        }
+
+        .main-nav__item:hover .menu-drop-panel {
+          height: auto;
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .main-nav__item-label {
+          font-size: 1rem;
+        }
+
+        .main-nav__item:hover .drop-trigger .main-nav__item-icon {
+          transform: translateY(1px) rotate(180deg);
+        }
+
+        .main-nav__item:hover .mega-drop-wrapper > div:first-child {
+          transform: translateY(0);
+          transition: all 0.3s ease;
+          transition-delay: 150ms;
+          transition-property: opacity transform;
+          opacity: 1;
+        }
+
+        .menu-drop-panel {
+          overflow: hidden;
+          transition: all 0.4s ease;
+          height: 0;
+          cursor: auto;
+          opacity: 0;
+        }
+
+        .mega-drop-wrapper > div:first-child {
+          transform: translateY(-0.5rem);
+          opacity: 0;
+        }
+
+      }
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{% macro mega_drop_resources(drop_obj, icon)  %}
+    {{dropTriggerButton ()}}
+    <div class="menu-drop-panel mega-drop">
+      <div class="mega-drop-wrapper maxmd:bg-neutral-white"">
+        <div class="flex gap-8 container">
+          <div class="grid grid-cols-2 maxmd:grid-cols-3 gap-y-0 maxmd:gap-y-0 gap-x-0 maxmd:gap-x-8 container relative after:absolute after:w-[1px] after:h-[100%] after:bg-primary-40 after:top-0 after:right-[-40px]">
+          {% for child in drop_obj.mega_menu_labels %}
+            <div class="hidden maxmd:block">
+              <p class="font-extrabold text-secondary-50 leading-7 m-0">{{ child.mega_title }}</p>
+            </div>
+          {% endfor %}
+          {% for child in drop_obj.mega_drop %}
+              <a href="{{child.link.url.href}}" class="mega-drop__item w-[170px] maxmd:w-auto" target="{{ child.link.open_in_new_tab ? '_blank' : '_self' }}">
+                <img src="{{ child.mega_image.src }}" alt="{{ child.mega_image.alt }}" width=100 loading="{{ child.mega_image.loading }}">
+                <div class="mega-drop__item-text">
+                  <p class="text-primary-50 hover:text-secondary-50 leading-4 maxmd:leading-7 md:font-semibold mb-2">{{ child.mega_title }}</p>
+                  {% if child.mega_description %}
+                  <p class="hidden maxmd:block text-sm text-primary-50">{{ child.mega_description }}</p>
+                  {% endif %}
+                </div>
+              </a>
+          {% endfor %}
+          </div>
+          <div class="hidden maxmd:block max-w-[256px]">
+            <p class="font-extrabold text-secondary-50 leading-7 mb-3">What's New</p>
+            {% for child in drop_obj.mega_featured_menu_items %}
+              {% set href = child.mega_featured_link.url.href %}
+              {% set rel = [] %}
+              {% set url_type = child.mega_featured_link.url.type %}
+              {% set no_follow = child.mega_featured_link.no_follow %}
+              {% set new_tab = child.mega_featured_link.open_in_new_tab %}
+                
+              {# Sets attributes used for the link field #}
+
+              {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set href = 'mailto:' + href %}
+              {% endif %}
+              {% if no_follow %}
+                {% do rel.append('nofollow') %}
+              {% endif %}
+              {% if new_tab %}
+                {% do rel.append('noopener') %}
+              {% endif %}
+
+              <div class="block bg-primary-10 rounded mb-3 w-[256px]">
+                <a class="font-serif" href="{{ href }}"
+                  id="button_{{name}}"
+                  {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+                  {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                >
+                  {% if child.mega_featured_image.src %}
+                  {% set sizeAttrs = 'width="{{ child.mega_featured_image.width }}" height="{{ child.mega_featured_image.height }}"' %}
+                  {% if child.mega_featured_image.size_type == "auto" %}
+                    {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                  {% elif child.mega_featured_image.size_type == "auto_custom_max" %}
+                    {% set sizeAttrs = 'width="{{ child.mega_featured_image.max_width }}" height="{{ child.mega_featured_image.max_height }}" style="max-width: 100%; max-height: auto;"' %}
+                  {% endif %}
+                  {% set loadingAttr = child.mega_featured_image.loading != "disabled" ? 'loading="{{ child.mega_featured_image.loading }}"' : "" %}
+                  <img class="card__image" src="{{ child.mega_featured_image.src }}" alt="{{ child.mega_featured_image.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+                {% endif %}
+                  <div class="flex flex-col gap-2 p-3">
+                    <p class="text-primary-50 m-0 leading-6 font-semibold">{{ child.mega_featured_title }}</p>
+                    <p class="text-primary-50 m-0 text-xs font-semibold">{{ child.mega_featured_label }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endmacro %} 
+
+{% macro mega_drop_features(drop_obj, icon)  %}
+    {{dropTriggerButton ()}}
+    <div class="menu-drop-panel mega-drop">
+      <div class="mega-drop-wrapper maxmd:bg-neutral-white"">
+        <div class="flex gap-8 container">
+          <div class="flex gap-y-4 gap-x-8 maxmd:gap-x-0 xl:gap-x-8 container relative after:absolute after:w-[1px] after:h-[100%] after:bg-primary-40 after:top-0 after:right-[-40px]">
+            <div class="hidden maxmd:block max-w-[305px]">
+              {% for child in drop_obj.mega_drop %}
+                <div class="mega-drop__item-text">
+                  <p class="text-primary-50 text-4xl font-extrabold leading-11 mb-3">{{ child.mega_intro.mega_intro_title }}</p>
+                  {% if child.mega_intro.mega_intro_description %}
+                  <p class="text-base text-primary-50">{{ child.mega_intro.mega_intro_description }}</p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="grow grid grid-cols-2 maxmd:flex maxmd:flex-col">
+              {% for child in drop_obj.mega_drop %}
+                {% if child.link.url.href %}
+                <div class="mega-drop__item mb-2 maxmd:mb-4 w-[170px] maxmd:w-auto">
+                  <div class="mega-drop__item-text flex items-center gap-x-4 maxmd:gap-x-1 xl:gap-x-4">
+                    <div class="hidden maxmd:block">{{child.mega_icon}}</div>
+                    <div class="grow">
+                      <a href="{{child.link.url.href}}" target="{{ child.link.open_in_new_tab ? '_blank' : '_self' }}">
+                        <p class="text-base text-primary-50 hover:text-secondary-50 leading-4 maxmd:leading-7 md:font-semibold mb-2">{{ child.mega_title }}</p>
+                      </a>
+                      {% if child.mega_description %}
+                        <p class="text-sm text-primary-50 hidden maxmd:block">{{ child.mega_description }}</p>
+                      {% endif %}
+                      {% if child.mega_top_features %}
+                        <div class="hidden maxmd:flex text-sm text-primary-50">
+                        <span class="mr-1 flex items-center">Top features: </span>
+                        {% for features in child.mega_top_features %}
+                          {% set href = features.mega_top_features_link.url.href %}
+                          {% set rel = [] %}
+                          {% set url_type = features.mega_top_features_link.url.type %}
+                          {% set no_follow = features.mega_top_features_link.no_follow %}
+                          {% set new_tab = features.mega_top_features_link.open_in_new_tab %}
+                          <a 
+                          href="{{ href }}"
+                          class="flex items-center text-sm text-left maxmd:text-center xl:text-left text-primary-40 mx-1 bg-primary-10 font-semibold py-1 px-2 rounded-[980px] hover:bg-[#6ba0fa] transition ease-in-out duration-300"
+                          {% if features.mega_top_features_link.open_in_new_tab %}target="_blank"{% endif %}
+                          {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                          >{{ features.mega_top_features_title }}</a>
+                        {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+              {% endfor %}
+              <a href="/features/" class="text-primary-50 hover:text-secondary-50 flex font-semibold my-3 maxmd:my-6 [&>svg>path]:hover:fill-[red]">See all features <svg xmlns="http://www.w3.org/2000/svg" class="mx-3" width="16" height="16" fill="none"><path fill="#033180" d="M8 0 6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8-8-8Z"/></svg></a>
+            </div>
+          </div>
+          <div class="hidden maxmd:block min-w-[256px]">
+            <p class="font-extrabold text-secondary-50 leading-7 mb-3">Latest Product Spotlight</p>
+            {% for child in drop_obj.mega_featured_menu_items %}
+              {% set href = child.mega_featured_link.url.href %}
+              {% set rel = [] %}
+              {% set url_type = child.mega_featured_link.url.type %}
+              {% set no_follow = child.mega_featured_link.no_follow %}
+              {% set new_tab = child.mega_featured_link.open_in_new_tab %}
+                
+              {# Sets attributes used for the link field #}
+
+              {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set href = 'mailto:' + href %}
+              {% endif %}
+              {% if no_follow %}
+                {% do rel.append('nofollow') %}
+              {% endif %}
+              {% if new_tab %}
+                {% do rel.append('noopener') %}
+              {% endif %}
+
+              <div class="block bg-primary-10 rounded mb-3 w-[256px]">
+                <a class="font-serif" href="{{ href }}"
+                  id="button_{{name}}"
+                  {% if new_tab %}target="_blank"{% endif %}
+                  {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                >
+                  {% if child.mega_featured_image.src %}
+                  {% set sizeAttrs = 'width="{{ child.mega_featured_image.width }}" height="{{ child.mega_featured_image.height }}"' %}
+                  {% if child.mega_featured_image.size_type == "auto" %}
+                    {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                  {% elif child.mega_featured_image.size_type == "auto_custom_max" %}
+                    {% set sizeAttrs = 'width="{{ child.mega_featured_image.max_width }}" height="{{ child.mega_featured_image.max_height }}" style="max-width: 100%; max-height: auto;"' %}
+                  {% endif %}
+                  {% set loadingAttr = child.mega_featured_image.loading != "disabled" ? 'loading="{{ child.mega_featured_image.loading }}"' : "" %}
+                  <img class="card__image" src="{{ child.mega_featured_image.src }}" alt="{{ child.mega_featured_image.alt }}" loading="lazy" {{ sizeAttrs }}>
+                {% endif %}
+                  <div class="flex flex-col gap-2 p-3">
+                    <p class="text-primary-50 leading-6 m-0 font-semibold">{{ child.mega_featured_title }}</p>
+                    <p class="text-primary-50 text-xs m-0 font-semibold">{{ child.mega_featured_label }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endmacro %} 
+
+{% macro mega_drop_industries(drop_obj, icon)  %}
+    {{dropTriggerButton ()}}
+    <div class="menu-drop-panel mega-drop">
+      <div class="mega-drop-wrapper bg-neutral-white">
+        <div class="flex gap-8 container">
+          <div class="flex gap-y-4 gap-x-8 maxmd:gap-x-0 xl:gap-x-8 container relative after:absolute after:w-[1px] after:h-[100%] after:bg-primary-40 after:top-0 after:right-[-40px]">
+            <div class="hidden maxmd:block max-w-[305px]">
+              {% for child in drop_obj.mega_drop %}
+                <div class="mega-drop__item-text">
+                  <p class="text-primary-50 text-4xl leading-11 font-extrabold mb-3">{{ child.mega_intro.mega_intro_title }}</p>
+                  {% if child.mega_intro.mega_intro_description %}
+                  <p class="text-base text-primary-50">{{ child.mega_intro.mega_intro_description }}</p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="grow grid grid-cols-2 maxmd:grid-cols-2 gap-y-0 maxmd:gap-y-2 gap-x-4 auto-rows-min">
+              {% for child in drop_obj.mega_drop %}
+                {% if child.link.url.href %}
+                <a href="{{child.link.url.href}}" class="mega-drop__item mb-2 maxmd:mb-4 w-[170px] maxmd:w-fit" target="{{ child.link.open_in_new_tab ? '_blank' : '_self' }}">
+                  <div class="mega-drop__item-text flex gap-x-4">
+                    <div class="hidden maxmd:block">{{child.mega_icon}}</div>
+                    <div class="grow">
+                      <p class="text-base text-primary-50 hover:text-secondary-50 leading-4 maxmd:leading-7 md:font-semibold mb-2">{{ child.mega_title }}</p>
+                      {% if child.mega_description %}
+                      <p class="text-sm text-primary-50">{{ child.mega_description }}</p>
+                      {% endif %}
+                      {% if child.mega_top_features %}
+                        <div class="text-sm text-primary-50 flex">
+                        <span class="mr-1 flex items-center">Top features: </span>
+                        {% for features in child.mega_top_features %}
+                          <span class="text-sm text-primary-40 mx-1 bg-primary-10 font-semibold py-1 px-2 rounded-[980px]">{{ features.mega_top_features_title }}</span>
+                        {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </a>
+                {% endif %}
+              {% endfor %}
+              <a href="/industries/" class="text-primary-50 hover:text-secondary-50 flex font-semibold my-3 maxmd:my-6 [&>svg>path]:hover:fill-[red]">See all industries <svg xmlns="http://www.w3.org/2000/svg" class="mx-3" width="16" height="16" fill="none"><path fill="#033180" d="M8 0 6.59 1.41 12.17 7H0v2h12.17l-5.58 5.59L8 16l8-8-8-8Z"/></svg></a>
+            </div>
+          </div>
+          <div class="hidden maxmd:block max-w-[256px]">
+            <p class="font-extrabold text-secondary-50 leading-7 mb-3">Customer Stories</p>
+            {% for child in drop_obj.mega_featured_menu_items %}
+              {% set href = child.mega_featured_link.url.href %}
+              {% set rel = [] %}
+              {% set url_type = child.mega_featured_link.url.type %}
+              {% set no_follow = child.mega_featured_link.no_follow %}
+              {% set new_tab = child.mega_featured_link.open_in_new_tab %}
+                
+              {# Sets attributes used for the link field #}
+
+              {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set href = 'mailto:' + href %}
+              {% endif %}
+              {% if no_follow %}
+                {% do rel.append('nofollow') %}
+              {% endif %}
+              {% if new_tab %}
+                {% do rel.append('noopener') %}
+              {% endif %}
+
+              <div class="block bg-primary-10 rounded mb-3 w-[256px]">
+                <a class="font-serif" href="{{ href }}"
+                  id="button_{{name}}"
+                  {% if new_tab %}target="_blank"{% endif %}
+                  {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                >
+                  {% if child.mega_featured_image.src %}
+                  {% set sizeAttrs = 'width="{{ child.mega_featured_image.width }}" height="{{ child.mega_featured_image.height }}"' %}
+                  {% if child.mega_featured_image.size_type == "auto" %}
+                    {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' %}
+                  {% elif child.mega_featured_image.size_type == "auto_custom_max" %}
+                    {% set sizeAttrs = 'width="{{ child.mega_featured_image.max_width }}" height="{{ child.mega_featured_image.max_height }}" style="max-width: 100%; max-height: auto;"' %}
+                  {% endif %}
+                  <img class="card__image" src="{{ child.mega_featured_image.src }}" alt="{{ child.mega_featured_image.alt }}" loading="{{ child.mega_featured_image.loading }}" {{ sizeAttrs }}>
+                {% endif %}
+                  <div class="flex flex-col gap-2 p-3">
+                    <p class="text-primary-50 m-0 leading-6 font-semibold">{{ child.mega_featured_title }}</p>
+                    <p class="text-primary-50 m-0 text-xs font-semibold">{{ child.mega_featured_label }}</p>
+                  </div>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endmacro %}
+
+{% macro mega_drop_solutions(drop_obj, icon)  %}
+    {{dropTriggerButton ()}}
+    <div class="menu-drop-panel mega-drop">
+      <div class="mega-drop-wrapper bg-neutral-white">
+        <div class="flex gap-8 container">
+          <div class="flex gap-y-4 gap-x-8 maxmd:gap-x-0 xl:gap-x-8 container relative">
+            <div class="hidden maxmd:block max-w-[305px]">
+              {% for child in drop_obj.mega_drop %}
+                <div class="mega-drop__item-text">
+                  <p class="text-primary-50 text-4xl leading-11 font-extrabold mb-3">{{ child.mega_intro.mega_intro_title }}</p>
+                  {% if child.mega_intro.mega_intro_description %}
+                  <p class="text-base text-primary-50">{{ child.mega_intro.mega_intro_description }}</p>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+            <div class="grow grid grid-cols-2 maxmd:flex maxmd:flex-col">
+              {% for child in drop_obj.mega_drop %}
+                {% if child.link.url.href %}
+                <a href="{{child.link.url.href}}" class="mega-drop__item mb-2 maxmd:mb-4 max-w-[520px]" target="{{ child.link.open_in_new_tab ? '_blank' : '_self' }}">
+                  <div class="mega-drop__item-text flex items-center gap-x-4 maxmd:gap-x-1 xl:gap-x-4">
+                    <div class="hidden maxmd:block">{{child.mega_icon}}</div>
+                    <div class="grow">
+                      <p class="text-base lg:text-lg text-primary-50 hover:text-secondary-50 leading-4 maxmd:leading-7 md:font-semibold mb-2">{{ child.mega_title }}</p>
+                      {% if child.mega_description %}
+                      <p class="text-sm text-[#074DC5] hidden lg:block">{{ child.mega_description }}</p>
+                      {% endif %}
+                      {% if child.mega_top_features %}
+                        <div class="text-sm text-primary-50 flex">
+                        <span class="mr-1 flex items-center">Top features: </span>
+                        {% for features in child.mega_top_features %}
+                          <span class="text-sm text-primary-40 mx-1 bg-primary-10 font-semibold py-1 px-2 rounded-[980px]">{{ features.mega_top_features_title }}</span>
+                        {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endmacro %} 
+
+{% macro sub_menu_drop(sub_menu) %}
+  <button class="drop-trigger">
+    <span class="main-nav__item-label">{{ child.label }}</span>
+    <svg class='main-nav__item-icon' viewBox="0 0 19 18" fill="currentcolor"><path d="M9.1878 13.2325L4.1811 8.22575C3.93963 7.98428 3.93963 7.59279 4.1811 7.35135L4.76505 6.7674C5.00611 6.52634 5.39679 6.52588 5.63842 6.76637L9.62501 10.7343L13.6116 6.76637C13.8532 6.52588 14.2439 6.52634 14.4849 6.7674L15.0689 7.35135C15.3104 7.59282 15.3104 7.9843 15.0689 8.22575L10.0622 13.2325C9.82075 13.4739 9.42927 13.4739 9.1878 13.2325Z"/></svg>
+  </button>
+  <ul role="list" class="menu-drop-panel sub-menu-drop no-list">
+    {% for item in sub_menu.children %}
+    <li>
+      <a href="{{ item.url }}"> {{ item.label }} </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% endmacro %} 
+
+{% set mega_link_labels = module.mega_menu_links|map("mega_link_label")|map("lower")|map("trim") %} 
+{% set menu_object = menu(module.menu) %}
+
+{# Styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      {% if link_color.css %}
+        .main-nav__item a, 
+        .main-nav__item > button {
+          color: {{ link_color.css }};
+        }
+      {% endif %}
+
+      {% if link_color_hover.css %}
+        .main-nav__item a:hover, 
+        .main-nav__item > button:hover {
+          color: {{ link_color_hover.css }};
+        }
+      {% endif %}
+
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# Markup #}
+<nav aria-label="Main menu">
+  <ul role="list" class="main-nav-list" id="main-nav-list">
+    {% for child in menu_object.children %}
+
+      {% set classes = child.children ? 'drop-link menu-drop' : '' %}
+      {% set classes = (child.label|lower|trim) in mega_link_labels ? 'mega-link menu-drop' : classes %}
+
+      <li class="main-nav__item no-underline inline-block maxmd:flex items-center maxmd:h-[72px] {{ classes }}">
+        {% set index = mega_link_labels.index(child.label|lower|trim)%} 
+        {% if index > -1 %}
+          {% if child.label == 'Why ROLLER?' %}
+            {{ mega_drop_resources(module.mega_menu_links[index]) }}
+          {% elif child.label == 'Features' %}
+            {{ mega_drop_features(module.mega_menu_links[index]) }}
+          {% elif child.label == 'Industries' %}
+            {{ mega_drop_industries(module.mega_menu_links[index]) }}
+          {% elif child.label == 'Solutions' %}
+            {{ mega_drop_solutions(module.mega_menu_links[index]) }}
+          {% else %}
+            {{ mega_drop(module.mega_menu_links[index]) }}
+          {% endif%}
+        {% elif child.children %} 
+          {{ sub_menu_drop(child) }} 
+        {% else %}
+          <a href="{{ child.url }}" class="">
+            <span class="font-semibold">{{ child.label }}</span>
+            {{ icon }}
+          </a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
+

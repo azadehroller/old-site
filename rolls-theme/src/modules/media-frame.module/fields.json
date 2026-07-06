@@ -1,0 +1,97 @@
+[ {
+  "id" : "media_type",
+  "name" : "media_type",
+  "label" : "Media Type",
+  "help_text" : "Choose whether to display a video with play button or a static image",
+  "required" : true,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "video", "Video" ], [ "image", "Static Image" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "video"
+}, {
+  "id" : "high_priority_loading",
+  "name" : "high_priority_loading",
+  "label" : "High Priority Loading",
+  "help_text" : "Enable this if the media frame appears above the fold (visible without scrolling) to improve page loading performance",
+  "inline_help_text" : "Enable this if the media frame appears above the fold (visible without scrolling) to improve page loading performance",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "video_url",
+  "name" : "video_url",
+  "label" : "Video Id",
+  "help_text" : "Enter the id at the end of the full URL of your video.",
+  "inline_help_text" : "Enter the id at the end of the full URL of your video.",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "video",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "display" : "text",
+  "placeholder" : "Example Id: vi226zumk5 from this url : https://rollerdigital.wistia.com/medias/vi226zumk5",
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "video_thumbnail",
+  "name" : "video_thumbnail",
+  "label" : "Video Thumbnail",
+  "help_text" : "Upload a thumbnail image to display before the video plays",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "video",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "Video thumbnail"
+  }
+}, {
+  "id" : "static_image",
+  "name" : "static_image",
+  "label" : "Static Image",
+  "help_text" : "Upload an image to display in the media frame",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "image",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "Media frame image"
+  }
+} ]

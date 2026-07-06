@@ -1,0 +1,89 @@
+@property --＠gradient-color-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(7, 100%, 52%)
+}
+
+@property --＠gradient-color-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(265, 90%, 59%);
+}
+
+@property --＠gradient-color-3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(218, 93%, 50%)
+}
+
+@property --＠gradient-color-4 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(218, 93%, 50%);
+}
+
+@property --＠gradient-color-5 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsla(183, 100%, 61%, 0.6);
+}
+
+@property --＠gradient-color-6 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(183, 100%, 61%);
+}
+.custom-text-wrapper:has(.gradient) {
+  .gradient > span{
+background: linear-gradient(to right in oklch,
+            var(--＠gradient-color-1) 0%,
+            var(--＠gradient-color-2) 22%,
+            var(--＠gradient-color-3) 42%,
+            var(--＠gradient-color-4) 82%,
+            var(--＠gradient-color-5) 100%,
+            var(--＠gradient-color-6) 104%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+  }
+}
+.bright-blue{color: #3a80f8;}
+.blue-50{color: #0960F6;}
+.blue-80{color:#9DBFFB;}
+.light-blue{color: #6BA0FA;}
+.light-purple{color: #f4daff;}
+.indigo{color: #E5E5FF;}
+.iris_shade{color: #AF9FFA;}
+.title-blue-30{color: #033180;}
+.title-blue-10{color: #011840;}
+.custom-text-wrapper-content ol,
+.custom-text-wrapper-content ul {
+  list-style: inherit;
+  padding-left: 26px;
+  margin:0;
+  li{padding-left: 8px;margin-bottom: 0;        line-height: 27px;}
+}
+/* https://brand-assets.softwareadvice.com/badge/2f423e39-c2f2-479e-b3c8-62fde38c0154.svg" / */
+.eyebrow{font-size: 18px;}
+/* .custom-text-wrapper-content div *:last-child{margin-bottom: 0px;} */
+.heading-composition .text-lg,.heading-composition .text-lg p, .heading-composition .text-base p{font-size: 16px;}
+h2.h3-heading{
+  font-size: 32px;
+font-weight: 800;
+line-height: 40px; 
+  letter-spacing: -0.32px;
+}
+@media (min-width: 768px){
+  h2.h3-heading{
+  font-size: 40px;
+line-height: 50px;
+letter-spacing: -0.4px;
+  }
+.heading-composition .text-lg,.heading-composition .text-lg p, .heading-composition .text-base p{font-size: 18px;}
+  .heading-composition .h4-heading{
+  font-size: 32px;
+line-height: 40px;
+letter-spacing: -0.32px;}
+}

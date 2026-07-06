@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 196030106658,
+  "label" : "Pulse Wave Animation",
+  "icon" : "../../images/module-icons/info-circle-solid.svg",
+  "is_available_for_new_content" : true
+}

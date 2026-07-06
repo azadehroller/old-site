@@ -1,0 +1,156 @@
+<!--
+    templateType: section
+    label: Pain Points
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/hero.png
+    description: "Section for displaying common pain points data including bad experiences, improvement areas, and waiting issues."
+-->
+{% dnd_section
+  vertical_alignment="TOP",
+  class="s-layout s-pain-points bg-dark"
+%}
+  {% dnd_column
+    offset=0,
+    width=12
+  %}
+    {% dnd_row %}
+      <div class="section-header fade-in-up mb-8">
+        <h2 class="text-4xl font-bold flex items-center">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-purple-900/50 mr-3">
+            <svg class="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </span>
+          <span class="text-purple-400">02.</span> Common pain points
+        </h2>
+        <p class="mt-2 text-gray-400">Understanding what frustrates guests the most helps you eliminate these issues and ensure memorable experiences.</p>
+      </div>
+    {% end_dnd_row %}
+
+    {% dnd_row %}
+      {% dnd_module 
+        path="../modules/pulse-line-chart",
+        label="Common Causes of Bad Experiences"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {% dnd_row %}
+      {% dnd_module 
+        path="../modules/pulse-half-circle-chart",
+        label="Where Guests Want Improvements"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {% dnd_row %}
+      {% dnd_module 
+        path="../modules/pulse-stat-card",
+        label="The Waiting Game Stat"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+
+{% end_dnd_section %}
+
+<style>
+  .s-pain-points {
+    background-color: #0d0c22;
+    color: #e0e0e0;
+    padding: 4rem 0;
+  }
+  
+  .section-header {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  
+  
+  
+  .text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .inline-flex {
+    display: inline-flex;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .w-12 {
+    width: 3rem;
+  }
+  
+  .h-12 {
+    height: 3rem;
+  }
+  
+  .w-6 {
+    width: 1.5rem;
+  }
+  
+  .h-6 {
+    height: 1.5rem;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .mr-3 {
+    margin-right: 0.75rem;
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+  
+  .text-purple-400 {
+    color: #a78bfa;
+  }
+  
+  .text-purple-300 {
+    color: #d8b4fe;
+  }
+  
+  .text-gray-400 {
+    color: #9ca3af;
+  }
+  
+  .bg-purple-900\\/50 {
+    background-color: rgba(88, 28, 135, 0.5);
+  }
+  
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .mb-8 {
+    margin-bottom: 2rem;
+  }
+</style>

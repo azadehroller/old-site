@@ -1,0 +1,162 @@
+[ {
+  "id" : "image",
+  "name" : "image",
+  "label" : "Image",
+  "help_text" : "Select an image from the file manager",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "",
+    "loading" : "lazy",
+    "width" : null,
+    "height" : null
+  }
+}, {
+  "id" : "loading_type",
+  "name" : "loading_type",
+  "label" : "Loading Type",
+  "help_text" : "Choose 'eager' for above-the-fold images to improve performance",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "lazy", "Lazy (default)" ], [ "eager", "Eager (for above-the-fold images)" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "lazy"
+}, {
+  "id" : "enable_fetchpriority",
+  "name" : "enable_fetchpriority",
+  "label" : "Enable High Fetch Priority",
+  "help_text" : "Automatically adds fetchpriority='high' when loading is set to 'eager'",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "loading_type",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "eager",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "responsive_behavior",
+  "name" : "responsive_behavior",
+  "label" : "Responsive Behavior",
+  "help_text" : "How the image should behave responsively",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "fluid", "Fluid (max-width: 100%, height: auto)" ], [ "fixed", "Fixed dimensions" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "fluid"
+}, {
+  "id" : "custom_width",
+  "name" : "custom_width",
+  "label" : "Custom Width",
+  "help_text" : "Override image width in pixels",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "responsive_behavior",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "fixed",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null
+}, {
+  "id" : "custom_height",
+  "name" : "custom_height",
+  "label" : "Custom Height",
+  "help_text" : "Override image height in pixels",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "responsive_behavior",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "fixed",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null
+}, {
+  "id" : "button_section_info",
+  "name" : "button_section_info",
+  "label" : " ",
+  "help_text" : "",
+  "required" : false,
+  "locked" : true,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h4 style='margin: 0 0 8px 0; color: #33475b; font-size: 16px; font-weight: 600;'>Optional Button over the image</h4><p style='margin: 0; color: #516f90; font-size: 14px;'>If you like to add a link button over the image, you can add it using the next two fields.</p>"
+}, {
+  "id" : "button_link",
+  "name" : "button_link",
+  "label" : "Button Link",
+  "help_text" : "URL for the button that will appear over the image",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "dc4ee0e0-ca5b-393a-18bd-0a9dbfe88643",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "cfc3e7ad-d7b7-1c28-a913-c64a91edbeaa",
+    "name" : "alignment_field",
+    "label" : "Alignment",
+    "required" : false,
+    "locked" : false,
+    "alignment_direction" : "BOTH",
+    "type" : "alignment",
+    "display_width" : null,
+    "default" : { }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button Text",
+  "help_text" : "Custom text for the button overlay (e.g., 'Learn More', 'View Details', 'Shop Now')",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+} ]

@@ -1,0 +1,252 @@
+{# ========================
+  Shared variables & macros
+  ======================== #}
+
+{% set tab_type      = module.tab_type %}
+{% set tabs          = module.tabs %}
+{% set requested_tab = module.default_active_tab|int %}
+{% set active_tab    = requested_tab if (requested_tab >= 1 and requested_tab <= tabs|length) else 1 %}
+
+{# CTA Macro #}
+{% macro render_cta(cta) %}
+  {% if cta.cta_text %}
+    {% set href     = cta.cta_link.url.href || '#' %}
+    {% set url_type = cta.cta_link.url.type %}
+    {% set new_tab  = cta.cta_link.open_in_new_tab %}
+    {% set no_follow = cta.cta_link.no_follow %}
+    {% set rel      = [] %}
+
+    {% if url_type is equalto 'EMAIL_ADDRESS' and cta.cta_link.url.href %}
+      {% set href = 'mailto:' + cta.cta_link.url.href %}
+    {% endif %}
+
+    {% if no_follow %}
+      {% do rel.append('nofollow') %}
+    {% endif %}
+    {% if new_tab %}
+      {% do rel.append('noopener') %}
+    {% endif %}
+
+    <a
+      class="tab-cta"
+      href="{{ href }}"
+      {% if new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(' ') }}"{% endif %}
+    >
+      {{ cta.cta_text }}
+      {% if cta.show_icon %}
+        <span class="tab-cta-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 12H19M19 12L12 5M19 12L12 19"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </span>
+      {% endif %}
+    </a>
+  {% endif %}
+{% endmacro %}
+
+{# ============================================================
+  REGULAR TABS MODE
+  ============================================================ #}
+
+{% if tab_type == 'regular' %}
+
+<div class="tabs-container" data-module-instance="{{ name }}">
+  <div class="tabs-wrapper">
+    <div class="tabs-selector" role="tablist">
+      {% for tab in tabs %}
+        <button
+          class="tab-button{% if loop.index == active_tab %} active{% endif %}"
+          role="tab"
+          aria-selected="{% if loop.index == active_tab %}true{% else %}false{% endif %}"
+          aria-controls="tab-panel-{{ name }}-{{ loop.index }}"
+          data-tab-index="{{ loop.index }}"
+          id="tab-{{ name }}-{{ loop.index }}"
+          type="button"
+        >
+          {{ tab.tab_label }}
+        </button>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% for tab in tabs %}
+    <div
+      class="tab-content tab-with-side-content{% if loop.index == active_tab %} active{% endif %}"
+      role="tabpanel"
+      aria-labelledby="tab-{{ name }}-{{ loop.index }}"
+      id="tab-panel-{{ name }}-{{ loop.index }}"
+      data-tab-panel="{{ loop.index }}"
+    >
+      <aside class="tab-left">
+        <h2 class="tab-heading">{{ tab.heading }}</h2>
+        {% if tab.description %}
+          <div class="tab-description">{{ tab.description }}</div>
+        {% endif %}
+        {{ render_cta(tab.cta) }}
+      </aside>
+
+      <figure class="tab-right">
+        {% if tab.side_content == "image" %}
+          {% if tab.side_image.src %}
+            <img
+              class="tab-right-image"
+              src="{{ tab.side_image.src }}"
+              alt="{{ tab.side_image.alt|escape }}"
+              loading="{{ tab.side_image.loading }}"
+              width="{{ tab.side_image.width }}"
+              height="{{ tab.side_image.height }}"
+            />
+          {% endif %}
+        {% elif tab.side_content == "stacked" %}
+          <div
+            id="stack-{{ module._uid }}-{{ loop.index }}"
+            class="stack-container"
+            data-stack-instance="{{ module._uid }}-{{ loop.index }}"
+          >
+            {% for image in tab.stacked_images.images %}
+              {% if image.src %}
+                <div class="card" style="width: {{ image.width }}px; height: {{ image.height }}px;">
+                  <img
+                    src="{{ image.src }}"
+                    alt="{{ image.alt|escape }}"
+                    loading="{{ image.loading }}"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                    class="card-image"
+                  />
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </figure>
+    </div>
+  {% endfor %}
+</div>
+
+{# ============================================================
+  JOBS MODE (GREENHOUSE) - 5 HARD-CODED GROUPS
+  ============================================================ #}
+
+{% elif tab_type == 'jobs' %}
+
+{# Convenience reference to the "All" tab (first tab) #}
+{% set all_tab = tabs[0] %}
+
+{# Map of group label overrides from the editor.
+   Keys MUST match the JS group keys: 'sales', 'gtm', 'product', 'engineering', 'corporate' #}
+{% set group_labels = {
+  'sales':       tabs[1].tab_label if tabs|length > 1 and tabs[1].tab_label else '',
+  'gtm':         tabs[2].tab_label if tabs|length > 2 and tabs[2].tab_label else '',
+  'product':     tabs[3].tab_label if tabs|length > 3 and tabs[3].tab_label else '',
+  'engineering': tabs[4].tab_label if tabs|length > 4 and tabs[4].tab_label else '',
+  'corporate':   tabs[5].tab_label if tabs|length > 5 and tabs[5].tab_label else ''
+} %}
+
+{# Editor-controlled order of groups (multi-select "job_category_groups")
+   IMPORTANT: each option's VALUE must be one of:
+   sales, gtm, product, engineering, corporate
+   to line up with the JS editorToGroupKey mapping. #}
+{% set group_order = module.job_category_groups or [] %}
+
+{# Helper: render left panel for a group with field-level fallback to all_tab #}
+{% macro render_group_panel(group_key, tab_for_group, all_tab, is_active=false) %}
+  {% set base        = tab_for_group if tab_for_group is defined and tab_for_group else all_tab %}
+  {% set heading     = base.heading     or all_tab.heading %}
+  {% set description = base.description or all_tab.description %}
+  {% set cta         = base.cta         or all_tab.cta %}
+  {% set side_image  = base.side_image.src ? base.side_image : all_tab.side_image %}
+
+  <aside
+    class="tab-content open-jobs__static{% if is_active %} active{% endif %}"
+    data-tab-panel="{{ group_key }}"
+    {% if base.tab_label %}
+      data-tab-label="{{ base.tab_label|escape }}"
+    {% endif %}
+  >
+    {% if heading %}
+      <h2 class="tab-heading">{{ heading }}</h2>
+    {% endif %}
+
+    {% if description %}
+      <div class="tab-description">{{ description }}</div>
+    {% endif %}
+
+    {{ render_cta(cta) }}
+
+    {% if side_image.src %}
+      <img
+        class="tab-image"
+        src="{{ side_image.src }}"
+        alt="{{ side_image.alt|escape }}"
+        loading="{{ side_image.loading }}"
+        width="{{ side_image.width }}"
+        height="{{ side_image.height }}"
+      />
+    {% endif %}
+  </aside>
+{% endmacro %}
+
+<div
+  class="tabs-container open-jobs"
+  data-module-instance="{{ name }}"
+  data-board-token="{{ module.board_token }}"
+  data-jobs-limit="{{ module.jobs_limit }}"
+  data-all-filter-label="{{ module.all_filter_label }}"
+  data-group-labels="{{ group_labels|tojson|escape }}"
+  data-group-order="{{ group_order|join(',') }}"
+>
+  <div class="open-jobs__layout">
+    <div class="open-jobs__left">
+      {#
+        Tabs / panels mapping:
+
+        Group keys (must match JS):
+        - all        (synthetic; not in groupDefs)
+        - sales
+        - gtm
+        - product
+        - engineering
+        - corporate
+      #}
+
+      {# ALL (default active) #}
+      {{ render_group_panel('all', all_tab, all_tab, true) }}
+
+      {# SALES #}
+      {{ render_group_panel('sales', tabs[1] if tabs|length > 1 else null, all_tab, false) }}
+
+      {# GTM #}
+      {{ render_group_panel('gtm', tabs[2] if tabs|length > 2 else null, all_tab, false) }}
+
+      {# PRODUCT #}
+      {{ render_group_panel('product', tabs[3] if tabs|length > 3 else null, all_tab, false) }}
+
+      {# ENGINEERING #}
+      {{ render_group_panel('engineering', tabs[4] if tabs|length > 4 else null, all_tab, false) }}
+
+      {# CORPORATE #}
+      {{ render_group_panel('corporate', tabs[5] if tabs|length > 5 else null, all_tab, false) }}
+    </div>
+
+    <div class="open-jobs__dynamic">
+      <div class="tabs-wrapper">
+        {# JS will inject tab buttons here in the order determined by editor #}
+        <div class="tabs-selector open-jobs-selector" role="tablist"></div>
+      </div>
+
+      <div class="open-jobs__panels">
+        <div class="open-jobs__loading">Loading open positions...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}

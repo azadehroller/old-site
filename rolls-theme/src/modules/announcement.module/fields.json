@@ -1,0 +1,152 @@
+[ {
+  "id" : "8765762a-721a-e41c-e9a9-da61b29699ff",
+  "name" : "display",
+  "label" : "Display",
+  "help_text" : "This field will enable/disable this module to show before the header.",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "4a463a8a-ef45-9d48-3b54-fc6104ebedc5",
+  "name" : "link",
+  "label" : "Link",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7d6d51a7-d903-267b-3c67-8d7e12cd0bed",
+    "name" : "link",
+    "label" : "Link",
+    "required" : true,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+}, {
+  "id" : "94218d2c-7272-77f8-0519-cb32660a4d21",
+  "name" : "text",
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "1d2c446d-f168-bc1d-fd0d-1e838239fde8",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "cb965e56-92e8-0979-cd5e-fb18f838323a",
+  "name" : "cta_text",
+  "label" : "CTA Text",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "1513908e-2fa0-b98e-8696-53801d4df896",
+    "name" : "cta_text",
+    "label" : "CTA Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "e3e3b536-57e0-5e16-dd45-168c9bc45c13",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "a9cd1090-9494-0b21-0745-2e358d3c3a23",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "industry_report", "Industry Report" ], [ "new_design", "Pulse report 2025" ], [ "product_launch", "Product Launch" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "theme" : "default"
+  }
+}, {
+  "id" : "2df5610b-c67e-45fa-a8f2-a881d1a5579a",
+  "name" : "countdown",
+  "label" : "Countdown",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "46216a7c-3876-2792-5d8d-d8259c6331e1",
+    "name" : "datetime",
+    "label" : "Date and time",
+    "required" : false,
+    "locked" : false,
+    "step" : 30,
+    "type" : "datetime",
+    "display_width" : null,
+    "default" : 1690824600000
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "datetime" : 1690824600000
+  }
+} ]

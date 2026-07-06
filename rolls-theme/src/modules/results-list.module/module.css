@@ -1,0 +1,14 @@
+.w-\[48px\]{width: 48px}
+.h-\[48px\]{height: 48px}
+.results-list{margin-block: 48px;}
+  .results-list-list{grid-template-columns: 1fr;}
+.results-list-text,.results-list-title{font-size: 16px;}
+.results-list .grid-has-image{grid-template-columns: 1fr}
+.results-list .grid-has-image .has-image{display: none;}
+@media  (min-width: 768px){
+  .results-list-title{font-size: 18px;}
+  .results-list .results-list-list{grid-template-columns: repeat(auto-fit, minmax(0, 1fr));}
+  .results-list:has( .results-list-list + .has-image) .results-list-list{grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));}
+  .results-list .grid-has-image{grid-template-columns: repeat(3,minmax(0,1fr))}
+  .results-list .grid-has-image .has-image{display: block;}
+}

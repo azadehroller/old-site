@@ -1,0 +1,364 @@
+/* =========================================================
+   Video Hero
+   All custom properties are scoped here and cascade to
+   every child element, including the fixed-position modal.
+   ========================================================= */
+
+/* Break out of the theme's max-width container so the hero spans
+   full viewport width. Overrides theme-overrides.css which caps
+   .dnd-section and .dnd-section > .row-fluid at the theme's
+   container width. */
+.dnd-section:has(.video-hero),
+.dnd-section:has(.video-hero) > .row-fluid,
+.dnd-section:has(.video-hero) .dnd-column {
+  max-width: 100%;
+  padding: 0;
+}
+
+.video-hero {
+  /* Colours */
+  --vh-c-primary:      #0960f6;
+  --vh-c-text:         #fff;
+  --vh-c-overlay-from: #011840;
+  --vh-c-overlay-to:   rgba(1, 24, 64, 0.4);
+  --vh-c-modal-scrim:  rgba(0, 0, 0, 0.85);
+
+  /* Spacing — Figma: px-24/py-64 mobile, px-48/py-80 desktop */
+  --vh-pad-x:          24px;
+  --vh-pad-y:          64px;
+  --vh-max-w:          1312px;
+  --vh-gap:            32px;
+  --vh-text-gap:       24px;
+  --vh-cta-gap:        16px;
+
+  /* Typography — Figma mobile base, overridden at 768px+ */
+  --vh-h-size:         40px;
+  --vh-h-lh:           50px;
+  --vh-h-ls:           -0.4px;
+  --vh-body-size:      16px;
+  --vh-body-lh:        24px;
+
+  /* Misc */
+  --vh-btn-radius:     980px;
+  --vh-modal-max-w:    900px;
+
+  /* Layout */
+  position: relative;
+  overflow: hidden;
+  min-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--vh-pad-y) var(--vh-pad-x);
+  color: var(--vh-c-text);
+
+  /* Solid colour fallback shown before the poster <img> paints. */
+  background-color: var(--vh-c-overlay-from);
+
+  @media (min-width: 768px) {
+    --vh-pad-x:     48px;
+    --vh-pad-y:     80px;
+    --vh-gap:       48px;
+    --vh-h-size:    64px;
+    --vh-h-lh:      72px;
+    --vh-h-ls:      -0.64px;
+    --vh-body-size: 18px;
+    --vh-body-lh:   27px;
+
+    min-height: 720px;
+  }
+}
+
+/* ── Background ──────────────────────────────────────────── */
+
+.video-hero__poster {
+  /* Rendered as an <img> so the preload scanner fetches it immediately.
+     Sits below the <video> in DOM order so the video overlays it once playing. */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--vh-focal-x, 50%) var(--vh-focal-y, 50%);
+}
+
+.video-hero__video {
+  /* display:block prevents the default inline baseline gap that can
+     shift the video down and clip the top edge inside overflow:hidden */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--vh-focal-x, 50%) var(--vh-focal-y, 0%);
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
+
+.video-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--vh-c-overlay-from),
+    var(--vh-c-overlay-to) 15%
+  );
+}
+
+/* ── Content ─────────────────────────────────────────────── */
+
+.video-hero__container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--vh-max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--vh-gap);
+}
+
+.video-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vh-text-gap);
+}
+
+.video-hero__heading {
+  margin: 0;
+  font-size: var(--vh-h-size);
+  line-height: var(--vh-h-lh);
+  letter-spacing: var(--vh-h-ls);
+  font-weight: 800;
+  color: inherit;
+  /* No opacity:0 — heading is visible at first paint so Chrome can record LCP
+     immediately. Only the Y position is animated; opacity stays 1 throughout. */
+  animation: videoHeroSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.video-hero__sub {
+  margin: 0;
+  font-size: var(--vh-body-size);
+  line-height: var(--vh-body-lh);
+  font-weight: 400;
+  color: inherit;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: videoHeroFadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+}
+
+/* ── CTAs ────────────────────────────────────────────────── */
+
+.video-hero__ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: var(--vh-cta-gap);
+  opacity: 0;
+  transform: translateY(16px);
+  animation: videoHeroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.75s forwards;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.video-hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 24px;
+  border-radius: var(--vh-btn-radius);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: opacity 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: auto;
+  }
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &.video-hero__btn--primary {
+    background-color: var(--vh-c-primary);
+    border-color: var(--vh-c-primary);
+    color: #fff;
+    height: 40px;
+
+    &:hover {
+      background-color: #053d9e;
+      border-color: #053d9e;
+      opacity: 1;
+    }
+  }
+
+  &.video-hero__btn--watch {
+    background-color: var(--vh-c-primary);
+    border-color: var(--vh-c-primary);
+    color: #fff;
+    padding-left: 24px;
+    padding-right: 16px;
+    height: 40px;
+
+    &:hover {
+      background-color: #053d9e;
+      border-color: #053d9e;
+      opacity: 1;
+    }
+  }
+
+  & .video-hero__play-icon {
+    flex-shrink: 0;
+  }
+}
+
+/* ── Modal ───────────────────────────────────────────────── */
+
+.video-hero__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &[hidden] {
+    display: none;
+  }
+
+  & .video-hero__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--vh-c-modal-scrim);
+    cursor: pointer;
+  }
+
+  & .video-hero__modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: 95vw;
+    max-width: var(--vh-modal-max-w);
+    background: #000;
+
+    @media (min-width: 768px) {
+      width: 90vw;
+    }
+  }
+
+  & .video-hero__modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 0;
+  }
+
+  & .video-hero__modal-video {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+
+    & .wistia_embed {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    & .video-hero__end-cta {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: #011840;
+
+      &[hidden] {
+        display: none;
+      }
+    }
+
+    & .video-hero__end-cta-msg {
+      margin: 0;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      padding: 0 32px;
+    }
+
+    & .video-hero__end-cta-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    & .video-hero__end-cta-replay {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.65);
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+/* ── Entrance animations ─────────────────────────────────── */
+
+/* Heading: transform-only — opacity stays 1 so LCP fires at first paint. */
+@keyframes videoHeroSlideUp {
+  from { transform: translateY(24px); }
+  to   { transform: translateY(0); }
+}
+
+/* Subheading + CTAs: full fade-up (not LCP elements, delay is acceptable). */
+@keyframes videoHeroFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-hero__heading,
+  .video-hero__sub,
+  .video-hero__ctas {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

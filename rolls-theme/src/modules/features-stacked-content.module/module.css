@@ -1,0 +1,65 @@
+@property --＠gradient-color-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(7, 100%, 52%)
+}
+
+@property --＠gradient-color-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(265, 90%, 59%);
+}
+
+@property --＠gradient-color-3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(218, 93%, 50%)
+}
+
+@property --＠gradient-color-4 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(218, 93%, 50%);
+}
+
+@property --＠gradient-color-5 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsla(183, 100%, 61%, 0.6);
+}
+
+@property --＠gradient-color-6 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(183, 100%, 61%);
+}
+header:has(.gradient) {
+  .gradient > span{
+background: linear-gradient(to right in oklch,
+            var(--＠gradient-color-1) 0%,
+            var(--＠gradient-color-2) 22%,
+            var(--＠gradient-color-3) 42%,
+            var(--＠gradient-color-4) 82%,
+            var(--＠gradient-color-5) 100%,
+            var(--＠gradient-color-6) 104%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+  }
+}
+.blue-30{color:#023180}
+.main-text p{font-size: 18px;}
+.logo-container{max-width: 130px}
+.eyebrow,.small.eyebrow{font-size: 18px;}
+.features-stacked-content .s-layout{padding: 40px 0;}
+@media (min-width: 768px) {
+  .features-stacked-content-grid {
+    grid-template-columns: repeat(2, 1fr);
+   }
+}
+.features-stacked-content .text-lg, .features-stacked-content p, .features-stacked-content li{font-size: 16px;}
+@media (min-width: 768px){
+.features-stacked-content .text-lg, .features-stacked-content p, .features-stacked-content li{font-size: 18px;}
+}

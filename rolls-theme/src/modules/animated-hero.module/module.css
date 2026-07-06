@@ -1,0 +1,186 @@
+/* Animated Hero Module Styles */
+
+/* Gradient color properties */
+@property --gradient-color-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #ff270a;
+}
+
+@property --gradient-color-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #8738f5;
+}
+
+@property --gradient-color-3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0960f6;
+}
+
+@property --gradient-color-4 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0960f6;
+}
+
+@property --gradient-color-5 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: rgba(56, 245, 255, 0.6);
+}
+
+@property --gradient-color-6 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #38f5ff;
+}
+
+/* Custom utility classes */
+@media (min-width: 768px) {
+  .md\:grid-cols-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .md\:ml-100px {
+    margin-left: 100px;
+  }
+  
+  .md\:ml-50px {
+    margin-left: 50px;
+  }
+  
+  .md\:ml-200px {
+    margin-left: 200px;
+  }
+}
+
+/* Mobile margin-left utilities */
+.ml-100px {
+  margin-left: 100px;
+}
+
+.ml-50px {
+  margin-left: 50px;
+}
+
+/* Grid justify utilities */
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-items-start {
+  justify-items: flex-start;
+}
+
+/* Typography */
+figcaption h1 {
+  font-size: 58px;
+  line-height: 100%;
+}
+
+@media (min-width: 991px) {
+  figcaption h1 {
+    font-size: 78px;
+  }
+}
+
+/* Gradient text styles */
+.animated-hero-text {
+  background: linear-gradient(to right in oklch, var(--gradient-color-1) 0, var(--gradient-color-2) 22%, var(--gradient-color-3) 42%, var(--gradient-color-4) 82%, var(--gradient-color-5) 100%, var(--gradient-color-6) 104%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Custom animations - keyframes and animation properties */
+
+/* Keyframe animations - using translate3d for smoother performance */
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInFromLeftFar {
+  from {
+    opacity: 0;
+    transform: translate3d(-30px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInFromRight {
+  from {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInFromRightFar {
+  from {
+    opacity: 0;
+    transform: translate3d(30px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Text animations with staggered delays - twice as fast, using translate3d */
+.animated-hero-text-left-1 {
+  animation: fadeInFromLeft 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s forwards;
+}
+
+.animated-hero-text-right-1 {
+  animation: fadeInFromRight 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+}
+
+.animated-hero-text-left-2 {
+  animation: fadeInFromLeftFar 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+}
+
+.animated-hero-text-right-2 {
+  animation: fadeInFromRightFar 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
+}
+
+/* Image animation - twice as fast, using translate3d */
+.animated-hero-image {
+  animation: fadeInImage 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+}
+
+/* Image animation on mobile - twice as fast */
+@media (max-width: 767px) {
+  .animated-hero-image {
+    animation: fadeInImage 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+  }
+}
+.tpl-rollup .dnd-section .dnd-column:has(.animated-hero-module) {
+  /* overflow: hidden; */
+}

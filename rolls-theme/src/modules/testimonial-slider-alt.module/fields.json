@@ -1,0 +1,254 @@
+[ {
+  "id" : "e64e0628-ea79-a409-ea40-ba5799c37872",
+  "name" : "styles",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "655e3f32-150d-422d-9825-c4bbbf11328b",
+    "name" : "layout",
+    "label" : "Layout",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "c05f8795-f459-9ee7-6b0b-dd705e18ffcd",
+      "name" : "spacing",
+      "label" : "Spacing",
+      "required" : false,
+      "locked" : false,
+      "type" : "spacing",
+      "display_width" : null,
+      "default" : { }
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "spacing" : { }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "layout" : {
+      "spacing" : { }
+    }
+  }
+}, {
+  "id" : "338bc14b-8f1c-fd85-0343-a78bde85261e",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "2de03ecd-7271-1b59-6c40-20ef3b8290d6",
+  "name" : "slides",
+  "label" : "Slides",
+  "help_text" : "The arrows navigation will show when the items are more the 5.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 4,
+    "sorting_label_field" : "e9dedcec-4026-dbfa-552c-a6e94d13a2bc",
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "1584a93c-e39d-e4ed-2fdf-827dee9aa3bc",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "2827c0bb-a948-4737-4bdb-72d2f31ea2c8",
+      "name" : "img",
+      "label" : "Customer Image",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Customer%20logo-1.png",
+        "alt" : "Customer logo-1",
+        "loading" : "lazy",
+        "width" : 80,
+        "height" : 44,
+        "max_width" : 80,
+        "max_height" : 44
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "img" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Customer%20logo-1.png",
+        "alt" : "Customer logo-1",
+        "loading" : "lazy",
+        "width" : 80,
+        "height" : 44,
+        "max_width" : 80,
+        "max_height" : 44
+      }
+    }
+  }, {
+    "id" : "e9dedcec-4026-dbfa-552c-a6e94d13a2bc",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "7da8d7f6-7125-e55c-61ec-4d9f5aa456b0",
+      "name" : "text",
+      "label" : "Text",
+      "required" : false,
+      "locked" : false,
+      "type" : "richtext",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : { }
+  }, {
+    "id" : "bb89513b-10d2-9ff9-da32-60fd81719815",
+    "name" : "settings",
+    "label" : "Button Settings",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "130cb1ce-7b0b-8645-3bd7-d9648a1b3121",
+      "name" : "link",
+      "label" : "Button Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "id" : "a1415bc9-64ca-2bd6-04bd-d9018f95072d",
+      "name" : "button_text",
+      "label" : "Button Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Read the full story"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      },
+      "button_text" : "Read the full story"
+    }
+  }, {
+    "id" : "cc50d66a-cd56-dbb8-c965-1d977bee096f",
+    "name" : "alternate_card",
+    "label" : "Alternate Card",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "image" : {
+      "img" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Customer%20logo-1.png",
+        "alt" : "Customer logo-1",
+        "loading" : "lazy",
+        "width" : 80,
+        "height" : 44,
+        "max_width" : 80,
+        "max_height" : 44
+      }
+    },
+    "content" : { },
+    "settings" : {
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      },
+      "button_text" : "Read the full story"
+    },
+    "boolean_field" : false
+  }, {
+    "image" : {
+      "img" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Customer%20logo-1.png",
+        "alt" : "Customer logo-1",
+        "loading" : "lazy",
+        "width" : 80,
+        "height" : 44,
+        "max_width" : 80,
+        "max_height" : 44
+      }
+    },
+    "content" : { },
+    "settings" : {
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      },
+      "button_text" : "Read the full story"
+    },
+    "boolean_field" : false
+  } ]
+} ]

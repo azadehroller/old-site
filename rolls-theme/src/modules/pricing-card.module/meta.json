@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST" ],
+  "module_id" : 107494492736,
+  "label" : "Module: Pricing Cards",
+  "icon" : "fontawesome-5.14.0:Alternate%20Money%20Check:SOLID",
+  "is_available_for_new_content" : true
+}

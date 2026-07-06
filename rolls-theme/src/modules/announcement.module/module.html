@@ -1,0 +1,101 @@
+{# Variables #}
+{% set display = module.display %}
+{% set text = module.text.text %}
+{% set link = module.link.link %}
+{% set href = link.url.href %}
+{% set rel = [] %}
+{% set url_type = link.url.type %}
+{% set no_follow = link.no_follow %}
+{% set new_tab = link.open_in_new_tab %}
+{% set cta = module.cta_text.cta_text %}
+{% set countdown = module.countdown.datetime %}
+{% set theme = module.styles.theme %}
+
+
+{# Sets attributes used for the link field #}
+
+{% if url_type == 'EMAIL_ADDRESS' %}
+  {% set href = 'mailto:' ~ href %}
+{% endif %}
+{% if no_follow %}
+  {% set rel = rel|merge(['nofollow']) %}
+{% endif %}
+{% if new_tab %}
+  {% set rel = rel|merge(['noopener']) %}
+{% endif %}
+
+{# Tailwind safelist: bg-announcement bg-industry-report bg-new-design bg-new-design-mobile #}
+
+{%- macro setBGColor(themeColor, defaultColor='', onIRColor='', newDesignColor='', productLaunch='') -%}
+  {%- set colorMap = {
+    'default': defaultColor,
+    'industry_report': onIRColor,
+    'new_design': newDesignColor,
+    'product_launch': productLaunch
+  } -%}
+  {%- set bgColor = colorMap[themeColor] or defaultColor -%}
+  {{ bgColor }}
+{%- endmacro -%}
+ 
+
+{% if display %}
+<div id="module-banner-{{name}}" class="announcement-bar js-banner {{ setBGColor(theme, 'bg-announcement', 'bg-industry-report', 'bg-new-design-mobile md:bg-new-design' , 'bg-product-launch-mobile md:bg-product-launch') }} text-neutral-white">
+<!--   <div class="banner-top-cta">   -->
+    <!-- 
+    {% set cc_override = request.query_dict.cc|default('')|upper %} 
+    {% set cf_cc = request.headers|attr('cf-ipcountry')|default('')|upper %} 
+    {% set geo_cc = request.geoip_country|default('')|upper %}
+    {% set country_code = cc_override if cc_override else (cf_cc if cf_cc else geo_cc) %} 
+    {% if country_code == "US" %} 
+      <a href="tel:+18334514741" class="font-semibold header__sales" aria-label="Call sales: +1 8334514741">Call sales: +1 833-451-4741</a>
+    {% elif country_code == "GB" or country_code == "UK" %}
+      <a href="tel:+447426441542" class="font-semibold header__sales" aria-label="Call sales: +44 7426 441542">Call sales: +44 7426 441542</a> 
+    {% elif country_code == "AU" %} 
+      <a href="tel:+61468014312" class="font-semibold header__sales" aria-label="Call sales: +61 468 014 312">Call sales: +61 468 014 312</a>
+    {% else %}{% endif %}
+    -->
+<!--   </div> -->
+  <div class="container banner-text">
+    <a href={{ href }} {% if new_tab %}target="_blank"{% endif %} {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}>
+      <div class="flex md:items-center gap-2 md:gap-3 flex-col md:flex-row md:px-5 py-3">
+          <div class="flex-1 font-extrabold text-lg">{{ text || 'Some great news are coming, watch this space ROLLERS :)' }}</div>
+          {% if cta %}
+            <div class="font-semibold underline">{{ cta }}</div>
+          {% endif %}
+          {% if countdown %}
+            <div id="js-timer" class="font-semibold underline text-md"></div>
+          {% endif %}
+      </div>
+    </a>
+  </div>
+</div>
+{% endif %}
+
+{# JavaScript #}
+{% require_js position="footer" defer="true" %}
+  <script>
+    const passiveSupported=(()=>{let passive=false;try{const opts=Object.defineProperty({},'passive',{get:()=>{passive=true}});window.addEventListener("testPassive",null,opts);window.removeEventListener("testPassive",null,opts);}catch(e){}return passive;})();
+    const countdownTimer=(targetDate,displayElement)=>{let rafId;const updateTimer=()=>{const now=Date.now(),timeRemaining=targetDate-now;if(timeRemaining<=0){displayElement.textContent='';cancelAnimationFrame(rafId);}else{const days=Math.floor(timeRemaining/864e5),hours=Math.floor(timeRemaining%864e5/36e5),minutes=Math.floor(timeRemaining%36e5/6e4),seconds=Math.floor(timeRemaining%6e4/1e3);displayElement.textContent=`${days}d ${hours}h ${minutes}m ${seconds}s`;setTimeout(()=>{rafId=requestAnimationFrame(updateTimer);},1e3);}};rafId=requestAnimationFrame(updateTimer);};
+    ('requestIdleCallback'in window?requestIdleCallback:cb=>setTimeout(cb,1))(initializeAnnouncement);
+    function initializeAnnouncement(){
+      const targetDate=new Date('{{countdown}}').getTime(),display=document.getElementById("js-timer"),block=document.querySelector(".header__block"),banner=document.getElementById("module-banner-{{name}}"),headerMenu=document.getElementById('header');if(display){countdownTimer(targetDate,display);document.body.classList.add("js-timer-active");if(block&&banner){let ticking=false;const updatePosition=()=>{if(!ticking){ticking=true;requestAnimationFrame(()=>{const bannerHeight=banner.offsetHeight,headerHeight=headerMenu.offsetHeight;block.style.top=headerMenu.classList.contains("is-fixed")?`${headerHeight}px`:`${bannerHeight+headerHeight}px`;ticking=false;});}};updatePosition();let resizeTimeout;window.addEventListener("resize",()=>{clearTimeout(resizeTimeout);resizeTimeout=setTimeout(updatePosition,150);},passiveSupported?{passive:true}:false);window.addEventListener("scroll",updatePosition,passiveSupported?{passive:true}:false);}}
+      // Initial measurement
+      updateAnnouncementBarHeight();
+
+      // Update on resize
+      window.addEventListener('resize', updateAnnouncementBarHeight);                                             
+    }
+    function updateAnnouncementBarHeight() {
+      var bar = document.querySelector('.announcement-bar');
+      if (bar) {
+        var height = bar.offsetHeight;
+        document.documentElement.style.setProperty('--announcement-bar-height', height + 'px');
+      } else {
+        document.documentElement.style.setProperty('--announcement-bar-height', '0px');
+      }
+    }
+
+
+ 
+</script>
+{% end_require_js %}

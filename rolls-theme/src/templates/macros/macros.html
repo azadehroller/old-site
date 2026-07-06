@@ -1,0 +1,53 @@
+<!--
+  templateType: "none"
+  isAvailableForNewContent: false
+-->
+{# Tailwind safelist: bg-iris-50 hover:bg-iris-60 text-iris-50 text-iris-40 #}
+
+{%- macro buttons_settings(bg_kind) -%} {% set baseClasses = "relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold text-md transition ease-in-out duration-300 w-full sm:w-auto  test whitespace-nowrap" %}
+  {%- if bg_kind == 'primary' -%}
+  {% set buttonClasses = baseClasses ~ " bg-secondary-50 hover:bg-secondary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {%- elif bg_kind == 'secondary' -%}
+  {% set buttonClasses = baseClasses ~ " bg-primary-50 hover:bg-primary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {%- elif bg_kind == 'tertiary' -%}
+  {% set buttonClasses = baseClasses ~ " bg-neutral-white hover:bg-neutral-20 rounded-3xl py-2 px-4 text-primary-50 border-[1px]" %}
+  {%- elif bg_kind == 'ghost' -%}
+  {% set buttonClasses = baseClasses ~ " bg-transparent text-primary-50 py-2" %}
+  {%- elif bg_kind == 'primary-inverted' -%}
+  {% set buttonClasses = baseClasses ~ " bg-neutral-white hover:bg-neutral-20 rounded-3xl py-2 px-4 text-secondary-50" %}
+  {%- elif bg_kind == 'gx_score'-%}
+  {% set buttonClasses = baseClasses ~ " bg-gx-90 hover:bg-primary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {%- elif bg_kind == 'industry_report'-%}
+  {% set buttonClasses = baseClasses ~ " bg-[#0960F6] hover:bg-primary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {%- elif bg_kind == 'gx_score_inverted' -%}
+  {% set buttonClasses = baseClasses ~ " bg-transparent hover:bg-neutral-20 rounded-3xl py-2 px-4 text-[#5615AD] border-[1px]" %}
+  {%- elif bg_kind == 'iris' -%}
+  {% set buttonClasses = baseClasses ~ " bg-iris-50 hover:bg-iris-60 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {%- else -%}
+  {% set buttonClasses = baseClasses %}
+  {%- endif -%}
+  {{ buttonClasses }}
+{%- endmacro -%}
+
+{%- macro image(image, options)  -%}
+  {%- if image.src -%}
+    {% set sizeAttrs = 'width="{{ image.width }}" height="{{ image.height }}"' -%}
+    {% if image.size_type == 'auto' -%}
+      {% set sizeAttrs = 'style="max-width: 100%; height: auto;"' -%}
+    {%- elif image.size_type == 'auto_custom_max' -%}
+      {% set sizeAttrs = 'width="{{ image.width }}" height="{{ image.height }} style="max-width: 100%; height: auto;"' -%}
+    {%- endif -%}
+    {%- set loadingAttr = image.loading != 'disabled' ? 'loading="{{ image.loading }}" ' : '' -%}
+    <img src="{{ image.src }}" alt="{{ image.alt }}" {{ loadingAttr }} {{ sizeAttrs }} {{ options }}>
+  {%- endif -%}
+{%- endmacro -%}
+
+{#
+    Macro to return a text color depending on the theme.
+
+    If the theme is `light`, returns the `onDarkColor`.
+    If the theme is `gxscore`, returns the `gxColor`.
+    Otherwise, returns the `defaultColor`.
+#}
+
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='') %}{% set textColor = (themeColor == 'light') ? onDarkColor : (themeColor == 'gxscore') ? gxColor : defaultColor %}{{ textColor }}{% endmacro %}

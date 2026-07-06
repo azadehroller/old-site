@@ -1,0 +1,40 @@
+<!--
+    templateType: section
+    isAvailableForNewContent: true
+    label: Comparison
+    screenshotPath: ../images/section-previews/comparison.png
+    description: "Section with Header composition + comparison table"
+-->
+
+{% dnd_section 
+    vertical_alignment="MIDDLE",
+    class="s-layout s-comparison"
+    background_color={{ context.background_color or "#F5F8FF"}},
+%}
+    {% dnd_column %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+                extra_classes="w-full",
+                content={
+                    "eyebrow":"Velit urna montes",
+                    "title":"Watch your results soar to new heights with ROLLER’s all-in-one platform.",
+                    "text": "ROLLER is the trusted partner for leading trampoline parks around the world."
+                },
+                styles={
+                    "textalignment": {
+                        "text_align": "CENTER",
+                    },
+                    "heading_type":"h3",                
+                    "text_type":"s1",                
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {% dnd_module path="../modules/comparison-table" %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

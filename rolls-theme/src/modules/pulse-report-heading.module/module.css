@@ -1,0 +1,78 @@
+.pulse-report-heading {
+  background-color: #0d0c22;
+  color: #e0e0e0;
+  overflow-x: hidden;
+}
+
+.pulse-report-heading.gradient-bg {
+  background: radial-gradient(circle at bottom, rgba(76, 29, 149, 0.4) 0%, #0d0c22 40%);
+}
+
+.pulse-report-heading header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.pulse-report-heading .fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pulse-report-heading p.inline-block {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d8b4fe;
+  letter-spacing: 0.1em;
+  border: 2px solid #a78bfa;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
+}
+
+.pulse-report-heading h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .pulse-report-heading h1 {
+    font-size: 4.5rem;
+  }
+}
+
+.pulse-report-heading .mt-6 {
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  color: #d1d5db;
+}
+
+.pulse-report-heading a {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  background-color: #9333ea;
+  color: white;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: transform 0.3s, background-color 0.3s;
+  text-decoration: none;
+}
+
+.pulse-report-heading a:hover {
+  background-color: #7e22ce;
+  transform: scale(1.05);
+}

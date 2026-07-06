@@ -1,0 +1,158 @@
+[ {
+  "id" : "e1814c14-393e-b0dd-03af-c769ff644805",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "32bbecce-a16b-e09a-c016-5d8506966ab8",
+    "name" : "add_bg",
+    "label" : "Add bg",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "add_bg" : true
+  }
+}, {
+  "id" : "content",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "content.eyebrow",
+    "name" : "eyebrow",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ROLLER LAUNCH NOVEMBER 2025"
+  }, {
+    "id" : "content.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Lorem ipsum consectetur sit"
+  }, {
+    "id" : "d5fab5f4-5443-f313-f737-00eee2ef1f19",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null
+  }, {
+    "id" : "content.reports",
+    "name" : "reports",
+    "label" : "Reports",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : "reports.title",
+      "default" : 2
+    },
+    "children" : [ {
+      "id" : "content.reports.title",
+      "name" : "title",
+      "label" : "Report Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "2025 Attractions industry pulse report"
+    }, {
+      "id" : "content.reports.link",
+      "name" : "link",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "title" : "2025 Attractions industry pulse report",
+      "link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "title" : "2026 Attractions industry benchmark report",
+      "link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "ROLLER LAUNCH NOVEMBER 2025",
+    "title" : "Lorem ipsum consectetur sit",
+    "reports" : [ {
+      "title" : "2025 Attractions industry pulse report",
+      "link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "title" : "2026 Attractions industry benchmark report",
+      "link" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  }
+} ]

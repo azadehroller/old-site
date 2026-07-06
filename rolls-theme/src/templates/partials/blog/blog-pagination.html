@@ -1,0 +1,125 @@
+<!--
+  templateType: "none"
+  isAvailableForNewContent: false
+-->
+{# blog-pagination.html #}
+
+{# Debug: Show pagination info #}
+<!-- Debug: total_page_count = {{ contents.total_page_count }}, current_page_num = {{ current_page_num }} -->
+
+{% set total_pages = contents.total_page_count|default(1) %}
+{% set current_page = current_page_num|default(1) %}
+
+{# Ensure values are positive integers #}
+{% set total_pages = total_pages|abs|round %}
+{% set current_page = current_page|abs|round %}
+
+{# Additional safety checks #}
+{% if total_pages < 1 %}
+  {% set total_pages = 1 %}
+{% endif %}
+{% if current_page < 1 %}
+  {% set current_page = 1 %}
+{% endif %}
+{% if current_page > total_pages %}
+  {% set current_page = total_pages %}
+{% endif %}
+
+<!-- Debug: Processed total_pages = {{ total_pages }}, current_page = {{ current_page }} -->
+
+{% if total_pages > 1 %}
+  <nav class="new-theme-pagination blog-pagination">
+
+    {# ---------- NUMBER LINKS – left side ---------- #}
+    <div class="blog-pagination__items">
+      <!-- Debug: Starting pagination items generation -->
+      
+      {% if total_pages <= 7 %}
+        {# If 7 or fewer pages, show all pages #}
+        {% for p in range(1, total_pages + 1) %}
+          {% if p == current_page %}
+            <span class="blog-pagination__link blog-pagination__link--active">{{ p }}</span>
+          {% else %}
+            <a class="blog-pagination__link" href="{{ blog_page_link(p) }}">{{ p }}</a>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {# Sliding window pagination for more than 7 pages #}
+        
+        {# Calculate the window #}
+        {% set window_size = 5 %}
+        {% set half_window = (window_size - 1) // 2 %}
+        
+        {# Calculate start and end of the window #}
+        {% set window_start = current_page - half_window %}
+        {% set window_end = current_page + half_window %}
+        
+        {# Adjust if window goes beyond boundaries #}
+        {% if window_start < 1 %}
+          {% set window_start = 1 %}
+          {% set window_end = window_size %}
+        {% endif %}
+        {% if window_end > total_pages %}
+          {% set window_end = total_pages %}
+          {% set window_start = total_pages - window_size + 1 %}
+        {% endif %}
+        
+        <!-- Debug: Window start = {{ window_start }}, end = {{ window_end }} -->
+        
+        {# First page + ellipsis if needed #}
+        {% if window_start > 1 %}
+          <a class="blog-pagination__link" href="{{ blog_page_link(1) }}">1</a>
+          {% if window_start > 2 %}
+            <span class="blog-pagination__ellipsis">…</span>
+          {% endif %}
+        {% endif %}
+        
+        {# Window pages #}
+        {% for p in range(window_start, window_end + 1) %}
+          {% if p == current_page %}
+            <span class="blog-pagination__link blog-pagination__link--active">{{ p }}</span>
+          {% else %}
+            <a class="blog-pagination__link" href="{{ blog_page_link(p) }}">{{ p }}</a>
+          {% endif %}
+        {% endfor %}
+        
+        {# Last page + ellipsis if needed #}
+        {% if window_end < total_pages %}
+          {% if window_end < total_pages - 1 %}
+            <span class="blog-pagination__ellipsis">…</span>
+          {% endif %}
+          <a class="blog-pagination__link" href="{{ blog_page_link(total_pages) }}">{{ total_pages }}</a>
+        {% endif %}
+      {% endif %}
+      
+      <!-- Debug: Finished pagination items generation -->
+    </div>
+
+    {# ---------- PREV / NEXT LINKS – right side ---------- #}
+    <div class="blog-pagination__nav">
+      {% if current_page > 1 %}
+        <a class="blog-pagination__link blog-pagination__prev-link sm:pl-0"
+           href="{{ blog_page_link(current_page - 1) }}">
+<!--          <span class="blog-pagination__link-icon blog-pagination__link-icon-left">‹</span>  -->
+          <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 3.333 8.825 4.508l4.65 4.659H3.333v1.666h10.142l-4.65 4.659L10 16.667 16.667 10 10 3.333Z" fill="#143D82"></path>
+          </svg>
+          Previous page
+        </a>
+      {% endif %}
+      {% if current_page < total_pages %}
+        <a class="blog-pagination__link blog-pagination__next-link"
+           href="{{ blog_page_link(current_page + 1) }}">
+           Next page
+<!--           <span class="blog-pagination__link-icon blog-pagination__link-icon-right">›</span> -->
+          <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 3.333 8.825 4.508l4.65 4.659H3.333v1.666h10.142l-4.65 4.659L10 16.667 16.667 10 10 3.333Z" fill="#143D82"></path>
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+  </nav>
+{% else %}
+  <!-- Debug: Pagination not shown because total_pages = {{ total_pages }} -->
+{% endif %}

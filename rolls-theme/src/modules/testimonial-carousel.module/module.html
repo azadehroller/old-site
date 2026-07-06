@@ -1,0 +1,142 @@
+{# Variables #}
+{% set eyebrow = module.heading.eyebrow %}
+{% set testimonials = module.testimonial %}
+
+{# Styles #}
+    <style>
+            .testimonial-carousel--wrapper__inner {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .testimonial-carousel--wrapper[data-animated="true"] {
+                -webkit-mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+                mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+            }
+
+            .testimonial-carousel--wrapper[data-animated="true"] .testimonial-carousel--wrapper__inner {
+                width: fit-content;
+                flex-wrap: nowrap;
+                animation: scroll 150s linear infinite;
+            }
+
+            .testimonial-carousel--wrapper[data-animated="true"] .testimonial-carousel--wrapper__inner ul li {
+                width: 47rem;
+                margin: 0 1em;
+            }
+
+            @keyframes scroll {
+                to {
+                    transform: translate(calc(-50% - 0.5rem));
+                }
+            }
+            
+            .testimonial-carousel--wrapper__inner--link:hover .testimonial-carousel--wrapper__inner--link__icon svg {
+                transform: scale(1.2) rotate(-45deg);
+            }
+    </style>
+
+
+{% macro testimonialContent(link) %}
+    <div class="flex justify-center flex-col items-center gap-2">
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" fill="none">
+            <path fill="#E7EFFE" d="m11.79 0 5.238 4.248c-4.53 2.973-8.637 8.637-9.062 13.168.142 0 1.133-.142 1.841-.142 3.965 0 6.796 2.974 6.796 7.222C16.604 28.602 13.348 32 9.1 32 4.426 32 .32 28.177.32 21.239.32 12.602 5.276 4.673 11.79 0Zm22.654 0 5.24 4.248c-4.532 2.973-8.497 8.637-9.063 13.168.142 0 1.133-.142 1.84-.142 3.965 0 6.939 2.974 6.939 7.222 0 4.106-3.398 7.504-7.646 7.504-4.673 0-8.779-3.823-8.779-10.761 0-8.637 4.956-16.566 11.47-21.239Z"/>
+            </svg>
+        </div>
+        <div class="text-2xl font-semibold text-primary-50">{{ content }}</div>
+    </div>
+    <div class="flex justify-center flex-col items-center gap-2 text-primary-50">
+        <div class="text-lg font-semibold">{{ author }}</div>
+        <div class="text-lg">{{ position }}</div>
+        <div>
+            <figure class="w-[130px] h-[72px] grid justify-center items-center">
+                {% set sizeAttrs = 'width="{{ logo.width }}" height="{{ logo.height }}"' %}
+                {% set loadingAttr = logo.loading != 'disabled' ? 'loading="{{ logo.loading }}"' : '' %}
+                <img src="{{logo.src}}" alt="{{logo.alt}}" class="object-fill" {{sizeAttrs}} {{loadingAttr}}>
+            </figure>
+        </div>
+        {% if link %}
+            <div class="absolute bottom-4 right-5 testimonial-carousel--wrapper__inner--link__icon">
+                <svg class="transition duration-150 ease-out" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"><rect width="40" height="40" fill="#ff290c" rx="20"></rect><path fill="#fff" d="m20 12-1.41 1.41L24.17 19H12v2h12.17l-5.58 5.59L20 28l8-8-8-8Z"></path></svg>
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+{# Section Markup #}
+<section id="testimonial-carousel-{{name}}" class="pt-7 overflow-hidden w-screen relative right-[50%] left-[50%] ml-[-50vw] mr-[-50vw] flex flex-col gap-6">
+    {% if eyebrow %}
+    <div class="text-secondary-50 uppercase font-extrabold text-center">{{eyebrow || "Enter the small text here"}}</div>
+    {% endif %}
+    <div class="testimonial-carousel--wrapper">
+        <div class="testimonial-carousel--wrapper__inner pb-5 inline-flex justify-between gap-5">
+            <ul class="flex list-none">
+                {% for testimonial in testimonials %}
+                    {% set content = testimonial.content %}
+                    {% set author = testimonial.author %}
+                    {% set position = testimonial.position %}
+                    {% set logo = testimonial.logo %}
+                    {% set href = testimonial.link.url.href %}
+                    {% set rel = [] %}
+                    {% set url_type = testimonial.link.url.type %}
+                    {% set no_follow = testimonial.link.no_follow %}
+                    {% set new_tab = testimonial.link.open_in_new_tab %}
+
+                    {# Sets attributes used for the link field #}
+                    {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                    {% set href = 'mailto:' + href %}
+                    {% endif %}
+                    {% if no_follow %}
+                    {% do rel.append('nofollow') %}
+                    {% endif %}
+                    {% if new_tab %}
+                    {% do rel.append('noopener') %}
+                    {% endif %}
+
+                    <li class="text-center bg-neutral-white rounded-[32px] box-shadow-onlight-navy-40 gap-5 mo-card-md relative">
+                        {% if href %}
+                            <a href="{{ href }}" class="testimonial-carousel--wrapper__inner--link grid gap-5">
+                                {{ testimonialContent(true) }}
+                            </a>
+                        {% else %}
+                            <div class="testimonial-carousel--wrapper__inner--link grid gap-5">
+                                {{ testimonialContent() }}
+                            </div>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
+
+{% require_js %}
+    <script>
+
+        const items = document.querySelectorAll('.testimonial-carousel--wrapper');
+
+        const addTestimonialAnimation = () => {
+            items.forEach((item) => {
+
+                item.setAttribute("data-animated", true);
+
+                const itemInner = item.querySelector(".testimonial-carousel--wrapper__inner");
+                const itemContent = Array.from(itemInner.children);
+
+                itemContent.forEach((content) => {
+                    const duplicatedContent = content.cloneNode(true);
+                    duplicatedContent.setAttribute("aria-hidden", true);
+                    duplicatedContent.setAttribute("inert", "");
+                    itemInner.appendChild(duplicatedContent);
+                });
+
+            });
+        };
+
+        if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            addTestimonialAnimation();
+        }
+
+    </script>
+{% end_require_js%}

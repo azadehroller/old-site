@@ -1,0 +1,222 @@
+[ {
+  "id" : "cf500bd1-23b1-9d86-b470-3c3aa93ab505",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "bc40a065-ea8e-7e50-5f29-41427ba01dd7",
+    "name" : "eyebrow_text",
+    "label" : "Eyebrow Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "USER REVIEWS"
+  }, {
+    "id" : "b386733b-2390-16fb-326d-5e7a4c69733e",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "See what other operators have to say"
+  }, {
+    "id" : "b77424af-5c38-cb80-e4dc-75a6c1d786b4",
+    "name" : "badges",
+    "label" : "Badges",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 2,
+      "max" : null,
+      "sorting_label_field" : "e96eceb7-e107-963c-8abb-b9d34cfd0bd5",
+      "default" : 2
+    },
+    "children" : [ {
+      "id" : "e96eceb7-e107-963c-8abb-b9d34cfd0bd5",
+      "name" : "badge",
+      "label" : "Badge",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/capterra-review-badge@2x.png",
+        "alt" : "capterra-review-badge@2x",
+        "loading" : "lazy",
+        "width" : 300,
+        "height" : 200,
+        "max_width" : 300,
+        "max_height" : 200
+      }
+    }, {
+      "id" : "4dc3e083-b329-ab50-414d-45bc3a525fc2",
+      "name" : "link",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "badge" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/capterra-review-badge@2x.png",
+        "alt" : "capterra-review-badge@2x",
+        "loading" : "lazy",
+        "width" : 300,
+        "height" : 200,
+        "max_width" : 300,
+        "max_height" : 200
+      },
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "badge" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/capterra-review-badge@2x.png",
+        "alt" : "capterra-review-badge@2x",
+        "loading" : "lazy",
+        "width" : 300,
+        "height" : 200,
+        "max_width" : 300,
+        "max_height" : 200
+      },
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow_text" : "USER REVIEWS",
+    "title" : "See what other operators have to say",
+    "badges" : [ {
+      "badge" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/capterra-review-badge@2x.png",
+        "alt" : "capterra-review-badge@2x",
+        "loading" : "lazy",
+        "width" : 300,
+        "height" : 200,
+        "max_width" : 300,
+        "max_height" : 200
+      },
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "badge" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/capterra-review-badge@2x.png",
+        "alt" : "capterra-review-badge@2x",
+        "loading" : "lazy",
+        "width" : 300,
+        "height" : 200,
+        "max_width" : 300,
+        "max_height" : 200
+      },
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://www.roller.software/",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  }
+}, {
+  "id" : "3d28a588-5d75-7d87-672e-68a37f82e47b",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "a2729eed-9bc9-788f-a880-323acceb9cef",
+    "name" : "thumbnail",
+    "label" : "Thumbnail",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/industry.png",
+      "alt" : "industry",
+      "loading" : "lazy",
+      "width" : 700,
+      "height" : 459,
+      "max_width" : 700,
+      "max_height" : 459
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "thumbnail" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/industry.png",
+      "alt" : "industry",
+      "loading" : "lazy",
+      "width" : 700,
+      "height" : 459,
+      "max_width" : 700,
+      "max_height" : 459
+    }
+  }
+} ]

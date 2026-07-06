@@ -1,0 +1,107 @@
+[ {
+  "id" : "d7b9b2ee-7478-792c-70e8-f29639ac46fa",
+  "name" : "images",
+  "label" : "Images",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 6,
+    "max" : null,
+    "sorting_label_field" : "a3f13b23-3c7f-c9c9-7957-eefb67a8d00a",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "a3f13b23-3c7f-c9c9-7957-eefb67a8d00a",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "loading" : "lazy",
+      "width" : 605,
+      "height" : 451,
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  } ]
+} ]

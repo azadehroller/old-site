@@ -1,0 +1,80 @@
+<!--
+  templateType: section
+  isAvailableForNewContent: true
+  label: Pulse Report Hero
+  description: Hero section with animated wave background for Pulse Report
+  screenshotPath: ../images/section-previews/pulse-hero.png
+  tags: hero, animated, report
+-->
+
+{% dnd_section %}
+  {% dnd_column %}
+    {% dnd_row %}
+      {% dnd_module path="@hubspot/rich_text" %}
+        {% module_attribute "html" %}
+<section class="pulse-hero-section">
+  <!-- Animated particles background -->
+  <div class="hero-particles" id="hero-particles"></div>
+  
+  <!-- Floating orbs -->
+  <div class="floating-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  
+  <div class="container relative z-10">
+    <!-- Badge -->
+    <div class="pulse-hero-badge" data-aos="fade-down" data-aos-delay="200">
+      <span class="badge-icon">📊</span>
+      <span class="badge-text">ROLLER PULSE REPORT 2025</span>
+      <span class="badge-glow"></span>
+    </div>
+    
+    <!-- Hero Title Module -->
+    <div data-aos="fade-up" data-aos-delay="400">
+      {% module "hero_title" 
+        path="../modules/pulse-hero-title.module",
+        title="Find out what your guests really think",
+        subtitle="Discover insights from thousands of attraction guests worldwide",
+        enable_animation=true,
+        animation_type="typewriter"
+      %}
+    </div>
+    
+    <!-- CTA Buttons -->
+    <div class="hero-cta-section" data-aos="fade-up" data-aos-delay="600">
+      <a href="#insights" class="hero-cta-primary">
+        <span>Explore Insights</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 14L14 10L10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 10H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </a>
+      <a href="#download" class="hero-cta-secondary">
+        <span>Download Report</span>
+      </a>
+    </div>
+    
+    <!-- Wave Animation Module -->
+    {% module "hero_waves" 
+      path="../modules/pulse-wave-animation.module",
+      wave_color="rgba(255,255,255,0.1)",
+      wave_speed="slow",
+      wave_count=3
+    %}
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" data-aos="fade" data-aos-delay="1000">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span class="scroll-text">Scroll to explore</span>
+    </div>
+  </div>
+</section>
+        {% end_module_attribute %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+{% end_dnd_section %}

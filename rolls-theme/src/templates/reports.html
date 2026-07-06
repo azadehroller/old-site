@@ -1,0 +1,576 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: Special Reports template
+    screenshotPath: ../images/template-previews/special-bg.png
+-->
+
+{% extends "./layouts/base.html" %}
+{% set header_theme_class = 'light' %}
+
+
+{% require_css %}
+    <style>
+        @theme {
+          --breakpoint-slg: 1312px;
+        }
+        /* ========== CSS Variables ========== */
+        :root {
+            --aurora-page-bg: #011840;
+            --aurora-content-max-w: min(70vw, 1316px);
+            --aurora-content-max-h: min(70vh, 600px);
+            --aurora-card-radius: 18px;
+            --aurora-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* ========== Background Images on Main ========== */
+        main::before,
+        main::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 50%;
+            {# height: -webkit-fill-available; #}
+            background-size: 500px 100%;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        main::before {
+            left: 0;
+            top: 45%;
+            transform: translateY(-50%);
+            background-image: url('{{ get_asset_url('/rolls-theme/images/body-left-bg.png') }}');
+            background-position: left center;
+        }
+        
+        main::after {
+            right: 0;
+            bottom: 10%;
+            top: inherit;
+            background-image: url('{{ get_asset_url('/rolls-theme/images/body-bg-right.png') }}');
+            background-position: right center;
+        }
+        
+        /* Hide background images on screens smaller than md (768px) */
+        @media (max-width: 767px) {
+            main::before,
+            main::after {
+                content: none;
+            }
+        }
+        
+        .tpl-special-bg .header.dark{
+            background: var(--neutral-white);
+
+            .header__logo {
+                display: none;
+            }
+
+            .header__logo--secondary {
+                display: block;
+            }
+
+            .main-nav__item a,
+            .main-nav__item button {
+                color: var(--primary-50);
+
+                &:hover {
+                    color: var(--secondary-50);
+
+                    .main-nav__item-label {
+                        color: var(--secondary-50);
+                    }
+
+                    .main-nav__item-icon {
+                        fill: var(--secondary-50);
+                    }
+                }
+            }
+
+            .main-nav__item-icon {
+                fill: var(--primary-50);
+            }
+
+            .header__block-toggle {
+                color: var(--primary-50);
+            }
+
+            .header__block-toggle-item {
+                background-color: var(--primary-50);
+            }
+
+            .main-nav__item:last-child {
+                a {
+                    color: var(--primary-50);
+
+                    &:hover {
+                        color: var(--secondary-50);
+                    }
+                }
+            }
+        }
+        /* ========== Aurora Section Container ========== */
+        @media (min-width: 1362px){
+          .tpl-special-bg  .dnd-section .dnd-column {
+              padding: 0;
+          }
+        }
+        
+        .dnd-section:first-of-type {
+            background: var(--aurora-page-bg);
+            position: relative;
+            width: 100%;
+            min-height: auto;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* ========== WebGL Canvas (Aurora Background) ========== */
+        .dnd-section:first-of-type canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: transparent;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== Content Container ========== */
+        .dnd-section:first-of-type .row-fluid {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: auto;
+            text-align: center;
+            .row-fluid-wrapper:last-of-type{
+              margin-top: 48px;
+            }
+
+        }
+        @media (min-width: 768px){
+         .dnd-section:first-of-type .row-fluid .row-fluid-wrapper:first-of-type{
+            {# padding-top: 80px; #}
+         }
+        }
+        @media (min-width: 1024px){
+         .dnd-section:first-of-type .row-fluid .row-fluid-wrapper:first-of-type{
+            {# padding-top: 160px; #}
+         }
+        }
+        /* ========== Content Styling ========== */
+        .dnd-section:first-of-type .row-fluid * {
+            width: 100%;
+            {# height: auto; #}
+            {# max-width: var(--aurora-content-max-w); #}
+            {# max-height: var(--aurora-content-max-h); #}
+            {# border-radius: var(--aurora-card-radius); #}
+            {# box-shadow: var(--aurora-card-shadow); #}
+            {# object-fit: cover; #}
+            {# background: rgba(255, 255, 255, 0.88); #}
+        }
+
+        /* ========== Glow Effect Behind Content ========== */
+        .dnd-section:first-of-type .row-fluid::before {
+            content: "";
+            position: absolute;
+            width: calc(var(--aurora-content-max-w) + 10vw);
+            height: calc(var(--aurora-content-max-h) + 10vh);
+            border-radius: calc(var(--aurora-card-radius) * 1.5);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(
+                60% 60% at 50% 50%,
+                rgba(255, 255, 255, 0.12),
+                transparent 70%
+            );
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .dnd-section:first-of-type .row-fluid > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            :root {
+                --aurora-content-max-w: min(88vw, 720px);
+                --aurora-content-max-h: min(60vh, 520px);
+                --aurora-card-radius: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --aurora-content-max-w: 92vw;
+                --aurora-content-max-h: 56vh;
+                --aurora-card-radius: 12px;
+            }
+        }
+
+        /* ========== Text Riding on Waves ========== */
+        .dnd-section:first-of-type {
+            position: relative;
+        }
+        
+        .aurora-riding-text {
+            position: absolute;
+            bottom: 20%;
+            left: 0;
+            z-index: 5;
+            font-size: clamp(24px, 4vw, 48px);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
+                         0 0 20px rgba(58, 128, 248, 0.5),
+                         0 0 40px rgba(157, 191, 251, 0.3);
+            white-space: nowrap;
+            pointer-events: none;
+            will-change: transform;
+            transform-origin: center center;
+        }
+
+        /* ========== Accessibility ========== */
+        @media (prefers-reduced-motion: reduce) {
+            .dnd-section:first-of-type canvas {
+                display: none;
+            }
+            .aurora-riding-text {
+                animation: none;
+                position: static;
+                color: rgba(255, 255, 255, 0.95);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .aurora-riding-text {
+                font-size: clamp(20px, 5vw, 32px);
+                bottom: 15%;
+            }
+        }
+    </style>
+{% end_require_css %}
+
+{% block body %}
+
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--special-bg"
+%}
+  {% include_dnd_partial path="../sections/s-aurora-background.html" %}
+{% end_dnd_area %}
+
+{# Text element that rides on the aurora waves - positioned inside the first section #}
+
+<script type="module">
+  // ========== Aurora Background Effect ==========
+  // WebGL-powered animated gradient background using OGL library
+  
+  import { Renderer, Program, Mesh, Color, Triangle } from 'https://unpkg.com/ogl?module';
+
+  // ========== Configuration ==========
+  const config = {
+    colorStops: ['#3A80F8', '#9DBFFB'],  // Original brand colors
+    amplitude: 1.0,    // Wave height intensity
+    blend: 0.5,        // Gradient edge softness
+    speed: 1.0,        // Animation speed multiplier
+    opacity: 0.75,      // Overall opacity of the aurora effect (0-1) - balanced lightness
+  };
+
+  // ========== Shaders ==========
+  // Vertex shader: Simple pass-through for fullscreen triangle
+  const VERT = `#version 300 es
+    in vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }`;
+
+  // Fragment shader: Simplex noise-based aurora effect
+  const FRAG = `#version 300 es
+    precision highp float;
+    uniform float uTime;
+    uniform float uAmplitude;
+    uniform vec3 uColorStops[2];
+    uniform vec2 uResolution;
+    uniform float uBlend;
+    uniform float uOpacity;
+    out vec4 fragColor;
+    
+    // Simplex noise helper
+    vec3 permute(vec3 x) { 
+      return mod(((x * 34.0) + 1.0) * x, 289.0); 
+    }
+    
+    // 2D Simplex noise function
+    float snoise(vec2 v) {
+      const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+      vec2 i  = floor(v + dot(v, C.yy));
+      vec2 x0 = v - i + dot(i, C.xx);
+      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod(i, 289.0);
+      vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+      vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
+      m = m * m;
+      m = m * m;
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+      vec3 g;
+      g.x  = a0.x  * x0.x  + h.x  * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+    
+    struct ColorStop { 
+      vec3 color; 
+      float position; 
+    };
+    
+    // Two-stop color gradient interpolation
+    #define COLOR_RAMP(colors, factor, finalColor) { \
+      ColorStop currentColor = colors[0]; \
+      ColorStop nextColor = colors[1]; \
+      float lerpFactor = factor; \
+      finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
+    }
+    
+    void main() {
+      vec2 uv = gl_FragCoord.xy / uResolution;
+      
+      // Setup color gradient
+      ColorStop colors[2];
+      colors[0] = ColorStop(uColorStops[0], 0.0);
+      colors[1] = ColorStop(uColorStops[1], 1.0);
+      
+      vec3 rampColor;
+      COLOR_RAMP(colors, uv.x, rampColor);
+      
+      // Generate animated wave pattern at the bottom
+      // Invert uv.y so the effect appears at the bottom instead of top
+      float invertedY = 1.0 - uv.y;
+      float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+      height = exp(height);
+      height = (invertedY * 2.0 - height + 0.2);
+      float intensity = 0.4 * height;  // Reduced from 0.6 to 0.4 for lighter effect
+
+      // Create aurora band with smooth edges at bottom
+      float midPoint = 0.20;
+      float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+
+      // Use pure colors without intensity darkening
+      vec3 auroraColor = rampColor;
+      // Apply global opacity for lighter overall effect
+      float finalAlpha = auroraAlpha * uOpacity;
+      fragColor = vec4(auroraColor * finalAlpha, finalAlpha);
+    }`;
+
+  // ========== Initialization ==========
+  const container = document.querySelector('.dnd-section:first-of-type');
+  
+  if (container) {
+    // Create and append the riding text element
+    const ridingText = document.createElement('div');
+    ridingText.className = 'aurora-riding-text';
+    ridingText.id = 'aurora-riding-text';
+    ridingText.textContent = 'Year 2026';
+    container.appendChild(ridingText);
+    // Setup WebGL renderer
+    const renderer = new Renderer({ 
+      alpha: true, 
+      premultipliedAlpha: true, 
+      antialias: true 
+    });
+    const gl = renderer.gl;
+    
+    // Configure blending for transparency
+    gl.clearColor(0, 0, 0, 0);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.canvas.style.backgroundColor = 'transparent';
+    
+    // Add accessibility attribute
+    gl.canvas.setAttribute('aria-hidden', 'true');
+    gl.canvas.setAttribute('role', 'presentation');
+    
+    // Create fullscreen triangle geometry
+    const geometry = new Triangle(gl);
+    if (geometry.attributes.uv) delete geometry.attributes.uv;
+    
+    // Convert hex colors to RGB (cached, not recalculated each frame)
+    const toRGB = (hex) => {
+      const c = new Color(hex);
+      return [c.r, c.g, c.b];
+    };
+    const colorStopsVec3 = config.colorStops.map(toRGB);
+    
+    // Create shader program
+    const program = new Program(gl, {
+      vertex: VERT,
+      fragment: FRAG,
+      uniforms: {
+        uTime: { value: 0 },
+        uAmplitude: { value: config.amplitude },
+        uColorStops: { value: colorStopsVec3 },
+        uResolution: { value: [1, 1] },
+        uBlend: { value: config.blend },
+        uOpacity: { value: config.opacity || 0.4 },
+      },
+      transparent: true,
+      depthTest: false,
+      depthWrite: false,
+    });
+    
+    const mesh = new Mesh(gl, { geometry, program });
+    container.appendChild(gl.canvas);
+
+    // ========== Dynamic Canvas Height Based on Image ==========
+    const mediaImage = container.querySelector('.media-frame-background-image, .media-frame-image');
+    let canvasHeightOffset = 0;
+
+    if (mediaImage) {
+      const img = mediaImage.tagName === 'IMG' ? mediaImage : mediaImage.querySelector('img');
+      if (img) {
+        const updateCanvasHeightOffset = () => {
+          const imageHeight = img.offsetHeight;
+          canvasHeightOffset = imageHeight / 2;
+          resize(); // Recalculate canvas dimensions
+        };
+
+        // Update on load and resize
+        if (img.complete) {
+          updateCanvasHeightOffset();
+        } else {
+          img.addEventListener('load', updateCanvasHeightOffset);
+        }
+        window.addEventListener('resize', updateCanvasHeightOffset, { passive: true });
+      }
+    }
+
+    // ========== Resize Handler ==========
+    function resize() {
+      const w = container.clientWidth;
+      const h = container.clientHeight - canvasHeightOffset;
+      renderer.setSize(w, h);
+      program.uniforms.uResolution.value = [w, h];
+    }
+
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    
+    // ========== Text Riding Animation ==========
+    let updateTextPosition = null;
+    
+    if (ridingText) {
+      // Simple noise-like function for wave calculation (matching shader pattern)
+      function simpleNoise(x, y) {
+        return Math.sin(x * 2.0 + y * 0.25) * 0.5 + 
+               Math.sin(x * 3.7 + y * 0.15) * 0.3 +
+               Math.sin(x * 5.3 + y * 0.35) * 0.2;
+      }
+      
+      updateTextPosition = function(time, containerWidth) {
+        if (!ridingText) return;
+        
+        // Calculate horizontal position (moves left to right, loops)
+        const cycleDuration = 25; // seconds for full cycle
+        const progress = (time * 10) % cycleDuration / cycleDuration;
+        const baseX = progress * (containerWidth + 400) - 200;
+        
+        // Calculate vertical offset based on wave pattern at current position
+        // Normalize x position to 0-1 range for wave calculation
+        const normalizedX = (baseX / containerWidth) * 2.0;
+        const waveHeight = simpleNoise(normalizedX, time * 0.25);
+        const waveOffset = Math.exp(waveHeight) * 30 - 15; // Scale to -15 to +15px
+        
+        // Apply transform
+        ridingText.style.transform = `translateX(${baseX}px) translateY(${waveOffset}px)`;
+      };
+    }
+    
+    // ========== Animation Loop with Performance Optimizations ==========
+    let rafId = null;
+    let isPageVisible = !document.hidden;
+    const start = performance.now();
+    
+    function frame(t) {
+      // Only render when page is visible
+      if (!isPageVisible) {
+        rafId = requestAnimationFrame(frame);
+        return;
+      }
+      
+      const elapsed = (t - start) * 0.005;
+      const time = elapsed * config.speed * 0.1;
+      program.uniforms.uTime.value = time;
+      program.uniforms.uAmplitude.value = config.amplitude;
+      program.uniforms.uBlend.value = config.blend;
+      program.uniforms.uOpacity.value = config.opacity || 0.4;
+      
+      // Update text position to follow wave pattern
+      if (updateTextPosition) {
+        updateTextPosition(time, container.clientWidth);
+      }
+      
+      renderer.render({ scene: mesh });
+      rafId = requestAnimationFrame(frame);
+    }
+    
+    // Pause animation when tab is hidden (performance optimization)
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+    });
+    
+    rafId = requestAnimationFrame(frame);
+    
+    // ========== WebGL Context Loss Recovery ==========
+    gl.canvas.addEventListener('webglcontextlost', (e) => {
+      e.preventDefault();
+      cancelAnimationFrame(rafId);
+      console.warn('WebGL context lost. Will attempt recovery...');
+    });
+    
+    gl.canvas.addEventListener('webglcontextrestored', () => {
+      console.log('WebGL context restored.');
+      resize();
+      rafId = requestAnimationFrame(frame);
+    });
+    
+    // ========== Cleanup on Page Unload ==========
+    window.addEventListener('beforeunload', () => {
+      cancelAnimationFrame(rafId);
+      if (gl.canvas && gl.canvas.parentNode) {
+        gl.canvas.parentNode.removeChild(gl.canvas);
+      }
+    });
+    
+    // ========== Debug Controls (Commented Out) ==========
+    // Uncomment to enable keyboard controls for adjusting parameters
+    // Arrow Up/Down: adjust amplitude | Arrow Left/Right: adjust blend
+    /*
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') config.amplitude = Math.min(3, config.amplitude + 0.1);
+      if (e.key === 'ArrowDown') config.amplitude = Math.max(0, config.amplitude - 0.1);
+      if (e.key === 'ArrowRight') config.blend = Math.min(1.5, config.blend + 0.05);
+      if (e.key === 'ArrowLeft') config.blend = Math.max(0.05, config.blend - 0.05);
+    });
+    */
+  }
+
+</script>
+
+{% endblock body %}
+

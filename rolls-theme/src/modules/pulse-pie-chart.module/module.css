@@ -1,0 +1,139 @@
+.pulse-pie-chart-container {
+  position: relative;
+}
+
+.pulse-pie-chart {
+  position: relative;
+}
+
+.chart-svg {
+  overflow: visible;
+}
+
+.pie-segment {
+  cursor: pointer;
+}
+
+.segment-path {
+  transition: all 0.3s ease;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+}
+
+.segment-path:hover {
+  transform: scale(1.05);
+  transform-origin: center;
+  filter: brightness(1.1);
+}
+
+.segment-label {
+  pointer-events: none;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.pie-tooltip {
+  position: absolute;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.legend-item {
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.legend-item:hover {
+  transform: translateY(-1px);
+}
+
+/* Animation classes */
+.segment-path.animate {
+  animation: segmentGrow var(--animation-duration, 2000ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.segment-label.animate {
+  animation: labelFadeIn 0.5s ease forwards;
+  animation-delay: calc(var(--animation-duration, 2000ms) * 0.7);
+}
+
+/* Animation keyframes */
+@keyframes segmentGrow {
+  from {
+    stroke-dasharray: 0 1000;
+  }
+  to {
+    stroke-dasharray: var(--segment-length) 1000;
+  }
+}
+
+@keyframes labelFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hover effects */
+.pie-segment:hover .segment-path {
+  stroke-width: 3;
+  filter: brightness(1.1) drop-shadow(0 2px 8px rgba(10, 27, 62, 0.2));
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pulse-pie-chart-container h3 {
+    font-size: 1.25rem;
+  }
+  
+  .pulse-pie-chart-container .flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .chart-svg {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .pulse-pie-legend .flex {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .legend-item {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-svg {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .segment-label {
+    font-size: 12px;
+  }
+  
+  .legend-item span {
+    font-size: 0.75rem;
+  }
+}
+
+/* Focus styles for accessibility */
+.pie-segment:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+.legend-item:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

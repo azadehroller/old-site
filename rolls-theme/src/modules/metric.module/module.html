@@ -1,0 +1,36 @@
+{% set tall_metric = module.tall_metric %}
+    {% set short_metric = module.short_metric %}
+    {% set chart_type = module.chart_type|default('line_chart') %}
+    {% set chart_type_class = chart_type|replace('_', '-') %}
+    
+    <div class="grid gap-4 items-end metrics fade-in-on-scroll metric-{{ chart_type_class }}{% if chart_type == 'line_chart' %} grid-cols-2{% elif chart_type == 'circle_chart' %} grid-cols-2 md:grid-cols-[320px_193px]{% endif %}">
+        <!-- Tall Metric -->
+        {% if tall_metric %}
+        <figure data-value="{{ tall_metric.percentage }}" class="p-3 self-end metric{% if chart_type == 'circle_chart' %} self-center  flex items-center justify-center w-[320px] h-[320px] rounded-full{% endif %}"{% if chart_type != 'circle_chart' %} style="--percentage: 380px;" {% else %} style="--percentage:320px;"{% endif %}>
+            <figcaption class="text-info{% if chart_type == 'circle_chart' %} text-center{% endif %} grid gap-1">
+                <h3 class="metric-title text-2xl font-bold leading-[100%] letter-spacing-tight text-neutral-white metric-text-animation" style="--text-2xl">
+                    {{ tall_metric.percentage }}{% if chart_type == 'circle_chart' %}x{% else %}%{% endif %}
+                </h3>
+                <p class="metric-text text-small letter-spacing-tight text-neutral-white metric-text-animation mb-0">
+                    {% if chart_type == 'circle_chart' %}{{ tall_metric.text|replace('%', 'x') }}{% else %}{{ tall_metric.text }}{% endif %}
+                </p>
+            </figcaption>
+        </figure>
+        {% endif %}
+        
+        <!-- Short Metric -->
+        {% if short_metric %}
+        <figure data-value="{{ short_metric.percentage }}" class="p-3 self-end metric{% if chart_type == 'circle_chart' %} self-center flex items-center justify-center w-[193px] h-[193px] rounded-full{% endif %}"{% if chart_type != 'circle_chart' %} style="--percentage: 273px;" {% else %} style="--percentage:193px;"{% endif %}>
+            <figcaption class="text-info{% if chart_type == 'circle_chart' %} text-center{% endif %} grid gap-1">
+                <h3 class="metric-title text-2xl font-bold leading-[100%] letter-spacing-tight text-neutral-white metric-text-animation" style="--text-2xl">
+                    {{ short_metric.percentage }}{% if chart_type == 'circle_chart' %}x{% else %}%{% endif %}
+                </h3>
+                <p class="metric-text text-small letter-spacing-tight text-neutral-white metric-text-animation mb-0">
+                    {% if chart_type == 'circle_chart' %}{{ short_metric.text|replace('%', 'x') }}{% else %}{{ short_metric.text }}{% endif %}
+                </p>
+            </figcaption>
+        </figure>
+        {% endif %}
+    </div>
+    
+    

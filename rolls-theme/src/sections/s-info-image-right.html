@@ -1,0 +1,103 @@
+<!--
+  templateType: section
+  label: Info with landscape image on the right
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/info-image-right.png
+  description: "Two-column section with an image (5:4 aspect ratio) on the right, label, heading, and text on the left."
+-->
+
+{% dnd_section 
+  vertical_alignment="MIDDLE",
+  background_color={{ context.background_color || "#F5F8FF" }}
+  class="s-layout s-info-image-right"
+%}
+  {# Text #}
+  {% dnd_column 
+    offset=0,
+    width=6,
+    vertical_alignment="CENTER"
+  }
+  %}
+     {% dnd_row %}
+        {# Module: Heading Composition #}
+          {% dnd_module path="../modules/heading-composition",
+              label="Modules: Header Composition",
+              styles={
+                  "textalignment": {
+                      "text_align": "LEFT",
+                  },
+                  "heading_type": context.heading_type || "h2",                
+                  "text_type": context.text_type || "base",                
+              }
+          %}
+        {% end_dnd_module %}
+     {% end_dnd_row %}
+    {# Stats #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/stat",
+        extra_classes="pt-2 max-w-[560px]",
+        label="Modules: Stats",
+        extra_classes={{"my-2 md:my-3"}}
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Stats #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/quote",
+        extra_classes="max-w-[560px]",
+        label="Modules: Quote",
+        extra_classes={{"my-2 md:my-3"}}
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+
+    {# Button Stack #}
+
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/button-stack",
+        extra_classes="max-w-[560px]",
+        label="Modules: Button",
+        extra_classes={{"my-2 md:my-3"}},
+        horizontal_alignment="LEFT",
+        "button_styles": context.button_styles || 'primary',
+        "button_link": context.button_link || "https://www.roller.software/",
+        "btn_label": context.btn_label || "Button"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+    
+  {% end_dnd_column %}
+    {# Image #}
+    {% dnd_column 
+        offset=6,
+        width=6
+    %}
+       {% dnd_row 
+        padding={
+            "default": {
+                "top": "3.34rem"
+            },
+            "mobile": {
+            "top": "1.5rem"
+            }
+        }
+        %}
+        {% dnd_module path="@hubspot/linked_image"
+            horizontal_alignment="CENTER",
+             extra_classes="img-cover--square-md img-contain",
+            img={
+            "src": context.img_url || get_asset_url("../images/grayscale-mountain.png"),
+            "size_type": "auto"
+            },
+            label="Image"
+        %}
+        {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+    
+{% end_dnd_section %}

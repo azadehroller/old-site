@@ -1,0 +1,67 @@
+{#
+  Interactive Hero — HubSpot Custom Module
+  Animated gradient hero with editable eyebrow, title, description, and CTA.
+#}
+
+{# Unique ID so multiple instances on a page don't clash #}
+{% set module_id = "interactive-hero-" ~ name ~ "-" ~ loop.index|default(0) %}
+
+<section class="interactive-hero-module" id="{{ module_id }}">
+
+  {# ── SVG filters (blur + noise) ── #}
+  <svg width="0" height="0" class="interactive-hero__svg-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="{{ module_id }}-softBlur70" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="70"/>
+      </filter>
+      <filter id="{{ module_id }}-softBlur80" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="80"/>
+      </filter>
+      <filter id="{{ module_id }}-noiseFilter" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" seed="42"/>
+        <feColorMatrix type="saturate" values="0"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0
+                                             0 0 0 0 0
+                                             0 0 0 0 0
+                                             1 0 0 0 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  {# ── Hero ── #}
+  <div class="interactive-hero">
+    <div class="interactive-hero__gradient">
+      <div class="interactive-hero__orb interactive-hero__orb--1" style="filter: url(#{{ module_id }}-softBlur70);"></div>
+      <div class="interactive-hero__orb interactive-hero__orb--2" style="filter: url(#{{ module_id }}-softBlur80);"></div>
+      <div class="interactive-hero__orb interactive-hero__orb--3" style="filter: url(#{{ module_id }}-softBlur80);"></div>
+    </div>
+
+    <div class="interactive-hero__noise" style="filter: url(#{{ module_id }}-noiseFilter);"></div>
+
+    <div class="interactive-hero__content">
+      <div class="interactive-hero__heading-group">
+        {% if module.eyebrow %}
+          <p class="interactive-hero__eyebrow">{{ module.eyebrow }}</p>
+        {% endif %}
+
+        {% if module.title %}
+          <h1 class="interactive-hero__title">{{ module.title }}</h1>
+        {% endif %}
+
+        {% if module.description %}
+          <div class="interactive-hero__desc">{{ module.description }}</div>
+        {% endif %}
+      </div>
+
+      {% if module.cta.url.href and module.cta.button_label %}
+        <a
+          href="{{ module.cta.url.href }}"
+          class="interactive-hero__cta"
+          {% if module.cta.url.type == "EXTERNAL" and module.cta.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+        >
+          {{ module.cta.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>

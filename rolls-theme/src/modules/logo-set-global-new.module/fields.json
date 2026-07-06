@@ -1,0 +1,1209 @@
+[ {
+  "id" : "0555d715-129d-b7ec-2af2-c133333a99cc",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : true,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Trusted by over 1,700 venues worldwide"
+}, {
+  "id" : "64735314-45db-ab50-9a5c-ac805b18cd74",
+  "name" : "region",
+  "label" : "Region",
+  "help_text" : "",
+  "inline_help_text" : "Enable to overwrite adding logos by region, AMER, EMEA and APAC.",
+  "required" : false,
+  "locked" : true,
+  "display" : "toggle",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "87e29e56-80fe-84ea-96ef-441e8ce13c32",
+  "name" : "styles",
+  "label" : "Style",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "e2abd8fb-f5fb-2d2c-3e5f-ff9f9e0d9768",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "dark", "OnLight" ], [ "light", "OnDark" ], [ "gxscore", "GxScore" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "dark"
+  }, {
+    "id" : "14985328-6bb1-88b9-ee7e-97719beeac5f",
+    "name" : "textalignment",
+    "label" : "Text alignment",
+    "required" : false,
+    "locked" : false,
+    "type" : "textalignment",
+    "display_width" : null,
+    "default" : {
+      "text_align" : "CENTER"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "theme" : "dark",
+    "textalignment" : {
+      "text_align" : "CENTER"
+    }
+  }
+}, {
+  "id" : "ebf2206e-def1-0565-c8ff-e6e799506200",
+  "name" : "logos",
+  "label" : "Logos",
+  "required" : false,
+  "locked" : true,
+  "occurrence" : {
+    "min" : 6,
+    "max" : null,
+    "sorting_label_field" : "159af483-8988-68b6-62af-fb274103beba",
+    "default" : 6
+  },
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "region",
+    "controlling_value_regex" : "false",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "527bfa40-5ec1-8214-b753-f815dfb287a6",
+    "name" : "type",
+    "label" : "Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "radio",
+    "choices" : [ [ "img", "Image file" ], [ "svg", "SVG code" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "img"
+  }, {
+    "id" : "159af483-8988-68b6-62af-fb274103beba",
+    "name" : "img",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "logos.type",
+      "controlling_value_regex" : "img",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "id" : "628d6893-00ad-bd57-6ea1-0313e360094a",
+    "name" : "svg",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "logos.type",
+      "controlling_value_regex" : "svg",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "type" : "img",
+    "img" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "type" : "img",
+    "img" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "type" : "img",
+    "img" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "type" : "img",
+    "img" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "type" : "img",
+    "img" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  }, {
+    "type" : "img",
+    "img" : {
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : "grayscale-mountain",
+      "size_type" : "auto",
+      "width" : 605,
+      "height" : 451,
+      "loading" : "lazy",
+      "max_width" : 605,
+      "max_height" : 451
+    }
+  } ]
+}, {
+  "id" : "e6e30171-3c90-eb84-b377-a728c2fffed4",
+  "name" : "amer",
+  "label" : "AMER",
+  "required" : false,
+  "locked" : true,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "region",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "1fcaaea5-afdd-326f-baab-ab5dd39db0f4",
+    "name" : "logos",
+    "label" : "Logos",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 6,
+      "max" : null,
+      "sorting_label_field" : "65ff9d13-3ddc-8db7-5d71-78dfcc1a406b",
+      "default" : 6
+    },
+    "children" : [ {
+      "id" : "92481c84-226e-0db3-d9b7-9864444d98a8",
+      "name" : "type",
+      "label" : "Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "img", "Image file" ], [ "svg", "SVG code" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "img"
+    }, {
+      "id" : "65ff9d13-3ddc-8db7-5d71-78dfcc1a406b",
+      "name" : "img",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "amer.logos.type",
+        "controlling_value_regex" : "img",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+        "alt" : "grayscale-mountain",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "id" : "57264aaa-2b91-0575-e8f5-232e7ec6a810",
+      "name" : "svg",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "amer.logos.type",
+        "controlling_value_regex" : "svg",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Altitude-on-light.png",
+        "alt" : "Altitude",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/AmericanDream-on-light.png",
+        "alt" : "AmericanDream",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Elevate-Trampoline-Park-on-light.png",
+        "alt" : "Elevate-Trampoline-Park",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Lost-Island.png",
+        "alt" : "Lost Island",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Skyzone-on-light.png",
+        "alt" : "Skyzone",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/WhoaZone-on-light.png",
+        "alt" : "WhoaZone",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "logos" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Altitude-on-light.png",
+        "alt" : "Altitude",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/AmericanDream-on-light.png",
+        "alt" : "AmericanDream",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Elevate-Trampoline-Park-on-light.png",
+        "alt" : "Elevate-Trampoline-Park",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Lost-Island.png",
+        "alt" : "Lost Island",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/Skyzone-on-light.png",
+        "alt" : "Skyzone",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/AMER/WhoaZone-on-light.png",
+        "alt" : "WhoaZone",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  }
+}, {
+  "id" : "c1e40a1e-aeb4-39ed-d11a-e087e0aac9f5",
+  "name" : "apac",
+  "label" : "APAC",
+  "required" : false,
+  "locked" : true,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "region",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "8fdd291a-7a3b-db5a-4ced-3cea72e076c7",
+    "name" : "logos",
+    "label" : "Logos",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 6,
+      "max" : null,
+      "sorting_label_field" : "cc819558-6f73-ad9e-5d47-e1c448046ba8",
+      "default" : 6
+    },
+    "children" : [ {
+      "id" : "682e778a-37fe-ac5f-e6c1-6c03b6485f15",
+      "name" : "type",
+      "label" : "Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "img", "Image file" ], [ "svg", "SVG code" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "img"
+    }, {
+      "id" : "4e14c66c-19cd-6b93-9ffe-3a85741a450c",
+      "name" : "img",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "apac.logos.type",
+        "controlling_value_regex" : "img",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/raw_assets/public/rolls-theme/modules/images/grayscale-mountain.png",
+        "alt" : "ROLLER - Industry Rating",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "id" : "cc819558-6f73-ad9e-5d47-e1c448046ba8",
+      "name" : "svg",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "apac.logos.type",
+        "controlling_value_regex" : "svg",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/AdventurePark.png",
+        "alt" : "AdventurePark",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/Chipmunks-on-light.png",
+        "alt" : "Chipmunks",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/EntertainmentPark.png",
+        "alt" : "Entertainment-Park",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/Flip-Out.png",
+        "alt" : "Flip-Out",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/GC-Wake-and-Aquapark-on-light.png",
+        "alt" : "GC-Wake-and-Aquapark",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/The%20Lume-on-light.png",
+        "alt" : "The Lume",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "logos" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/AdventurePark.png",
+        "alt" : "AdventurePark",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/Chipmunks-on-light.png",
+        "alt" : "Chipmunks",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/EntertainmentPark.png",
+        "alt" : "Entertainment-Park",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/Flip-Out.png",
+        "alt" : "Flip-Out",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/GC-Wake-and-Aquapark-on-light.png",
+        "alt" : "GC-Wake-and-Aquapark",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/APAC/The%20Lume-on-light.png",
+        "alt" : "The Lume",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  }
+}, {
+  "id" : "1ca661e4-9525-c4a6-c848-896363da72d9",
+  "name" : "emea",
+  "label" : "EMEA",
+  "required" : false,
+  "locked" : true,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "region",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "73e5d008-acec-524d-b233-ef0616ba6c81",
+    "name" : "logos",
+    "label" : "Logos",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 6,
+      "max" : null,
+      "sorting_label_field" : "03eef5b8-dc4b-ea94-5b0c-3619a5af9cc9",
+      "default" : 6
+    },
+    "children" : [ {
+      "id" : "c0497817-a0c3-52ac-b87f-e4fe921f7148",
+      "name" : "type",
+      "label" : "Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "img", "Image file" ], [ "svg", "SVG code" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "img"
+    }, {
+      "id" : "3f22153e-ffe4-667c-c543-8803e05545bc",
+      "name" : "img",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "emea.logos.type",
+        "controlling_value_regex" : "img",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/raw_assets/public/rolls-theme/modules/images/grayscale-mountain.png",
+        "alt" : "ROLLER - Industry Rating",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "id" : "03eef5b8-dc4b-ea94-5b0c-3619a5af9cc9",
+      "name" : "svg",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "emea.logos.type",
+        "controlling_value_regex" : "svg",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Bounce-Valley.png",
+        "alt" : "Bounce-Valley",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Jump-in.png",
+        "alt" : "Jump-in",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Jumpsquare-Trampolin-on-light.png",
+        "alt" : "Jumpsquare-Trampolin",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Monkey-Town.png",
+        "alt" : "Monkey-Town",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Superfly-on-light.png",
+        "alt" : "Superfly",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Urban-Planet.png",
+        "alt" : "Urban-Planet",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "logos" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Bounce-Valley.png",
+        "alt" : "Bounce-Valley",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Jump-in.png",
+        "alt" : "Jump-in",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Jumpsquare-Trampolin-on-light.png",
+        "alt" : "Jumpsquare-Trampolin",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Monkey-Town.png",
+        "alt" : "Monkey-Town",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Superfly-on-light.png",
+        "alt" : "Superfly",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/MAINLAND_EUROPE/Urban-Planet.png",
+        "alt" : "Urban-Planet",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  }
+}, {
+  "id" : "9fd269dc-1c23-22f5-7292-a22396af434a",
+  "name" : "uk",
+  "label" : "UK",
+  "required" : false,
+  "locked" : true,
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "region",
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "b2db52dc-0843-17df-89b3-fd64ba09242e",
+    "name" : "logos",
+    "label" : "Logos",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 6,
+      "max" : null,
+      "sorting_label_field" : "1da837bf-946c-f641-7a2b-a22e9193b864",
+      "default" : 6
+    },
+    "children" : [ {
+      "id" : "78f3cb91-0203-2d14-6354-e6855c38e2d1",
+      "name" : "type",
+      "label" : "Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "img", "Image file" ], [ "svg", "SVG code" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "img"
+    }, {
+      "id" : "02bfe29b-7de8-3bd0-b6ba-f4dffa3bc9e3",
+      "name" : "img",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "uk.logos.type",
+        "controlling_value_regex" : "img",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/raw_assets/public/rolls-theme/modules/images/grayscale-mountain.png",
+        "alt" : "ROLLER - Industry Rating",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "id" : "1da837bf-946c-f641-7a2b-a22e9193b864",
+      "name" : "svg",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "uk.logos.type",
+        "controlling_value_regex" : "svg",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Flip-Out.png",
+        "alt" : "Flip-Out",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Innoflate-Pinz-Bowling-Group.png",
+        "alt" : "Innoflate-Pinz-Bowling-Group",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Jump-in.png",
+        "alt" : "Jump-in",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Ninja-Warrior-UK-on-light.png",
+        "alt" : "Ninja-Warrior-UK",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Oxygen-Trampoline-on-light.png",
+        "alt" : "Oxygen-Trampoline",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Wonder-World.png",
+        "alt" : "Wonder-World",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "logos" : [ {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Flip-Out.png",
+        "alt" : "Flip-Out",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Innoflate-Pinz-Bowling-Group.png",
+        "alt" : "Innoflate-Pinz-Bowling-Group",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Jump-in.png",
+        "alt" : "Jump-in",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Ninja-Warrior-UK-on-light.png",
+        "alt" : "Ninja-Warrior-UK",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Oxygen-Trampoline-on-light.png",
+        "alt" : "Oxygen-Trampoline",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    }, {
+      "type" : "img",
+      "img" : {
+        "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Customer_logos/UK/Wonder-World.png",
+        "alt" : "Wonder-World",
+        "size_type" : "auto",
+        "width" : 384,
+        "height" : 208,
+        "max_width" : 400,
+        "max_height" : 220,
+        "loading" : "lazy"
+      }
+    } ]
+  }
+} ]

@@ -1,0 +1,165 @@
+{# Variables #}
+{% set bg_images = module.background_images %}
+{% set label = module.section_label %}
+{% set description = module.description %}
+{% set regions = module.regions %}
+
+{% require_css %}
+<style>
+.dnd-section:has(.location-module) {
+  position: relative;
+  background-color: #011840;
+}
+.dnd-section:has(.location-module)::before,.dnd-section:has(.location-module) > .row-fluid > .dnd-column::after{
+  content: "";
+  position: absolute;
+  inset:0;
+   z-index: 0;
+
+}
+ .dnd-section:has(.location-module) > .row-fluid > .dnd-column::after{
+    background-image: url('{{ get_asset_url("rolls-theme/images/awards.svg") }}') ;
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: auto 100%;
+      height: 100px; 
+  }
+  
+/* Tablets (< 720px) */
+@media (min-width: 433px) {
+  .dnd-section:has(.location-module) > .row-fluid > .dnd-column::after {
+    height: 120px;
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+  .dnd-section:has(.location-module) > .row-fluid > .dnd-column::after {
+    height: 166px;
+  }
+}
+    @media (min-width: 1440px) {
+  .dnd-section:has(.location-module) > .row-fluid > .dnd-column::after {
+    height: 181px;
+  }
+}
+.dnd-section:has(.location-module)::before {
+  height: 340px; 
+  background-image: url('{{ get_asset_url("../../images/map-small.svg") }}') ;
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: auto 100%;
+}
+
+.dnd-section:has(.location-module) > .row-fluid {
+  position: relative;
+  z-index: 1;
+  padding-top: 120px;
+  padding-bottom: 80px;
+}
+@media (min-width: 433px) {
+  .dnd-section:has(.location-module) > .row-fluid  {
+    padding-top: 130px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dnd-section:has(.location-module) > .row-fluid {
+    padding-top: 80px;
+  }
+}
+/* Tablets (< 720px) */
+@media (min-width: 433px) {
+  .dnd-section:has(.location-module)::before {
+    height: 459px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 721px) {
+  .dnd-section:has(.location-module)::before {
+    height: 459px;
+    background-image: url('{{ get_asset_url("../../images/map-big.svg") }}');
+  }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+  .dnd-section:has(.location-module)::before {
+    height: 459px;
+  }
+}
+
+/* XL screens */
+@media (min-width: 1312px) {
+  .dnd-section:has(.location-module)::before {
+    height: 600px;
+  }
+}
+
+/* 1920+ */
+@media (min-width: 1920px) {
+  .dnd-section:has(.location-module)::before {
+    height: 800px;
+  }
+}
+
+  {% scope_css %}
+
+    .location-module {
+      {% if bg_images.desktop.src %}
+      background-image: url('{{ bg_images.desktop.src }}');
+      {% endif %}
+    }
+
+    @media (max-width: 1024px) {
+      .location-module {
+        {% if bg_images.tablet.src %}
+        background-image: url('{{ bg_images.tablet.src }}');
+        {% endif %}
+      }
+    }
+
+    @media (max-width: 432px) {
+      .location-module {
+        {% if bg_images.mobile.src %}
+        background-image: url('{{ bg_images.mobile.src }}');
+        {% endif %}
+      }
+    }
+  {% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="location-module">
+  {% if label %}
+  <span class="location-label">{{ label }}</span>
+  {% endif %}
+
+  {% if description %}
+  <div class="location-description">{{ description }}</div>
+  {% endif %}
+
+  {% if regions %}
+  <nav class="location-accordions">
+    {% for region in regions %}
+    <details>
+      <summary>
+        {{ region.region_name }}
+        <svg class="icon-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        <svg class="icon-minus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+      </summary>
+      {{ region.locations }}
+    </details>
+    {% endfor %}
+  </nav>
+  {% endif %}
+</section>

@@ -1,0 +1,206 @@
+[ {
+  "id" : "section_label",
+  "name" : "section_label",
+  "label" : "Section Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "SUMMARY"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Lorem ipsum dolor sit amet consectetur. Elementum at interdum erat sem ridiculus proin. Lectus ullamcorper mi sed lacus est aenean lectus ut. <a href=\"#\">Turpis leo magnis hendrerit morbi commodo aliquam aliquam. In lacus id sit arcu nibh feugiat non.</a></p>"
+}, {
+  "id" : "show_awards",
+  "name" : "show_awards",
+  "label" : "Show Awards Badge",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "items",
+  "name" : "items",
+  "label" : "Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "items.item_name",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "items.item_name",
+    "name" : "item_name",
+    "label" : "Item Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Item Title"
+  }, {
+    "id" : "items.item_type",
+    "name" : "item_type",
+    "label" : "Item Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "accordion", "Accordion" ], [ "link", "Link" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "accordion"
+  }, {
+    "id" : "items.item_content",
+    "name" : "item_content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "items.item_type",
+      "controlling_value_regex" : "accordion",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Item content goes here.</p>"
+  }, {
+    "id" : "items.item_url",
+    "name" : "item_url",
+    "label" : "Link URL",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "items.item_type",
+      "controlling_value_regex" : "link",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "type" : "url",
+    "display_width" : null,
+    "default" : {
+      "content_id" : null,
+      "href" : "",
+      "type" : "EXTERNAL"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "item_name" : "First Item",
+    "item_type" : "accordion",
+    "item_content" : "<p>Item content goes here.</p>",
+    "item_url" : {
+      "content_id" : null,
+      "href" : "",
+      "type" : "EXTERNAL"
+    }
+  }, {
+    "item_name" : "Second Item",
+    "item_type" : "accordion",
+    "item_content" : "<p>Item content goes here.</p>",
+    "item_url" : {
+      "content_id" : null,
+      "href" : "",
+      "type" : "EXTERNAL"
+    }
+  }, {
+    "item_name" : "Third Item",
+    "item_type" : "accordion",
+    "item_content" : "<p>Item content goes here.</p>",
+    "item_url" : {
+      "content_id" : null,
+      "href" : "",
+      "type" : "EXTERNAL"
+    }
+  } ]
+}, {
+  "id" : "side_content_text",
+  "name" : "side_content_text",
+  "label" : "Side Content Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "0fb35895-e6ad-4021-7640-3322e40ac2e8",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "50183d8a-9859-15a5-ca80-552303801e0a",
+    "name" : "image_field",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image_field" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }
+}, {
+  "id" : "side_content_image",
+  "name" : "side_content_image",
+  "label" : "Side Content Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "",
+    "alt" : "",
+    "loading" : "lazy",
+    "width" : 0,
+    "height" : 0,
+    "max_width" : null,
+    "max_height" : null
+  }
+} ]

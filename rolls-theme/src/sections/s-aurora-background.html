@@ -1,0 +1,21 @@
+<!--
+    templateType: section
+    label: Aurora Background
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/aurora-background.png
+    description: "Section with animated aurora background effect for creating dynamic and engaging visual experiences."
+-->
+
+    {% dnd_section
+     class="aurora-container"
+     vertical_alignment='MIDDLE'
+    %}
+      {% dnd_column
+        offset=0,
+        width=12
+      %}
+        {% dnd_row %}
+          {# Add your modules here - they will appear on top of the aurora background #}
+        {% end_dnd_row %}
+      {% end_dnd_column %}
+    {% end_dnd_section %}

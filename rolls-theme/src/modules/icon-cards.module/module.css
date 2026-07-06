@@ -1,0 +1,32 @@
+/* Additional styles for icon-cards module */
+
+/* CSS Variables */
+:root {
+  --icon-card-heading-color: #005EFF;
+}
+
+/* Equivalent of text-icon-card-heading */
+.text-icon-card-heading {
+  color: var(--icon-card-heading-color);
+}
+
+/* Equivalent of sm:grid-cols-3 */
+@media (min-width: 624px) {
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  
+  .sm\:justify-items-center {
+    justify-items: center;
+  }
+  
+  .sm\:gap-3 {
+    gap: 1rem;
+  }
+}
+
+/* Equivalent of max-w-[416px] */
+.max-w-\[416px\] {
+  max-width: 416px;
+}
+.icon-cards-text p{font-size: 16px;line-height: 24px;}

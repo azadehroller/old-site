@@ -1,0 +1,13 @@
+defaultPortal: azadehroller
+portals:
+  - name: azadehroller
+    portalId: 50219696
+    env: prod
+    authType: personalaccesskey
+    auth:
+      tokenInfo:
+        accessToken: REDACTED
+        expiresAt: '2025-09-10T23:36:27.733Z'
+    accountType: DEVELOPMENT_SANDBOX
+    personalAccessKey: REDACTED
+    parentAccountId: 3375779

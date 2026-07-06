@@ -1,0 +1,63 @@
+
+{% require_css %}
+    <style>
+        .{{name}} a.is-active {
+            background: #033180;
+            border-radius: 4px;
+            color: var(--white, #fff);
+            box-shadow: none;
+        }
+
+        .module--archor-links--item {
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 400;
+            transition: box-shadow .2s;
+            display: block;
+            margin: 0 0 12px;
+            background: #f2f2f2;
+            border-radius: 4px;
+        }
+
+        .module--archor-links--item:hover {
+            box-shadow: 0 0 0 2px #00B5FA;
+            border-radius: 4px;
+        }
+    </style>
+{% end_require_css %}
+
+{% if module.anchor_items %}
+    <h4>In this article</h4>
+    <div class="{{ name }} my-4">
+        {% for item in module.anchor_items %}
+            <a href="#" id="{{ item.text_field|lower|replace(' ', '-') }}" class="module--archor-links--item text-primary-50 bg-neutral-10 no-underline">{{ item.label_field }}</a>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% require_js position="footer" defer="true" %}
+    <script>
+        (function() {
+            const elements = document.querySelectorAll('.{{ name }} a');
+
+                elements.forEach(function(element) {
+                    const elementId = element.getAttribute('id');
+                    const elementIdConverted = `#${elementId.replace(/\s+/g, '-').toLowerCase()}`;
+
+                    element.href = elementIdConverted;
+                });
+
+                elements.forEach(function(element) {
+                    element.addEventListener('click', function(event) {
+                    event.preventDefault();
+
+                    document.querySelectorAll('a.is-active').forEach(function(activeElement) {
+                        activeElement.classList.remove('is-active');
+                    });
+
+                    element.classList.add('is-active');
+                    });
+                });
+        })();
+    </script>
+{% end_require_js %}

@@ -1,0 +1,8 @@
+{% set show_divider = module.show_divider|default(true) %}
+{% set divider_bg = module.background|default(light) %}
+{% set divider_type = module.divider_type %}
+<div class="divider {{ divider_type }} {{ divider_bg }} w-full h-[2px] {% if show_divider %}block divider-shown{% else %}hidden divider-hidden{% endif %}">
+{% if show_divider %}
+<img src="{{ get_asset_url('../../images/divider.svg') }}" alt="Divider" class="w-full h-[2px] block max-w-full" width="1314" height="2" />
+{% endif %}
+</div>

@@ -1,0 +1,119 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macro %}
+
+{# Variables #}
+{% set title = module.title %}
+{% set layout = module.layout %}
+{% set logos = module.logos %}
+{% set logos_amer = module.amer.logos %}
+{% set logos_apac = module.apac.logos %}
+{% set logos_emea = module.emea.logos %}
+{% set logos_uk = module.uk.logos %}
+{% set region = module.region %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set divider = module.styles.divider %}
+
+{% require_css %}
+  <style>
+  {% scope_css %} 
+     .scroller__inner {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .scroller[data-animated="true"] {
+        overflow: hidden;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .scroller[data-animated="true"] .scroller__inner {
+        width: fit-content;
+        flex-wrap: nowrap;
+        animation: scroll 30s linear infinite;
+    }
+    .scroller[data-animated="true"] {
+        -webkit-mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+        mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+    }
+
+    @media screen and (min-width: 1032px) {
+
+        .scroller[data-animated="true"] .scroller__inner {
+            margin: 0 auto;
+            animation: none;
+        }
+
+        .scroller[data-animated="true"] {
+            width: 1248px;
+            -webkit-mask: none;
+            mask: none;
+        }
+    }
+    
+    @keyframes scroll {
+        to {
+            transform: translate(calc(-50% - 0.5rem));
+        }
+    }
+
+  {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{% macro logoSrc(logo) %}
+    {# Image #}
+    {% if logo.type == "img" %}
+        {% set sizeAttrs = 'width="194" height="106"' %}
+        {% set loadingAttr = logo.img.loading != 'disabled' ? 'loading="{{ logo.img.loading }}"' : '' %}
+        <img src="{{ logo.img.src }}" alt="{{ logo.img.alt }}" {{ loadingAttr }} {{ sizeAttrs }} class="object-contain">
+    {% else %}
+        {{ logo.svg }}
+    {% endif %}
+{% endmacro %}
+
+{% macro logoItems(item, resized) %}
+    {% for logo in item %}
+        <div class="{{resized ? 'w-[150px] md:w-[194px]' : 'm-auto'}}">
+            {# Image #}
+            {{ logoSrc(logo) }}
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+{# Section Markup #}
+<section id="logo-set-{{name}}" class="relative flex flex-col gap-3 min-w-[1px] max-w-full">
+  {% if divider %}
+    <div class="mt-3 w-full h-[1px] bg-neutral-white"></div> 
+  {% endif %}
+  {% if title %}
+    <div class="font-semibold text-lg block {{ macro.setTextColor(theme, 'text-neutral-white', 'text-primary-50', 'text-gx-80') }} m-0 text-{{alignment|lower || "left"}}">
+      {{ title || 'Trusted by over 2,000 venues worldwide'}}
+    </div>
+  {% endif %}
+  {% if !region %}
+    <div class="scroller">
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos, true)}}
+      </div>
+    </div>
+    {% else %}
+    <div class="scroller">
+      <div class="amer-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+       {{ logoItems(logos_amer, true) }}
+      </div>
+      <div class="apac-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos_apac, true) }}
+      </div>
+      <div class="emea-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos_emea, true) }}
+      </div>
+      <div class="uk-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos_uk, true) }}
+      </div>
+    </div>
+  {% endif %}
+</section>

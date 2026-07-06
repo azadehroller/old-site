@@ -1,0 +1,67 @@
+[ {
+  "id" : "section_label",
+  "name" : "section_label",
+  "label" : "Section Label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "WHERE WE WORK"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Lorem ipsum dolor sit amet consectetur. Elementum at interdum erat sem ridiculus proin. Lectus ullamcorper mi sed lacus est aenean lectus ut. <a href=\"#\">Turpis leo magnis hendrerit morbi commodo aliquam aliquam. In lacus id sit arcu nibh feugiat non.</a></p>"
+}, {
+  "id" : "regions",
+  "name" : "regions",
+  "label" : "Regions",
+  "required" : true,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 10,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "region_name",
+    "name" : "region_name",
+    "label" : "Region Name",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "APAC"
+  }, {
+    "id" : "locations",
+    "name" : "locations",
+    "label" : "Locations",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Location 1</p>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "region_name" : "APAC",
+    "locations" : "<p>Location 1</p>"
+  }, {
+    "region_name" : "AMER",
+    "locations" : "<p>Location 1</p>"
+  }, {
+    "region_name" : "EMEA",
+    "locations" : "<p>Location 1</p>"
+  } ]
+} ]

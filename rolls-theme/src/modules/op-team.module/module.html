@@ -1,0 +1,178 @@
+{# Variables #}
+{% set moderator = module.moderator %}
+{% set operators = module.operators %}
+
+{# Styles #}
+{% require_css %}
+    <style>
+        {% scope_css %}
+
+            .team-section {
+                margin-bottom: 3rem;
+            }
+
+            .team-section:last-child {
+                margin-bottom: 0;
+            }
+
+            .section-title {
+                font-size: 24px;
+                font-weight: 800;
+                line-height: 27px;
+                text-align: center;
+                position: relative;
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+            }
+
+            .section-title::before,
+            .section-title::after {
+                content: '';
+                border-radius: 15px;
+                width: 48%;
+                height: 2px;
+                background: linear-gradient(45deg, #C239FB, #0960F6);
+            }
+
+            .section-title::before {
+                background: linear-gradient(45deg, #0960F6, #C239FB);
+            }
+
+            .moderator-container {
+                display: flex;
+                justify-content: center; 
+            }
+
+            .operators-container {
+                display: flex; 
+                gap: 2rem;
+                justify-content: center;
+                justify-items: center;
+            }
+
+            .team-member {
+                display: flex; flex: 0 1 250px;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .team-image {
+                width: 132px;
+                height: 132px;
+                position: relative;
+                background-image: url("{{ get_asset_url('/rolls-theme/images/bg.png') }}");
+                background-size: 132px 132px;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .team-image img {
+                width: 65px;
+                height: 65px;
+                object-fit: cover;
+                border-radius: 50%;
+                display: block;
+            }
+
+            .team-name {
+                font-size: 1rem;
+                line-height: 24px;
+                font-weight: 600;
+                margin-top: -1rem;
+                margin-bottom: 0.2rem;
+                color: white;
+            }
+
+            .team-position {
+                font-size: 1rem;
+                margin-bottom: 0.25rem;
+                color: white;
+            }
+
+            .team-company {
+                font-size: 1rem;
+                color: white;
+            }
+            
+            @media (min-width: 769px) {
+                .section-title {
+                    font-size: 32px;
+                }
+
+
+                .operators-container {
+                   grid-template-columns: repeat(3, 1fr);
+                }
+
+                .team-image {
+                    width: 168px;
+                    height: 168px;
+                    background-size: 168px 168px;
+                }
+
+                .team-image img {
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+
+
+            @media (min-width: 0px) and (max-width: 480px) {
+  
+
+            }
+        {% end_scope_css %}
+    </style>
+{% end_require_css %}
+
+{# Section Markup #}
+<section id="operating-team-{{name}}" class="operating-team">
+    {% if moderator %}
+        <div class="team-section">
+            <h2 class="section-title"><span>Moderator</span></h2>
+            <div class="moderator-container">
+                <div class="team-member">
+                    {% if moderator.image %}
+                        <div class="team-image">
+                            {% set sizeAttrs = 'width="{{ moderator.image.width }}" height="{{ moderator.image.height }}"' %}
+                            {% set loadingAttr = 'loading="eager"' %}
+                            <img src="{{ moderator.image.src }}" loading="eager" alt="{{ moderator.image.alt }}">
+                        </div>
+                    {% endif %}
+                    <h3 class="team-name">{{ moderator.full_name }}</h3>
+                    <p class="team-position">{{ moderator.position }}</p>
+                    <p class="team-company">{{ moderator.company|replace('\n', '<br>')|safe }}</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if operators %}
+        <div class="team-section">
+            <h2 class="section-title"><span>Operators</span></h2>
+            <div class="operators-container">
+                {% for operator in operators %}
+                    <div class="team-member">
+                        {% if operator.image %}
+                            <div class="team-image">
+                                {% set sizeAttrs = 'width="{{ operator.image.width }}" height="{{ operator.image.height }}"' %}
+                                {% set loadingAttr = 'loading="eager"' %}
+                                <img src="{{ operator.image.src }}" alt="{{ operator.image.alt }}" {{sizeAttrs}} {{loadingAttr}}>
+                            </div>
+                        {% endif %}
+                        <h3 class="team-name">{{ operator.full_name }}</h3>
+                        <p class="team-position">{{ operator.position }}</p>
+                        <p class="team-company">{{ operator.company|replace('\n', '<br>')|safe }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</section>

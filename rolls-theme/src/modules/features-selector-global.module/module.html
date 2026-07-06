@@ -1,0 +1,148 @@
+{# Variables #}
+
+{# Content #}
+{# Header #}
+{% set eyebrow  = module.header.eyebrow %}
+{% set title  = module.header.title %}
+{% set text  = module.header.text %}
+
+{# CTA #}
+{% set cta_link_label = module.cta.link_label %}
+{% set cta_link = module.cta.link %}
+{% set href = module.cta.link.url.href %}
+{% set rel = [] %}
+{% set url_type = module.cta.link.url.type %}
+{% set no_follow = module.cta.link.no_follow %}
+{% set new_tab = module.cta.link.open_in_new_tab %}
+
+{# Industries #}
+{% set industries = module.industries %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set heading_type = module.styles.heading_type %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set text_type = module.styles.text_type %}
+{% set eyebrow_type = module.styles.eyebrow_type %}
+{% set display_type = module.styles.display_type %}
+
+{% macro eyebrow(tag, eyebrow_type)%}
+<{{tag || "div"}} class="text-secondary-50 uppercase font-extrabold {% if eyebrow_type %}small{% endif %}">{{ eyebrow || "DESIGNED TO GROW WITH YOUR BUSINESS"}}</{{tag || "div"}}>
+{% endmacro%}
+
+{% macro heading(tag, title, display_tag)%}
+<{{tag || "h3"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {% if tag == 'h1'%}text-balance{%endif%}">{{title || "Explore all of ROLLER's features"}}</{{tag || "h3"}}>
+{% endmacro%}
+
+{% require_css %}
+  <style>
+
+    .box-shadow-ondark-blue-10 {
+        box-shadow: var(--shadown-ondark-blue-10, 0px 8px 16px 0px rgba(1, 19, 50, 0.25), 0px 24px 40px 0px rgba(1, 19, 50, 0.50));
+
+        &:hover {
+            box-shadow: var(--shadown-ondark-blue-10, 0px 8px 16px 0px rgba(1, 19, 50, 0.25), 0px 24px 40px 0px rgba(1, 19, 50, 0.50));
+        }
+    }
+
+    .dropdown-wrapper-{{name}} { 
+        position: relative;
+        grid-template-areas: "select";
+        align-items: center;
+    } 
+
+    .dropdown-wrapper-{{name}}, .dropdown-wrapper-{{name}}:after {
+        grid-area: select;
+    }
+
+    .dropdown-wrapper-{{name}}:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        left: calc(100% - 60px);
+        transform: translateY(-50%);
+        width: 0.7em;
+        height: 0.4em;
+        background-color: var(--primary-50, #033180);
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        justify-self: end;
+    } 
+
+    #js-industryItemContainer_{{name}}.js-industryItemContainer {
+        cursor: pointer;
+        display: flex;
+        height: 4rem;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: 4rem;
+      }
+
+      @media (max-width: 767px) {
+        #js-industryItemContainer_{{name}}.js-industryItemContainer{
+          height: {{height_mob || 4 }}{{height_unit || rem}};
+          width: {{width_mob || 4 }}{{width_unit || rem}};
+        }
+      }
+      
+      #js-industryItemContainer_{{name}}.js-industryItemContainer {
+        width: 48px;
+        height: 48px;
+      }
+  </style>
+{% end_require_css %}
+
+<div id="industry-selector-{{name}}" class="mx-auto gap-5 {{ theme == 'light' ? "bg-primary-50 box-shadow-ondark-blue-10 flex flex-col lg:grid lg:grid-cols-3" : "bg-widget-industries box-shadow-onlight flex flex-col lg:p-6" }} rounded-[32px] py-6 px-6 mb-0 md:mb-4">
+    <header class="text-{{alignment|lower || "left"}} {{ theme == 'light' ? "text-neutral-white flex flex-col" : "text-primary-50" }} grid gap-4">
+        {% if eyebrow %}
+            {{ eyebrow(eyebrow_type, eyebrow) }}
+        {% endif %}
+        {{ heading(heading_type, title, display_type) }}
+        {% if text %}
+            <div class="text-{{text_type || 'S1'}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4">{{ text || "Select a feature and discover how ROLLER can help your business grow." }}</div>
+        {% endif %}
+        {% if theme == 'light' %}
+            <img src='{{image.src || get_asset_url("../../images/industry-selector-graph.svg")}}' alt="{{title}}" width="368" height="368" class="hidden lg:block mt-4">
+        {% endif %}
+    </header>
+    <div class="hidden md:flex flex-wrap gap-3 ms-auto me-auto {{theme}} {{ theme == 'light' ? "col-span-2" : null }}">
+    {% for industry in industries %}
+            {% set industry_data =  {
+                'title': industry.title,
+                'icon': industry.icon,
+                'animation': industry.animation,
+                'href': industry.link.url.href,
+                'url_type': industry.link.url.type,
+                'no_follow': industry.link.no_follow,
+                'new_tab': industry.link.open_in_new_tab,
+            } %}
+
+            {% set rel = [] %}
+            {% if industry_data.url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set href = 'mailto:' + industry_data.href %}
+            {% endif %}
+            {% if industry_data.no_follow %}
+                {% do rel.append('nofollow') %}
+            {% endif %}
+            {% if industry_data.new_tab %}
+                {% do rel.append('noopener') %}
+            {% endif %}
+
+            <a href="{{industry_data.href}}" {% if industry_data.new_tab %}target="_blank"{% endif %} {% if rel %}rel="{{ rel|join(" ") }}"{% endif %} class="js-industryItemsLink flex items-center justify-center gap-2 p-3 {{ theme == 'light' ? "text-neutral-white hover:text-primary-50" : "text-primary-50" }} font-semibold ease-in transition duration-200 hover:bg-neutral-white hover:shadow-3xl rounded-2xl">
+                <span>{{industry_data.icon}}</span>
+                <span>{{industry_data.title}}</span>
+            </a>
+    {% endfor%}
+    </div>
+    {% if href %}
+    <div>
+        <a href="{{ href }}" {% if new_tab %}target="_blank"{% endif %} {% if rel %}rel="{{ rel|join(" ") }}"{% endif %} class="relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold bg-transparent text-primary-50 font-serif group">
+            <span class="flex justify-center items-center mr-0 ml-2 order-1">
+                <svg class="transition-transform ease-out duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"><rect width="40" height="40" fill="#ff290c" rx="20"></rect><path fill="#fff" d="m20 12-1.41 1.41L24.17 19H12v2h12.17l-5.58 5.59L20 28l8-8-8-8Z"></path></svg>
+            </span>
+            <span>{{cta_link_label}}</span>
+        </a>
+    </div>
+    {% endif %}
+</div>

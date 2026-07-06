@@ -1,0 +1,46 @@
+{# Special Intro Module #}
+{# A notebook paper styled intro component with handwritten greeting and signature #}
+
+<div class="special-intro">
+  <figure class="special-intro__container">
+
+    {# Greeting Image (Hey There!) - Top #}
+    {% if module.greeting_image.src %}
+      {% set loadingAttr = module.greeting_image.loading != "disabled" ? 'loading="' ~ module.greeting_image.loading ~ '"' : "" %}
+      <img
+        class="special-intro__greeting-image"
+        src="{{ module.greeting_image.src }}"
+        alt="{{ module.greeting_image.alt }}"
+        {{ loadingAttr }}
+      >
+    {% endif %}
+
+    {# Body Content with Notebook Lines - Middle (figcaption) #}
+    {% if module.body_content %}
+      <figcaption class="special-intro__body">
+        <div class="special-intro__lines" aria-hidden="true"></div>
+        <div class="special-intro__content">
+          {% set paragraphs = module.body_content|split("\n\n", 500) %}
+          {% for para in paragraphs %}
+            {% if para|trim %}
+              <p class="special-intro__paragraph">{{ para|replace("\n", "<br>")|safe }}</p>
+              <span class="special-intro__paragraph-line" aria-hidden="true"></span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </figcaption>
+    {% endif %}
+
+    {# Signature Image - Bottom #}
+    {% if module.signature_image.src %}
+      {% set loadingAttr = module.signature_image.loading != "disabled" ? 'loading="' ~ module.signature_image.loading ~ '"' : "" %}
+      <img
+        class="special-intro__signature-image"
+        src="{{ module.signature_image.src }}"
+        alt="{{ module.signature_image.alt }}"
+        {{ loadingAttr }}
+      >
+    {% endif %}
+
+  </figure>
+</div>

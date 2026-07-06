@@ -1,0 +1,439 @@
+[ {
+  "id" : "ee348835-61c2-5e86-0d80-d037770b8d0c",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "be128e11-52a2-e06b-0e19-5c2fa6c2fd78",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Frequently asked questions"
+  }, {
+    "id" : "ee29eaba-6de3-c28e-661f-4d93e3ea27fa",
+    "name" : "faq",
+    "label" : "FAQ",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : null,
+      "max" : null,
+      "sorting_label_field" : "9f918e46-d72e-c874-f383-f46bc6682cd6",
+      "default" : null
+    },
+    "children" : [ {
+      "id" : "9f918e46-d72e-c874-f383-f46bc6682cd6",
+      "name" : "title",
+      "label" : "Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacinia egestas nisl sit amet suscipit?"
+    }, {
+      "id" : "b145c4a8-0bd0-d07c-3366-f77c6bcb11e9",
+      "name" : "content",
+      "label" : "Content",
+      "required" : false,
+      "locked" : false,
+      "type" : "richtext",
+      "display_width" : null,
+      "default" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacinia egestas nisl sit amet suscipit. Aenean malesuada faucibus diam a hendrerit. Mauris a nisl vitae elit feugiat ullamcorper."
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "title" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacinia egestas nisl sit amet suscipit?",
+      "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacinia egestas nisl sit amet suscipit. Aenean malesuada faucibus diam a hendrerit. Mauris a nisl vitae elit feugiat ullamcorper."
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "title" : "Frequently asked questions",
+    "faq" : {
+      "title" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacinia egestas nisl sit amet suscipit?",
+      "content" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacinia egestas nisl sit amet suscipit. Aenean malesuada faucibus diam a hendrerit. Mauris a nisl vitae elit feugiat ullamcorper."
+    }
+  }
+}, {
+  "id" : "db314ecb-5042-e2b2-4b66-52712f38dc4e",
+  "name" : "settings",
+  "label" : "Settings",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "2bd3c88b-141c-1537-60de-fbef26e96b58",
+    "name" : "section_id",
+    "label" : "Section ID",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "1a58657d-6029-2ba5-b26c-d837283b6523",
+    "name" : "background",
+    "label" : "Background",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "53d76429-4d87-fd85-f495-cc6bcf9d4951",
+      "name" : "type",
+      "label" : "Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "color", "Color" ], [ "image", "Image" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "7cb333ca-cdb3-5e52-27ac-8a677b220c51",
+      "name" : "color",
+      "label" : "Color",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "53d76429-4d87-fd85-f495-cc6bcf9d4951",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "color",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "type" : "color",
+      "display_width" : null,
+      "default" : {
+        "color" : "#ffffff",
+        "opacity" : 100
+      }
+    }, {
+      "id" : "5d87d9db-3817-a057-ffdb-3ea03b9bd526",
+      "name" : "image",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "53d76429-4d87-fd85-f495-cc6bcf9d4951",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "image",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "children" : [ {
+        "id" : "99cf7649-700b-92b5-427a-b3330b33dc6b",
+        "name" : "mobile",
+        "label" : "Mobile",
+        "required" : false,
+        "locked" : false,
+        "responsive" : true,
+        "resizable" : true,
+        "show_loading" : false,
+        "type" : "image",
+        "display_width" : null,
+        "default" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048-1.jpg",
+          "alt" : "Frame 48-1",
+          "loading" : "lazy",
+          "width" : 375,
+          "height" : 345,
+          "max_width" : 375,
+          "max_height" : 345
+        }
+      }, {
+        "id" : "9923eaf5-d7cc-164b-829c-ac00efe37cb7",
+        "name" : "desktop",
+        "label" : "Desktop",
+        "required" : false,
+        "locked" : false,
+        "responsive" : true,
+        "resizable" : true,
+        "show_loading" : false,
+        "type" : "image",
+        "display_width" : null,
+        "default" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048.jpg",
+          "alt" : "Frame 48",
+          "loading" : "lazy",
+          "width" : 1600,
+          "height" : 250,
+          "max_width" : 1600,
+          "max_height" : 250
+        }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "mobile" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048-1.jpg",
+          "alt" : "Frame 48-1",
+          "loading" : "lazy",
+          "width" : 375,
+          "height" : 345,
+          "max_width" : 375,
+          "max_height" : 345
+        },
+        "desktop" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048.jpg",
+          "alt" : "Frame 48",
+          "loading" : "lazy",
+          "width" : 1600,
+          "height" : 250,
+          "max_width" : 1600,
+          "max_height" : 250
+        }
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "color" : {
+        "color" : "#ffffff",
+        "opacity" : 100
+      },
+      "image" : {
+        "mobile" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048-1.jpg",
+          "alt" : "Frame 48-1",
+          "loading" : "lazy",
+          "width" : 375,
+          "height" : 345,
+          "max_width" : 375,
+          "max_height" : 345
+        },
+        "desktop" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048.jpg",
+          "alt" : "Frame 48",
+          "loading" : "lazy",
+          "width" : 1600,
+          "height" : 250,
+          "max_width" : 1600,
+          "max_height" : 250
+        }
+      }
+    }
+  }, {
+    "id" : "9e245a31-b25d-7fdc-6a6e-1f2f686d6f70",
+    "name" : "paddings",
+    "label" : "Paddings",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "b88c9af6-94ae-2ad4-d326-931d5d3102e7",
+      "name" : "mobile",
+      "label" : "Mobile",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "b41735ab-5afd-7ff4-d95b-afb5a033b866",
+        "name" : "top",
+        "label" : "Top",
+        "required" : false,
+        "locked" : false,
+        "display" : "text",
+        "min" : 0,
+        "step" : 1,
+        "type" : "number",
+        "display_width" : null,
+        "default" : 50
+      }, {
+        "id" : "cb8490e6-fda9-4bea-ee9a-3f5361cfe37f",
+        "name" : "bottom",
+        "label" : "Bottom",
+        "required" : false,
+        "locked" : false,
+        "display" : "text",
+        "min" : 0,
+        "step" : 1,
+        "type" : "number",
+        "display_width" : null,
+        "default" : 50
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "top" : 50,
+        "bottom" : 50
+      }
+    }, {
+      "id" : "ee5ddf47-e8de-c160-e19c-875cccb2d6b7",
+      "name" : "tablet",
+      "label" : "Tablet",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "b85dda45-b063-c37e-ad53-41d05554d516",
+        "name" : "top",
+        "label" : "Top",
+        "required" : false,
+        "locked" : false,
+        "display" : "text",
+        "min" : 0,
+        "step" : 1,
+        "type" : "number",
+        "display_width" : null,
+        "default" : 50
+      }, {
+        "id" : "60d2b224-9146-2ab3-15ec-6be594ae5585",
+        "name" : "bottom",
+        "label" : "Bottom",
+        "required" : false,
+        "locked" : false,
+        "display" : "text",
+        "min" : 0,
+        "step" : 1,
+        "type" : "number",
+        "display_width" : null,
+        "default" : 50
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "top" : 50,
+        "bottom" : 50
+      }
+    }, {
+      "id" : "7dde5d24-c3cc-1fb8-246f-04bec69662d6",
+      "name" : "desktop",
+      "label" : "Desktop",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "0041dc1a-ed98-b91d-1de3-4a11541b350f",
+        "name" : "top",
+        "label" : "Top",
+        "required" : false,
+        "locked" : false,
+        "display" : "text",
+        "min" : 0,
+        "step" : 1,
+        "type" : "number",
+        "display_width" : null,
+        "default" : 100
+      }, {
+        "id" : "7051849b-b0ee-6975-13a0-9f9f278d70a8",
+        "name" : "bottom",
+        "label" : "Bottom",
+        "required" : false,
+        "locked" : false,
+        "display" : "text",
+        "min" : 0,
+        "step" : 1,
+        "type" : "number",
+        "display_width" : null,
+        "default" : 100
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "top" : 100,
+        "bottom" : 100
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "mobile" : {
+        "top" : 50,
+        "bottom" : 50
+      },
+      "tablet" : {
+        "top" : 50,
+        "bottom" : 50
+      },
+      "desktop" : {
+        "top" : 100,
+        "bottom" : 100
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "background" : {
+      "color" : {
+        "color" : "#ffffff",
+        "opacity" : 100
+      },
+      "image" : {
+        "mobile" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048-1.jpg",
+          "alt" : "Frame 48-1",
+          "loading" : "lazy",
+          "width" : 375,
+          "height" : 345,
+          "max_width" : 375,
+          "max_height" : 345
+        },
+        "desktop" : {
+          "size_type" : "auto",
+          "src" : "https://f.hubspotusercontent20.net/hubfs/3375779/SaltedStone/images/Frame%2048.jpg",
+          "alt" : "Frame 48",
+          "loading" : "lazy",
+          "width" : 1600,
+          "height" : 250,
+          "max_width" : 1600,
+          "max_height" : 250
+        }
+      }
+    },
+    "paddings" : {
+      "mobile" : {
+        "top" : 50,
+        "bottom" : 50
+      },
+      "tablet" : {
+        "top" : 50,
+        "bottom" : 50
+      },
+      "desktop" : {
+        "top" : 100,
+        "bottom" : 100
+      }
+    }
+  }
+} ]

@@ -1,0 +1,58 @@
+
+.hs_cos_wrapper:has(.stack-container ){
+  overflow: hidden;
+}
+.stack-container {
+  position: relative;
+  perspective: 600px;
+  margin: 0 auto;
+}
+
+.stack-container .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform;
+  cursor: default;
+  touch-action: none;
+  transition: transform 800ms cubic-bezier(.34,1.56,.64,1), opacity 400ms ease-out;
+  opacity: 0;
+}
+
+/* Initial spread state - images are visible but spread out */
+.stack-container.is-spread .card {
+  opacity: 1;
+  cursor: default;
+}
+
+/* Animating state - keep visible with smooth transition */
+.stack-container.is-animating .card {
+  opacity: 1;
+  cursor: default;
+}
+
+/* After stacking animation completes, enable interaction */
+.stack-container.is-stacked .card {
+  opacity: 1;
+  cursor: grab;
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+}
+
+.stack-container .card.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.stack-container .card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}

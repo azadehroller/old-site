@@ -1,0 +1,84 @@
+[ {
+  "id" : "c7738fe7-4256-b14e-0414-b6e70099e343",
+  "name" : "styles",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "fbc4dc81-e84b-7360-f1dd-e929b96334df",
+    "name" : "alignment",
+    "label" : "Alignment",
+    "required" : false,
+    "locked" : false,
+    "alignment_direction" : "BOTH",
+    "type" : "alignment",
+    "display_width" : null,
+    "default" : { }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "28fe359e-9f5b-1eca-16ea-31c5f591c3ff",
+  "name" : "stats_settings",
+  "label" : "Stats Settings",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "62e9642c-b747-23a6-cb53-4d0b8fed6d45",
+    "name" : "stats_number",
+    "label" : "Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "10%"
+  }, {
+    "id" : "f15093fa-0099-6ef2-ed18-6402689d490c",
+    "name" : "stats_text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<strong>increase in conversion rate</strong>, when using progressive checkout"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "stats_number" : "10%",
+    "stats_text" : "<strong>increase in conversion rate</strong>, when using progressive checkout"
+  }
+}, {
+  "id" : "e19dd539-0cb4-d996-18d8-4e4c382b0462",
+  "name" : "stats_icon",
+  "label" : "Icon",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "e6628304-0f10-a434-4044-766bf0bc06e2",
+    "name" : "icon",
+    "label" : "SVG Icon Code",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" fill=\"none\"><path fill=\"#18F273\" fill-rule=\"evenodd\" d=\"M20 13.333v8h-8v-8H6.667L16 4l9.333 9.333H20Zm5.333 13.334V24H6.667v2.667h18.666Z\" clip-rule=\"evenodd\"/></svg>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"32\" height=\"32\" fill=\"none\"><path fill=\"#18F273\" fill-rule=\"evenodd\" d=\"M20 13.333v8h-8v-8H6.667L16 4l9.333 9.333H20Zm5.333 13.334V24H6.667v2.667h18.666Z\" clip-rule=\"evenodd\"/></svg>"
+  }
+} ]

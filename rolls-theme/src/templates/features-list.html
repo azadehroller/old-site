@@ -1,0 +1,39 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Features List page
+  screenshotPath: ../images/template-previews/features-list.png
+-->
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--features-lis"
+%}
+
+  {# Hero banner #}
+
+  {% include_dnd_partial path="../sections/s-hero.html" %}
+
+
+  {% include_dnd_partial path="../sections/s-integeration-bar.html" %}
+
+  {# Industry Rating #}
+  {% include_dnd_partial path="../sections/s-industry-rating.html" 
+    context={
+      "bg_color": "#fff",
+      "padding_top_m": "1rem",
+      "padding_bottom_d": "6rem",
+      "padding_bottom_m": "4rem",
+      "text": "USER REVIEWS"
+    }
+  %}
+  {# Industry Rating #}
+  {% include_dnd_partial path="../sections/s-widgets.html" %}
+
+{% end_dnd_area %}
+{% endblock body %}

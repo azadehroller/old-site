@@ -1,0 +1,194 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macro %}
+
+{# Variables #}
+{% set slide = module.slide %}
+{% set spacing = module.styles.spacing.css %}
+{% set theme = module.styles.theme %}
+
+{# Styles #}
+{% require_css %}
+    <style>
+        {% scope_css %}
+
+            {% if spacing %}
+                .swiper-{{ name }} {
+                    {{ spacing }}
+                }
+            {% endif %}
+
+            .swiper{
+                overflow: visible;
+            }
+
+            .swiper-{{ name }} .swiper-slide {
+                width: 100% !important;
+            }
+
+            .swiper-{{ name }} .swiper {
+                width: 100%;
+                height: auto;
+                
+            }
+            .swiper-{{ name }} .swiper-header {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: 1fr;
+                grid-column-gap: 0px;
+                grid-row-gap: 0px;
+            }
+
+            .swiper-{{ name }} .swiper-pagination {
+                position: relative;
+                bottom: -48px;
+            }
+
+            .swiper-{{ name }} .swiper-pagination-bullet {
+                height: auto;
+                border-radius: 0;
+                width: auto; 
+                text-align: left;
+                position: relative;
+                opacity: unset;
+                background: transparent;
+                margin: 0;
+            }
+
+            .swiper-{{ name }} .swiper-pagination-bullet .pag-content .pag-progress-bar {
+                height: 4px;
+                width: auto;
+                position: relative;
+                overflow: hidden;
+                {# {{ macro.setTextColor(theme, defaultColor, onDarkColor, gxColor) }} #}
+                background: {{ macro.setTextColor(theme, '#cccccc', '#F5F8FF', '#f4ebff') }};
+            }
+
+            .swiper-{{ name }} .swiper-pagination-bullet .pag-content .pag-progress-bar:before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                height: 4px;
+            }
+
+            .swiper-{{ name }} .swiper-pagination-bullet-active .pag-content .pag-progress-bar {
+                background: {{ macro.setTextColor(theme, '#cccccc', '#F5F8FF', '#f4ebff') }};
+            }
+
+            .swiper-{{ name }} .swiper-pagination-bullet-active .pag-content .pag-progress-bar:before {
+                background: {{ macro.setTextColor(theme, '#ff290c', '#ff290c', '#A554FF') }};
+                animation: slide-progress 5s cubic-bezier(.3,0,.3,1) forwards;
+            }
+
+            @keyframes slide-progress {
+                0% {
+                    transform: translateX(-100%);
+                }
+
+                100% {
+                    transform: translateX(0);
+                }
+            }
+
+            .pag-title {
+                color: {{ macro.setTextColor(theme, '#ff290c', '#ff290c', '#A554FF') }};
+            }
+
+            .pag-text {
+                color: {{ macro.setTextColor(theme, '#033180', '#fff', '#A554FF') }};
+            }
+
+            .pag-link {
+                color: {{ macro.setTextColor(theme, '#033180', '#fff', '#3C0091') }};
+            }
+
+            .pag-svg rect {
+                fill: {{ macro.setTextColor(theme, '#ff290c', '#ff290c', '#A554FF') }};
+            }
+
+        {% end_scope_css %}
+    </style>
+{% end_require_css%}
+
+<section id="features-horizontal-slide-{{name}}" class='container relative swiper swiper-{{name}}'>
+    <div class="swiper-wrapper">
+        {# Slides #}
+        {% for item in slide %}
+            <article class='swiper-slide slide-{{loop.index}}' data-name='{{item.title|string}}' data-content='{{item.content|string}}' data-link='{{item.link.url.href}}' data-label='{{item.link_label || 'Learn more'}}'>
+            {% if item.image %}
+                <div class="{{ macro.setTextColor('bg-[#F6F9FF]', 'bg-[#FBF8FF]', null) }} [&>img]:spect-video [&>img]:w-full [&>img]:object-cover">
+                     <img src="{{ resize_image_url(item.image.src|escape_html, 0, 0, 1248) }}" alt="{{item.image.alt}}" class="object-cover w-full h-full" width="1248" height="520" loading="{{item.image.loading}}">
+                </div>
+            {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+    <div class="swiper-pagination pag grid grid-cols-1 lg:grid-cols-3 gap-5 md:h-auto"></div>
+</section>
+
+{# External assets #}
+{{ require_css('https://unpkg.com/swiper@8/swiper-bundle.min.css', {"media": "print", "onload": "this.media='all'"}) }}
+{{ require_js('https://unpkg.com/swiper@8/swiper-bundle.min.js', "footer", {"defer": true}) }} 
+
+{# JavaScript #}
+{% require_js position="footer" defer="true" %}
+    <script>
+        const slides = document.querySelectorAll('.swiper-slide');
+        const swiperPagination = document.querySelector('.swiper-pagination');
+        const swiperContainer = document.querySelector('#features-horizontal-slide-{{name}}');
+
+        const slideData = {};
+        slides.forEach((slide, index) => {
+            slideData[index] = {
+                name: slide.dataset.name,
+                content: slide.dataset.content,
+                link: slide.dataset.link,
+                label: slide.dataset.label
+            };
+        });
+
+        const swiper = new Swiper(swiperContainer, {
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            autoHeight: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
+            loop: true,
+            watchSlidesProgress: true,
+            pagination: {
+                el: ".pag",
+                clickable: true,
+                renderBullet: function(index, className) {
+                    const slide = slideData[index];
+                    return `
+                        <div class="flex flex-col gap-3">
+                        <div class="pag-container ${className}">
+                            <div class="pag-content flex flex-col gap-3 h-full cursor-auto">
+                            <div class="pag-progress-bar"></div>
+                            <div class="pag-title text-2xl font-semibold">${slide.name}</div>
+                            <div class="pag-text text-base">${slide.content}</div>
+                            </div>
+                        </div>
+                        <a class="inline-flex items-center pag-link text-base font-semibold mt-auto w-max group" href="${slide.link}">
+                            <span>${slide.label}</span><span><svg class="pag-svg mr-0 ml-2 transition-transform ease-out duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"><rect width="40" height="40" rx="20"/><path fill="#fff" d="m20 12-1.41 1.41L24.17 19H12v2h12.17l-5.58 5.59L20 28l8-8-8-8Z"/></svg></span>
+                        </a>
+                        </div>
+                    `;
+                },
+            },
+        });
+
+    </script>
+{% end_require_js %}
+{# For debugging purposes #}
+<script>
+{# console.log({{ module|tojson }}); #}
+{# console.log({{ slide|tojson }}); #}
+</script>

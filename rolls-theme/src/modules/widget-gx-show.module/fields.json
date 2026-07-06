@@ -1,0 +1,173 @@
+[ {
+  "id" : "c140f69d-6da2-4bd6-7515-31e763d420c5",
+  "name" : "text",
+  "label" : "Text",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "b51a5d1e-d7d9-1a4a-d766-80d9e2638a3e",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ATTRACTIONS INDUSTRY PODCAST"
+  }, {
+    "id" : "c72361b9-60e9-77d5-6302-64dad6fa486f",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn from the experts"
+  }, {
+    "id" : "25d0f5b2-4139-2fd7-27f6-1dc027ac2245",
+    "name" : "blurb",
+    "label" : "Blurb",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Listen as thought leaders in the industry share strategies to grow your business by putting guests first."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "ATTRACTIONS INDUSTRY PODCAST",
+    "title" : "Learn from the experts",
+    "blurb" : "Listen as thought leaders in the industry share strategies to grow your business by putting guests first."
+  }
+}, {
+  "id" : "5fa280cc-39ee-c3d9-7494-d90d1434e1cf",
+  "name" : "social_icons",
+  "label" : "Social Icons",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "c905028a-f046-b84e-e487-6668bc7fd381",
+    "name" : "social_text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Subscribe on your favorite podcast app"
+  }, {
+    "id" : "a66e2860-048f-ff18-2f06-90899e6e51ca",
+    "name" : "icons",
+    "label" : "Icons",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 0,
+      "max" : 3,
+      "sorting_label_field" : "b496eb43-5905-2c31-b5dd-9ae8248a02c4",
+      "default" : null
+    },
+    "children" : [ {
+      "id" : "1546c569-3136-e252-7a0a-d1f5de96d30d",
+      "name" : "social_icon",
+      "label" : "Image",
+      "required" : false,
+      "locked" : false,
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/spotify.png",
+        "alt" : "spotify",
+        "loading" : "lazy",
+        "width" : 32,
+        "height" : 32,
+        "max_width" : 32,
+        "max_height" : 32
+      }
+    }, {
+      "id" : "b496eb43-5905-2c31-b5dd-9ae8248a02c4",
+      "name" : "social_link",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://open.spotify.com/show/26b4IpUsVBS4BRYBuc2TN8",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : true,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "social_icon" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/spotify.png",
+        "alt" : "spotify",
+        "loading" : "lazy",
+        "width" : 32,
+        "height" : 32,
+        "max_width" : 32,
+        "max_height" : 32
+      },
+      "social_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://open.spotify.com/show/26b4IpUsVBS4BRYBuc2TN8",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : true,
+        "no_follow" : false
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "social_text" : "Subscribe on your favorite podcast app",
+    "icons" : {
+      "social_icon" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/spotify.png",
+        "alt" : "spotify",
+        "loading" : "lazy",
+        "width" : 32,
+        "height" : 32,
+        "max_width" : 32,
+        "max_height" : 32
+      },
+      "social_link" : {
+        "url" : {
+          "content_id" : null,
+          "href" : "https://open.spotify.com/show/26b4IpUsVBS4BRYBuc2TN8",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : true,
+        "no_follow" : false
+      }
+    }
+  }
+} ]

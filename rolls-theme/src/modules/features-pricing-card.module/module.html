@@ -1,0 +1,231 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Cards #}
+{% set cards = module.cards %}
+
+{# Styles #}
+{% set card_alignment = module.styles.alignment.card_alignment %}
+{% set button_styles_kind = module.styles.button.kind %}
+{% set button_styles_icon_position = module.styles.button.icon_position %}
+
+{# Macro: Card Alignment #}
+
+{% macro card_alignment() %}
+flex-wrap {% if card_alignment.text_align == 'LEFT' %}content-start text-left {% elif card_alignment.text_align == 'CENTER' %}content-center text-center {% elif card_alignment.text_align == 'right' %} content-end text-right{% endif %}
+{% endmacro %}
+
+{% macro card_alignment_content() %}
+flex-wrap {% if card_alignment.text_align == 'LEFT' %}items-start {% elif card_alignment.text_align == 'CENTER' %}items-center{% elif card_alignment.text_align == 'right' %} items-end{% endif %}
+{% endmacro %}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+
+        #js-feature-prices > span {
+            display: none;
+        }
+
+        #js-feature-prices > span.-active {
+            display: inline;
+        }
+
+        .list li:hover .tooltip {
+            opacity: 1;
+            transition-timing-function: cubic-bezier(.165,.84,.44,1);
+            transform: translateY(calc(-100% - 1px));
+        }
+
+        .tooltip {
+            opacity: 0;
+            position: absolute;
+            left: -16px;
+            right: -10px;
+            top: 0;
+            border-radius: 8px;
+            pointer-events: none;
+            background: #fff;
+            color: #033180;
+            font-weight: 600;
+            transition: transform, opacity, .15s ease-in-out;
+            transform-origin: 20px calc(100% + 12px);
+            transform: translateY(calc(-100% + 10px)) scale(.75);
+            padding: 16px;
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .tooltip:before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 18px;
+            width: 12px;
+            height: 12px;
+            transform: rotate(45deg);
+            border-radius: 0 0 4px 0;
+            background-color: inherit;
+            box-shadow: 3px 3px 5px rgba(82,95,127,.04);
+        }
+
+      {# Button wrapper #}
+      {% if alignment %}
+        .button-wrapper {
+          text-align: {{ alignment.horizontal_align }};
+        }
+      {% endif %}
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+<div class="featured-pricing-cards-{{name}} grid grid-cols-1 lg:flex lg:flex-row justify-center gap-4 md:mx-auto my-4">
+    {% for card in cards %}
+
+        {% set card_data = {
+            'header': {
+                'title': card.header.content.title,
+                'subtitle': card.header.content.subtitle,
+                'venue': card.header.content.pill_venue,
+                'fees': card.header.content.pill_fees
+            },
+            'price': {
+                'display_pricing': card.header.price.display_pricing,
+                'annually': {
+                    'overwrite_monthly_prices': card.header.price.annually.overwrite_monthly_prices,
+                    'overwrite_monthly_prices_content': card.header.price.annually.overwrite_monthly_prices_content,
+                    'usd': card.header.price.annually.usd,
+                    'aud': card.header.price.annually.aud,
+                    'eur': card.header.price.annually.eur,
+                    'gbp': card.header.price.annually.gbp,
+                    'cad': card.header.price.annually.cad
+                },
+                'monthly': {
+                    'usd': card.header.price.monthly.usd,
+                    'aud': card.header.price.monthly.aud,
+                    'eur': card.header.price.monthly.eur,
+                    'gbp': card.header.price.monthly.gbp,
+                    'cad': card.header.price.monthly.cad
+                }
+            },
+            'features': {
+                'feature_items': card.features.feature_items,
+                'icon': card.features.icon,
+                'heading': card.features.heading
+            },
+            'button': {
+                'label': card.button.button_label,
+                'url': {
+                    'type': card.button.link.url.type,
+                    'href': card.button.link.url.href,
+                    'no_follow': card.button.link.url.no_follow,
+                    'open_in_new_tab': card.button.link.url.open_in_new_tab
+                },
+                'icon': card.button.icon
+            }
+        } %}
+
+        {% if card_data.button.url is equalto 'EMAIL_ADDRESS' %}
+        {% set {% set card_data.button.url.href =  card_data.button.url.href %}
+        = 'mailto:' + href %}
+        {% endif %}
+        {% if card_data.button.url.no_follow %}
+        {% do rel.append('nofollow') %}
+        {% endif %}
+        {% if card_data.button.url.open_in_new_tab %}
+        {% do rel.append('noopener') %}
+        {% endif %}
+
+        <div class="mo-card bg-neutral-white rounded-[32px] box-shadow-onlight px-4 md:px-6 relative flex flex-col gap-5 lg:w-[430px] lg:max-w-[430px]">
+            <header class="flex flex-col gap-y-3 {{card_alignment()}}">
+                <div class="text-lg uppercase font-extrabold text-secondary-50">{{ card.header.content.title || "Feature Name" }}</div>
+                {% if card_data.header.subtitle %}
+                <div class="text-primary-50">{{ card_data.header.subtitle || 'Text Here' }}</div>
+                {% endif %}
+                {% if card_data.price.display_pricing %}
+                    <div class="flex flex-col gap-2 {{card_alignment_content()}}">
+                        <h2 id="js-feature-prices" class="flex font-extrabold text-primary-50">
+                            <span class="-usd -active">${{ card_data.price.monthly.usd }}</span>
+                            <span class="-aud">${{ card_data.price.monthly.aud }}</span>
+                            <span class="-gbp">£{{ card_data.price.monthly.gbp }}</span>
+                            <span class="-eur">€{{ card_data.price.monthly.eur }}</span>
+                            <span class="-ca">${{ card_data.price.monthly.cad }}</span>
+                            /mo
+                        </h2>
+                        {% if !card_data.price.annually.overwrite_monthly_prices %}
+                        <div id="js-feature-prices" class="text-primary-50 pb-2">billed annually
+                            <span class="-usd -active">{{ card_data.price.annually.usd  ? 'or $' ~ card_data.price.annually.usd : '' }}</span>
+                            <span class="-aud">{{ card_data.price.annually.aud ? 'or $' ~ card_data.price.annually.aud ~ ' /mo billed monthly' : '' }}</span>
+                            <span class="-gbp">{{ card_data.price.annually.eur ? 'or £' ~ card_data.price.annually.eur ~ ' /mo billed monthly' : '' }}</span>
+                            <span class="-eur">{{ card_data.price.annually.gbp ? 'or €' ~ card_data.price.annually.gbp ~ ' /mo billed monthly' : '' }}</span>
+                            <span class="-ca">{{ card_data.price.annually.cad ? 'or $' ~ card_data.price.annually.cad  ~ ' /mo billed monthly' : '' }}</span>
+                        </div>
+                        {% else %}
+                            <div class="text-primary-50 pb-2">{{ card_data.price.annually.overwrite_monthly_prices_content || "Content here" }}</div>
+                        {% endif %}
+                        <div class="flex gap-2">
+                            {% if card_data.header.venue %}
+                            <div class="bg-primary-10 font-semibold py-1 px-2 text-primary-40 rounded-3xl text-xs w-fit">{{ card_data.header.venue }}</div>
+                            {% endif %}
+                            {% if fees %}
+                            <div class="bg-green-10 py-1 px-2 text-green-60 font-semibold rounded-3xl text-xs w-fit">{{ card_data.header.fees }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </header>
+            {% if !(card_alignment.text_align == 'CENTER')%}
+                <div class="h-[1px] w-full bg-primary-40"></div>
+            {% endif %}
+
+            {% if card_data.features.feature_items %}
+                <div class="grid gap-3 relative">
+                    <div class="text-primary-50 font-semibold">{{card_data.features.heading}}</div>
+                    <ul class="flex flex-col mb-0 list">
+                        {% for feature in card_data.features.feature_items%}
+                            <li class="relative text-primary-50 flex items-center gap-x-2 py-[8px]">{% if feature.tooltip %}<span>{{ card_data.features.icon }}</span>{% endif %}{{feature.features}}
+                            {% if feature.tooltip %}
+                            <div class="tooltip box-shadow-onlight">{{ feature.tooltip }}</div>
+                            {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if card_data.button.label %}
+            <div class="{% if !(card_alignment.text_align == 'CENTER')%}mt-auto{% else %} m-auto{%endif%}">
+                <a class="{{ button.buttons_settings(button_styles_kind || 'primary') }} font-serif" href="{{ card_data.button.url.href ? card_data.button.url.href : null }}"
+                id="button_{{name}}"
+                {% if card_data.button.url.open_in_new_tab %}target="_blank"{% endif %}
+                {% if button_rel %}rel="{{ button_rel|join(" ") }}"{% endif %}
+                >
+                    {% if svg_icon %}
+                    <div class="flex justify-center items-center {% if button_styles_icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+                    {{svg_icon}}
+                    </div>
+                {% endif %}
+                    {# Button label #}
+                    <span>{{ card_data.button.label }}</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+{# JavaScript #}
+{% require_js position="footer" defer="true" %}
+    <script>
+        window.addEventListener('load', function(){
+            if (startingCurrency) {
+                const selectPricesElements = document.querySelectorAll('#js-feature-prices > span');
+
+                selectPricesElements.forEach(function(el) {
+                    const isCurrencyMatch = el.classList.contains('-' + startingCurrency);
+                    el.classList.toggle('-active', isCurrencyMatch);
+                });
+            }
+        });
+    </script>
+{% end_require_js %}

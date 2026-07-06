@@ -1,0 +1,304 @@
+[ {
+  "id" : "4fc83034-6529-1342-caa8-ef6483d00db9",
+  "name" : "feature",
+  "label" : "Feature",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 12,
+    "max" : null,
+    "sorting_label_field" : "161c5db6-22b9-2a53-3171-094270490cd2",
+    "default" : 12
+  },
+  "children" : [ {
+    "id" : "1f9d4ce9-d6ea-5aed-6cda-4f630448206a",
+    "name" : "feature_month",
+    "label" : "Feature Month",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "7806dc3c-3b16-c2d7-1a8f-be476b5432f5",
+    "name" : "feature_icon",
+    "label" : "Feature Icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "exact",
+      "width" : 32,
+      "height" : 32,
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "161c5db6-22b9-2a53-3171-094270490cd2",
+    "name" : "feature_name",
+    "label" : "Feature Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "55246b17-3c3c-9599-50ea-b76009bb3091",
+    "name" : "feature_link",
+    "label" : "Feature Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/waivers.svg",
+      "alt" : "Booking agreements",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Booking agreements",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "CONTENT",
+        "href" : "digital-waiver-software"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/gx_score.svg",
+      "alt" : "GX Score benchmarks",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "GX Score benchmarks",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "CONTENT",
+        "href" : "guest-feedback-software/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/report_dashboard.svg",
+      "alt" : "HQ role management",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "HQ role management",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "CONTENT",
+        "href" : "hq-add-on/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/guest_flags_bans.svg",
+      "alt" : null,
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Guest flags and bans",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/report_dashboard.svg",
+      "alt" : "HQ reports",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "HQ reports",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/party_booking.svg",
+      "alt" : "Party packages",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Party packages",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/waivers.svg",
+      "alt" : "Waiver translations",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Waiver translations",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/production_docket_management.svg",
+      "alt" : "Production management",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Production management",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/chashless_wallets.svg",
+      "alt" : "Wristband management",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Wristband management",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/chashless_wallets.svg",
+      "alt" : "Digital wallets",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Digital wallets",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/guest_segmentation.svg",
+      "alt" : "Guest segmentation",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Guest segmentation",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "feature_icon" : {
+      "size_type" : "exact",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/features_icons/operating_hours.svg",
+      "alt" : "Operating hours",
+      "loading" : "lazy",
+      "width" : 32,
+      "height" : 32
+    },
+    "feature_name" : "Operating hours",
+    "feature_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "features/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

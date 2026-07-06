@@ -1,0 +1,149 @@
+[ {
+  "id" : "2e9fa985-6f0a-59b0-0bb6-b5eff8057ee5",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7f72466c-1a88-db51-97ad-524433f33a9e",
+    "name" : "width",
+    "label" : "Width",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "bb112ce8-a9a8-67f9-f41f-a994b50cc316",
+      "name" : "unit",
+      "label" : "Measurement units",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "px", "Pixels (px)" ], [ "vw", "Visual widths" ], [ "%", "Percents" ], [ "rem", "Root element" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "%"
+    }, {
+      "id" : "87f5b15b-9814-fad9-9886-733247a8cd17",
+      "name" : "desktop",
+      "label" : "Desktop",
+      "help_text" : "Element width on screens greater than 768px",
+      "required" : true,
+      "locked" : false,
+      "display" : "text",
+      "min" : 1,
+      "step" : 1,
+      "type" : "number",
+      "display_width" : null,
+      "default" : 100
+    }, {
+      "id" : "45a3d4b6-1a73-12c6-86c5-a3579005bee4",
+      "name" : "mobile",
+      "label" : "Mobile",
+      "help_text" : "Element width on screens smaller than 768px",
+      "required" : true,
+      "locked" : false,
+      "display" : "text",
+      "min" : 1,
+      "step" : 1,
+      "type" : "number",
+      "display_width" : null,
+      "default" : 100
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "unit" : "%",
+      "desktop" : 100,
+      "mobile" : 100
+    }
+  }, {
+    "id" : "184bf746-fef5-ca0d-e6ba-a51a4576a8c7",
+    "name" : "height",
+    "label" : "Height",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "e1050c84-931c-24dd-7d97-82dd3628d8f4",
+      "name" : "unit",
+      "label" : "Measurement units",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "px", "Pixels (px)" ], [ "vw", "Visual widths" ], [ "%", "Percents" ], [ "rem", "Root element" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "%"
+    }, {
+      "id" : "4671e067-09da-6461-dc91-8493a567bfc3",
+      "name" : "desktop",
+      "label" : "Desktop",
+      "help_text" : "Element width on screens greater than 768px",
+      "required" : true,
+      "locked" : false,
+      "display" : "text",
+      "min" : 1,
+      "step" : 1,
+      "type" : "number",
+      "display_width" : null,
+      "default" : 60
+    }, {
+      "id" : "2ca8a964-ecd9-3d24-9715-220be1fec29f",
+      "name" : "mobile",
+      "label" : "Mobile",
+      "help_text" : "Element width on screens smaller than 768px",
+      "required" : true,
+      "locked" : false,
+      "display" : "text",
+      "min" : 1,
+      "step" : 1,
+      "type" : "number",
+      "display_width" : null,
+      "default" : 60
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "unit" : "%",
+      "desktop" : 60,
+      "mobile" : 60
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "width" : {
+      "unit" : "%",
+      "desktop" : 100,
+      "mobile" : 100
+    },
+    "height" : {
+      "unit" : "%",
+      "desktop" : 60,
+      "mobile" : 60
+    }
+  }
+}, {
+  "picker" : "file",
+  "id" : "d6b64ccf-332e-d4dd-0925-028b5009c8a8",
+  "name" : "lottie_file",
+  "label" : "Lottie JSON file",
+  "help_text" : "More information on Lottie: https://lottiefiles.com",
+  "required" : false,
+  "locked" : false,
+  "type" : "file",
+  "display_width" : null
+} ]

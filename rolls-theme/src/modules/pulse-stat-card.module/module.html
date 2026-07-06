@@ -1,0 +1,76 @@
+<div class="pulse-stat-card card text-center" 
+     style="transition-delay: {{ module.animation_delay }}ms;"
+     {% if module.tooltip_text %}data-tooltip="{{ module.tooltip_text }}"{% endif %}>
+  {% if module.icon.name %}
+    <div class="stat-icon">
+      {% icon name="{{ module.icon.name }}" style="{{ module.icon.type }}" %}
+    </div>
+  {% endif %}
+
+    <p class="mt-2 uppercase text-neutral-white">
+    {{ module.card_extra_info }}
+  </p>
+  <p class="text-5xl font-bold text-purple-400 mb-0">
+    <span class="counter" data-target="{{ module.percentage }}">0</span>%
+  </p>
+     <p class="mt-2 uppercase text-neutral-white">
+    {{ module.card_label }}
+  </p> 
+
+</div>
+
+<script>
+(function() {
+  // Unique identifier for this module instance
+  const moduleId = 'stat-{{ name }}';
+  
+  // Check if already initialized
+  if (window[moduleId + '_initialized']) return;
+  window[moduleId + '_initialized'] = true;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const animateCounter = (counter) => {
+      const target = +counter.getAttribute('data-target');
+      const duration = 1500;
+      const stepTime = 20;
+      const steps = duration / stepTime;
+      const increment = target / steps;
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          clearInterval(timer);
+          counter.innerText = target;
+        } else {
+          counter.innerText = Math.ceil(current);
+        }
+      }, stepTime);
+    };
+    
+    // Observer for animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target.querySelector('.counter:not(.animated)');
+          if (counter) {
+            setTimeout(() => {
+              animateCounter(counter);
+              counter.classList.add('animated');
+            }, {{ module.animation_delay }});
+          }
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Observe all pulse-stat-card elements
+    const cards = document.querySelectorAll('.pulse-stat-card:not(.observed)');
+    cards.forEach(card => {
+      card.classList.add('observed');
+      observer.observe(card);
+    });
+  });
+})();
+</script>

@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roller Module Library — rolls-theme</title>
+<style>
+:root {
+  --ground: #0B1E3D;
+  --surface: #122040;
+  --surface-2: #1A2F52;
+  --border: #1E3560;
+  --text: #E8EDF5;
+  --text-muted: #7A8BAD;
+  --text-dim: #4A5F80;
+  --accent: #3B7BF8;
+  --accent-2: #00D4B4;
+  --mono-bg: #0D1B35;
+  --sidebar-w: 240px;
+  --header-h: 48px;
+
+  /* category colors */
+  --cat-hero: #E84855;
+  --cat-cards: #3B7BF8;
+  --cat-features: #00D4B4;
+  --cat-pulse: #9B59B6;
+  --cat-forms: #F39C12;
+  --cat-nav: #2ECC71;
+  --cat-blog: #1ABC9C;
+  --cat-testimonials: #E91E8C;
+  --cat-lists: #00BCD4;
+  --cat-stats: #FF5722;
+  --cat-logo: #795548;
+  --cat-media: #607D8B;
+  --cat-layout: #9E9E9E;
+  --cat-industry: #4CAF50;
+  --cat-search: #FF9800;
+  --cat-faqs: #8BC34A;
+  --cat-widgets: #00ACC1;
+  --cat-custom: #FF6B35;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 14px; }
+
+body {
+  background: var(--ground);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+#site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--header-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 16px;
+  z-index: 100;
+  gap: 16px;
+}
+
+#site-header .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+#site-header .brand-mark {
+  width: 24px; height: 24px;
+  border-radius: 4px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#site-header .brand-mark svg {
+  width: 14px; height: 14px;
+  fill: white;
+}
+
+#site-header .brand-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+#site-header .brand-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+}
+
+#module-count-display {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  flex-shrink: 0;
+}
+
+#module-count-display span {
+  color: var(--accent-2);
+  font-weight: 700;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: var(--header-h);
+  bottom: 0;
+  width: var(--sidebar-w);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  z-index: 90;
+  /* Blueprint dot grid */
+  background-image:
+    radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 10px 10px;
+  background-attachment: local;
+}
+
+#sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 32, 64, 0.82);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#sidebar > * { position: relative; z-index: 1; }
+
+#search-wrap {
+  padding: 12px 12px 8px;
+  position: sticky;
+  top: 0;
+  background: rgba(18, 32, 64, 0.96);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid var(--border);
+  z-index: 2;
+}
+
+#search-input {
+  width: 100%;
+  background: var(--mono-bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text);
+  font-size: 12px;
+  padding: 6px 10px 6px 28px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+
+#search-input:focus { border-color: var(--accent); }
+
+#search-wrap .search-icon {
+  position: absolute;
+  left: 21px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim);
+  pointer-events: none;
+  font-size: 12px;
+}
+
+#search-result-count {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  padding: 4px 12px 0;
+  display: none;
+}
+
+#search-result-count.visible { display: block; }
+
+.sb-category {
+  border-bottom: 1px solid rgba(30, 53, 96, 0.5);
+}
+
+.sb-category-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: inherit;
+  gap: 6px;
+  text-align: left;
+}
+
+.sb-category-toggle:hover { color: var(--text); }
+
+.sb-cat-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.sb-cat-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sb-cat-count {
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 9px;
+  color: var(--text-dim);
+  margin-left: auto;
+  padding-right: 4px;
+}
+
+.sb-arrow {
+  font-size: 8px;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+  color: var(--text-dim);
+}
+
+.sb-category.collapsed .sb-arrow { transform: rotate(-90deg); }
+
+.sb-module-list {
+  list-style: none;
+  padding: 0 0 4px 0;
+  overflow: hidden;
+}
+
+.sb-category.collapsed .sb-module-list { display: none; }
+
+.sb-module-list li { display: block; }
+
+.sb-module-list a {
+  display: block;
+  padding: 3px 12px 3px 24px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.1s, border-color 0.1s, background 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sb-module-list a:hover {
+  color: var(--text);
+  background: rgba(59, 123, 248, 0.06);
+}
+
+.sb-module-list a.hidden { display: none; }
+
+/* ── MAIN ── */
+#main {
+  margin-left: var(--sidebar-w);
+  margin-top: var(--header-h);
+  padding: 32px 40px 80px;
+  min-height: calc(100vh - var(--header-h));
+}
+
+.category-section {
+  margin-bottom: 56px;
+}
+
+.category-section.hidden { display: none; }
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.category-header-bar {
+  width: 3px;
+  height: 20px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.category-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.category-count {
+  font-size: 10px;
+  font-family: 'Cascadia Code', 'Fira Code', monospace;
+  color: var(--text-dim);
+  margin-left: auto;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+
+/* ── MODULE CARD ── */
+.module-card {
+  background: var(--surface);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--cat-color, var(--accent));
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+
+.module-card:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.module-card.hidden { display: none; }
+
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 10px;
+  flex-wrap: wrap;
+}
+
+.module-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-family: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  border-radius: 3px;
+  padding: 1px 6px;
+  line-height: 1.6;
+}
+
+.chip-label {
+  background: rgba(59, 123, 248, 0.12);
+  color: #7AA3FF;
+  border: 1px solid rgba(59, 123, 248, 0.25);
+}
+
+.chip-src {
+  background: rgba(0, 212, 180, 0.08);
+  color: #00D4B4;
+  border: 1px solid rgba(0, 212, 180, 0.2);
+}
+
+.chip-custom {
+  background: rgba(255, 107, 53, 0.1);
+  color: #FF8A63;
+  border: 1px solid rgba(255, 107, 53, 0.25);
+}
+
+/* ── CODE BLOCK ── */
+.code-wrap {
+  position: relative;
+}
+
+.code-block {
+  display: block;
+  background: var(--mono-bg);
+  border-top: 1px solid var(--border);
+  padding: 14px 16px;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: 'Cascadia Code', 'Fira Code', 'Courier New', monospace;
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: #C8D8F0;
+  tab-size: 2;
+  -webkit-overflow-scrolling: touch;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-family: inherit;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  z-index: 2;
+}
+
+.copy-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.copy-btn.copied {
+  background: rgba(0, 212, 180, 0.15);
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+
+/* ── SYNTAX HIGHLIGHTING ── */
+.hl-tag { color: #3B7BF8; }
+.hl-attr { color: #00D4B4; }
+.hl-value { color: #A8C8F8; }
+.hl-placeholder { color: #F5C842; }
+.hl-comment { color: #4A6A8A; font-style: italic; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* ── FOCUS ── */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 14 14"><path d="M7 1L13 4V10L7 13L1 10V4L7 1Z"/></svg>
+    </div>
+    <div>
+      <div class="brand-name">Roller Module Library</div>
+      <div class="brand-sub">rolls-theme · HubSpot CMS</div>
+    </div>
+  </div>
+  <div id="module-count-display">
+    <span id="visible-count">141</span> of <span id="total-count">141</span> modules
+  </div>
+</header>
+
+<nav id="sidebar" aria-label="Module categories">
+  <div id="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="search" id="search-input" placeholder="Filter modules…" autocomplete="off" aria-label="Filter modules">
+  </div>
+  <div id="search-result-count"></div>
+
+  <!-- Sidebar categories injected by JS -->
+  <div id="sb-categories"></div>
+</nav>
+
+<main id="main">
+  <!-- Module cards injected by JS -->
+  <div id="cards-root"></div>
+</main>
+
+<script>
+// DATA AND LOGIC WILL BE ADDED
+</script>
+</body>
+</html>

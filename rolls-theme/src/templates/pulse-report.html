@@ -1,0 +1,263 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  useForPages: true
+  label: Pulse Report 2025
+  screenshotPath: ../images/template-previews/pulse-report.png
+  enableDomainStylesheets: true
+-->
+{% extends "./layouts/base.html" %}
+
+{% block extra_head %}
+  <!-- Pulse Report Enhanced Styles -->
+  <link rel="stylesheet" href="{{ get_asset_url('../css/pulse-report.css') }}">
+  
+  <!-- Tailwind CSS for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          backdropBlur: {
+            'xl': '24px',
+            '2xl': '40px',
+            '3xl': '64px',
+          }
+        }
+      }
+    }
+  </script>
+{% endblock extra_head %}
+
+{% block body %}
+
+{% dnd_area "main_content" 
+  label="Main Content Area",
+  class="pulse-report-content"
+%}
+
+  <!-- Hero Section -->
+  {% dnd_section %}
+    {% dnd_column
+      offset=0,
+      width=12
+    %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/pulse-hero-title.module"
+          title="Find out what your guests really think"
+          subtitle="Discover insights from thousands of attraction guests worldwide"
+          enable_animation=true
+          animation_type="typewriter"
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  <!-- Stats Section -->
+  {% dnd_section %}
+    {% dnd_column
+      offset=0,
+      width=4
+    %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/pulse-stat-card.module"
+          main_value="2,000"
+          label="Survey Participants"
+          size="large"
+          animation_type="counter"
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+    {% dnd_column
+      offset=4,
+      width=4
+    %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/pulse-stat-card.module"
+          main_value="3"
+          label="Countries Surveyed"
+          size="large"
+          animation_type="counter"
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+    {% dnd_column
+      offset=8,
+      width=4
+    %}
+      {% dnd_row %}
+        {% dnd_module
+          path="../modules/pulse-stat-card.module"
+          main_value="100+"
+          label="Data Points Analyzed"
+          size="large"
+          animation_type="counter"
+        %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+  <!-- Flexible Content Area -->
+  {% dnd_section %}
+    {% dnd_column
+      offset=0,
+      width=12
+    %}
+      {% dnd_row %}
+        {% dnd_module
+          path="@hubspot/rich_text"
+        %}
+          {% module_attribute "html" %}
+            <section class="pulse-toc-section">
+              <div class="container">
+                
+                <!-- Section Header -->
+                <div class="text-center mb-20" data-aos="fade-up">
+                  <div class="inline-flex items-center gap-3 px-6 py-2 bg-white bg-opacity-80 backdrop-blur-md rounded-full border border-indigo-100 border-opacity-50 shadow-sm mb-6">
+                    <div class="w-2 h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse"></div>
+                    <span class="text-sm font-medium text-indigo-600 uppercase tracking-wider">Navigate Report</span>
+                  </div>
+                  
+                  <h2 class="text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-slate-900 via-indigo-800 to-purple-800 bg-clip-text text-transparent mb-6 leading-tight">
+                    Explore Key Insights
+                  </h2>
+                  <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    Dive deep into comprehensive data-driven findings and strategic recommendations that will transform your venue operations
+                  </p>
+                </div>
+
+                <!-- Chapter Navigation Grid -->
+                <div class="pulse-toc-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
+                  
+                  <!-- Chapter 1 - Executive Summary -->
+                  <div class="toc-card group relative" data-chapter="1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start gap-5 mb-4">
+                      <div class="flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                          <span class="relative z-10">01</span>
+                        </div>
+                      </div>
+                      <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">Executive Summary</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">Key findings and strategic insights from the 2025 venue industry landscape</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Progress indicator -->
+                    <div class="flex items-center justify-between mt-auto">
+                      <div class="flex items-center gap-2 text-sm text-indigo-600 font-medium">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>5 min read</span>
+                      </div>
+                      <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Chapter 2 - Market Trends -->
+                  <div class="toc-card group relative" data-chapter="2" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start gap-5 mb-4">
+                      <div class="flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                          <span class="relative z-10">02</span>
+                        </div>
+                      </div>
+                      <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">Market Trends & Growth</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">Analysis of emerging trends, growth patterns, and market opportunities</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Progress indicator -->
+                    <div class="flex items-center justify-between mt-auto">
+                      <div class="flex items-center gap-2 text-sm text-purple-600 font-medium">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>8 min read</span>
+                      </div>
+                      <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Chapter 3 - Technology Adoption -->
+                  <div class="toc-card group relative" data-chapter="3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start gap-5 mb-4">
+                      <div class="flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                          <span class="relative z-10">03</span>
+                        </div>
+                      </div>
+                      <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-slate-800 mb-3">Technology Adoption</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">Digital transformation trends and technology implementation strategies</p>
+                      </div>
+                    </div>
+                    
+                    <!-- Progress indicator -->
+                    <div class="flex items-center justify-between mt-auto">
+                      <div class="flex items-center gap-2 text-sm text-blue-600 font-medium">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>12 min read</span>
+                      </div>
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+
+                <!-- Download CTA -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="800">
+                  <div class="relative inline-block">
+                    <a href="#download" class="relative inline-flex items-center gap-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white px-10 py-5 rounded-full font-bold text-lg shadow-2xl hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 transform hover:-translate-y-2 hover:shadow-indigo-500/25 transition-all duration-500 group overflow-hidden">
+                      
+                      <div class="relative z-10 flex items-center gap-4">
+                        <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                        </div>
+                        <span class="text-xl">Download Full Report</span>
+                        <div class="w-2 h-2 bg-white rounded-full animate-bounce"></div>
+                      </div>
+                    </a>
+                  </div>
+                  
+                  <p class="text-slate-600 mt-6 text-lg">Free access • No email required • Instant download</p>
+                </div>
+              </div>
+            </section>
+          {% end_module_attribute %}
+        {% end_dnd_module %}
+      {% end_dnd_row %}
+    {% end_dnd_column %}
+  {% end_dnd_section %}
+
+{% end_dnd_area %}
+
+<!-- Pulse Report Enhanced JavaScript -->
+<script src="{{ get_asset_url('../js/pulse-report.js') }}"></script>
+
+{% endblock body %}

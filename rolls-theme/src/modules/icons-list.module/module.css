@@ -1,0 +1,9 @@
+.icons-list-link{
+  svg{transition: all .35s;}
+
+  &:hover{
+    svg{    transform: translateX(10px);}
+  }
+
+
+}

@@ -1,0 +1,105 @@
+{# Variables #}
+{% set service_title = module.title %}
+{% set service_footer = module.service_footer %}
+{% set service = module.service %}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+        .prices span {
+            display: none;
+        }
+        .prices span.-active {
+            display: inline;
+        }
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# Section Markup #}
+<section class="w-full md:max-w-[864px] mx-auto my-6 rounded-[32px] overflow-hidden box-shadow-onlight">
+    <div class="text-2xl pb-2 text-neutral-white bg-primary-50 px-6 pt-5 pb-4 font-extrabold">{{service_title}}</div>
+    <div class="text-primary-50">
+        {% for item in service %}
+            {% set display_link = item.display_link %}
+            {% set package = item.package %}
+            {% set price = item.prices %}
+
+            {% set href = item.link.url.href %}
+            {% set rel = [] %}
+            {% set url_type = item.link.url.type %}
+            {% set no_follow = item.link.no_follow %}
+            {% set new_tab = item.link.open_in_new_tab %}
+
+            {# Sets attributes used for the link field #}
+            {% if url_type is equalto 'EMAIL_ADDRESS' %}
+            {% set href = 'mailto:' + href %}
+            {% endif %}
+            {% if no_follow %}
+            {% do rel.append('nofollow') %}
+            {% endif %}
+            {% if new_tab %}
+            {% do rel.append('noopener') %}
+            {% endif %}
+            <dl class="flex flex-col sm:flex-row sm:items-center p-4 md:p-6 odd:bg-primary-10 even:bg-neutral-white">
+                <dt class="grow sm:pr-5 [&>ul>li]:list-disc [&>ul]:pl-5 [&>ul]:pt-3 max-w-[480px] relative after:sm:absolute after:sm:w-[1px] after:sm:h-[100%] after:sm:bg-primary-50 after:top-0 after:sm:right-0">{{ package }}</dt>
+                <dd class="prices grow font-semibold pt-3 sm:pt-0 sm:pl-5">
+                    {% if display_link%}
+                        <a 
+                        href="{{ href }}" 
+                        class="flex sm:items-start"
+                        {% if item.link.open_in_new_tab %}target="_blank"{% endif %}
+                        {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                        >
+                            Contact us for pricing <svg class="ml-2" xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="none"><path fill="#033180" d="M10 6.5 8.59 7.91l4.58 4.59-4.58 4.59L10 18.5l6-6-6-6Z"/></svg>
+                        </a>
+                    {% else %}
+                        <span class="-usd -active">${{ item.prices.usd  }}</span>
+                        <span class="-aud">${{ item.prices.aud }}</span>
+                        <span class="-gbp">£{{ item.prices.gbp }}</span>
+                        <span class="-eur">€{{ item.prices.eur }}</span>
+                        <span class="-ca">${{ item.prices.cad }}</span>
+                    {% endif%}
+                </dd>
+            </dl>
+        {% endfor %}
+    </div>
+    {% if service_footer %}
+        <div class="text-sm text-neutral-60 bg-widget-group px-5 py-4">{{service_footer}}</div>
+    {% endif %}
+</section>
+
+{% require_js %}
+    <script>
+    (function () {
+        // Function for executing code on document ready
+        function domReady(callback) {
+            if (['interactive', 'complete'].indexOf(document.readyState)) {
+                callback();
+            } else {
+                document.addEventListener('DOMContentLoaded', callback);
+            }
+        }
+
+        // Check the Start Currency Value
+        function setStartingCurrency(currency) {
+            const pricesEl = document.querySelectorAll('.prices');
+            pricesEl.forEach(pricesItemEl => {
+                const activeEl = pricesItemEl.querySelector('.-active');
+                if (activeEl) {
+                    activeEl.classList.remove('-active');
+                }
+                const currencyEl = pricesItemEl.querySelector(`.-${currency}`);
+                if (currencyEl) {
+                    currencyEl.classList.add('-active');
+                }
+            });
+        }
+
+        domReady(() => {
+            setStartingCurrency(startingCurrency);
+        });
+
+    })();
+    </script>
+{% end_require_js%}

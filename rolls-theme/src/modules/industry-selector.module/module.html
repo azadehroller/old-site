@@ -1,0 +1,181 @@
+{# Variables #}
+
+{# Content #}
+{# Header #}
+{% set eyebrow  = module.header.eyebrow %}
+{% set title  = module.header.title %}
+{% set text  = module.header.text %}
+
+{# Industries #}
+{% set industries = module.industries %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set heading_type = module.styles.heading_type %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set text_type = module.styles.text_type %}
+{% set eyebrow_type = module.styles.eyebrow_type %}
+{% set display_type = module.styles.display_type %}
+
+{% macro heading(tag, title, display_tag)%}
+<{{tag if tag else "h3"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {% if tag == 'h1'%}text-balance{%endif%}">{{title if title else "Implementation Services"}}</{{tag if tag else "h1"}}>
+{% endmacro%}
+
+
+{% macro eyebrow(tag, eyebrow_type)%}
+<{{tag || "div"}} class="text-secondary-50 uppercase font-extrabold {% if eyebrow_type %}small{% endif %}">{{ eyebrow || "TAILORED FOR YOUR INDUSTRY"}}</{{tag || "div"}}>
+{% endmacro%}
+
+{% require_css %}
+  <style>
+
+    .box-shadow-ondark-blue-10 {
+        box-shadow: var(--shadown-ondark-blue-10, 0px 8px 16px 0px rgba(1, 19, 50, 0.25), 0px 24px 40px 0px rgba(1, 19, 50, 0.50));
+
+        &:hover {
+            box-shadow: var(--shadown-ondark-blue-10, 0px 8px 16px 0px rgba(1, 19, 50, 0.25), 0px 24px 40px 0px rgba(1, 19, 50, 0.50));
+        }
+    }
+
+    .dropdown-wrapper-{{name}} { 
+        position: relative;
+        grid-template-areas: "select";
+        align-items: center;
+    } 
+
+    .dropdown-wrapper-{{name}}, .dropdown-wrapper-{{name}}:after {
+        grid-area: select;
+    }
+
+    .dropdown-wrapper-{{name}}:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        left: calc(100% - 60px);
+        transform: translateY(-50%);
+        width: 0.7em;
+        height: 0.4em;
+        background-color: var(--primary-50, #033180);
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        justify-self: end;
+    } 
+
+    #js-industryItemContainer_{{name}}.js-industryItemContainer {
+        cursor: pointer;
+        display: flex;
+        height: 4rem;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: 4rem;
+    }
+
+      @media (max-width: 767px) {
+        #js-industryItemContainer_{{name}}.js-industryItemContainer{
+          height: {{height_mob || 4 }}{{height_unit || rem}};
+          width: {{width_mob || 4 }}{{width_unit || rem}};
+        }
+      }
+      
+      #js-industryItemContainer_{{name}}.js-industryItemContainer {
+        width: 48px;
+        height: 48px;
+      }
+  </style>
+{% end_require_css %}
+
+<div id="industry-selector-{{name}}" class="mx-auto gap-5 {{ theme == 'light' ? "bg-primary-50 box-shadow-ondark-blue-10 flex flex-col lg:grid lg:grid-cols-3" : "bg-widget-industries box-shadow-onlight flex flex-col lg:p-6" }} rounded-[32px] py-6 px-6 mb-0 md:mb-4">
+    <header class="text-{{alignment|lower || "left"}} {{ theme == 'light' ? "text-neutral-white flex flex-col" : "text-primary-50" }} grid gap-4">
+        {% if eyebrow %}
+            {{ eyebrow(eyebrow_type, eyebrow) }}
+        {% endif %}
+        {{ heading(heading_type, title, display_type) }}
+        {% if text %}
+            <div class="text-{{text_type || 'S1'}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4">{{ text || "Select your industry and discover how ROLLER can help your business grow." }}</div>
+        {% endif %}
+        {% if theme == 'light' %}
+            <img src='{{image.src || get_asset_url("../../images/industry-selector-graph.svg")}}' alt="{{title}}" width="368" height="368" class="hidden lg:block mt-4">
+        {% endif %}
+    </header>
+    <div class="hidden md:flex flex-wrap gap-3 ms-auto me-auto {{theme}} {{ theme == 'light' ? "col-span-2" : null }}">
+    {% for industry in industries %}
+            {% set title = industry.title %}
+            {% set icon = industry.icon %}
+            {% set animation = industry.animation_file %}
+            {% set href = industry.link.url.href %}
+
+            <a href="{{href}}" class="js-industryItemsLink flex items-center justify-center gap-2 mo-card-features {{ theme == 'light' ? "text-neutral-white hover:text-primary-50" : "text-primary-50" }} font-semibold ease-in transition duration-200 hover:bg-neutral-white hover:shadow-3xl rounded-2xl">
+                {% if animation %}
+                 <div id="js-industryItemContainer_{{name}}" class="js-industryItemContainer" data-lottie={{animation}}></div>
+                    {# External assets #}
+                    {{ require_js('https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js', "footer") }} 
+                {# Javascript #}
+                {% else %}
+                <span>{{icon}}</span>
+                {% endif %}
+                <span>{{title}}</span>
+            </a>
+    {% endfor%}
+    </div>
+    <div class="grid gap-3 md:hidden dropdown-wrapper-{{name}} ">
+        <select id="js-ind-dropdown-{{name}}" class="bg-neutral-white box-shadow-onlight-navy-40 text-primary-50 font-semibold text-center rounded-[61.25rem] py-2 px-4 w-full appearance-none cursor-pointer">
+            <option selected>Select your industry</option>
+            {% for industry in industries %}
+                {% set title = industry.title %}
+                {% set icon = industry.icon %}
+                {% set href = industry.link.url.href %}
+                <option value="{{href}}">{{title}}</option>
+            {% endfor%}
+        </select>
+        <button id="industrySelectorBTN" class="relative items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold transition ease-in-out duration-300 bg-secondary-50 hover:bg-secondary-70 rounded-3xl py-2 px-4 text-neutral-white">Discover</button>
+    </div>
+</div>
+
+{# JavaScript #}
+{% require_js position="footer" defer="true" %}
+    <script>
+        const industrySelectorBTN = document.getElementById("industrySelectorBTN");
+
+        const handleDropdownClick = () => {
+            const selectedValue = document.getElementById("js-ind-dropdown-{{name}}").value;
+
+            if (selectedValue) {
+                window.location.assign(selectedValue);
+            }
+        };
+
+        industrySelectorBTN.addEventListener("click", handleDropdownClick);
+
+        const industryItems = document.querySelectorAll(".js-industryItemsLink");
+
+        industryItems.forEach(function(industryItem) {
+            const industryItemContainer = industryItem.querySelector(".js-industryItemContainer");
+
+            if (industryItemContainer) {
+                const animation = lottie.loadAnimation({
+                    container: industryItemContainer,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: false, 
+                    path: industryItemContainer.getAttribute('data-lottie'),
+                });
+                
+                industryItemContainer.animation = animation;
+
+                industryItem.addEventListener('mouseenter', function() {
+                    industryItemContainer.animation.play();
+                    industryItemContainer.classList.add('disabled'); 
+                });
+
+                industryItem.addEventListener('mouseleave', function() {
+                    industryItemContainer.animation.stop();
+                });
+            }
+        });
+
+
+
+    </script>
+
+{% end_require_js %}

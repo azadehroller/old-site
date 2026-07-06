@@ -1,0 +1,69 @@
+[ {
+  "id" : "4dcde143-45ca-4793-5236-d69448b7fafc",
+  "name" : "top_main_heading",
+  "label" : "Top Main heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "main_heading",
+  "name" : "main_heading",
+  "label" : "Bottom Main Heading",
+  "help_text" : "Main heading text (e.g., 'Product Launch')",
+  "required" : true,
+  "locked" : false,
+  "display" : "text",
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Product Launch"
+}, {
+  "id" : "date_text",
+  "name" : "date_text",
+  "label" : "Date Text (Primary)",
+  "help_text" : "Primary date text (e.g., 'November')",
+  "required" : true,
+  "locked" : false,
+  "display" : "text",
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "November"
+}, {
+  "id" : "date_secondary",
+  "name" : "date_secondary",
+  "label" : "Date Text (Secondary)",
+  "help_text" : "Secondary date text (e.g., '2025')",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "2025"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "help_text" : "Main description text content",
+  "required" : false,
+  "locked" : false,
+  "display" : "textarea",
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>This November, intelligence becomes part of your everyday with three new capabilities built to lighten your workload. ROLLER iQ is your AI-powered assistant that turns venue data into instant answers. Price Rules automates pricing to help you fill more sessions, effortlessly. And Channel Management helps you expand your audience through seamless connections with major booking platforms.</p><p>Watch the video to see ROLLER's CEO and Founder, Luke Finn, talk about why this launch is so special to us and what it means for the attractions community.</p>"
+}, {
+  "id" : "high_priority_loading",
+  "name" : "high_priority_loading",
+  "label" : "High Priority Loading",
+  "help_text" : "Enable high priority loading for above-the-fold content (recommended for hero sections)",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+} ]

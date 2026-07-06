@@ -1,0 +1,39 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macros %}
+
+{# Variables #}
+{# Content #}
+{% set card_segmentation = module.card_segmentation %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+
+<dl id="cards-events-{{name}}" class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 gap-5 py-2">
+    {% for card_segmentation in card_segmentation %}
+        {% set card_segmentation_data =  {
+            'thumb': card_segmentation.card_thumb,
+            'title': card_segmentation.card_title,
+            'content': card_segmentation.card_content,
+            'label': card_segmentation.card_link_label,
+            'href': card_segmentation.card_link.url.href,
+            'url_type': card_segmentation.card_link.url.type,
+            'no_follow': card_segmentation.card_link.no_follow,
+            'new_tab': card_segmentation.card_link.open_in_new_tab,
+            'loading': card_segmentation.card_thumb.loading
+        } %}
+        <div class="flex flex-col gap-3 max-w-full {{ macros.setTextColor(theme, 'bg-neutral-white', 'bg-primary-60', 'bg-gx-80') }} w-full h-full box-shadow-onlight-navy-40 rounded-[32px] overflow-hidden">
+            <div class="w-full [&>img]:w-full [&>img]:object-cover">{{ macros.image(card_segmentation.card_thumb) }}</div>
+            <div class="flex flex-col gap-2 py-2 px-[32px] md:px-6 {{ macros.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}">
+                <span class="text-2xl font-semibold">{{ card_segmentation_data.title }}</br></span>
+                <span>{{card_segmentation_data.content}}</span>
+            </div>
+            <div class="flex flex-col md:flex-row wrap px-[32px] md:px-6 gap-3 mt-auto pb-5">
+                {% if card_segmentation_data.href %}
+                    <a class="{{ macros.buttons_settings(bg_kind || 'ghost') }} relative inline-flex items-center gap-2 group" href="{{ card_segmentation_data.href }}">
+                    <span class="{{ macros.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}">{{card_segmentation_data.label}}</span>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" class="transition-transform ease-out duration-300 group-hover:translate-x-1"><path fill="{{ macros.setTextColor(theme, '#033180', '#fff', '#3C0091') }}" d="m6.667 4-.94.94L8.78 8l-3.053 3.06.94.94 4-4-4-4Z"/></svg></span></a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</dl>

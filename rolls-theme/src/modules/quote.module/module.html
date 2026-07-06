@@ -1,0 +1,109 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as textColor %}
+{% import "../../templates/macros/macros.html" as thumbnail %}
+
+{# Variables #}
+{% set text = module.quote_settings.content.quote_text %}
+{% set author = module.quote_settings.content.quote_author %}
+{% set title = module.quote_settings.content.quote_title %}
+{% set customer_story = module.quote_settings.customer_story %}
+{% set link = module.quote_settings.content.customer_story_link %}
+
+{% set href = link.url.href %}
+{% if link.url.type == "EMAIL_ADDRESS" %}
+    {% set href = "mailto:" + href %}
+{% endif %}
+{% set rel = [] %}
+{% if link.no_follow %}
+    {% do rel.append("nofollow") %}
+{% endif %}
+{% if link.open_in_new_tab %}
+    {% do rel.append("noopener") %}
+{% endif %}
+{% set link_label = module.quote_settings.content.link_label %}
+{% set image = module.quote_settings.image %}
+{% set image_options = module.quote_settings.image.image_options %}
+{% set avatar = module.quote_settings.image.quote_avatar %}
+{% set logo = module.quote_settings.image.quote_logo %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+
+{# Style Variant #}
+{% set variant = module.style_variant.style %}
+{% set quote_weight  = module.styles.quote_bold %}
+
+{# TODO: Revisit the design logic,  way to many if statements #}
+
+{# Section Markup #}
+
+<section class="quote-module text-left my-2 md:my-3">
+    <div class="quote-module-grid relative before:absolute before:w-[2px] before:h-[100%] before:{{ textColor.setTextColor(theme, 'bg-secondary-50', 'bg-secondary-50', 'bg-gx-90') }} before:top-0 before:left-0 pl-3">
+        {% if variant == 'extrabold' %}  
+            <div class="flex items-center gap-3 {% if not (avatar.src or logo.src) %}hidden{% endif %}">
+                {% if image_options || "avatar" %}
+                    {% if image_options == 'avatar' %}
+                        <figure class="quote-avatar-container rounded-full overflow-hidden">
+                            {% if avatar.src %}
+                                {{thumbnail.image(avatar, "loading='lazy' class='object-cover w-full h-full' width='72' height='72'")}}
+                            {% endif %}
+                        </figure>
+                    {% elif image_options == 'logo' %}
+                        <figure class="quote-logo-container rounded-lg overflow-hidden">
+                            {% if logo.src %}
+                                {{thumbnail.image(logo, "loading='lazy' class='object-contain w-full h-full' width='148' height='80'")}}
+                            {% endif %}
+                        </figure>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="flex flex-col gap-3">
+            <div class="quote-text-container font-{{ variant }} {{ textColor.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }} {% if variant == 'extrabold' %}text-2xl leading-7{% else %}text-base leading-6{% endif %} {% if quote_weight %}  make-bold {% endif %}">{{text}}</div>
+            {% if author %}
+                <div class="{{ textColor.setTextColor(theme, 'text-primary-50', 'text-neutral-white','text-gx-80') }} {% if variant == 'regular' %}flex flex-row gap-3 items-center{% endif %}">
+                    {% if variant == 'regular' %}
+                        <div class="{% if avatar.src or logo.src %}block{% else %}hidden{% endif %}">
+                            {% if image_options || "avatar" %}
+                                {% if image_options == 'avatar' %}
+                                    <figure class="quote-avatar-container rounded-full overflow-hidden">
+                                        {% if avatar.src %}
+                                            {{thumbnail.image(avatar, "loading='lazy' class='object-cover w-full h-full' width='72' height='72'")}}
+                                        {% endif %}
+                                    </figure>
+                                {% elif image_options == 'logo' %}
+                                    <figure class="quote-logo-container rounded-lg overflow-hidden">
+                                        {% if logo.src %}
+                                            {{thumbnail.image(logo, "loading='lazy' class='object-contain w-full h-full' width='148' height='80'")}}
+                                        {% endif %}
+                                    </figure>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="quote-author-container min-w-0 flex-1">
+                        <div class="text-base font-semibold block">{{ author }}</div>
+                        {% if title %}
+                            <div class="text-base font-normal">{{ title }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        {% if href %}
+            <div class="quote-link-container">
+                <a href="{{ href || "https://www.roller.software/" }}" class="mt-auto flex items-center gap-2 font-semibold {{ textColor.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}"
+                    {% if link.open_in_new_tab %}target="_blank"{% endif %}
+                    {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                    >
+                    <span>{{link_label || "Link Label here"}}</span>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none">
+                    <rect width="40" height="40" fill="{{ textColor.setTextColor(theme, '#ff290c', '#ff290c', '#A554FF') }}" rx="20"/>
+                    <path fill="#fff" d="m20 12-1.41 1.41L24.17 19H12v2h12.17l-5.58 5.59L20 28l8-8-8-8Z"/>
+                    </svg>
+                    </span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>

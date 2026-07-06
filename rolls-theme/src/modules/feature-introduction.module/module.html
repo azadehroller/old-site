@@ -1,0 +1,189 @@
+{# Variables #}
+{% set heading_style = module.heading_style %}
+{% set heading_text = module.heading_text %}
+{% set desktop_heading = module.h2_text %}
+{% set mobile_heading = module.h2_mobile %}
+{% set icon_type = module.icon_type %}
+{% set tag = module.tag %}
+{% set description_text = module.description_text %}
+{% set make_centred = module.style.make_centred %}
+
+{% set button_1 = module.button_1 %}
+{% set button_2 = module.button_2 %}
+
+{# Set up button 1 attributes #}
+{% set btn1_href = button_1.link.url.href %}
+{% set btn1_rel = [] %}
+{% set btn1_url_type = button_1.link.url.type %}
+{% set btn1_no_follow = button_1.link.no_follow %}
+{% set btn1_new_tab = button_1.link.open_in_new_tab %}
+
+{% if btn1_url_type is equalto 'EMAIL_ADDRESS' %}
+  {% set btn1_href = 'mailto:' + btn1_href %}
+{% endif %}
+{% if btn1_no_follow %}
+  {% do btn1_rel.append('nofollow') %}
+{% endif %}
+{% if btn1_new_tab %}
+  {% do btn1_rel.append('noopener') %}
+{% endif %}
+
+{# Set up button 2 attributes #}
+{% set btn2_href = button_2.link.url.href %}
+{% set btn2_rel = [] %}
+{% set btn2_url_type = button_2.link.url.type %}
+{% set btn2_no_follow = button_2.link.no_follow %}
+{% set btn2_new_tab = button_2.link.open_in_new_tab %}
+
+{% if btn2_url_type is equalto 'EMAIL_ADDRESS' %}
+  {% set btn2_href = 'mailto:' + btn2_href %}
+{% endif %}
+{% if btn2_no_follow %}
+  {% do btn2_rel.append('nofollow') %}
+{% endif %}
+{% if btn2_new_tab %}
+  {% do btn2_rel.append('noopener') %}
+{% endif %}
+
+{# Module styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      .feature-heading {
+        {% if heading_style == 'gradient' %}
+         
+            {# animation: gradient-change 7s linear infinite alternate; #}
+            background: linear-gradient(to right in oklch,
+            var(--＠gradient-color-1) 0%,
+            var(--＠gradient-color-2) 22%,
+            var(--＠gradient-color-3) 42%,
+            var(--＠gradient-color-4) 82%,
+            var(--＠gradient-color-5) 100%,
+            var(--＠gradient-color-6) 104%
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        
+            /* modern browser version */
+            background-clip: text;
+            color: transparent;
+            {# background: linear-gradient(
+                    to right in oklch,
+                    var(--＠gradient-color-1) 0%,
+                    var(--＠gradient-color-2) 30%,
+                    var(--＠gradient-color-3) 50%,
+                    var(--＠gradient-color-4) 60%,
+                    var(--＠gradient-color-5) 90%,
+                    var(--＠gradient-color-6) 100%
+                  );
+                  background-size: 200% 100%;
+                  background-position: 0% 50%;
+
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                  background-clip: text;
+                  color: transparent; #}
+                    {# background-image: #}
+                    {# radial-gradient(ellipse 200% 100% at 100% 50%, var(--＠gradient-cyan) 0%, var(--＠gradient-cyan-transparent) 22.4%),
+                    radial-gradient(ellipse 200% 100% at 0% 50%, var(--＠gradient-red) 0%, var(--＠gradient-purple) 22%, var(--＠gradient-blue) 45%, var(--＠gradient-blue) 100%); #}
+                {# linear-gradient(90deg,rgba(255, 41, 12, 1) 0%, rgba(136, 57, 245, 1) 64%, rgba(9, 96, 246, 1) 50%, rgba(9, 96, 246, 1) 57%, rgba(56, 246, 255, 1) 68%, rgba(56, 246, 255, 1) 76%);
+                  -webkit-background-clip: text; #}
+
+
+        {% else %}
+          color: #0960F6;
+        {% endif %}
+      }
+
+   .feature-h2 .feature-title-text::after {
+        {% if icon_type and not tag %}
+          content: '';
+          display: inline-block;
+          position: absolute;
+          width: 114px;
+          height: 20px;
+          vertical-align: top;
+          top: 0;
+          {% if icon_type == 'save-time' %}
+            background-image: url('{{ get_asset_url("../../images/save-time.svg") }}');
+          {% elif icon_type == 'boost-revenue' %}
+            background-image: url('{{ get_asset_url("../../images/boost-revenue.svg") }}');
+          {% endif %}
+          background-size: 114px 20px;
+          background-repeat: no-repeat;
+          background-position: center;
+          margin-left: 8px;
+        {% else %}
+          content: none;
+        {% endif %}
+      }
+{# 
+      @media (max-width: 767px) {
+        .feature-h2::after {
+          width: 70px;
+          height: 16px;
+        }
+      } #}
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# Module markup #}
+<div class="feature-introduction-wrapper flex flex-col gap-4  justify-items-center {% if make_centred %} sm:items-center  sm:text-center max-w-[847px] mx-auto{% endif %} pb-20  md:px-0">
+  {# Heading #}
+  {% if heading_text %}
+    <strong  class="feature-heading">
+      {{ heading_text }}
+    </strong>
+  {% endif %}
+
+  {# H2 with icon #}
+  {% if desktop_heading %}
+    <h2 class="feature-h2 flex items-start grid-cols-[1fr_114px] {% if make_centred %}sm:justify-center{% endif %} gap-2  text-4xl md:text-5xl font-extrabold leading-[40px] md:leading-[60px] tracking-tight text-roller-blue">
+{% if desktop_heading and mobile_heading %}      
+<span class="relative feature-title-text feature-title-text-desktop ">  {{ desktop_heading }}      {% if tag %}<span class="feature-tag">   {{ tag }}</span> {% endif %} </span>
+<span class="relative feature-title-text feature-title-text-mobile">  {{ mobile_heading }}      {% if tag %}<span class="feature-tag">   {{ tag }}</span> {% endif %} </span>
+  {% else %}
+<span class="relative feature-title-text ">  {{ desktop_heading }}      {% if tag %}<span class="feature-tag">   {{ tag }}</span> {% endif %} </span>
+  {% endif %}
+
+       
+    </h2>
+  {% endif %}
+
+  {# Description #}
+  {% if description_text %}
+    <div class="feature-text text-roller-blue">
+      {{ description_text }}
+    </div>
+  {% endif %}
+
+  {# Buttons #}
+  {% if button_1.enabled or button_2.enabled %}
+  <div class="grid w-full text-center sm:flex {% if button_1.enabled and button_2.enabled %}{% endif %} gap-3 items-center sm:justify-center feature-buttons">
+    {# Button 1 - Primary style #}
+    {% if button_1.enabled and button_1.text %}
+      <a
+        href="{{ btn1_href }}"
+        class="feature-button   flex bg-[var(--btn-primary-bg)] hover:bg-[var(--btn-primary-hover)] text-neutral-white font-semibold text-base px-4 py-2 rounded-full items-center justify-center justify-self-center {% if button_2.enabled %} sm:justify-self-end{% endif %}"
+        {% if btn1_new_tab %}target="_blank"{% endif %}
+        {% if btn1_rel %}rel="{{ btn1_rel|join(" ") }}"{% endif %}
+      >
+        {{ button_1.text }}
+      </a>
+    {% endif %}
+
+    {# Button 2 - Secondary style #}
+    {% if button_2.enabled and button_2.text %}
+      <a
+        href="{{ btn2_href }}"
+        class="feature-button  flex border border-roller-blue text-roller-blue hover:bg-[var(--btn-primary-hover)] hover:text-neutral-white hover:border-[var(--btn-primary-hover)] font-semibold text-base px-4 py-2 rounded-full items-center justify-center justify-self-center {% if button_1.enabled %} sm:justify-self-start{% endif %}"
+        {% if btn2_new_tab %}target="_blank"{% endif %}
+        {% if btn2_rel %}rel="{{ btn2_rel|join(" ") }}"{% endif %}
+      >
+        {{ button_2.text }}
+      </a>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>

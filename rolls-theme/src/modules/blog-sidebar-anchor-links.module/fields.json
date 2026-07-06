@@ -1,0 +1,39 @@
+[ {
+  "id" : "anchor_items",
+  "name" : "anchor_items",
+  "label" : "Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "6b7f63b5-d1d5-1f69-7b20-fb7f4d349e3c",
+    "name" : "text_field",
+    "label" : "Anchor ID",
+    "inline_help_text" : "Field required, needs to match the targeted anchor ID from the content.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "anchor_items.label_field",
+    "name" : "label_field",
+    "label" : "Label",
+    "inline_help_text" : "Label is the content of the link that will be shown in the sidebar.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

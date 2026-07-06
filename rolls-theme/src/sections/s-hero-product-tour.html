@@ -1,0 +1,87 @@
+<!--
+  templateType: section
+  label: Hero Product Tour
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/hero-product-tour.png
+  description: "Two columns section product tour, including eyebrow, title, description and image with a CTA."
+-->
+
+{% dnd_section
+    vertical_alignment="MIDDLE"
+    class="s-layout s-hero-product-tour overflow-x-hidden relative"
+%}
+    {# Text #}
+    {% dnd_column 
+        offset=6,
+        width=6,
+        vertical_alignment="CENTER"
+        padding={
+            "default": {
+                "top": "6rem",
+                "bottom": "6rem"
+            },
+            "mobile": {
+                "top": "3rem",
+                "bottom": "3rem",
+            }
+        },
+        extra_classes={{'flex flex-col gap-4'}}
+    }
+    %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+
+
+        {# Button Stack #}
+        {% dnd_row %}
+        {% dnd_module
+            path="../modules/button-stack",
+            extra_classes="py-4 sm:py-6",
+            label="Modules: Button Stack",
+            extra_classes={{"my-2 md:my-3 flex justify-start"}}
+            butto_settings={
+                "button_text": "Learn more",
+            }
+        %}
+        {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+    {# Image #}
+    {% dnd_column 
+            offset=0,
+            width=6,
+        %}
+        {% dnd_row 
+        %}
+        {% dnd_module path="@hubspot/linked_image"
+            horizontal_alignment="CENTER",
+            img={
+            "src": context.img_url || get_asset_url("../images/grayscale-mountain.png"),
+            "size_type": "auto",
+            },
+            label="Image",
+            extra_classes={{'md:w-[55vw] relative md:min-w-[800px]'}}
+        %}
+        {% end_dnd_module %}
+
+        {% end_dnd_row %}
+        {# Button #}
+        {% dnd_row %}
+        {% dnd_module
+            path="../modules/button",
+            extra_classes="",
+            label="Modules: Button",
+            butto_settings={
+                "button_text": "Take a tour",
+            },
+            extra_classes={{'absolute inset-y-2/4 left-1/2 translate-y-[-50%] translate-x-[-50%] hidden md:block'}}
+        %}
+        {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

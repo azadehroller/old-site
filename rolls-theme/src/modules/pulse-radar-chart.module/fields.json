@@ -1,0 +1,154 @@
+[ {
+  "id" : "chart_title",
+  "name" : "chart_title",
+  "label" : "Chart Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Performance Comparison"
+}, {
+  "id" : "chart_icon",
+  "name" : "chart_icon",
+  "label" : "Chart Icon",
+  "required" : false,
+  "locked" : false,
+  "icon_set" : "fontawesome-5.0.10",
+  "type" : "icon",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "axes",
+  "name" : "axes",
+  "label" : "Chart Axes",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 3,
+    "max" : 8,
+    "sorting_label_field" : null,
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "axis_label",
+    "name" : "axis_label",
+    "label" : "Axis Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Metric"
+  }, {
+    "id" : "max_value",
+    "name" : "max_value",
+    "label" : "Max Value",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 3,
+    "max" : 10,
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 5
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "axis_label" : "Performance",
+    "max_value" : 5
+  }, {
+    "axis_label" : "Reliability",
+    "max_value" : 5
+  }, {
+    "axis_label" : "Scalability",
+    "max_value" : 5
+  }, {
+    "axis_label" : "User Experience",
+    "max_value" : 5
+  }, {
+    "axis_label" : "Cost Efficiency",
+    "max_value" : 5
+  }, {
+    "axis_label" : "Security",
+    "max_value" : 5
+  } ]
+}, {
+  "id" : "datasets",
+  "name" : "datasets",
+  "label" : "Data Series",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 4,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "series_label",
+    "name" : "series_label",
+    "label" : "Series Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Series"
+  }, {
+    "id" : "series_color",
+    "name" : "series_color",
+    "label" : "Series Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#8b5cf6"
+    }
+  }, {
+    "id" : "values",
+    "name" : "values",
+    "label" : "Data Values (comma-separated)",
+    "help_text" : "Enter values separated by commas, e.g: 4,3,2,4,3,5",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "4,3,2,4,3,5"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "series_label" : "Current Solution",
+    "series_color" : "#7c3aed",
+    "values" : "4,3,2,4,3,5"
+  }, {
+    "series_label" : "Competitor A",
+    "series_color" : "#a855f7",
+    "values" : "5,4,5,3,2,3"
+  }, {
+    "series_label" : "Competitor B",
+    "series_color" : "#e879f9",
+    "values" : "3,5,4,5,4,4"
+  } ]
+}, {
+  "id" : "show_legend",
+  "name" : "show_legend",
+  "label" : "Show Legend",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+} ]

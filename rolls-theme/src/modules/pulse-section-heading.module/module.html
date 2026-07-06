@@ -1,0 +1,49 @@
+<div class="fade-in-up visible">
+  <h2 class="text-4xl font-bold flex items-center text-neutral-white">
+    {% if module.section_icon.name %}
+      <span class="inline-flex items-center justify-center w-12 h-12 rounded-lg mr-3 pulse-icon-container" style="background-color: rgba(96, 63, 245, 0.5);">
+        {% icon name="{{ module.section_icon.name }}" style="{{ module.section_icon.type }}" %}
+      </span>
+    {% endif %}
+    {% if module.section_number %}
+      <span  calss="text-neutral-white">{{ module.section_number }}.</span>
+    {% endif %}
+    {{ module.section_title }}
+  </h2>
+  {% if module.section_subtitle %}
+    <p class="mt-2 text-neutral-white">{{ module.section_subtitle }}</p>
+  {% endif %}
+</div>
+
+<style>
+.pulse-icon-container svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #d8b4fe;
+}
+</style>
+
+<script>
+(function() {
+  const moduleId = 'pulse-section-heading-{{ name }}';
+  if (window[moduleId + '_initialized']) return;
+  window[moduleId + '_initialized'] = true;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Observer for animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Observe fade-in elements
+    document.querySelectorAll('.pulse-section-heading.fade-in-up').forEach(el => {
+      observer.observe(el);
+    });
+  });
+})();
+</script>

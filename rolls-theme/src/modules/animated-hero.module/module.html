@@ -1,0 +1,28 @@
+<figure class="animated-hero-module grid grid-cols-1 md:grid-cols-hero gap-5 md:gap-12 w-full">
+  {% if module.content.text_loops %}
+    <figcaption>
+      <h1 class="grid justify-items-start gap-2 md:gap-4 justify-around">
+        {% for text_loop in module.content.text_loops %}
+          {% set loop_index = loop.index0 %}
+          {% if loop_index == 0 %}
+            <span class="animated-hero-text animated-hero-text-left-1 opacity-0 block text-left">{{ text_loop.text }}</span>
+          {% elif loop_index == 1 %}
+            <span class="animated-hero-text animated-hero-text-right-1 opacity-0 block text-left ml-100px md:ml-200px">{{ text_loop.text }}</span>
+          {% elif loop_index == 2 %}
+            <span class="animated-hero-text animated-hero-text-left-2 opacity-0 block text-left ml-50px">{{ text_loop.text }}</span>
+          {% elif loop_index == 3 %}
+            <span class="animated-hero-text animated-hero-text-right-2 opacity-0 block text-left ml-100px">{{ text_loop.text }}</span>
+          {% else %}
+            <span class="animated-hero-text animated-hero-text-left-1 opacity-0 block text-left">{{ text_loop.text }}</span>
+          {% endif %}
+        {% endfor %}
+      </h1>
+    </figcaption>
+  {% endif %}
+  {% if module.content.image.src %}
+    <div>
+      <img src="{{ module.content.image.src }}" alt="{{ module.content.image.alt }}" loading="{{ module.content.image.loading }}" {% if module.content.image.loading == 'eager' %}fetchpriority="high"{% endif %} class="animated-hero-image opacity-0 w-full h-auto object-cover" />
+    </div>
+  {% endif %}
+</figure>
+

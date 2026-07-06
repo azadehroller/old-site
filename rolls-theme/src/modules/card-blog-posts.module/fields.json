@@ -1,0 +1,130 @@
+[ {
+  "id" : "214ce033-1343-bb43-3106-60f5cc89cb4c",
+  "name" : "card_blog_posts",
+  "label" : "Card Blog Posts",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 3,
+    "max" : null,
+    "sorting_label_field" : "429ed9df-31a3-1c32-8912-c0420c39bca2",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "c54116e0-9f1b-7dc5-8ea4-c32ebb5174d6",
+    "name" : "card_blog_post_image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "ca81efcb-08ed-3efa-6c8e-7e8d0c0d0379",
+    "name" : "card_blog_post_title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Blog name lorem ipsum dolairs iae meoaslip"
+  }, {
+    "id" : "b396f598-0bb0-fbae-6278-030fdf939941",
+    "name" : "card_blog_post_link_label",
+    "label" : "Link Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Discover more"
+  }, {
+    "id" : "429ed9df-31a3-1c32-8912-c0420c39bca2",
+    "name" : "card_blog_post_link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : 110541796250,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_blog_post_title" : "Blog name lorem ipsum dolairs iae meoaslip",
+    "card_blog_post_link_label" : "Discover more",
+    "card_blog_post_link" : {
+      "url" : {
+        "content_id" : 110541796250,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    },
+    "card_blog_post_image" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }, {
+    "card_blog_post_title" : "Blog name lorem ipsum dolairs iae meoaslip",
+    "card_blog_post_link_label" : "Discover more",
+    "card_blog_post_link" : {
+      "url" : {
+        "content_id" : 110541796250,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    },
+    "card_blog_post_image" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }, {
+    "card_blog_post_title" : "Blog name lorem ipsum dolairs iae meoaslip",
+    "card_blog_post_link_label" : "Discover more",
+    "card_blog_post_link" : {
+      "url" : {
+        "content_id" : 110541796250,
+        "href" : null,
+        "type" : "CONTENT"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    },
+    "card_blog_post_image" : {
+      "size_type" : "auto",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  } ]
+} ]

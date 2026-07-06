@@ -1,0 +1,84 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: Solution Individual
+    screenshotPath: ../images/template-previews/industry-individual-template.png
+-->
+{% extends "./layouts/base.html" %}
+{% block head %}
+  {{ super() }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "{{ canonical_url }}",
+    "url": "{{ canonical_url }}",
+    "name": "{{ page_title }}",
+    "description": "{{ page_meta.description }}",
+    "isPartOf": {
+      "@id": "https://www.roller.software/#website"
+    },
+    "potentialAction": {
+      "@type": "Action",
+      "name": "Get Started with ROLLER",
+      "target": "https://www.roller.software/get-started/"
+    }
+  }
+  </script>
+{% endblock head %}
+
+{% block body %}
+    {% dnd_area "dnd_area"
+        label="Main section",
+        class="body-container body-container--industry-individual"
+    %}
+        {% include_dnd_partial path="../sections/s-case-study.html" 
+            context={
+                'padding': '3rem',
+                'heading_type': 'h2',
+                "text_type": 'lg',
+                "eyebrow_type": 'h1',
+            }
+        %}
+        
+        {% include_dnd_partial path="../sections/s-logo-set.html"
+            context={
+                'padding': '0',
+            }
+        %}
+
+        {% include_dnd_partial path="../sections/s-quote-two-columns.html" 
+            context={
+                'heading_type': 'h3',
+                'size': 'small',
+            }
+        %}
+
+        {% include_dnd_partial path="../sections/s-4-bullet-content.html" 
+            context={
+                'background_color': '#EBF2FE',
+                'heading_type': 'h3',
+                'text_type': 'base',
+                'title': 'Diam aliquam ut ullamcorper',
+                'content': 'Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus.',
+                "link": 'https://www.roller.software/',
+                'link_label': 'Lorem Ipsum'
+            }
+        %}
+
+        {% include_dnd_partial path="../sections/s-comparison.html" 
+        %}
+
+        {% include_dnd_partial path="../sections/s-info-image-right.html"
+            context={
+                'background_color': '#F5F8FF',
+                'heading_type': 'h3',
+                'text_type': 'base',
+                'button_styles': 'primary',
+                'button_link': 'https://www.roller.software/',
+                'btn_label': 'Button'
+            }
+        %}
+        
+    {% end_dnd_area %}
+{% endblock body %}

@@ -1,0 +1,173 @@
+[ {
+  "id" : "3d4042b2-3f1b-4ab6-1fee-cff3faad4178",
+  "name" : "booth_agenda",
+  "label" : "Booth Agenda",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "af99f6a5-7190-cd63-d605-81c5019e6f07",
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "69eb96ca-99f8-08f1-b63d-e93dd6d913f9",
+    "name" : "booth_agenda_date",
+    "label" : "Booth Agenda Date",
+    "required" : false,
+    "locked" : false,
+    "type" : "date",
+    "display_width" : null,
+    "default" : 1710907200000
+  }, {
+    "id" : "40f9e628-d5ec-dddf-7895-2a8810809718",
+    "name" : "booth_agenda_items",
+    "label" : "Booth Agenda Items",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : "af99f6a5-7190-cd63-d605-81c5019e6f07",
+      "default" : 5
+    },
+    "children" : [ {
+      "id" : "13ff28ff-8c4a-7328-0b03-aab003243ca0",
+      "name" : "booth_agenda_time",
+      "label" : "Booth Agenda Time",
+      "required" : false,
+      "locked" : false,
+      "step" : 15,
+      "type" : "datetime",
+      "display_width" : null,
+      "default" : 1710928800000
+    }, {
+      "id" : "af99f6a5-7190-cd63-d605-81c5019e6f07",
+      "name" : "booth_agenda_title",
+      "label" : "Booth Agenda Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Agenda details lorem ipsum"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "booth_agenda_date" : 1710907200000,
+    "booth_agenda_items" : [ {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    } ]
+  }, {
+    "booth_agenda_date" : 1710907200000,
+    "booth_agenda_items" : [ {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    } ]
+  }, {
+    "booth_agenda_date" : 1710907200000,
+    "booth_agenda_items" : [ {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    } ]
+  }, {
+    "booth_agenda_date" : 1710907200000,
+    "booth_agenda_items" : [ {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    } ]
+  }, {
+    "booth_agenda_date" : 1710907200000,
+    "booth_agenda_items" : [ {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    }, {
+      "booth_agenda_time" : 1710928800000,
+      "booth_agenda_title" : "Agenda details lorem ipsum"
+    } ]
+  } ]
+} ]

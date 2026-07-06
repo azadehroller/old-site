@@ -1,0 +1,359 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Report
+  screenshotPath: ../images/template-previews/contact.png
+-->
+
+
+{% extends "./layouts/base.html" %}
+
+{% set body_classes = "dark-bg" %}
+
+{% block body %}
+<style>
+/* ROLLER Pulse Report Styles */
+.tpl-report-temp h3{
+    color: white;
+}
+.dark-bg {
+    background-color: #0d0c22;
+}
+
+body .dnd-section>.row-fluid{
+  padding: 0 2rem;
+}
+
+body .dnd-section .dnd-column{
+  padding: 0; 
+}
+
+.card {
+    background-color: rgba(30, 27, 58, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card hover animation */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    background-color: rgba(40, 35, 78, 0.8);
+    border-color: rgba(168, 139, 250, 0.3);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(168, 139, 250, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Subtle glow effect for KPI cards only */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(168, 139, 250, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+/* Accessible light effect for other cards */
+.chart-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, 
+        transparent 0%, 
+        transparent 40%, 
+        rgba(168, 139, 250, 0.05) 50%, 
+        transparent 60%, 
+        transparent 100%);
+    transition: left 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.chart-card:hover::before {
+    left: 100%;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .card::before,
+    .chart-card::before {
+        transition: none;
+        display: none;
+    }
+    
+    .card:hover::before,
+    .chart-card:hover::before {
+        left: -100%;
+    }
+}
+
+/* Enhanced number glow on hover */
+.card:hover .text-purple-400 {
+    text-shadow: 0 0 20px rgba(168, 139, 250, 0.6);
+    color: #c4b5fd;
+}
+
+/* --- ANIMATION STYLES --- */
+.fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+.bar { 
+    transform-origin: bottom; 
+    transform: scaleY(0); 
+    transition: transform 1s ease-out, background-color 0.3s, filter 0.3s; 
+}
+.chart-container.visible .bar { 
+    transform: scaleY(1); 
+}
+.bar:hover {
+    filter: brightness(1.2);
+    transform: scaleY(1.05) !important;
+}
+
+.h-bar { transform-origin: left; transform: scaleX(0); transition: transform 1s ease-out, background-color 0.2s; }
+.chart-container.visible .h-bar { transform: scaleX(1); }
+
+.chart-arc { transition: stroke-dashoffset 1.5s ease-out; }
+
+.fan-segment { opacity: 0; transform-origin: bottom right; transform: rotate(-30deg) scale(0.8); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+.chart-container.visible .fan-segment { opacity: 1; transform: rotate(0) scale(1); }
+
+/* --- TOOLTIP & HOVER STYLES --- */
+[data-tooltip] {
+    position: relative;
+    cursor: pointer;
+}
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    background-color: rgba(17, 15, 41, 0.95);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Only add transition for non-horizontal bar tooltips */
+.bar[data-tooltip]::after,
+.chart-element[data-tooltip]::after,
+li.chart-element[data-tooltip]::after {
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+/* Tooltip for Vertical Bars */
+.bar[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translateX(-50%);
+}
+
+/* Tooltip for Horizontal Bars - appears on the bar itself */
+.h-bar-wrapper {
+    position: relative;
+    overflow: visible !important;
+}
+
+/* Override overflow hidden on chart containers for tooltips */
+.chart-container:hover {
+    overflow: visible !important;
+}
+
+.h-bar-wrapper[data-tooltip]:hover::after {
+    content: attr(data-tooltip) !important;
+    position: absolute !important;
+    background-color: rgba(17, 15, 41, 0.95) !important;
+    color: #fff !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    left: 50% !important;
+    top: -45px !important;
+    transform: translateX(-50%) !important;
+    z-index: 1000 !important;
+    pointer-events: none !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    max-width: none !important;
+    transition: none !important;
+}
+
+/* Smoother hover effects for bars */
+.h-bar {
+    transition: filter 0.2s ease, background-color 0.2s ease;
+}
+.h-bar:hover {
+    filter: brightness(1.15);
+}
+
+/* Chart element click effects */
+.chart-element {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.chart-element:active {
+    transform: scale(0.98);
+}
+
+/* Fan segment hover effects */
+.fan-segment {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.fan-segment:hover {
+    filter: brightness(1.3);
+    transform: scale(1.05);
+}
+
+/* Donut chart hover */
+.chart-arc {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+}
+.chart-arc:hover {
+    filter: brightness(1.2);
+    stroke-width: 7;
+}
+.chart-arc.animated {
+    opacity: 1;
+    transform: rotate(-90deg) scale(1);
+}
+
+/* Special tooltip for chart arcs (donut segments) */
+.chart-arc[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    left: 50%;
+    top: -40px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* Tooltip positioning for SVG elements */
+svg .chart-arc {
+    position: relative;
+}
+
+/* Alternative tooltip approach for SVG circles */
+.donut-container {
+    position: relative;
+}
+
+.donut-tooltip {
+    position: absolute;
+    background-color: rgba(17, 15, 41, 0.95);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Fan chart tooltip */
+.fan-tooltip {
+    position: absolute;
+    background-color: rgba(17, 15, 41, 0.95);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    top: 25%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
+
+/* Generic tooltip for legend items */
+li.chart-element[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+}
+</style>
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--report"
+%}
+
+  {# Two column image left #}
+
+  {% dnd_section
+    vertical_alignment="TOP"
+  %}
+    {% dnd_module
+      path="@hubspot/linked_image",
+      img={
+        "alt": "Coworkers sitting together and smiling outside.",
+        "loading": "disabled",
+        "max_height": 449,
+        "max_width": 605,
+        "size_type": "auto_custom_max",
+        "src": get_asset_url("../images/team-image.jpg")
+      },
+      offset=0,
+      width=6
+    %}
+    {% end_dnd_module %}
+    {% dnd_module
+      path="@hubspot/rich_text",
+      html="<h1>Meet our team</h1><p>Use this page to help your visitors learn more about you. Include images so that folks will recognize you at conferences and events.</p>"
+      offset=6,
+      width=6
+    %}
+    {% end_dnd_module %}
+  {% end_dnd_section %}
+
+{% end_dnd_area %}
+{% endblock body %}

@@ -1,0 +1,148 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow (strong)",
+  "help_text" : "Short uppercase label above the main title.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "MAY 2026 PRODUCT LAUNCH"
+}, {
+  "id" : "title",
+  "name" : "title",
+  "label" : "Main title (H2)",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "And there’s so much more to explore!"
+}, {
+  "id" : "introduction",
+  "name" : "introduction",
+  "label" : "Introduction",
+  "help_text" : "Supporting copy. The last block in this field has no bottom margin in the layout.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Beyond this May Launch, we’re constantly enhancing ROLLER. Customers benefit from <a href=\"#\">monthly releases</a> designed to save them time, boost revenue, and improve the guest experience.</p>"
+}, {
+  "id" : "panels",
+  "name" : "panels",
+  "label" : "Accordion panels",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "panels.title",
+    "default" : 1
+  },
+  "children" : [ {
+    "id" : "panels.title",
+    "name" : "title",
+    "label" : "Panel title",
+    "help_text" : "Shown on the left; add more panels with “Add” in the editor.",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Lorem Ipsum"
+  }, {
+    "id" : "panels.description",
+    "name" : "description",
+    "label" : "Panel description",
+    "help_text" : "Optional copy when expanded. Arrows appear only after you add Feature links (label + URL/page). Last block has no bottom margin.",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "panels.label_when_collapsed",
+    "name" : "label_when_collapsed",
+    "label" : "Toggle label when closed",
+    "help_text" : "Shown on the right when collapsed.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "View all features"
+  }, {
+    "id" : "panels.label_when_open",
+    "name" : "label_when_open",
+    "label" : "Toggle label when open",
+    "help_text" : "Shown on the right when expanded.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Collapse"
+  }, {
+    "id" : "panels.items",
+    "name" : "items",
+    "label" : "Feature links",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 0,
+      "max" : null,
+      "sorting_label_field" : "panels.items.link_text",
+      "default" : 0
+    },
+    "children" : [ {
+      "id" : "panels.items.link_text",
+      "name" : "link_text",
+      "label" : "Link label",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    }, {
+      "id" : "panels.items.destination",
+      "name" : "destination",
+      "label" : "Link (URL / page)",
+      "help_text" : "Add rows only when needed; labels and arrows render only when both label and destination are set.",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "no_follow" : false,
+        "open_in_new_tab" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Lorem Ipsum",
+    "description" : "",
+    "label_when_collapsed" : "View all features",
+    "label_when_open" : "Collapse",
+    "items" : [ ]
+  } ]
+} ]

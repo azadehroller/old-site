@@ -1,0 +1,226 @@
+[ {
+  "id" : "heading_text",
+  "name" : "heading_text",
+  "label" : "Heading Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "AI THAT WORKS LIKE PART OF YOUR TEAM"
+}, {
+  "id" : "heading_style",
+  "name" : "heading_style",
+  "label" : "Heading Style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "solid", "Solid Color" ], [ "gradient", "Gradient" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "gradient"
+}, {
+  "id" : "h2_text",
+  "name" : "h2_text",
+  "label" : "Desktop heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "ROLLER iQ"
+}, {
+  "id" : "14b6bd8d-88be-cbdf-13b1-8eed573b2b25",
+  "name" : "h2_mobile",
+  "label" : "Mobile heading (optional)",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null
+}, {
+  "id" : "icon_type",
+  "name" : "icon_type",
+  "label" : "Icon Type",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "save-time", "Save Time" ], [ "boost-revenue", "Boost Revenue" ], [ "", "" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "save-time"
+}, {
+  "id" : "aae0ff90-abb7-3ff4-28ab-25188f3308fb",
+  "name" : "tag",
+  "label" : "Tag",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+}, {
+  "id" : "description_text",
+  "name" : "description_text",
+  "label" : "Description Text",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "Giving you insights at your fingertips, ROLLER iQ is a new AI-powered assistant built specifically for the attractions industry. iQ turns your venue's data into actionable takeaways, helping you make smarter decisions, without digging through reports. Watch the video to see what iQ can do."
+}, {
+  "id" : "button_1",
+  "name" : "button_1",
+  "label" : "Button 1 (Primary)",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "button_1.enabled",
+    "name" : "enabled",
+    "label" : "Enable Button",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "button_1.text",
+    "name" : "text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn more"
+  }, {
+    "id" : "button_1.link",
+    "name" : "link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "enabled" : true,
+    "text" : "Learn more",
+    "link" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }
+}, {
+  "id" : "button_2",
+  "name" : "button_2",
+  "label" : "Button 2 (Secondary)",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "button_2.enabled",
+    "name" : "enabled",
+    "label" : "Enable Button",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "button_2.text",
+    "name" : "text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Request early access"
+  }, {
+    "id" : "button_2.link",
+    "name" : "link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "enabled" : true,
+    "text" : "Request early access",
+    "link" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }
+}, {
+  "id" : "6d295eeb-0c5d-98ad-08b1-e25244d94fcd",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "090a045b-35da-3f0c-9478-f95240426f1f",
+    "name" : "make_centred",
+    "label" : "Make centered",
+    "help_text" : "When enabled, content will be center-aligned on small screens and above. When disabled, content will be left-aligned.",
+    "inline_help_text" : "When enabled, content will be center-aligned on small screens and above. When disabled, content will be left-aligned.",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "make_centred" : true
+  }
+} ]

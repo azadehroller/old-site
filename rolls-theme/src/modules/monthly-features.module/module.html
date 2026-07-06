@@ -1,0 +1,130 @@
+{# Variables #}
+{% set features = module.feature %}
+
+{% require_css %}
+    <style>
+    {% scope_css %}
+
+        .monthly-features-button-next,
+        .monthly-features-button-prev {
+            display: none;    
+        }
+
+
+        @media (min-width: 768px) {
+
+            .monthly-features-button-next,
+            .monthly-features-button-prev {
+                position: absolute;
+                top: 50%;
+                z-index: 10;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
+
+        .monthly-features-button-next {
+            right: 40px;
+            left: auto;
+         }
+
+        .monthly-features-button-prev {
+            left: 40px;
+            right: auto;
+         }
+
+        .monthly-features-button-next.swiper-button-disabled, .monthly-features-button-prev.swiper-button-disabled {
+            opacity: 0;
+        }
+        
+    {% end_scope_css %}
+    </style>
+{% end_require_css%}
+
+{# Section Markup #}
+<div class="monthly-features-wrapper">
+<section id="monthly-features-{{name}}" class="monthly-features-mask swiper swiper-{{name}} mt-3">
+    <div class="swiper-wrapper">
+        {% set monthNames = ['January', 'January', 'February', 'February', 'March', 'April', 'May', 'July', 'AUGUST', 'SEPTEMBER', 'SEPTEMBER', 'SEPTEMBER', 'October', 'October', 'November', 'November', 'November'] %}
+        {% for feature in features %}
+            
+            {% set month = feature.feature_month %}
+            {% set href = feature.feature_link.url.href %}
+            {% set rel = [] %}
+            {% set url_type = feature.feature_link.url.type %}
+            {% set no_follow = feature.feature_link.no_follow %}
+            {% set new_tab = feature.feature_link.open_in_new_tab %}
+
+            {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set href = 'mailto:' + href %}
+            {% endif %}
+            {% if no_follow %}
+                {% do rel.append('nofollow') %}
+            {% endif %}
+            {% if new_tab %}
+                {% do rel.append('noopener') %}
+            {% endif %}
+
+            <a href={{href}} class="feature-link swiper-slide rounded-2xl mo-card-md border-neutral-white border-[1px] overflow-hidden ease-in transition duration-300 hover:bg-primary-40 min-h-[165px]"
+            {% if new_tab %} target="_blank"{% endif %}
+            {% if rel %} rel="{{ rel|join(" ") }}"{% endif %}
+            >
+                <strong class="month-heading absolute top-0 left-0 w-full bg-neutral-white text-center py-2 ">
+                    <span class="bg-pill-gradient from-primary-50 to-secondary-60 bg-clip-text text-lg font-extrabold text-transparent">{{ month or monthNames[loop.index0] }}</span>
+                </strong>
+                <div class="feature-text-wrapper flex flex-col items-center gap-2 md:gap-1 absolute left-0 right-0 top-[10%] h-full justify-center">
+                   <div class="flex flex-col items-center gap-2 md:gap-1">
+                    {% if feature.feature_icon.src%}
+                    <div><img class="w-[32px] h-[32px] object-contain" src="{{feature.feature_icon.src}}" alt="{{feature.feature_icon.alt}}"></div>
+                    {% endif %}
+                    <div class="feature-text text-center text-neutral-white font-semibold leading-5 max-w-[5.5rem] md:max-w-[10rem]">{{ feature.feature_name }}</div>
+                   </div>
+                </div>
+            </a>
+        {% endfor %}
+  </div>
+</section>
+    <div class="monthly-features-button-next w-[40px] h-[40px] bg-primary-50 hover:bg-primary-70 rounded-[980px]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6.49024 3.87002L8.26024 2.10003L18.1602 12L8.26023 21.9L6.49023 20.13L14.6202 12L6.49024 3.87002Z" fill="#033180"/>
+        </svg>
+    </div>
+    <div class="monthly-features-button-prev w-[40px] h-[40px] bg-primary-50 hover:bg-primary-70 rounded-[980px]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M17.5098 20.13L15.7298 21.9L5.83985 12L15.7398 2.1L17.5098 3.87L9.37985 12L17.5098 20.13Z" fill="#033180"/>
+        </svg>
+    </div>
+</div>
+{# External assets #}
+{{ require_css('https://unpkg.com/swiper@8/swiper-bundle.min.css') }} 
+{{ require_js('https://unpkg.com/swiper@8/swiper-bundle.min.js', "head") }} 
+
+{% require_js %}
+    <script>
+        const carousel = new Swiper('#monthly-features-{{name}}', {
+            slidesPerView: 2,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".monthly-features-button-next",
+                prevEl: ".monthly-features-button-prev",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40,
+                },
+                1024: {
+                    slidesPerView: 6,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    </script>
+{% end_require_js %}

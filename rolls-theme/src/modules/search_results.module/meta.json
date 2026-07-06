@@ -1,0 +1,32 @@
+{
+  "content_tags" : [ {
+    "name" : "SEARCH",
+    "source" : "MARKETPLACE"
+  }, {
+    "name" : "COMPATIBLE_BLOG",
+    "source" : "MARKETPLACE"
+  }, {
+    "name" : "COMPATIBLE_PAGE",
+    "source" : "MARKETPLACE"
+  }, {
+    "name" : "SEARCH",
+    "source" : "USER"
+  } ],
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "master_language" : "en",
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 194846440767,
+  "js_assets" : [ {
+    "url" : "../js/template.js",
+    "autoload" : true,
+    "name" : "template.js"
+  }, {
+    "url" : "../js/url-search-params.js",
+    "autoload" : true,
+    "name" : "url-search-params.js"
+  } ],
+  "label" : "search_results",
+  "icon" : "../../../mV0_d-web-default-modules_hubspot/img/icon/edited-search-1.svg",
+  "is_available_for_new_content" : true
+}

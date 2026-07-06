@@ -1,0 +1,10 @@
+[ {
+  "id" : "a5ad338a-7b9d-7977-5e4f-e3828b684644",
+  "name" : "form_id",
+  "label" : "Form Id",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+} ]

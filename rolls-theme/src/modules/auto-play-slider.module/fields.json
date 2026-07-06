@@ -1,0 +1,78 @@
+[ {
+  "id" : "slides",
+  "name" : "slides",
+  "label" : "Slides",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "image",
+    "name" : "image",
+    "label" : "Image",
+    "help_text" : "Select an image for this slide.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 800,
+      "height" : 600
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 800,
+      "height" : 600
+    }
+  }, {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 800,
+      "height" : 600
+    }
+  }, {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 800,
+      "height" : 600
+    }
+  } ]
+}, {
+  "id" : "speed",
+  "name" : "speed",
+  "label" : "Slide Speed",
+  "help_text" : "Time each slide is visible before advancing, in milliseconds.",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 100,
+  "max" : 10000,
+  "step" : 100,
+  "suffix" : "ms",
+  "type" : "number",
+  "display_width" : null,
+  "default" : 500
+} ]

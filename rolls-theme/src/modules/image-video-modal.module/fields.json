@@ -1,0 +1,71 @@
+[ {
+  "id" : "6ab555ee-1cbf-50f3-980c-46250a21c992",
+  "name" : "thumbnail",
+  "label" : "Thumbnail",
+  "required" : true,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : true,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/grayscale-mountain.png",
+    "alt" : "grayscale-mountain",
+    "loading" : "disabled",
+    "width" : 605,
+    "height" : 451,
+    "max_width" : 605,
+    "max_height" : 451
+  }
+}, {
+  "id" : "15fd9303-927b-5a25-53ed-3cdef1324833",
+  "name" : "style",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "c56d1941-86b5-2df5-075e-392ccb10a02a",
+    "name" : "border",
+    "label" : "Border",
+    "help_text" : "This instruction is intended to eliminate the border surrounding the image placeholder, leave checkbox checked to remove the border.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "f2ad14ae-1455-1f9f-6641-79ad698c99fa",
+    "name" : "light_background_shadow",
+    "label" : "Light Background Shadow",
+    "help_text" : "If you use the video in light background, turn on this toggle.",
+    "inline_help_text" : "If you use the video in light background, turn on this toggle.",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "border" : false,
+    "light_background_shadow" : false
+  }
+}, {
+  "id" : "619dbb8b-40b3-03b5-9d60-a1b0ef6e72d8",
+  "name" : "video_id",
+  "label" : "Video ID",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "fw30aqal7w"
+} ]

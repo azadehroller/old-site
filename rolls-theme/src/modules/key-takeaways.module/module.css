@@ -1,0 +1,15 @@
+.key-takeaways {
+    margin-bottom: 32px;
+    padding-left: 25.6px;
+    border-left: 4px solid #0960f6;
+}
+.key-takeaways__title{
+    margin-bottom: 32px; 
+    font-size: 2rem;
+    line-height: 1.2;
+}
+.key-takeaways__list {
+  margin: 0;
+  padding: 0 0 0 24px;
+  list-style: disc;
+}

@@ -1,0 +1,39 @@
+[ {
+  "id" : "show_divider",
+  "name" : "show_divider",
+  "label" : "Show the line",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "879f923f-ac4d-4b63-380d-a9b5d06485cc",
+  "name" : "divider_type",
+  "label" : "Divider type",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "tall", "Tall" ], [ "short", "short" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "short"
+}, {
+  "id" : "29c44500-77dd-80b7-3a25-76cb360e89dc",
+  "name" : "background",
+  "label" : "Background",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "light", "Light background" ], [ "dark", "Dark background" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "light"
+} ]

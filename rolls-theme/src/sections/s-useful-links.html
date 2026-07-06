@@ -1,0 +1,33 @@
+<!--
+  templateType: section
+  label: Useful Links content
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/useful-links.png
+  description: "Section separated in two rows. Top row has label,text and content and second row has the Modules: Widget Group."
+-->
+{% dnd_section
+    vertical_alignment="MIDDLE"
+    class="s-layout s-useful-links"
+%}
+    {% dnd_column
+    %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Widget Group #}
+            {% dnd_module 
+                path="../modules/widget-group",
+                label="Modules: Widget Group",
+                extra_classes={{"my-2 md:my-3"}}
+                offset=0,
+                width=12
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

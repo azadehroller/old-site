@@ -1,0 +1,48 @@
+<!--
+  templateType: "none"
+  isAvailableForNewContent: false
+-->
+{% set my_topics = blog_topics('default', 250) %}
+{% if !tag %}
+  <div class="blog-filter-options">
+
+    <nav id="js-scroll-nav">
+      <ul>
+        <li class="active"><a class="all" href="#">All articles</a></li>
+        {% set unique_topics = [] %}
+        {% for content in contents %}
+          {% set topic = content.topic_list[0] %}
+          {% if topic != null && !('Editor Picks' in content.topic_list|map('name')) %}
+            {% if topic.name not in unique_topics %}
+              {% set _ = unique_topics.append(topic.name) %}
+              {% set topicFiltered = topic.name|string|lower|replace('-', '_')|replace(' ', '_')|replace(',', '')|replace('_&_', '_') %}
+              <li data-filter='{{ topicFiltered }}'>
+                <a class="{{ topicFiltered }}">{{topic.name|truncate(20, True, "...")}}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
+    <div id="js-dropdown" class="dropdown blog-dropdown" data-dropdown>
+      <button class="btn--dropdown link" data-dropdown-button>
+        Browse categories <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m7 9.5 5 5 5-5H7Z" fill="#023180" clip-rule="evenodd"/></svg>
+      </button>
+      <!-- Dropdown menu -->
+      <div class="dropdown-menu">
+        <div>
+          <div class="dropdown-links">
+            {% for topic in my_topics %}
+              {% if topic.name != 'Editor Picks' %}
+                {% set topicFiltered = topic.name|string|lower|replace('-', '_')|replace(' ', '_')|replace(',', '')|replace('_&_', '_') %}
+                <a href="{{ blog_tag_url(group.id, topic.slug) }}" class="link {{ topicFiltered }}">{{topic.name}} ({{topic.live_posts}}) </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+{% endif %} 

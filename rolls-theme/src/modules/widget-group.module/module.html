@@ -1,0 +1,73 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+{% set widgets = module.widget %}
+
+{# Section Markup #}
+<section id="widget-group-{{name}}" class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-5">
+    {% for item in widgets %}
+        {% set title = item.settings.title %}
+        {% set icon = item.settings.icon %}
+        {% set thumbnail = item.settings.thumbnail %}
+        {% set content = item.settings.content %}
+
+        {# Button Variables #}
+        {% set link = item.button_settings.link %}
+        {% set label = item.button_settings.button_text %}
+        {% set button_icon = item.button_settings.svg %}
+        {% set position = item.button_settings.icon_position %}
+        {% set kind = item.button_settings.bg_kind %}
+
+        {% set href = link.url.href %}
+        {% set rel = [] %}
+        {% set url_type = link.url.type %}
+        {% set no_follow = link.no_follow %}
+        {% set new_tab = link.open_in_new_tab %}
+
+        {# Sets attributes used for the link field #}
+        {% if url_type is equalto 'EMAIL_ADDRESS' %}
+        {% set href = 'mailto:' + href %}
+        {% endif %}
+        {% if no_follow %}
+        {% do rel.append('nofollow') %}
+        {% endif %}
+        {% if new_tab %}
+        {% do rel.append('noopener') %}
+        {% endif %}
+
+        <div class="mo-card text-center text-primary-50 box-shadow-onlight rounded-[32px] bg-widget-group grid gap-4">
+            {% if icon %}
+                <div class="flex justify-center">{{icon}}</div>
+            {% endif %}
+            {% if thumbnail.src %}
+                <div class="flex justify-center m-auto w-[88px] h-[88px]">
+                    {% set sizeAttrs = 'width="88" height="88"' %}
+                    {% set loadingAttr = thumbnail.loading != 'disabled' ? 'loading="{{ thumbnail.loading }}"' : '' %}
+                    <img src="{{thumbnail.src}}" alt="{{thumbnail.alt}}" class="object-cover m-auto w-full rounded-[14rem]" {{sizeAttrs}}>
+                </div>
+            {% endif %}
+            <h3 class="font-bold mb-0">{{ title }}</h3>
+            {% if content %}
+                <div class="text-base block">{{ content }}</div>
+            {% endif %}
+            {% if href %}
+                <div class="button-wrapper flex justify-center grow">
+                    <a class="{{ button.buttons_settings(bg_kind || 'ghost') }} gap-2 font-serif" href="{{ href }}"
+                    id="button_{{name}}"
+                    {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+                    {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                    >
+                        {% if button_icon %}
+                            <div class="flex gap-4 justify-center items-center {{position}}{% if position == 'right' %}order-1 {% else %}order-2{% endif %}">
+                            {{button_icon}}
+                            </div>
+                        {% endif %}
+                        {# Button label #}
+                        <span>{{ label }}</span>
+                    </a>
+                </div>
+            {% endif%}
+        </div>
+    {% endfor %}
+</section>

@@ -1,0 +1,31 @@
+{# Set variables #}
+{% set theme = module.theme %}
+
+{% require_js %}
+    <script>
+        const theme = '{{ module.theme }}';
+        const header = document.getElementById("header");
+
+        switch (theme) {
+            case 'dark':
+                header.classList.add('dark');
+                break;
+            case 'light':
+                header.classList.add('light');
+                header.classList.remove('dark');
+                break;
+            case 'industry_report':
+                header.classList.add('industry_report');
+                header.classList.remove('dark');
+                header.classList.remove('light');
+                break;
+            case 'special_bg':
+                header.classList.add('light');
+                header.classList.remove('dark');
+                break;
+            default:
+                header.classList.remove('dark', 'light', 'custom');
+        }
+
+    </script>
+{% end_require_js%}

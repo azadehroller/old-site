@@ -1,0 +1,453 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: SBG Test Template
+    screenshotPath: ../images/template-previews/sbg-test.png
+-->
+
+{% extends "./layouts/base.html" %}
+{% set header_theme_class = 'light' %}
+
+
+{% require_css %}
+    <style>
+        @theme {
+          --breakpoint-slg: 1312px;
+        }
+        /* ========== CSS Variables ========== */
+        :root {
+            --aurora-page-bg: #ffffff;
+            --aurora-content-max-w: min(70vw, 1316px);
+            --aurora-content-max-h: min(70vh, 600px);
+            --aurora-card-radius: 18px;
+            --aurora-card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .tpl-special-bg .header.dark{
+            background: var(--neutral-white);
+
+            .header__logo {
+                display: none;
+            }
+
+            .header__logo--secondary {
+                display: block;
+            }
+
+            .main-nav__item a,
+            .main-nav__item button {
+                color: var(--primary-50);
+
+                &:hover {
+                    color: var(--secondary-50);
+
+                    .main-nav__item-label {
+                        color: var(--secondary-50);
+                    }
+
+                    .main-nav__item-icon {
+                        fill: var(--secondary-50);
+                    }
+                }
+            }
+
+            .main-nav__item-icon {
+                fill: var(--primary-50);
+            }
+
+            .header__block-toggle {
+                color: var(--primary-50);
+            }
+
+            .header__block-toggle-item {
+                background-color: var(--primary-50);
+            }
+
+            .main-nav__item:last-child {
+                a {
+                    color: var(--primary-50);
+
+                    &:hover {
+                        color: var(--secondary-50);
+                    }
+                }
+            }
+        }
+        /* ========== Aurora Section Container ========== */
+        .dnd-section:first-of-type {
+            background: var(--aurora-page-bg);
+            position: relative;
+            width: 100%;
+            min-height: auto;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* ========== WebGL Canvas (Aurora Background) ========== */
+        .dnd-section:first-of-type canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: transparent;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ========== Content Container ========== */
+        .dnd-section:first-of-type .row-fluid {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: auto;
+            text-align: center;
+            .row-fluid-wrapper:last-of-type{
+              margin-top: 48px;
+            }
+
+        }
+        @media (min-width: 768px){
+         .dnd-section:first-of-type .row-fluid .row-fluid-wrapper:first-of-type{
+            padding-top: 80px;
+         }
+        }
+        @media (min-width: 1024px){
+         .dnd-section:first-of-type .row-fluid .row-fluid-wrapper:first-of-type{
+            padding-top: 160px;
+         }
+        }
+        /* ========== Content Styling ========== */
+        .dnd-section:first-of-type .row-fluid * {
+            width: 100%;
+            {# height: auto; #}
+            {# max-width: var(--aurora-content-max-w); #}
+            {# max-height: var(--aurora-content-max-h); #}
+            {# border-radius: var(--aurora-card-radius); #}
+            {# box-shadow: var(--aurora-card-shadow); #}
+            {# object-fit: cover; #}
+            {# background: rgba(255, 255, 255, 0.88); #}
+        }
+
+        /* ========== Glow Effect Behind Content ========== */
+        .dnd-section:first-of-type .row-fluid::before {
+            content: "";
+            position: absolute;
+            width: calc(var(--aurora-content-max-w) + 10vw);
+            height: calc(var(--aurora-content-max-h) + 10vh);
+            border-radius: calc(var(--aurora-card-radius) * 1.5);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(
+                60% 60% at 50% 50%,
+                rgba(255, 255, 255, 0.12),
+                transparent 70%
+            );
+            filter: blur(40px);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .dnd-section:first-of-type .row-fluid > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            :root {
+                --aurora-content-max-w: min(88vw, 720px);
+                --aurora-content-max-h: min(60vh, 520px);
+                --aurora-card-radius: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --aurora-content-max-w: 92vw;
+                --aurora-content-max-h: 56vh;
+                --aurora-card-radius: 12px;
+            }
+        }
+
+        /* ========== Accessibility ========== */
+        @media (prefers-reduced-motion: reduce) {
+            .dnd-section:first-of-type canvas {
+                display: none;
+            }
+        }
+    </style>
+{% end_require_css %}
+
+{% block body %}
+
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--special-bg"
+%}
+  {% include_dnd_partial path="../sections/s-aurora-background.html" %}
+{% end_dnd_area %}
+
+<script type="module">
+  // ========== Aurora Background Effect ==========
+  // WebGL-powered animated gradient background using OGL library
+  
+  import { Renderer, Program, Mesh, Color, Triangle } from 'https://unpkg.com/ogl?module';
+
+  // ========== Configuration ==========
+  const config = {
+    colorStops: ['#0960F6', '#38F6FF'],  // Original brand colors
+    amplitude: 1.8,    // Wave height intensity - increased for more dramatic effect
+    blend: 0.8,        // Gradient edge softness - increased for smoother transitions
+    speed: 1.0,        // Animation speed multiplier
+    opacity: 0.9,      // Overall opacity of the aurora effect (0-1) - increased for more intense visibility
+  };
+
+  // ========== Shaders ==========
+  // Vertex shader: Simple pass-through for fullscreen triangle
+  const VERT = `#version 300 es
+    in vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }`;
+
+  // Fragment shader: Simplex noise-based aurora effect
+  const FRAG = `#version 300 es
+    precision highp float;
+    uniform float uTime;
+    uniform float uAmplitude;
+    uniform vec3 uColorStops[2];
+    uniform vec2 uResolution;
+    uniform float uBlend;
+    uniform float uOpacity;
+    out vec4 fragColor;
+    
+    // Simplex noise helper
+    vec3 permute(vec3 x) { 
+      return mod(((x * 34.0) + 1.0) * x, 289.0); 
+    }
+    
+    // 2D Simplex noise function
+    float snoise(vec2 v) {
+      const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+      vec2 i  = floor(v + dot(v, C.yy));
+      vec2 x0 = v - i + dot(i, C.xx);
+      vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+      vec4 x12 = x0.xyxy + C.xxzz;
+      x12.xy -= i1;
+      i = mod(i, 289.0);
+      vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+      vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
+      m = m * m;
+      m = m * m;
+      vec3 x = 2.0 * fract(p * C.www) - 1.0;
+      vec3 h = abs(x) - 0.5;
+      vec3 ox = floor(x + 0.5);
+      vec3 a0 = x - ox;
+      m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+      vec3 g;
+      g.x  = a0.x  * x0.x  + h.x  * x0.y;
+      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+      return 130.0 * dot(m, g);
+    }
+    
+    struct ColorStop { 
+      vec3 color; 
+      float position; 
+    };
+    
+    // Two-stop color gradient interpolation
+    #define COLOR_RAMP(colors, factor, finalColor) { \
+      ColorStop currentColor = colors[0]; \
+      ColorStop nextColor = colors[1]; \
+      float lerpFactor = factor; \
+      finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
+    }
+    
+    void main() {
+      vec2 uv = gl_FragCoord.xy / uResolution;
+      
+      // Setup color gradient
+      ColorStop colors[2];
+      colors[0] = ColorStop(uColorStops[0], 0.0);
+      colors[1] = ColorStop(uColorStops[1], 1.0);
+      
+      vec3 rampColor;
+      COLOR_RAMP(colors, uv.x, rampColor);
+      
+      // Generate animated wave pattern at the bottom
+      // Invert uv.y so the effect appears at the bottom instead of top
+      float invertedY = 1.0 - uv.y;
+      float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+      height = exp(height);
+      height = (invertedY * 2.0 - height + 0.2);
+      float intensity = 0.7 * height;  // Increased from 0.4 to 0.7 for more intense effect
+
+      // Create aurora band with smooth edges at bottom
+      float midPoint = 0.20;
+      float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+
+      // Use pure colors without intensity darkening
+      vec3 auroraColor = rampColor;
+      // Apply global opacity for lighter overall effect
+      float finalAlpha = auroraAlpha * uOpacity;
+      fragColor = vec4(auroraColor * finalAlpha, finalAlpha);
+    }`;
+
+  // ========== Initialization ==========
+  const container = document.querySelector('.dnd-section:first-of-type');
+  
+  if (container) {
+    // Setup WebGL renderer
+    const renderer = new Renderer({ 
+      alpha: true, 
+      premultipliedAlpha: true, 
+      antialias: true 
+    });
+    const gl = renderer.gl;
+    
+    // Configure blending for transparency
+    gl.clearColor(0, 0, 0, 0);
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.canvas.style.backgroundColor = 'transparent';
+    
+    // Add accessibility attribute
+    gl.canvas.setAttribute('aria-hidden', 'true');
+    gl.canvas.setAttribute('role', 'presentation');
+    
+    // Create fullscreen triangle geometry
+    const geometry = new Triangle(gl);
+    if (geometry.attributes.uv) delete geometry.attributes.uv;
+    
+    // Convert hex colors to RGB (cached, not recalculated each frame)
+    const toRGB = (hex) => {
+      const c = new Color(hex);
+      return [c.r, c.g, c.b];
+    };
+    const colorStopsVec3 = config.colorStops.map(toRGB);
+    
+    // Create shader program
+    const program = new Program(gl, {
+      vertex: VERT,
+      fragment: FRAG,
+      uniforms: {
+        uTime: { value: 0 },
+        uAmplitude: { value: config.amplitude },
+        uColorStops: { value: colorStopsVec3 },
+        uResolution: { value: [1, 1] },
+        uBlend: { value: config.blend },
+        uOpacity: { value: config.opacity || 0.4 },
+      },
+      transparent: true,
+      depthTest: false,
+      depthWrite: false,
+    });
+    
+    const mesh = new Mesh(gl, { geometry, program });
+    container.appendChild(gl.canvas);
+
+    // ========== Dynamic Canvas Height Based on Image ==========
+    const mediaImage = container.querySelector('.media-frame-background-image, .media-frame-image');
+    let canvasHeightOffset = 0;
+
+    if (mediaImage) {
+      const img = mediaImage.tagName === 'IMG' ? mediaImage : mediaImage.querySelector('img');
+      if (img) {
+        const updateCanvasHeightOffset = () => {
+          const imageHeight = img.offsetHeight;
+          canvasHeightOffset = imageHeight / 2;
+          resize(); // Recalculate canvas dimensions
+        };
+
+        // Update on load and resize
+        if (img.complete) {
+          updateCanvasHeightOffset();
+        } else {
+          img.addEventListener('load', updateCanvasHeightOffset);
+        }
+        window.addEventListener('resize', updateCanvasHeightOffset, { passive: true });
+      }
+    }
+
+    // ========== Resize Handler ==========
+    function resize() {
+      const w = container.clientWidth;
+      const h = container.clientHeight - canvasHeightOffset;
+      renderer.setSize(w, h);
+      program.uniforms.uResolution.value = [w, h];
+    }
+
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    
+    // ========== Animation Loop with Performance Optimizations ==========
+    let rafId = null;
+    let isPageVisible = !document.hidden;
+    const start = performance.now();
+    
+    function frame(t) {
+      // Only render when page is visible
+      if (!isPageVisible) {
+        rafId = requestAnimationFrame(frame);
+        return;
+      }
+      
+      const elapsed = (t - start) * 0.005;
+      program.uniforms.uTime.value = elapsed * config.speed * 0.1;
+      program.uniforms.uAmplitude.value = config.amplitude;
+      program.uniforms.uBlend.value = config.blend;
+      program.uniforms.uOpacity.value = config.opacity || 0.4;
+      
+      renderer.render({ scene: mesh });
+      rafId = requestAnimationFrame(frame);
+    }
+    
+    // Pause animation when tab is hidden (performance optimization)
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+    });
+    
+    rafId = requestAnimationFrame(frame);
+    
+    // ========== WebGL Context Loss Recovery ==========
+    gl.canvas.addEventListener('webglcontextlost', (e) => {
+      e.preventDefault();
+      cancelAnimationFrame(rafId);
+      console.warn('WebGL context lost. Will attempt recovery...');
+    });
+    
+    gl.canvas.addEventListener('webglcontextrestored', () => {
+      console.log('WebGL context restored.');
+      resize();
+      rafId = requestAnimationFrame(frame);
+    });
+    
+    // ========== Cleanup on Page Unload ==========
+    window.addEventListener('beforeunload', () => {
+      cancelAnimationFrame(rafId);
+      if (gl.canvas && gl.canvas.parentNode) {
+        gl.canvas.parentNode.removeChild(gl.canvas);
+      }
+    });
+    
+    // ========== Debug Controls (Commented Out) ==========
+    // Uncomment to enable keyboard controls for adjusting parameters
+    // Arrow Up/Down: adjust amplitude | Arrow Left/Right: adjust blend
+    /*
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowUp') config.amplitude = Math.min(3, config.amplitude + 0.1);
+      if (e.key === 'ArrowDown') config.amplitude = Math.max(0, config.amplitude - 0.1);
+      if (e.key === 'ArrowRight') config.blend = Math.min(1.5, config.blend + 0.05);
+      if (e.key === 'ArrowLeft') config.blend = Math.max(0.05, config.blend - 0.05);
+    });
+    */
+  }
+
+</script>
+
+{% endblock body %}
+

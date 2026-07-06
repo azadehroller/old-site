@@ -1,0 +1,68 @@
+[ {
+  "id" : "wave_count",
+  "name" : "wave_count",
+  "label" : "Number of Wave Layers",
+  "help_text" : "Number of wave layers to display",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 1,
+  "max" : 5,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 3
+}, {
+  "id" : "wave_speed",
+  "name" : "wave_speed",
+  "label" : "Animation Speed",
+  "help_text" : "Speed of wave animation",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "slow", "Slow" ], [ "medium", "Medium" ], [ "fast", "Fast" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "medium"
+}, {
+  "id" : "wave_color",
+  "name" : "wave_color",
+  "label" : "Wave Color",
+  "help_text" : "Color and opacity for the wave effect",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#ffffff",
+    "opacity" : 10
+  }
+}, {
+  "id" : "show_particles",
+  "name" : "show_particles",
+  "label" : "Show Floating Particles",
+  "help_text" : "Display floating particle effects with the waves",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "wave_blur",
+  "name" : "wave_blur",
+  "label" : "Wave Blur Effect",
+  "help_text" : "Amount of blur to apply to the waves (0 = no blur)",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 0,
+  "max" : 5,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 0
+} ]

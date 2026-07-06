@@ -1,0 +1,110 @@
+{% set FORMID = module.form_field.form_id %}
+
+<div id="footerHSForm" class="hidden"></div>
+{% form
+    form_to_use="{{ FORMID }}"
+    response_response_type="{{ FORMID.response_type }}"
+    response_message="{{ FORMID.message }}"
+    response_redirect_id="{{ FORMID.redirect_id }}"
+    response_redirect_url="{{ FORMID.redirect_url }}"
+    gotowebinar_webinar_key="{{ FORMID.gotowebinar_webinar_key }}"
+%}
+
+{% require_js %}
+    <script>
+        (() => {
+
+            // Function to gather the values from the main form based on field names
+            const gatherInputValuesByName = (fieldNames) => {
+                if (!Array.isArray(fieldNames)) {
+                    console.error('fieldNames must be an array');
+                    return [];
+                }
+                const inputData = {};
+                fieldNames.forEach((name) => {
+                    const inputField = document.querySelector(`input[name="${name}"]`);
+                    if (inputField) {
+                        inputData[name] = inputField.value;
+                    } else {
+                    console.error(`Main form field with name "${name}" not found.`);
+                        console.error(`Main form field with name "${name}" not found.`);
+                        inputData[name] = '';
+                    }
+                });
+                return inputData;
+            };
+
+            const initializeForm = () => {
+                try {
+                    const createForm = () => {
+                        hbspt.forms.create({
+                            portalId: {{ hub_id }},
+                            formId: "{{ FORMID }}",
+                            onFormReady: function() {
+                                const fieldNames = [
+                                    'firstname',
+                                    'email',
+                                    'company',
+                                    'venue_url',
+                                    'venue_name',
+                                    'industry'
+                                ];
+
+                                gatherInputValuesByName(fieldNames);
+
+                                // Add an event listener to prevent default form submission behavior
+                                document.addEventListener('submit', (event) => {
+                                        event.preventDefault();
+                                        handleSubmitForm(event);
+                                    });
+                                },
+                            onFormSubmit: handleSubmitForm
+                        });
+                    };
+
+                    const handleSubmitForm = (event) => {
+                        const formData = event.formData;
+                        const url = 'https://ocd.dev.roller.app/api/venue/import'; // or 'https://reqres.in/api/users'
+                        const apiKey = '9W7zhU4H0JaPSH1yBAp/FQD8y7BBSBLALypyELiYa4yMm-a6KtcJ2eHS2?3pIv0b';
+
+                        const fieldNames = ['venue_url', 'company', 'industry', 'venue_name'];
+                        const inputData = gatherInputValuesByName(fieldNames);
+
+                        const data = JSON.stringify(inputData);
+
+                        fetch(url, {
+                            mode: 'no-cors',
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: data
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data);
+                            console.log('API Response:');
+                        })
+                        .catch(error => console.error('Fetch error:', error));
+                    };
+
+                    createForm();
+                } catch (error) {
+                    console.error('Form error: ', error);
+                }
+            };
+
+            const init = () => {
+                initializeForm();
+            }
+
+            init();
+        
+        })();
+    </script>
+{% end_require_js%}

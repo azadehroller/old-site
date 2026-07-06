@@ -1,0 +1,75 @@
+<!--
+  templateType: global_partial
+  label: Trending Posts
+-->
+
+{# ─────────────────────────────────────────────
+   Replace the three numbers below with your
+   HubSpot blog post IDs to control which posts appear.
+   ───────────────────────────────────────────── #}
+{% set trending_post_ids = [111111111, 222222222, 333333333] %}
+
+<div class="blog-post__section">
+  <h2>Trending Posts</h2>
+  <div class="blog-index">
+    {% for post_id in trending_post_ids %}
+      {% set post = content_by_id(post_id) %}
+      {% if post %}
+        {# Calculate reading time for this post — use distinct variable names to avoid
+           conflicts with finishedPostWords / number set in the parent blog-post.html #}
+        {% set trendWords = post.post_body|striptags|wordcount %}
+        {% set trendReadTime = (trendWords / 300)|round(2) %}
+        {% set trendReadMins = trendReadTime|round %}
+
+        <article class="blog-index__post">
+          {% if post.featured_image %}
+            <a href="{{ post.absolute_url }}" class="blog-index__post-image">
+              <img
+                src="{{ post.featured_image }}"
+                alt="{{ post.featured_image_alt_text }}"
+              />
+            </a>
+          {% endif %}
+          <div class="blog-index__post-content">
+            {% if post.topic_list %}
+              {% set topic = post.topic_list[0] %}
+              <a class="blog-header__tag" href="{{ blog_tag_url(group.id, topic.slug) }}">
+                {{ topic.name }}
+              </a>
+            {% endif %}
+            <h3 class="blog-index__post-title">
+              <a href="{{ post.absolute_url }}">{{ post.name }}</a>
+            </h3>
+            <div class="blog-index__post-content-meta">
+              <span>
+              {{ post.publish_date|datetimeformat('%B %d, %Y') }}
+              </span>
+              <span> | </span>
+              {% if trendReadMins <= 1 %}
+              {% else %}
+                <span class="blog-post__readingtime">
+                  <span class="blog-post__readingtime-icon">
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M6 .667h4V2H6V.667Zm1.333 8.666v-4h1.334v4H7.333Zm5.354-4.406.946-.947c-.286-.34-.6-.66-.94-.94l-.946.947A5.975 5.975 0 0 0 8 2.667a6 6 0 1 0 6 6 5.975 5.975 0 0 0-1.313-3.74Zm-9.354 3.74A4.663 4.663 0 0 0 8 13.333a4.663 4.663 0 0 0 4.667-4.666A4.663 4.663 0 0 0 8 4a4.663 4.663 0 0 0-4.667 4.667Z"
+                        fill="#033180"
+                      />
+                    </svg>
+                  </span>
+                  {{ trendReadMins }} mins
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

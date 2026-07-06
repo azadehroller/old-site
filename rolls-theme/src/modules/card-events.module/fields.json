@@ -1,0 +1,133 @@
+[ {
+  "id" : "214ce033-1343-bb43-3106-60f5cc89cb4c",
+  "name" : "card_events",
+  "label" : "Card Events",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 3,
+    "max" : null,
+    "sorting_label_field" : "2a8dc366-9df3-025b-0da1-2dcbed13d1de",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "3e4a7e6a-d4c8-a0db-4764-1d7c376223f5",
+    "name" : "card_event_date",
+    "label" : "Date",
+    "required" : false,
+    "locked" : false,
+    "type" : "date",
+    "display_width" : null,
+    "default" : 1718078400000
+  }, {
+    "id" : "2a8dc366-9df3-025b-0da1-2dcbed13d1de",
+    "name" : "card_event_title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Event name"
+  }, {
+    "id" : "7be98bdb-51e5-5d65-de12-d34c43e4f31d",
+    "name" : "card_event_city",
+    "label" : "City",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "city"
+  }, {
+    "id" : "3bde6b5c-f209-6d68-e806-1cec88a634a9",
+    "name" : "card_event_country",
+    "label" : "Country",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "country"
+  }, {
+    "id" : "79a4fc58-05e1-79dc-9433-da7b54628239",
+    "name" : "card_event_link_label",
+    "label" : "Link Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn more"
+  }, {
+    "id" : "429ed9df-31a3-1c32-8912-c0420c39bca2",
+    "name" : "card_event_link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "card_event_date" : 1718078400000,
+    "card_event_title" : "Event name",
+    "card_event_city" : "city",
+    "card_event_country" : "country",
+    "card_event_link_label" : "Learn more",
+    "card_event_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "card_event_date" : 1718078400000,
+    "card_event_title" : "Event name",
+    "card_event_city" : "city",
+    "card_event_country" : "country",
+    "card_event_link_label" : "Learn more",
+    "card_event_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "card_event_date" : 1718078400000,
+    "card_event_title" : "Event name",
+    "card_event_city" : "city",
+    "card_event_country" : "country",
+    "card_event_link_label" : "Learn more",
+    "card_event_link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

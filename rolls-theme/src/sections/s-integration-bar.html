@@ -1,0 +1,71 @@
+<!--
+  templateType: section
+  label: Integration Bar content
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/bar-integration.png
+  description: "Section separated in two columns. Left column has text, cta, and right column has an image."
+-->
+{% dnd_section
+  vertical_alignment="MIDDLE"
+  class=" s-layout s-bar-integration"
+  background_color={{ context.background_color or '#ebf2fe'}}
+%}
+  {% dnd_column
+    offset=0,
+    width=6,
+  },
+  %}
+    {% dnd_row %}
+        {# Module: Heading Composition #}
+        {% dnd_module 
+          path="../modules/heading-composition",
+          label="Modules: Header Composition",
+          content={
+            "eyebrow":"",
+            "title": "Need something else?",
+            "text": "We've partnered with the best tools, to help you achieve more. ROLLER integration partners are a great option for providing further services to your business."
+          },
+          styles={
+            "textalignment": {
+              "text_align": "LEFT"
+            },
+            "heading_type": context.heading_type || "h2",                
+            "text_type": context.text_type || "base",    
+          }
+        %}
+        {% end_dnd_module %}
+    {% end_dnd_row %}
+    {# Button #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/button",
+        label="Modules: Button",
+        extra_classes={{"my-2 md:my-3"}}
+        settings={
+            "button_text": "Find out more",
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+  {% dnd_column
+    offset=6,
+    width=6,
+  %}
+  {% dnd_row %}
+  {% dnd_module
+    path="@hubspot/linked_image",
+    extra_classes={{"px-4 md:px-0 img-cover--square-lg img-cover"}}
+    img={
+      "alt": context.image_alt or "Stock placeholder image with grayscale geometrical mountain landscape",
+      "loading": context.image_loading or "disabled",
+      "max_height": context.image_height or 451,
+      "max_width": context.image_width or 605,
+      "size_type": "auto_custom_max",
+      "src": context.image or get_asset_url("../images/grayscale-mountain.png")
+    },
+  %}
+  {% end_dnd_module %}
+  {% end_dnd_row %}
+  {% end_dnd_column %}
+{% end_dnd_section %}

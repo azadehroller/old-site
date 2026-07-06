@@ -1,0 +1,49 @@
+<!--
+    templateType: section
+    label: Subscription Plans
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/subscription-plans.png
+    description: "Stacked section with the header composition then followed by the features pricing cards."
+-->
+
+{% dnd_section 
+    class="s-layout s-subscription-plans"
+%}
+    {% dnd_column %}
+        {% dnd_row %}
+            {% dnd_module
+                path="../modules/features-pricing-card",
+                header={
+                    "content": {
+                        "title": context.title || "Features Name"
+                    }
+                },
+                price={
+                    "monthly": {
+                        "aud": context.card_one_price || "$12"
+                    }
+                },
+                offset=0,
+                width=6
+            %}
+            {% end_dnd_module %}
+            {% dnd_module
+                path="../modules/features-pricing-card",
+                header={
+                    "content": {
+                        "title": context.title || "Features Name"
+                    }
+                },
+                price={
+                    "monthly": {
+                        "aud": context.card_one_price || "$12"
+                    }
+                },
+                offset=6,
+                width=6
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+
+{% end_dnd_section%}

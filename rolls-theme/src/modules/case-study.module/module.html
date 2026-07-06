@@ -1,0 +1,125 @@
+{% set segments = module.story_segments %}
+{% set st = namespace(any_segment=false, has_stat=false, has_tag=false) %}
+
+{% for seg in segments %}
+  {% if seg.eyebrow or seg.title or seg.quote_credit_name or seg.quote_credit_role or (seg.content and seg.content|striptags|trim) or (seg.quote_body and seg.quote_body|striptags|trim) or (seg.body_after_quote and seg.body_after_quote|striptags|trim) %}
+    {% set st.any_segment = true %}
+  {% endif %}
+{% endfor %}
+
+{% for row in module.result_stats %}
+  {% if row.stat_value or row.stat_label %}
+    {% set st.has_stat = true %}
+  {% endif %}
+{% endfor %}
+
+{% for row in module.product_tags %}
+  {% if row.tag_label or row.tag_icon.src %}
+    {% set st.has_tag = true %}
+  {% endif %}
+{% endfor %}
+
+{% set show_result_aside = module.result_label|default('')|trim or st.has_stat or module.result_logo.src %}
+{% set show_tags_aside = module.product_tags_label|default('')|trim or st.has_tag %}
+{% set show_rail = show_result_aside or show_tags_aside %}
+
+{% if st.any_segment or show_rail %}
+<article class="case-study">
+  <div class="case-study__segments">
+  {% for seg in segments %}
+    {% set has_seg = seg.eyebrow or seg.title or seg.quote_credit_name or seg.quote_credit_role %}
+    {% set has_body = seg.content and seg.content|striptags|trim %}
+    {% set has_quote = seg.quote_body and seg.quote_body|striptags|trim %}
+    {% set has_after = seg.body_after_quote and seg.body_after_quote|striptags|trim %}
+    {% if has_seg or has_body or has_quote or has_after %}
+  <section class="case-study__segment"{% if seg.section_id|default('')|trim %} id="{{ seg.section_id|trim }}"{% endif %}>
+      {% if seg.eyebrow %}
+    <p class="case-study__eyebrow">{{ seg.eyebrow }}</p>
+      {% endif %}
+      {% if seg.title %}
+    <h2 class="case-study__title">{{ seg.title }}</h2>
+      {% endif %}
+      {% if has_body %}
+    <div class="case-study__prose">{{ seg.content }}</div>
+      {% endif %}
+      {% if has_quote or seg.quote_credit_name or seg.quote_credit_role %}
+    <blockquote class="case-study__quote">
+    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="24" viewBox="0 0 31 24" fill="none">
+      <path d="M8.43437 0L13.1695 3.91222C10.8019 5.11599 7.69451 8.3511 6.95465 11.0596C7.2506 10.9843 7.91647 10.8339 8.65632 10.8339C11.7637 10.8339 14.3532 13.3166 14.3532 17.0031C14.3532 20.8401 11.2458 24 7.54654 24C3.55131 24 0 20.7649 0 15.2727C0 9.10345 3.25537 3.76176 8.43437 0ZM25.0811 0L29.8162 3.91222C27.4487 5.11599 24.4153 8.3511 23.6014 11.0596C23.8974 10.9843 24.5632 10.8339 25.3031 10.8339C28.4845 10.8339 31 13.3166 31 17.0031C31 20.8401 27.8926 24 24.2673 24C20.2721 24 16.6468 20.7649 16.6468 15.2727C16.6468 9.10345 19.9021 3.76176 25.0811 0Z" fill="#0960F6"/>
+    </svg>
+      {% if has_quote %}
+      <div class="case-study__quote-body">{{ seg.quote_body }}</div>
+      {% endif %}
+      {% if seg.quote_credit_name or seg.quote_credit_role %}
+      <footer class="case-study__quote-footer">
+        {% if seg.quote_credit_name %}
+        <p><strong>{{ seg.quote_credit_name }}</strong></p>
+        {% endif %}
+        {% if seg.quote_credit_role %}
+        <p class="case-study__quote-role">{{ seg.quote_credit_role }}</p>
+        {% endif %}
+      </footer>
+      {% endif %}
+    </blockquote>
+      {% endif %}
+      {% if has_after %}
+    <div class="case-study__prose">{{ seg.body_after_quote }}</div>
+      {% endif %}
+  </section>
+    {% endif %}
+  {% endfor %}
+  </div>
+
+  {% if show_rail %}
+  <div class="case-study__rail">
+    {% if show_result_aside %}
+    <aside class="case-study__result"{% if module.result_label|default('')|trim %} aria-label="{{ module.result_label|escape }}"{% else %} aria-label="Results"{% endif %}>
+      {% if module.result_label|default('')|trim %}
+      <p class="case-study__aside-kicker"><strong>{{ module.result_label }}</strong></p>
+      {% if st.has_stat %}<hr class="case-study__aside-rule">{% endif %}
+      {% endif %}
+      {% if st.has_stat %}
+      <dl class="case-study__stats">
+        {% for row in module.result_stats %}
+          {% if row.stat_value or row.stat_label %}
+          <div class="case-study__stat">
+            {% if row.stat_value %}<dt class="case-study__stat-value">{{ row.stat_value }}</dt>{% endif %}
+            {% if row.stat_label %}<dd class="case-study__stat-label">{{ row.stat_label }}</dd>{% endif %}
+          </div>
+          {% endif %}
+        {% endfor %}
+      </dl>
+      {% endif %}
+      {% if module.result_logo.src %}
+      <div class="case-study__powered-by">
+        <img class="case-study__powered-by-logo" src="{{ module.result_logo.src }}" alt="{{ module.result_logo.alt }}" loading="lazy">
+      </div>
+      {% endif %}
+    </aside>
+    {% endif %}
+    {% if show_tags_aside %}
+    <aside class="case-study__tags"{% if module.product_tags_label|default('')|trim %} aria-label="{{ module.product_tags_label|escape }}"{% else %} aria-label="Product tags"{% endif %}>
+      {% if module.product_tags_label|default('')|trim %}
+      <p class="case-study__aside-kicker"><strong>{{ module.product_tags_label }}</strong></p>
+      {% if st.has_tag %}<hr class="case-study__aside-rule">{% endif %}
+      {% endif %}
+      {% if st.has_tag %}
+      <ul class="case-study__tag-list">
+        {% for row in module.product_tags %}
+          {% if row.tag_label or row.tag_icon.src %}
+          <li class="case-study__tag">
+            {% if row.tag_icon.src %}
+            <img class="case-study__tag-icon" src="{{ row.tag_icon.src }}" alt="{{ row.tag_icon.alt }}" width="{{ row.tag_icon.width }}" height="{{ row.tag_icon.height }}" loading="lazy">
+            {% endif %}
+            {% if row.tag_label %}<span class="case-study__tag-text">{{ row.tag_label }}</span>{% endif %}
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </aside>
+    {% endif %}
+  </div>
+  {% endif %}
+</article>
+{% endif %}

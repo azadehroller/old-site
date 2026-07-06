@@ -1,0 +1,66 @@
+{# Variables #}
+{% set title = module.text.title %}
+{% set eyebrow = module.text.eyebrow %}
+{% set blurb = module.text.blurb %}
+{% set text = module.social_icons.social_text %}
+{% set icons = module.social_icons.icons %}
+
+{# Section Markup #}
+<section class="mx-auto bg-[#F2F2FF] box-shadow-onlight rounded-[32px] lg:min-h-[870px] xl:min-h-full relative">
+    <dl class="mt-16 grid grid-cols-1 sm:grid-cols-1 overflow-hidden rounded-2xl">
+        <div class="text-gx-50 pt-5 px-4 lg:px-6 lg:pt-[3rem] flex flex-col gap-4 pb-[3.8rem]">
+            {% if eyebrow %}
+            <dd class="font-extrabold uppercase">
+                {{ eyebrow || 'ALL-IN-ONE VENUE MANAGEMENT SOFTWARE'}}
+            </dd>
+            {% endif %}
+            <dt class="text-sm font-semibold leading-6">
+                <h2 class="block mb-0 md:mb-3">
+                    {{ title || 'Supporting your business every step of the way' }}
+                </h2>
+            </dt>
+            {% if blurb %}
+                <dd class="text-base">
+                    {{ blurb || 'Whether you manage one venue or 100, you need a solution built to help you succeed. At ROLLER, we help operators do just that' }}
+                </dd>
+            {% endif %}
+            {% if icons %}
+                <div class="flex flex-col lg:flex-row lg:items-center">
+                    <div class="mr-2">{{text || 'Subscribe on your favorite podcast app'}}</div>
+                    <ul class="flex items-center gap-2 mb-0 mt-2 lg:mt-0">
+                        {% for icon in icons %}
+                            {% set href = icon.social_link.url.href %}
+                            {% if icon.social_link.url.type == "EMAIL_ADDRESS" %}
+                            {% set href = "mailto:" + href %}
+                            {% endif %}
+                            {% set rel = [] %}
+                            {% if icon.social_link.no_follow %}
+                            {% do rel.append("nofollow") %}
+                            {% endif %}
+                            {% if icon.social_link.open_in_new_tab %}
+                            {% do rel.append("noopener") %}
+                            {% endif %}
+
+                            <li>
+                                <a href="{{ href }}"
+                                {% if icon.social_link.open_in_new_tab %}target="_blank"{% endif %}
+                                {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                                >
+                                    {% set sizeAttrs = 'width="{{ icon.social_icon.width }}" height="{{ icon.social_icon.height }}"' %}
+                                    {% set loadingAttr = icon.social_icon.loading != 'disabled' ? 'loading="{{ icon.social_icon.loading }}"' : '' %}
+                                    <img src="{{ icon.social_icon.src }}" alt="{{ icon.social_icon.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+                                </a>
+                            </li>
+                        {% endfor%}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        <div class="[&_img]:object-cover [&_img]:w-[100%] overflow-hidden sm:relative lg:absolute bottom-0 xl:relative rounded-b-[32px]">
+            <a href="/the-guest-experience-show/" title="The Guest Experience Show">
+                {# Image #}
+                <img src="https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hub/{{portal_id}}/hubfs/raw_assets/public/rolls-theme/images/module-bg/GX_Show.png" alt="Supporting your business every step of the way" loading="lazy" width="610" height="462">
+            </a>
+        </div>
+    </dl>
+</section>

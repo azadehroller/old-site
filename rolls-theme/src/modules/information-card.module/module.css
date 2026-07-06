@@ -1,0 +1,390 @@
+/* Information Card Module Styles - Tailwind Utility Class Equivalents */
+
+.p-\[24px\] {
+  padding: 24px;
+}
+
+.p-\[32px\] {
+  padding: 32px;
+}
+
+.p-\[56px\] {
+  padding: 56px;
+}
+
+.rounded-\[39\.164px\] {
+  border-radius: 39.164px;
+}
+.gap-\[24px\] {
+  gap: 24px;
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.max-w-\[1312px\] {
+  max-width: 1312px;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.transition-all {
+  transition-property: all;
+}
+
+.duration-\[400ms\] {
+  transition-duration: 400ms;
+}
+
+.ease {
+  transition-timing-function: ease;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+
+.text-\[24px\] {
+  font-size: 24px;
+}
+
+.leading-\[22\.03px\] {
+  line-height: 22.03px;
+}
+
+.py-\[10px\] {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.px-\[16px\] {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.pb-\[8px\] {
+  padding-bottom: 8px;
+}
+
+.text-\[24px\] {
+  font-size: 24px;
+}
+
+.tracking-\[-0\.32px\] {
+  letter-spacing: -0.32px;
+}
+
+.leading-none {
+  line-height: 0;
+}
+
+.text-\[45px\] {
+  font-size: 45px;
+}
+
+.text-\[68px\] {
+  font-size: 68px;
+}
+
+.leading-\[1\.2\] {
+  line-height: 1.2;
+}
+
+.tracking-\[-0\.88px\] {
+  letter-spacing: -0.88px;
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
+.rounded-\[1199\.403px\] {
+  border-radius: 1199.403px;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.border-2 {
+  border-width: 2px;
+}
+
+.border-\[#3c0091\] {
+  border-color: #3c0091;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+.font-\[800\] {
+  font-weight: 800;
+}
+
+.self-baseline {
+  align-self: baseline;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+
+/* Information Card Layout Styles */
+.information-card {
+  position: relative;
+  transition: all 0.4s ease;
+  margin-inline: auto;
+  column-count: 2;
+  column-gap: 24px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 24px;
+}
+
+.information-card figure {
+  margin-bottom: 24px;
+  display: inline-block;          /* important for Safari */
+  width: 100%; 
+  /* prevent splitting between columns */
+  break-inside: avoid;
+  break-inside: avoid-column;
+  -webkit-column-break-inside: avoid; /*  Safari */
+  page-break-inside: avoid;           /* print / older engines */
+}
+.break-inside-avoid {
+  break-inside: avoid;
+  break-inside: avoid-column;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+.information-card figure.span-all-columns {
+ display: flow-root;
+  width: 100%;
+  column-span: all;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@media (max-width: 700px) {
+  .information-card {
+    /* display: grid; */
+    grid-template-columns: 1fr;
+    column-count: 1;
+    width: 100%;
+  }
+  
+  /* .information-card figure:nth-child(1) {
+    grid-row: 1;
+  }
+  
+  .information-card figure:nth-child(2) {
+    grid-row: 3;
+  }
+  
+  .information-card figure:nth-child(3) {
+    grid-row: 5;
+  }
+  
+  .information-card figure:nth-child(4) {
+    grid-row: 2;
+  }
+  
+  .information-card figure:nth-child(5) {
+    grid-row: 4;
+  } */
+}
+
+@media (max-width: 576px) {
+  .information-card {
+    column-count: 1;
+    width: 100%;
+  }
+}
+
+@media (min-width: 640px) {
+  .sm\:text-\[68px\] {
+    font-size: 68px;
+  }
+}
+/*   .hide-on-mobile{ */
+/*     display: none;
+  }
+  .hide-on-desktop{
+    display: block;
+  } */
+/* @media (min-width: 768px) {
+  .hide-on-mobile{
+    display: block;
+  }
+  .hide-on-desktop{
+    display: none;
+  }
+  .md\:text-\[32px\] {
+    font-size: 32px;
+  }
+
+  .md\:p-\[32px\] {
+    padding: 32px;
+  }
+} */
+
+
+.information-card-item {
+    cursor: auto;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(168, 139, 250, 0.1), transparent);
+    /* animation: shimmer 1s linear infinite;  */
+  }
+}
+
+/* 👇 Add this keyframe animation */
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@media (min-width: 1352px) {
+  /* Apply width and height at lg breakpoint and above */
+
+  /* Set dd font-size to 88px at lg breakpoint */
+  .lg\:text-\[88px\] {
+    font-size: 88px;
+  }
+
+  /* Set padding to 56px at lg breakpoint */
+  .lg\:p-\[56px\] {
+    padding: 56px;
+  }
+}
+@keyframes up-and-down {
+    100% {
+      translate: 0 -10%;
+    }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-40px);
+    opacity: 1;
+  }
+}
+/* @keyframes lightning {
+    0%, 90%, 100% {
+      opacity: 0.6;
+      text-shadow: none;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 1;
+      text-shadow: 0 0 10px #fff, 0 0 20px #f7d, 0 0 30px #0ff;
+      filter: brightness(2);
+    }
+  } */
+
+.fade-in-on-scroll.is-visible dd.animate-text span  {
+    position: relative;
+    display: inline-block;
+    animation: up-and-down 0.5s forwards;
+    animation-delay: calc(sibling-index() * 0.1s);
+}
+.fade-in-on-scroll.is-visible dd.animate-text:hover span{
+    position: relative;
+    display: inline-block;
+    animation: up-and-down 0.5s forwards;
+    animation-delay: calc(sibling-index() * 0.1s);
+
+}
+.fade-in-on-scroll.is-visible .slide-up {
+  opacity: 0;
+  transform: translateY(-40px);
+  animation: slide-up 0.5s ease-out forwards;
+  animation-delay: 0.5s;
+}
+.fade-in-on-scroll.is-visible h3.animate-text span {
+    position: relative;
+    display: inline-block;
+    animation: lightning 1s infinite;
+    animation-delay: calc(sibling-index() * 0.1s);
+  }
+  @keyframes lightning {
+    0%, 90%, 100% {
+      filter: brightness(1);
+    }
+    91% {
+      filter: brightness(3);
+    }
+    92% {
+      filter: brightness(0.5);
+    }
+    93% {
+      filter: brightness(2);
+    }
+    94% {
+      filter: brightness(1);
+    }
+  }
+  
+  .lightning-effect {
+    animation: lightning 1s infinite;
+  }

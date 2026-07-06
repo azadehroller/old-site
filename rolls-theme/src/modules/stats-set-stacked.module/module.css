@@ -1,0 +1,18 @@
+.grid-third{
+  display: grid;
+  gap: 32px;
+}
+.stats-set-stacked-title{line-height: 40px;font-size: 32px;margin-block-end:4px;}
+.stats-set-stacked-title-text{font-size: 16px;}
+@media (min-width: 768px){
+  .stats-set-stacked-title-text{font-size: 18px;}
+  .stats-set-stacked-title{line-height: 60px;font-size: 48px;margin-block-end:0;}
+.grid-third{
+  grid-template-columns: repeat(3, minmax(0, 416px));
+  & .grid-third-inner{
+  grid-column: 3;
+}
+}
+}
+.stats-set-stacked-wrapper:first-child{padding-top:0px}
+.stats-set-stacked-wrapper:last-child{padding-bottom:0px}

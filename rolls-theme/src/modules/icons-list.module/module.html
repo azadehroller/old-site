@@ -1,0 +1,185 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macros %}
+
+
+{# Variables #}
+{% set items = module.items %}
+{% set image = module.image.image_src %}
+
+{# Animation #}
+{% set animation = module.settings.animation %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+
+{% require_css %}
+    <style>
+        #js-resultsItemContainer-{{name}}.js-resultsItemContainer {
+            cursor: pointer;
+            display: flex;
+            height: 4rem;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            width: 4rem;
+        }
+        #js-resultsItemContainer-{{name}}.js-resultsItemContainer {
+            width: 48px;
+            height: 48px;
+        }
+    </style>
+{% end_require_css %}
+{# Section Markup #}
+<section id="results-list-{{name}}" class="icons-list py-3 js-resultsItemsSection">
+    <div class="grid grid-flow-row-dense grid-cols-1 md:grid-cols-{% if !image.src %}1{% else %}3{% endif %} md:gap-3 gap-5">
+        <div class="grid grid-cols-1 {% if !image.src %}md:grid-cols-4 col-auto{% else %}md:grid-cols-2 col-span-2{% endif %} gap-4 gap-y-5 md:gap-y-6">
+            {% for item in items %}
+                {% set item_data =  {
+                    'title': item.title,
+                    'content': item.text,
+                    'label': item.link_label,
+                    'href': item.link.url.href,
+                    'url_type': item.link.url.type,
+                    'no_follow': item.link.no_follow,
+                    'new_tab': item.link.open_in_new_tab,
+                    'animation_file': item.animation_file,
+                    'icon': item.icon
+                } %}
+                {% set href = item_data.href %}
+                {% if item_data.url_type == "EMAIL_ADDRESS" %}
+                    {% set href = "mailto:" + href %}
+                {% endif %}
+                {% set rel = [] %}
+                {% if item_data.no_follow %}
+                    {% do rel.append("nofollow") %}
+                {% endif %}
+                {% if item_data.open_in_new_tab %}
+                    {% do rel.append("noopener") %}
+                {% endif %}
+                <div class="flex flex-col gap-3 js-resultsItemsLink">
+                    {% if animation %}
+                        <div id="js-resultsItemContainer-{{name}}" class="js-resultsItemContainer" data-lottie={{ item_data.animation_file }}></div>
+                    {% else %}
+                        <div class="{{ macros.setTextColor(theme, 'bg-primary-10', 'bg-[#0960F6]', 'bg-gx-90') }} rounded-lg w-[64px] h-[64px] flex justify-center items-center">
+                            {{ item_data.icon }} 
+                        </div>
+                    {% endif %}
+                    <div class="{{ macros.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-90') }}  flex flex-col gap-2">
+                        <h3 class="text-lg font-extrabold">{{ item_data.title }}</h3>
+                        <div class="text-base">{{ item_data.content }}</div>
+                        <div>
+                            {% if item_data.label %}
+                                <a href="{{ href || "https://www.roller.software/" }}" class='icons-list-link mt-auto relative inline-flex items-center gap-2 font-semibold cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 bg-transparent text-primary-50 font-serif group'
+                                    {% if link.open_in_new_tab %}target="_blank"{% endif %}
+                                    {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                                    >
+                                    <span>{{ item_data.label || "Link Label here"}}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M6.66656 4L5.72656 4.94L8.7799 8L5.72656 11.06L6.66656 12L10.6666 8L6.66656 4Z" fill="#033180"/>
+                                    </svg>
+                                    
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if image.src %}
+            <div class="w-full h-full overflow-hidden [&>img]:object-cover [&>img]:w-full [&>img]:h-full rounded-[42px] hidden md:block">
+                {% image
+                    label='Image', 
+                    alt='{{image.alt}}', 
+                    src='{{image.src}}',
+                    loading="lazy",
+                    no_wrapper=True
+                %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+{% if animation %}
+    {# External assets #}
+        {{ require_js('https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js', "footer") }} 
+    {# Javascript #}
+{% endif %}
+
+{# JavaScript #}
+{% if animation %}
+    {% require_js position="footer" defer="true" %}
+        <script>
+            const resultsItems = document.querySelectorAll('.js-resultsItemsLink');
+
+            const playSVGAnimation = () => {
+                let currentIndex = 0;
+                const intervalTime = 3000; // Set your desired interval time in milliseconds
+
+                const startAnimations = () => {
+                    setInterval(() => {
+                        if (resultsItems[currentIndex]) {
+                            const resultsItemContainer = resultsItems[currentIndex].querySelector('.js-resultsItemContainer');
+                            if (resultsItemContainer) {
+                                resultsItemContainer.animation.play();
+                                resultsItemContainer.classList.add('disabled');
+                            }
+
+                            // Stop the previous animation if it's not the first iteration
+                            if (currentIndex > 0) {
+                                const previousIndex = currentIndex - 1;
+                                const previousItemContainer = resultsItems[previousIndex].querySelector('.js-resultsItemContainer');
+                                if (previousItemContainer) {
+                                    previousItemContainer.animation.stop();
+                                    previousItemContainer.classList.remove('disabled');
+                                }
+                            }
+
+                            currentIndex = (currentIndex + 1) % resultsItems.length;
+                        }
+                    }, intervalTime);
+                };
+
+                resultsItems.forEach((resultsItem) => {
+                    const resultsItemContainer = resultsItem.querySelector('.js-resultsItemContainer');
+
+                    if (resultsItemContainer && typeof lottie !== 'undefined') {
+                        const animation = lottie.loadAnimation({
+                            container: resultsItemContainer,
+                            renderer: 'svg',
+                            loop: true,
+                            autoplay: false,
+                            path: resultsItemContainer.getAttribute('data-lottie'),
+                        });
+
+                        resultsItemContainer.animation = animation;
+                    }
+
+                    resultsItem.addEventListener('mouseenter', () => {
+                        resultsItemContainer.animation.play();
+                        resultsItemContainer.classList.add('disabled');
+                    });
+
+                    resultsItem.addEventListener('mouseleave', () => {
+                        resultsItemContainer.animation.stop();
+                    });
+                });
+
+                // Intersection Observer to start animation when the section comes into view
+                const section = document.querySelector('.js-resultsItemsSection'); // The parent section containing all resultsItems
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            startAnimations();
+                            observer.disconnect(); // Stop observing once the animations have started
+                        }
+                    });
+                });
+
+                observer.observe(section);
+            }
+
+            playSVGAnimation();
+        </script>
+    {% end_require_js %}
+{% endif %}

@@ -1,0 +1,73 @@
+{# Features Unfold — semantic section; native details/summary; link rows only when label + URL exist #}
+{% set eyebrow = module.eyebrow %}
+{% set title = module.title %}
+{% set introduction = module.introduction %}
+{% set panels = module.panels %}
+
+<section class="fu" data-module="features-unfold">
+  <header class="fu-header">
+  {% if eyebrow %}
+    <strong class="fu-eyebrow">{{ eyebrow }}</strong>
+  {% endif %}
+  {% if title %}
+    <h2 class="fu-title">{{ title }}</h2>
+  {% endif %}
+  {% if introduction %}
+    <div class="fu-intro hs-richtext">{{ introduction }}</div>
+  {% endif %}
+    </header>
+  <div class="fu-info">
+  {% for panel in panels %}
+    <details class="fu-panel">
+      <summary class="fu-summary">
+        {% if panel.title %}<span class="fu-panel-title">{{ panel.title }}</span>{% endif %}
+        <span class="fu-toggle">
+          <span class="fu-toggle-copy fu-toggle-copy--collapsed">{{ panel.label_when_collapsed }}</span>
+          <span class="fu-toggle-copy fu-toggle-copy--open">{{ panel.label_when_open }}</span>
+          <svg class="fu-icon fu-icon--plus" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5" stroke="currentColor"/>
+            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 8v8M8 12h8"/>
+          </svg>
+          <svg class="fu-icon fu-icon--minus" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" focusable="false" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5" stroke="currentColor"/>
+            <path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M8 12h8"/>
+          </svg>
+        </span>
+      </summary>
+
+      {% if panel.description %}
+        <div class="fu-panel-desc hs-richtext">{{ panel.description }}</div>
+      {% endif %}
+      {%- if panel.items and panel.items|length > 0 %}
+        <ul class="fu-grid">{%- for row in panel.items %}
+            {%- set href = row.destination.url.href %}
+            {%- set label_trim = row.link_text|default('')|trim %}
+            {%- if href and label_trim %}
+              {%- set url_type = row.destination.url.type %}
+              {%- set no_follow = row.destination.no_follow %}
+              {%- set new_tab = row.destination.open_in_new_tab %}
+              {%- set rel = [] %}
+              {%- if url_type is equalto 'EMAIL_ADDRESS' %}
+                {%- set href = 'mailto:' + href %}
+              {%- endif %}
+              {%- if no_follow %}{% do rel.append('nofollow') %}{% endif %}
+              {%- if new_tab %}{% do rel.append('noopener') %}{% endif %}
+              <li class="fu-grid-item">
+                <a class="fu-link"
+                  href="{{ href }}"
+                  {%- if new_tab %} target="_blank"{% endif %}
+                  {%- if rel|length %} rel="{{ rel|join(' ') }}"{% endif %}>
+                  {{ row.link_text }}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12Z" fill="#EBF2FE"/>
+                  <path d="M11.9998 6.6665L11.0598 7.6065L14.7798 11.3332H6.6665V12.6665H14.7798L11.0598 16.3932L11.9998 17.3332L17.3332 11.9998L11.9998 6.6665Z" fill="#005EFF"/>
+                  </svg>
+                </a>
+              </li>
+            {%- endif %}
+          {%- endfor %}</ul>
+      {% endif %}
+    </details>
+  {% endfor %}
+      </div>
+</section>

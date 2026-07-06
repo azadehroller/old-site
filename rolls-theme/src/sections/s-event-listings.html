@@ -1,0 +1,44 @@
+<!--
+   templateType: section
+   label: Event Listings
+   isAvailableForNewContent: true
+   screenshotPath: ../images/section-previews/event-listings.png
+   description: "Event listings sections + heading composition"
+-->
+
+{% dnd_section 
+    class="s-layout s-event-listings"
+    background_color={{ context.background_color or "#fff" }},
+%}
+    {% dnd_column %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+                content={
+                    "eyebrow": context.eyebrow || "SPECIAL EVENT",
+                    "title": context.title || "Special event name",
+                    "text":  context.text || " "
+                },
+                styles={
+                    "textalignment": {
+                        "text_align": context.text_align || "LEFT",
+                    },
+                    "heading_type": context.heading_type || "h3",                
+                    "text_type": context.text_type || "base",
+                    "eyebrow_type": context.eyebrow_type || "div",
+                    "theme": context.theme || "dark",
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Events Listing #}
+            {% dnd_module
+                label="Events Listing",
+                path='../modules/events-listing'
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

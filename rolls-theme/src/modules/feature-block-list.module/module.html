@@ -1,0 +1,17 @@
+{% set items = module.items %}
+
+{% if items|length > 0 %}
+<div class="feature-block-list">
+  {% for item in items %}
+    <figure class="feature-block-list-item">
+      <figcaption class="feature-block-list-content">
+        <h2 class="feature-block-list-heading">{{ item.title }}</h2>
+        <p class="feature-block-list-description">{{ item.description }}</p>
+      </figcaption>
+      {% if item.image.src %}
+        <img class="feature-block-list-image" src="{{ item.image.src }}" alt="{{ item.image.alt }}" width="{{ item.image.max_width }}" height="auto" loading="lazy">
+      {% endif %}
+    </figure>
+  {% endfor %}
+</div>
+{% endif %}

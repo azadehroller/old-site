@@ -1,0 +1,110 @@
+<!--  -->
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+{% import "../../templates/macros/macros.html" as image %}
+
+{% set media_type = module.media_type %}
+{% set video_url = module.video_url %}
+{% set video_thumbnail = module.video_thumbnail.src %}
+{% set static_image = module.static_image.src %}
+{% set static_image_alt = module.static_image.alt %}
+{% set high_priority = module.high_priority_loading %}
+
+{# Preload critical images for better LCP when high priority is enabled #}
+{% if high_priority %}
+  {% if media_type == "video" and video_thumbnail %}
+    {% require_head %}
+      <link rel="preload" as="image" href="{{ video_thumbnail }}" fetchpriority="high">
+    {% end_require_head %}
+  {% elif media_type == "image" and static_image %}
+    {% require_head %}
+      <link rel="preload" as="image" href="{{ static_image }}" fetchpriority="high">
+    {% end_require_head %}
+  {% endif %}
+{% endif %}
+
+{# Generate unique IDs for accessibility #}
+{% set unique_id = "media-frame-" ~ name|replace("_", "-") %}
+{% set modal_id = unique_id ~ "-modal" %}
+{% set video_id = unique_id ~ "-video" %}
+
+{% set media_type = module.media_type %}
+{% set video_id = module.video_url %}
+{% set thumbnail = module.video_thumbnail %}
+
+
+
+{% require_css %}
+    <style>
+    {% scope_css %}
+        .wistia_click_to_play { width: 100%; height: 100%; }
+        .wistia_click_to_play:hover span:before { background: #fff; }
+        /* Reserve space to prevent layout shift */
+        .relative.max-w-\[548px\] {
+            aspect-ratio: 548 / 310;
+            contain: layout;
+        }
+      .shadow-on-light{
+        box-shadow: 0 24px 40px 0 rgba(7, 77, 197, 0.10), 0 8px 16px 0 rgba(7, 77, 197, 0.05);
+      }
+    {% end_scope_css %}
+    </style>
+{% end_require_css %}
+
+{% if media_type == "video" %}
+<div id="image-video-modal-{{name}}" class="video-image-main-wrapper">
+    {# Container with max width and relative positioning #}
+    <div class="video-image-container relative">
+        {# Thumbnail image container #}
+        <div class="flex justify-center image-wrapper">
+            <img src="{{ resize_image_url(thumbnail.src|escape_html, 548, 310, 548) }}" 
+                 alt="{{thumbnail.alt}}" 
+                 class="video-image relative  " 
+                width="1264" 
+                height="710"
+              {% if high_priority %}fetchpriority="high"{% endif %}
+              {% if high_priority %}loading="eager"{% else %}loading="lazy"{% endif %}
+                 decoding="async">
+        </div>
+        {# Video player overlay centered absolutely #}
+        <div 
+            class="wistia_embed wistia_async_{{ video_id }} top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute w-full h-full flex justify-center items-center popover=true popoverContent=html" 
+            id="wistia-{{ video_id }}-{{loop.index}}"
+            role="button"
+            aria-label="Play video"
+            data-video={{ video_id }}>
+
+ <button 
+            class="media-frame-play-button" 
+            aria-label="Play video" 
+            data-video-url="{{ video_url }}" 
+            data-modal-id="{{ modal_id }}"
+            type="button">
+            <img 
+              src="{{ get_asset_url('/rolls-theme/images/play-btn.svg') }}" 
+              alt="Play" 
+              class="play-icon media-frame-play-btn-icon" 
+              width="48" 
+              height="48" 
+              loading="lazy" 
+              decoding="async">
+          </button>
+            </div>
+    </div>
+</div>
+  {% else %}
+        {# Static image only #}
+        <div class="media-frame-content">
+          <div class="media-frame-image-wrapper">
+            <img 
+              src="{{ static_image }}" 
+              alt="{{ static_image_alt|default('Media frame image') }}" 
+              class="media-frame-image" 
+              width="1312" 
+              height="657"
+              {% if high_priority %}fetchpriority="high"{% endif %}
+              {% if high_priority %}loading="eager"{% else %}loading="lazy"{% endif %}
+              decoding="async">
+          </div>
+        </div>
+      {% endif %}

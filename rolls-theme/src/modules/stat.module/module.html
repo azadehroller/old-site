@@ -1,0 +1,15 @@
+{# Variables #}
+{% set number = module.stats_settings.stats_number %}
+{% set text = module.stats_settings.stats_text %}
+{% set icon = module.stats_icon.icon %}
+
+{# Section Markup #}
+<section class="text-left">
+    <div class="relative before:absolute before:w-[2px] before:h-[100%] before:bg-secondary-50 before:top-0 before:left-0 pl-3">
+        <div class="flex items-end gap-x-2">
+            <span class="font-bold text-primary-50 text-[40px] leading-10">{{number}}</span>
+            <span>{{icon}}</span>
+        </div>
+        <div class="text-primary-50 leading-6">{{text}}</div>
+    </div>
+</section>

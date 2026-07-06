@@ -1,0 +1,24 @@
+<!--
+  templateType: section
+  label: Features Stacked content
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/features-vertical-slider.png
+  description: "Two-column section with an image (5:4 aspect ratio) on the left, label, heading, and text on the right."
+-->
+
+{% dnd_section 
+  background_color={{ context.background_color || "" }}
+  class="s-layout s-features-stacked-content"
+%}
+     {% dnd_column
+    %}
+        {% dnd_row %}
+            {% dnd_module path="../modules/features-stacked-content",
+                label="Module: Fetures Stacked Content",
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+
+    {% end_dnd_column %}
+  
+{% end_dnd_section %}

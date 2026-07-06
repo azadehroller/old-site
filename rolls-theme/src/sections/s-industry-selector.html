@@ -1,0 +1,23 @@
+<!--
+    templateType: section
+    label: Industry Selector
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/case-study.png
+    description: "One column with the industry-selector module"
+-->
+
+{% dnd_section 
+    vertical_alignment="MIDDLE",
+    class="s-layout s-industry-selector"
+%}
+    {% dnd_column
+    %}
+        {% dnd_row %}
+            {% dnd_module 
+                path="../modules/industry-selector-features-global",
+                label="Module: Industry Selector Features (Global)",
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

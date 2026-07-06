@@ -1,0 +1,26 @@
+<!--
+    templateType: section
+    isAvailableForNewContent: true
+    label: Logo Set
+    screenshotPath: ../images/section-previews/logo-set.png
+    description: "Section with Logo set module"
+-->
+
+{% dnd_section 
+    class="s-layout s-logo-set"
+%}
+    {% dnd_column  %}
+        {% dnd_row %}
+            {% dnd_module
+                path="../modules/logo-set",           
+                styles={
+                    "theme": "light",
+                    "textalignment": {
+                        "text_align": "LEFT",
+                    },
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {%end_dnd_column %}
+{% end_dnd_section%}

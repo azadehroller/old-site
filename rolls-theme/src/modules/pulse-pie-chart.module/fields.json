@@ -1,0 +1,172 @@
+[ {
+  "id" : "chart-settings",
+  "name" : "chart_settings",
+  "label" : "Chart Settings",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "chart-title",
+    "name" : "chart_title",
+    "label" : "Chart Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Market Share Distribution"
+  }, {
+    "id" : "chart-subtitle",
+    "name" : "chart_subtitle",
+    "label" : "Chart Subtitle",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Breakdown by customer segment"
+  }, {
+    "id" : "show-percentages",
+    "name" : "show_percentages",
+    "label" : "Show Percentage Labels",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "show-legend",
+    "name" : "show_legend",
+    "label" : "Show Legend",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "animation-duration",
+    "name" : "animation_duration",
+    "label" : "Animation Duration (ms)",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 2000
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "chart-data",
+  "name" : "chart_data",
+  "label" : "Chart Data",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : 8,
+    "sorting_label_field" : "segment_label",
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "segment-label",
+    "name" : "segment_label",
+    "label" : "Segment Label",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Enterprise"
+  }, {
+    "id" : "segment-value",
+    "name" : "segment_value",
+    "label" : "Value",
+    "required" : true,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 45
+  }, {
+    "id" : "segment-color",
+    "name" : "segment_color",
+    "label" : "Segment Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#3B82F6",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "chart-style",
+  "name" : "chart_style",
+  "label" : "Chart Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "chart-size",
+    "name" : "chart_size",
+    "label" : "Chart Size (px)",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 300
+  }, {
+    "id" : "donut-mode",
+    "name" : "donut_mode",
+    "label" : "Donut Mode (hollow center)",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "legend-position",
+    "name" : "legend_position",
+    "label" : "Legend Position",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "right", "Right" ], [ "bottom", "Bottom" ], [ "left", "Left" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "right"
+  }, {
+    "id" : "hover-effect",
+    "name" : "hover_effect",
+    "label" : "Enable Hover Effects",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

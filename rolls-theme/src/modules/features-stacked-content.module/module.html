@@ -1,0 +1,169 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+{% import "../../templates/macros/macros.html" as thumbnail %}
+
+{% set items = module.items %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set heading_type = module.styles.heading_type %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set text_type = module.styles.text_type %}
+{% set eyebrow_type = module.styles.eyebrow_type %}
+{% set eyebrow_style = module.styles.eyebrow_style %}
+{% set display_type = module.styles.display_type %}
+
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='') %}
+    {% set textColor = (themeColor == 'light') ? onDarkColor : (themeColor == 'gxscore') ? gxColor : defaultColor %}
+{{ textColor }}
+{% endmacro %}
+
+{% macro heading(tag, title, display_tag)%}
+    <{{tag || "h1"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0">{{title || "Implementation Services"}}</{{tag || "h1"}}>
+{% endmacro%}
+
+{% macro eyebrow(tag, eyebrow_type,eyebrow_style)%}
+      {% if eyebrow_style == 'red' %}
+        {% set eyebrowClasses = "text-secondary-50" %}
+      {% elif eyebrow_style == 'gradient' %}
+        {% set eyebrowClasses = "gradient" %}
+      {% endif %}
+<{{tag || "div"}} class="{{ setTextColor(theme, 'text-secondary-50', '', 'text-gx-90') }} {{ eyebrowClasses }} uppercase font-extrabold {% if eyebrow_type %}small{% endif %} eyebrow"><span>{{ eyebrow || "CUSTOMIZED TO YOUR VENUE"}}</span></{{tag || "div"}}>
+{% endmacro%}
+
+<section id="features-stacked-content-{{name}}" class="grid gap-7 features-stacked-content">
+    {% for item in items %}
+        {# Content #}
+        {% set eyebrow  = item.content.text.eyebrow %}
+        {% set title  = item.content.text.title %}
+        {% set text  = item.content.text.text %}
+        {% set image  = item.image.img %}
+        {% set position  = item.image.position %}
+        {% set ratio  = item.image.image_ratio %}
+        {# Stats #}
+        {% set number = item.content.stats.number %}
+        {% set stats_text = item.content.stats.text %}
+        {% set icon = item.content.stats.icon %}
+        {# Quote #}
+        {% set quote_text = item.content.quote.content.text %}
+        {% set author = item.content.quote.content.author %}
+        {% set quote_title = item.content.quote.content.title %}
+        {% set image_options = item.content.quote.image.image_options %}
+        {% set avatar = item.content.quote.image.avatar %}
+        {% set logo = item.content.quote.image.logo %}
+        {# CTA #}
+        {% set btn_label = item.content.cta.cta_text %}
+        {% set href = item.content.cta.cta_link.url.href %}
+        {% set rel = [] %}
+        {% set url_type = item.content.cta.cta_link.url.type %}
+        {% set no_follow = item.content.cta.cta_link.no_follow %}
+        {% set new_tab = item.content.cta.cta_link.open_in_new_tab %}
+
+        {% set svg_icon = item.content.cta.icon %}
+        {% set icon_position = item.content.cta.icon_position %}
+
+        {% set bg_kind = item.content.cta.kind %}
+
+        {# Sets attributes used for the link field #}
+
+        {% if url_type is equalto 'EMAIL_ADDRESS' %}
+        {% set href = 'mailto:' + href %}
+        {% endif %}
+        {% if no_follow %}
+        {% do rel.append('nofollow') %}
+        {% endif %}
+        {% if new_tab %}
+        {% do rel.append('noopener') %}
+        {% endif %}
+
+        {% require_css %}
+        <style>
+            {% scope_css %}
+
+            {# Button wrapper #}
+            {% if alignment %}
+                .button-wrapper {
+                    text-align: {{ alignment.horizontal_align }};
+                }
+            {% endif %}
+
+            {% end_scope_css %}
+        </style>
+        {% end_require_css %}
+
+
+        <div class="grid features-stacked-content-grid  gap-4 items-center">
+            <div class="order-last {% if position == 'right'%}md:order-first{% endif %} grid gap-4">
+                <header class="grid gap-4 text-{{alignment|lower || "center"}} {{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}">
+                    {% if eyebrow %}
+                        {{ eyebrow(eyebrow_type, eyebrow) }}
+                    {% endif %}
+                    {{ heading(heading_type, title, display_type) }}
+                    {% if text %}
+                        <div class="main-text text-{{text_type}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4">{{ text || "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice & guided training sessions to get the most value from ROLLER." }}</div>
+                    {% endif %}
+                </header>
+                {% if number %}
+                <div class="relative {% if theme == 'gxscore' %} before:absolute before:w-[2px] before:h-full before:bg-gx-90 before:top-0 before:left-0 {% else %} before:absolute before:w-[2px] before:h-full before:bg-secondary-50 before:top-0 before:left-0 {% endif %} pl-3 my-2 md:my-3">
+                    <div class="flex items-end gap-x-2">
+                        <span class="font-bold {{ setTextColor(theme, 'text-primary-50', '', 'text-gx-80') }} text-[40px] leading-10">{{number || '$2B'}}</span>
+                        <span >{{icon}}</span>
+                    </div>
+                    <div class="text-primary-50 leading-6">{{stats_text || 'increase in conversion rate, when using progressive checkout'}}</div>
+                </div>
+                {% endif %}
+                {% if quote_text %}
+                <div class="grid gap-3 relative {% if theme == 'gxscore' %} before:absolute before:w-[2px] before:h-full before:bg-gx-90{% else %} before:absolute before:w-[2px] before:h-full before:bg-secondary-50{% endif %} pl-3 my-2 md:my-3">
+                    <div class="{{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }} leading-6">{{quote_text}}</div>
+                    <div class="flex items-center gap-3">
+                        {% if image_options || "avatar" %}
+                            {% if image_options == 'avatar' %}
+                                <figure class="w-[72px] h-[72px] rounded-full bg-neutral-white grid items-center">
+                                    {% set sizeAttrs = 'width="72" height="72"' %}
+                                    {% set loadingAttr = avatar.loading != 'disabled' ? 'loading="{{ avatar.loading }}"' : '' %}
+                                    <img src="{{avatar.src}}" alt="{{avatar.alt}}" class="object-cover m-auto" {{sizeAttrs}}>
+                                </figure>
+                            {% elif image_options == 'logo' %}
+                                <figure class="w-auto h-auto  grid items-center logo-container">
+                                    {% set sizeAttrs = 'width="' ~ logo.width ~ '" height="auto"' %}
+                                    {% set loadingAttr = logo.loading != 'disabled' ? 'loading="{{ logo.loading }}"' : '' %}
+                                    <img src="{{logo.src}}" alt="{{logo.alt}}" class="object-cover" {{sizeAttrs}} {{loadingAttr}}>
+                                </figure>
+                            {% else %}
+                            {% endif %}
+                        {% endif %}
+                        <div class="font-semibold {{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }} text-[40px]">
+                            {% if author %}
+                                <div class="text-base font-semibold block">{{ author }}</div>
+                            {% endif %}
+                            {% if quote_title %}
+                                <div class="text-base font-normal">{{ quote_title }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if href %}
+                <div class="button-wrapper my-2 md:my-3 [&_a]:justify-start {% if alignment.horizontal_align == 'LEFT'%}text-left {% elif alignment.horizontal_align == 'CENTER' %}text-center {% elif alignment.horizontal_align == 'RIGHT' %}text-right{% endif%}">
+                    <a class="{{ button.buttons_settings(bg_kind || 'primary') }} font-serif" href="{{ href }}"
+                    id="button_{{name}}"
+                    {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+                    {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                    >
+                        {% if svg_icon %}
+                        <div class="flex justify-center items-center {% if icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+                        {{svg_icon || '<svg class="transition-transform ease-out duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none"><rect width="40" height="40" fill="#FF290C" rx="20"></rect><path fill="#fff" d="m20 12-1.41 1.41L24.17 19H12v2h12.17l-5.58 5.59L20 28l8-8-8-8Z"></path></svg>'}}
+                        </div>
+                    {% endif %}
+                        {# Button label #}
+                        <span class="blue-30">{{ btn_label || "Link Label here" }}</span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <figure class="[&>img]:aspect-square js-slide-in">
+                <img src="{{ resize_image_url(image.src|escape_html, 0, 0, 612) }}" alt="{{image.alt}}" class="object-cover w-full h-full" width="612" height="612" loading="{{image.loading}}">
+            </figure>
+        </div>
+    {% endfor %}
+</section>

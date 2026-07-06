@@ -1,0 +1,214 @@
+{# Variables #}
+{% set graphics_pie = module.counter %}
+{% set graphics_bar = module.graphic_bar %}
+{% set graphics_line = module.graphic_line %}
+{% set type = module.type %}
+{% set theme = module.styles.theme %}
+
+{%- macro setThemeColor(themeColor, defaultColor='', onIRColor='') -%}
+  {%- set colorMap = {
+    'default': defaultColor,
+    'industry_report': onIRColor
+  } -%}
+  {%- set bgColor = colorMap[themeColor] or defaultColor -%}
+  {{ bgColor }}
+{%- endmacro -%}    
+
+{% require_css %}
+    <style>
+        {% scope_css %}
+
+            {# Animation type == Pie #}
+            .animation-pie {
+                width: 100%;
+                height: auto;
+                max-width: 200px;
+                position: relative;
+            }
+
+            @media (min-width: 768px) {
+                .animation-pie {
+                    max-width: 245px;
+                }
+            }
+
+            .animation-pie svg, .animation-bar svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            circle {
+                fill: none;
+                stroke: transparent;
+                stroke-width: 30px;
+            }
+
+            circle#white {
+                fill: none;
+                stroke: #fff;
+                stroke-width: 25px;
+            }
+            
+            circle#neutral-10 {
+                fill: none;
+                stroke: #F2F2F2;
+                stroke-width: 20px;
+            }
+
+            .animation-pie .caption {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -45%);
+                transition-duration: 0.6s;
+                transition-property: opacity, transform;
+                transition-timing-function: ease-in-out;
+                opacity: 0;
+            }
+
+            {# Animation type == Bar #}
+            .animation-bar {
+                width: 100%;
+                height: auto;
+                max-width: {{ setThemeColor(theme, '180px', '118px') }};
+                margin: 0 {{ setThemeColor(theme, 'auto', '25px') }};
+                position: relative;
+            }
+
+            .animation-bar .caption {
+                opacity: 0;
+                transform: translateY(25%);
+                transition-duration: 0.6s;
+                transition-delay: 0.5s;
+                transition-property: opacity, transform;
+                transition-timing-function: ease-in-out;
+            }
+
+            {# Animation type == Line #}
+            .animation-line ul {
+                opacity: 0;
+                transform: translateY(5%);
+                transition-duration: 0.6s;
+                transition-delay: 0.5s;
+                transition-property: opacity, transform;
+                transition-timing-function: ease-in-out;
+            }
+
+        {% end_scope_css %}
+    </style>
+{% end_require_css %}
+    <div id="animation-graph-{{name}}" class="js-slide-in overflow-hidden pt-5 md:pt-8 {{ setThemeColor(theme, 'md:py-0', 'bg-[#F5F8FF] border-2 border-[#CEDFFD] rounded-[32px]') }}">
+        <div class="flex flex-row gap-0 items-center justify-center pt-6 pb-7 md:pb-8 px-3 md:px-2">
+            {% for graphic in graphics_pie %}
+                {% set second_calc = (653 - 653 * graphic.number/100) %}
+                {% require_css %}
+                    <style>
+                        {% scope_css %}
+                            #animation-graph-{{name}}.animate circle#gradient-{{ loop.index }} {
+                            fill: none;
+                                stroke: url(#paint0_linear_2626_5283_{{name}});
+                                stroke-width: 37px;
+                                stroke-dasharray: 653;
+                                stroke-dashoffset: 653;
+                                animation: anim-{{ loop.index }} 1s linear forwards;
+                            }
+
+                            @keyframes anim-{{ loop.index }} {
+                                100% {
+                                    stroke-dashoffset: {{second_calc}};
+                                }
+                            }
+
+                            #animation-graph-{{name}}.animate .caption {
+                                opacity: 1;
+                                transform: translate(-50%, -50%);
+                            }
+                        {% end_scope_css %}
+                    </style>
+                {% end_require_css %}
+                <div class="animation-pie">
+                    <div class="caption text-center text-[#0960F6] flex flex-col gap-1">
+                        {% if graphic.title %}
+                            <div class="{{ setThemeColor(theme, 'text-base', 'text-sm leading-4') }}">{{graphic.title}}</div>
+                        {% endif %}
+                        <div id="number" class="{{ setThemeColor(theme, 'text-3xl md:text-5xl', 'text-3xl md:text-6xl') }} font-extrabold" data-number="{{graphic.number || 55}}"></div>
+                        {% if graphic.caption %}
+                            <div class="{{ setThemeColor(theme, 'text-base', 'text-sm leading-4') }}">{{graphic.caption}}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor%}
+        </div>
+        <div><img src='{{image.src || get_asset_url("../../images/ir-bg-2.png")}}' alt="{{title}}" class=""></div>
+    </div>
+
+
+<script>
+    (function() {
+
+        function updateCounter(counter) {
+            if(counter.count >= counter.target) {
+                return counter;
+            }
+
+            return {
+                ...counter,
+                count: Math.min(counter.count + 1, counter.target), // Increment by 10 instead of 1
+            }
+        }
+
+        function updateCounters(counters) {
+            return counters.map(updateCounter);
+        }
+
+        function shouldContinueAnimation(counters) {
+            return counters.some((counter) => counter.count < counter.target);
+        }
+
+        function startAnimation(entries, observer) {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    let numbers = Array.from(entry.target.querySelectorAll("[data-number]"));
+
+                    let counters = numbers.map((number) => {
+                        let dataNumber = number.getAttribute("data-number");
+                        return { element: number, count: 0, target: parseInt(dataNumber) };
+                    });
+
+                    let lastUpdate = 0;
+
+                    function animate() {
+                        counters = updateCounters(counters);
+
+                        counters.forEach((counter) => {
+                            counter.element.innerHTML = `${counter.count}%`;
+                        });
+
+                        if (shouldContinueAnimation(counters)) {
+                            requestAnimationFrame(animate, 10000);
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+
+                    {# Add CSS to trigger animation #}
+                    entry.target.classList.add("animate");
+
+                    // Once the animtion starts, disconnect the observer
+                    observer.disconnect();
+                }
+            });
+        }
+
+        const section = document.querySelector("#animation-graph-{{name}}"); // Replace 'section-id' with the actual ID of the section
+
+        const observer = new IntersectionObserver(startAnimation, {
+            root: null,
+            rootMargin: "100px",
+            threshold: 0.35, // Adjust the threshold value as needed
+        });
+
+        observer.observe(section);
+        
+    })();
+</script>

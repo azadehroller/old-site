@@ -1,0 +1,49 @@
+{# Variables #}
+{% set eyebrow = module.content.eyebrow %}
+{% set title = module.content.title %}
+{% set description = module.content.description %}
+{% set reports = module.content.reports %}
+{% set bg = module.style.add_bg %}
+
+
+
+{# Module wrapper #}
+  {% if eyebrow %}
+    <strong class="reports-content-eyebrow text-[#38F6FF] uppercase font-extrabold text-lg leading-[27px]">{{ eyebrow }}</strong>
+  {% endif %}
+  <div class="reports-container relative grid">
+    
+    {# Left section - Main content #}
+    <section class="reports-content flex flex-col gap-3 w-full lg:w-[847px] flex-shrink-0">
+
+      
+      {% if title %}
+        <h2 class="reports-main-heading text-neutral-white font-extrabold text-[32px] md:text-[48px] leading-[40px] md:leading-[60px] tracking-[-0.32px] md:tracking-[-0.48px] my-0">{{ title }}</h2>
+      {% endif %}
+      
+      {% if description %}
+        <div class="description text-neutral-white text-base leading-6">{{ description }}</div>
+      {% endif %}
+    </section>
+
+    {# Right aside - Reports list #}
+    <aside class="reports-list flex flex-col w-full lg:w-[415px] flex-shrink-0">
+      {% for report in reports %}
+        <div class="report-item grid">
+          {% if report.title|length > 0 %}
+            <h3 class="report-item-title text-neutral-white font-extrabold text-2xl leading-[30px] my-0">{{ report.title }}</h3>
+          {% endif %}
+          
+          {% if report.link.url.href %}
+            <a href="{{ report.link.url.href }}" class="report-link inline-flex items-center gap-2 text-neutral-white font-semibold text-base leading-6 hover:opacity-80 transition-opacity"{% if report.link.open_in_new_tab %} target="_blank" rel="noopener noreferrer"{% endif %}>
+              Learn more
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </aside>
+
+  </div>

@@ -1,0 +1,44 @@
+<!--
+   templateType: section
+   label: Event Listings
+   isAvailableForNewContent: true
+   screenshotPath: ../images/section-previews/event-booth-programming.png.png
+   description: "Event Booth Programming + heading composition"
+-->
+
+{% dnd_section 
+    class="s-layout s-event-listings"
+    background_color={{ context.background_color or "#F5F8FF" }},
+%}
+    {% dnd_column %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+                content={
+                    "eyebrow": context.eyebrow || "WHAT'S ON",
+                    "title": context.title || "Booth programming",
+                    "text":  context.text || " "
+                },
+                styles={
+                    "textalignment": {
+                        "text_align": context.text_align || "LEFT",
+                    },
+                    "heading_type": context.heading_type || "h2",                
+                    "text_type": context.text_type || "base",
+                    "eyebrow_type": context.eyebrow_type || "div",
+                    "theme": context.theme || "dark",
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Events Listing #}
+            {% dnd_module
+                label="Events Booth Programming",
+                path='../modules/events-booth-programming'
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

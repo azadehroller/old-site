@@ -1,0 +1,93 @@
+[ {
+  "id" : "chart_type",
+  "name" : "chart_type",
+  "label" : "Chart Type",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "line_chart", "Line Chart" ], [ "circle_chart", "Circle Chart" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "line_chart"
+}, {
+  "id" : "tall_metric",
+  "name" : "tall_metric",
+  "label" : "Tall Metric",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "tall_metric_percentage",
+    "name" : "percentage",
+    "label" : "Metric Percentage",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 0,
+    "max" : 100,
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 0
+  }, {
+    "id" : "tall_metric_text",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "percentage" : 0,
+    "text" : ""
+  }
+}, {
+  "id" : "short_metric",
+  "name" : "short_metric",
+  "label" : "Short Metric",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "short_metric_percentage",
+    "name" : "percentage",
+    "label" : "Metric Percentage",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 0,
+    "max" : 100,
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 0
+  }, {
+    "id" : "short_metric_text",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "percentage" : 0,
+    "text" : ""
+  }
+} ]

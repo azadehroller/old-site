@@ -1,0 +1,24 @@
+{% set min_val = module.min_value|default(1000) %}
+{% set max_val = module.max_value|default(25000) %}
+{% set def_val = module.default_value|default(13000) %}
+{% set step_val = module.step|default(100) %}
+{% set active_hex = module.active_color.color if module.active_color and module.active_color.color else '#1a56db' %}
+
+<div class="range-slider" style="--range-slider-accent: {{ active_hex }};">
+  <label class="range-slider__label" for="range-slider-input-{{ name }}">{{ module.slider_label|default('Amount') }}</label>
+  <output class="range-slider__output" id="range-slider-out-{{ name }}" for="range-slider-input-{{ name }}">${{ def_val|format_number('en-US', 0) }}</output>
+  <input
+    type="range"
+    class="range-slider__input"
+    id="range-slider-input-{{ name }}"
+    name="range-slider-{{ name }}"
+    min="{{ min_val }}"
+    max="{{ max_val }}"
+    value="{{ def_val }}"
+    step="{{ step_val }}"
+  >
+  <div class="range-slider__labels">
+    <div><small>min</small><span>${{ min_val|format_number('en-US', 0) }}</span></div>
+    <div><small>max</small><span>${{ max_val|format_number('en-US', 0) }}</span></div>
+  </div>
+</div>

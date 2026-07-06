@@ -1,0 +1,49 @@
+[ {
+  "id" : "title",
+  "name" : "title",
+  "label" : "Main Title",
+  "help_text" : "Main headline for the hero section",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Find out what your guests really think"
+}, {
+  "id" : "subtitle",
+  "name" : "subtitle",
+  "label" : "Subtitle",
+  "help_text" : "Supporting text below the main title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Discover insights from thousands of attraction guests worldwide"
+}, {
+  "id" : "enable_animation",
+  "name" : "enable_animation",
+  "label" : "Enable Animation",
+  "help_text" : "Enable animations for the title",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "animation_type",
+  "name" : "animation_type",
+  "label" : "Animation Type",
+  "help_text" : "Choose the type of animation for the title",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "fade", "Fade In" ], [ "typewriter", "Typewriter Effect" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "fade"
+} ]

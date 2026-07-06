@@ -1,0 +1,71 @@
+[ {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Our hiring process"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>We aim to make our hiring process clear, respectful, and thoughtful. Each step is designed to help us understand your skills, experience, and ways of working — while giving you insight into life at ROLLER. We value open communication and strive to make every candidate experience a positive one.</p>"
+}, {
+  "id" : "button",
+  "name" : "button",
+  "label" : "Button",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "button_text",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Download our hiring guide"
+  }, {
+    "id" : "button_link",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button_text" : "Download our hiring guide",
+    "button_link" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }
+} ]

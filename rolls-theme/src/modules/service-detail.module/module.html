@@ -1,0 +1,66 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+{% set services = module.services %}
+
+{# Section Markup #}
+<section class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-5">
+    {% for service in services %}
+
+        {% set title = service.service.title %}
+        {% set icon = service.service.icon %}
+        {% set subtitle = service.service.subtitle %}
+        {% set content = service.service.content %}
+
+        {# Button Variables #}
+        {% set link = service.settings.link %}
+        {% set label = service.settings.button_text %}
+        {% set button_icon = service.settings.svg %}
+        {% set position = service.settings.icon_position %}
+        {% set kind = service.settings.bg_kind %}
+
+        {% set href = link.url.href %}
+        {% set rel = [] %}
+        {% set url_type = link.url.type %}
+        {% set no_follow = link.no_follow %}
+        {% set new_tab = link.open_in_new_tab %}
+
+        {# Sets attributes used for the link field #}
+        {% if url_type is equalto 'EMAIL_ADDRESS' %}
+        {% set href = 'mailto:' + href %}
+        {% endif %}
+        {% if no_follow %}
+        {% do rel.append('nofollow') %}
+        {% endif %}
+        {% if new_tab %}
+        {% do rel.append('noopener') %}
+        {% endif %}
+
+        <div class="bg-neutral-white rounded-[32px] shadow-xl">
+            <div class="pb-2 rounded-tr-[32px] rounded-tl-[32px] text-neutral-white bg-primary-50 px-5 md:px-6 pt-5 md:pt-6 pb-4 md:pb-5">
+                <h4 class="mb-0">{{title}}</h4>
+            </div>
+            <div class="px-5 md:px-6 py-4 md:py-5 grid gap-3">
+                <div>{{icon}}</div>
+                <div class="font-semibold text-primary-50 text-base">{{subtitle}}</div>
+                <div class="text-primary-50 leading-6">{{content}}</div>
+                <div class="button-wrapper pt-0 md:pt-3 flex items-end grow">
+                    <a class="{{ button.buttons_settings(bg_kind || 'primary') }} font-serif flex gap-2" href="{{ href }}"
+                    id="button_{{name}}"
+                    {% if module.link.open_in_new_tab %}target="_blank"{% endif %}
+                    {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                    >
+                        {% if button_icon %}
+                            <div class="flex justify-center items-center {{position}} {% if position == 'right' %}order-1{% endif %}">
+                            {{button_icon}}
+                            </div>
+                        {% endif %}
+                        {# Button label #}
+                        <span>{{ label }}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</section>

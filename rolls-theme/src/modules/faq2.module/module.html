@@ -1,0 +1,84 @@
+{% set settings = module.settings %}
+{% set paddings = settings.paddings %}
+{% set background = settings.background %}
+
+{% require_css %}
+<style>
+  {# Paddings #}
+  .{{ name }} {
+    padding-top: {{ paddings.mobile.top }}px;
+    padding-bottom: {{ paddings.mobile.bottom }}px;
+  }
+  
+  @media (min-width: 768px) {
+    .{{ name }} {
+      padding-top: {{ paddings.tablet.top }}px;
+      padding-bottom: {{ paddings.tablet.bottom }}px;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .{{ name }} {
+      padding-top: {{ paddings.desktop.top }}px;
+      padding-bottom: {{ paddings.desktop.bottom }}px;
+    }
+  }
+  
+  {# Background #}
+  {% if background.type == 'color' %}
+  .{{ name }} {
+    background-color: rgba({{ background.color.color|convert_rgb }}, {{ background.color.opacity }}%);
+  }
+  {% elif background.type == 'image' %}
+  .{{ name }} {
+    background-image: url({{ background.image.mobile.src}}); 
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  
+  @media (min-width: 1025px) {
+    .{{ name }} {
+      background-image: url({{ background.image.desktop.src}}); 
+    }
+  }
+  {% endif %}
+</style>
+{% end_require_css %}
+
+<div class="o-faq v2 {{ name }}" id="{{ settings.section_id }}">
+  <div class="m-faq__content">
+    {% if module.content.title %}
+    <h2 class="a-faq__title">{{ module.content.title }}</h2>
+    {% endif %}
+  </div>
+  
+  <div class="m-faq__items">
+    {% for item in module.content.faq %}
+    <div class="m-faq__item" id={{ item.title|lower|replace('&', '_')|replace(' ', '_') |replace(' ', '_')|replace('?', ' ') }} aria-controls={{ item.title|lower|replace('&', '_')|replace(' ', '_') |replace(' ', '_')|replace('?', ' ') }} aria-expanded="false">
+      <h3 class="a-faq__heading">{{ item.title }}</h3>
+      <div class="a-faq__body" aria-labelledby={{ item.title|lower|replace('&', '_')|replace(' ', '_') |replace(' ', '_')|replace('?', ' ') }}>{{ item.content }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% require_js %}
+<script>
+(function () {
+  // faq toggle
+  $(document).on('click', '.{{ name }} .m-faq__item', function (e) {
+    var $this = $(this);
+
+    $this.attr('aria-expanded',
+      $this.attr('aria-expanded')=='false' ? 'true' : 'false'
+   );
+  
+    $this.toggleClass('-open');
+    $(this).find('.a-faq__body').slideToggle();
+  
+  });
+  
+})();
+</script>
+{% end_require_js %}

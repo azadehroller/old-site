@@ -1,0 +1,159 @@
+[ {
+  "id" : "716b045a-b15d-3aab-3b3b-56f8d4bd29b5",
+  "name" : "type",
+  "label" : "Type",
+  "required" : false,
+  "locked" : false,
+  "display" : "radio",
+  "choices" : [ [ "pie", "Pie" ], [ "bar", "Bar" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null
+}, {
+  "id" : "57d3783b-142f-ff75-4b4e-05c9e803e993",
+  "name" : "graphic_pie",
+  "label" : "Graphic",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : null
+  },
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "type",
+    "controlling_value_regex" : "pie",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "a3014a0c-4f24-3e97-71b8-16cd4fe09eda",
+    "name" : "number",
+    "label" : "Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "53"
+  }, {
+    "id" : "e15d21a7-aaca-9d4a-4482-db5cb7cf7cb1",
+    "name" : "caption",
+    "label" : "Caption",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+}, {
+  "id" : "66aa682c-3e22-aa3a-a701-dbfa7fc72a3f",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "1a04ab64-46bb-a33c-2979-0b6092d16cc2",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "default", "Default" ], [ "industry_report", "Industry Report" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "default"
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "055e9b03-f58f-9806-3eed-c0738e7b2218",
+  "name" : "graphic_bar",
+  "label" : "Graphic",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : null
+  },
+  "visibility" : {
+    "controlling_field" : null,
+    "controlling_field_path" : "type",
+    "controlling_value_regex" : "bar",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "03f01ff1-67e9-d19b-6d8a-57862438f122",
+    "name" : "number",
+    "label" : "Number",
+    "help_text" : "As 1 for full-bar and 5 as 0.5 half-full.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "1"
+  }, {
+    "id" : "f31e267c-f755-0502-21f6-ae67d2393f7f",
+    "name" : "caption",
+    "label" : "Caption",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "5d00c6fe-bc51-e4b7-3cd4-9c27dac23d51",
+      "name" : "cap_text",
+      "label" : "Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "b346d0e7-dc1a-d189-b0a6-14d17dfd0aff",
+      "name" : "cap_number",
+      "label" : "Number",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "cap_number" : ""
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+} ]

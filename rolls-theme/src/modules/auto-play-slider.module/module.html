@@ -1,0 +1,56 @@
+{# Auto Play Slider #}
+{% set slides = module.slides %}
+{% set speed = module.speed %}
+
+{% if slides|length > 0 %}
+<div
+  class="aps"
+  id="aps-{{ module._uid }}"
+  data-speed="{{ speed }}"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Image slider"
+>
+  <div class="aps__viewport">
+    <div class="aps__track">
+      {% for slide in slides %}
+        {% if slide.image.src %}
+        <figure
+          class="aps__slide"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="Slide {{ loop.index }} of {{ slides|length }}"
+        >
+          <img
+            class="aps__image"
+            src="{{ slide.image.src }}"
+            alt="{{ slide.image.alt }}"
+            loading="{{ slide.image.loading }}"
+            width="{{ slide.image.width }}"
+            height="{{ slide.image.height }}"
+          />
+          <figcaption class="sr-only">{{ slide.image.alt }}</figcaption>
+        </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {# <div class="aps__controls">
+    <div class="aps__dots" role="tablist" aria-label="Slide navigation">
+      {% for slide in slides %}
+        {% if slide.image.src %}
+        <button
+          class="aps__dot{% if loop.first %} aps__dot--active{% endif %}"
+          type="button"
+          role="tab"
+          aria-selected="{{ loop.first|lower }}"
+          aria-label="Go to slide {{ loop.index }}"
+          data-index="{{ loop.index0 }}"
+        ></button>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div> #}
+</div>
+{% endif %}

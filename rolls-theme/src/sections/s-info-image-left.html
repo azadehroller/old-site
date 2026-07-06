@@ -1,0 +1,93 @@
+<!--
+  templateType: section
+  label: Info with landscape image on the left
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/info-image-left.png
+  description: "Two-column section with an image (5:4 aspect ratio) on the left, label, heading, and text on the right."
+-->
+
+{% dnd_section 
+  background_color={{ context.bg_color || "" }}
+  class="s-layout s-info-image-left"
+%}
+    {# Image #}
+    {% dnd_column 
+        offset=0,
+        width=6
+    %}
+       {% dnd_row 
+        padding={
+            "default": {
+                "top": "3.34rem"
+            },
+            "mobile": {
+            "top": "1.5rem"
+            }
+        }
+        %}
+        {% dnd_module path="@hubspot/linked_image"
+            horizontal_alignment="CENTER",
+            img={
+            "src": context.img_url || get_asset_url("../images/grayscale-mountain.png"),
+            "size_type": "auto"
+            },
+            extra_classes="img-cover--square-md img-contain",
+            label="Image"
+        %}
+        {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+    {# Text #}
+  {% dnd_column 
+    offset=6,
+    width=6,
+    vertical_alignment="CENTER"
+  }
+  %}
+    {% dnd_row %}
+        {# Module: Heading Composition #}
+          {% dnd_module path="../modules/heading-composition",
+              label="Modules: Header Composition",
+          %}
+        {% end_dnd_module %}
+     {% end_dnd_row %}
+
+    {# Stats #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/stat",
+        extra_classes="pt-2 max-w-[560px]",
+        label="Modules: Stats",
+        extra_classes={{"my-2 md:my-3"}}
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Stats #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/quote",
+        extra_classes="pt-2 max-w-[560px]",
+        label="Modules: Quote",
+        extra_classes={{"my-2 md:my-3"}}
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+
+    {# Button #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/button",
+        extra_classes="py-4 sm:py-6 max-w-[560px]",
+        label="Modules: Button",
+        extra_classes={{"my-2 md:my-3"}}
+        butto_settings={
+            "button_text": "Learn more",
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+    
+  {% end_dnd_column %}
+{% end_dnd_section %}

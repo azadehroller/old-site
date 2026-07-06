@@ -1,0 +1,84 @@
+<!--
+  templateType: global_partial
+  label: Header
+-->
+
+<header id="header" class="header {{ header_theme_class|default('dark') }}">
+  {# The link below is used for a navigation skipper which allows users navigating the site with their keyboard to skip over the site navigation. More information on the navigation skipper can be found here: https://github.com/HubSpot/cms-theme-boilerplate/wiki/Accessibility #}
+  <a href="#main-content" class="header__skip">Skip to content</a>
+
+  {# Main header #}
+  <div class="inner-header container px-0 md:px-5 lg:px-5 py-4">
+    {# Logo #}
+    <div class="header__logo w-[160px] mr-2 sm:w-[192px] shrink-0">
+      {% module "module_167918958523020" path="/rolls-theme/modules/logo", label="logo" %}
+    </div>
+    {# Logo Dark #}
+    <div class="header__logo--secondary w-[160px] mr-2 sm:w-[192px] shrink-0">
+      {% module 'site_logo' path='@hubspot/logo' link="/" %}
+    </div>
+
+  <div class="header__main order-3 maxmd:order-none ml-3 maxmd:ml-0">
+      {# Mobile menu trigger #}
+      <button id="header__block-toggle" class="header__block-toggle" aria-expanded="false" aria-controls="burger-submenu" popovertarget="burger-submenu">
+        <span class="b-0 h-[1px] overflow-hidden p-0 absolute whitespace-nowrap w-[1px]">Menu</span>
+        <span class="header__block-toggle-item header__block-toggle-item--s bg-neutral-white"></span>
+        <span class="header__block-toggle-item header__block-toggle-item--l bg-neutral-white"></span>
+        <span class="header__block-toggle-item header__block-toggle-item--m bg-neutral-white"></span>
+      </button>
+
+      {# Main content #}
+      <div id="burger-submenu" class="header__block" popover>
+        {# Navigation #}
+        <div class="header__nav">
+          {% module "module_167918966009422" path="/rolls-theme/modules/mega-menu", label="mega-menu" %}
+        </div>
+        <div class="header_cta bg-neutral-white flex maxmd:hidden absolute bottom-10 border-t-[1px] border-primary-40 w-full py-4 px-5 z-50">
+            <div class="flex gap-x-5">
+              <a href="/get-started/" class="flex items-center text-2xl font-semibold text-primary-50">
+                <span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="24" height="24" fill="none"><path fill="#033180" fill-rule="evenodd" d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2l.01-12c0-1.1.89-2 1.99-2Zm8 9 8-5V6l-8 5-8-5v2l8 5Z" clip-rule="evenodd"/></svg>
+                </span>
+                <span>Contact sales</span>
+              </a>
+            </div>
+        </div>
+
+      </div>
+<!--       <a href="tel:+61468014312" aria-label="Call AU sales at ">
+    
+         Call sales: +61 468 014 312
+      </a> -->
+      {# Language swicher #}
+      {% if content.translated_content.values()|selectattr("published")|length || is_listing_view && group.translations %}
+        <div class="header__lang">
+            {% language_switcher "language_switcher" display_mode='localized', label='Language switcher', no_wrapper=true %}
+            <div class="header__lang-label">{{ locale_name(locale)|truncate(2, true, "") }}</div>
+        </div>
+      {% endif %}
+    </div>
+
+    {# Header button stack column #}
+    <div class="ml-auto">
+        {% module 'button_stack'
+          extra_classes="[&>ul]:mb-[0px] [&>ul>li:first-child]:hidden [&>ul>li:first-child]:md:block [&>ul>li:last-child]:hidden [&>ul>li:last-child]:md:block",
+          path="/rolls-theme/modules/button-stack",
+          label="Module: Button Stack",
+          button_list=[
+            {
+              "btn_settings": {
+                "btn_label": ""
+              }
+            },
+            {
+              "btn_settings": {
+                "btn_label": ""
+              }
+            }
+          ]
+        %}
+    </div>
+  </div>
+</header>
+
+{{ require_js(get_asset_url('../../js/header.js')) }}

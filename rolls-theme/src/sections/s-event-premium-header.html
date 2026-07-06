@@ -1,0 +1,108 @@
+<!--
+    templateType: section
+    label: Case Study
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/event-premium-header.png
+    description: "Two columns section 7/5 with a columns with: eyebrow, title, quote, button and logo badge, and a column with a image."
+-->
+
+{% dnd_section 
+    vertical_alignment="MIDDLE",
+    background_color={{ context.background_color or "#fff" }},
+    padding={
+        'bottom': context.padding || '',
+    },
+    class="s-layout s-events-premium-header"
+%}
+    {% dnd_column 
+        offset=0,
+        width=7,
+    %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Module: Header Composition",
+                content={
+                    "eyebrow": context.eyebrow || "CUSTOMER NAME HERE",
+                    "title": context.title || "“Sed sagittis risus proin lacinia at viverra sed ut at",
+                    "text":  context.text || "Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus. Sed sagittis risus proin lacinia at viverra sed ut at. Metus pellentesque aliquam et lacus ultrices vulputate aliquet."
+                },
+                styles={
+                    "textalignment": {
+                        "text_align": "LEFT",
+                    },
+                    "heading_type": context.heading_type || "h2",                
+                    "text_type": context.text_type || "base",
+                    "eyebrow_type": context.eyebrow_type || "div",
+                    "theme": context.theme || "dark",
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Button Stack #}
+            {% dnd_module 
+                path="../modules/button-stack",
+                label="Module: Button Stack",
+                extra_classes={{"my-2 md:my-3"}},
+                styles={
+                    "layout": {
+                        "alignment": {
+                            "horizontal_align" : context.horizontal_align || "CENTER",
+                        }
+                    }
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {% dnd_module
+                label="Module: User Review",
+                path='../modules/user-review-badges'
+                review_badges=[
+                    {
+                        "code": context.code || '<a href="https://www.softwareadvice.com/retail/web-based-point-of-sale-software-comparison/#frontrunners" target="_blank" aria-label="Software Advice Front Runners 2025"><img border="0" src="https://brand-assets.softwareadvice.com/badge/5c5adfcc-2400-44a2-a044-f03fb85bc899.svg" loading="lazy" alt="Software Advice Front Runners 2025"/></a>',
+                    },
+                    {
+                        "code": '<a title=\"Users love ROLLER Software on G2\" href=\"https://www.g2.com/products/roller-software/reviews?utm_source=rewards-badge\" target=\"_blank\" aria-label=\"Users love ROLLER Software on G2\"><img style=\"width: 125px;\" alt=\"Users love ROLLER Software on G2\" src=\"https://www.g2.com/shared-assets/product-badges/users-love-us.svg\" loading=\"lazy\" /></a><script>(function(a,b,c,d){window.fetch(\"https://www.g2.com/products/roller-software/rating_schema.json\").then(e=>e.json()).then(f=>{c=a.createElement(b);c.type=\"application/ld+json\";c.text=JSON.stringify(f);d=a.getElementsByTagName(b)[0];d.parentNode.insertBefore(c,d);});})(document,\"script\");</script>',
+                    },
+                    {
+                        "code": '<a href="https://www.capterra.com/point-of-sale-software/shortlist" target="_blank" aria-label="2024 Capterra Shortlist for Business Management"><img border="0" src="https://brand-assets.capterra.com/badge/9b3cd854-4a10-4e4a-a517-ded108eb28ec.svg" loading="lazy" alt="2024 Capterra Shortlist for Business Management"/></a>'
+                    },
+                    {
+                        "code": '<a href=\"https://sourceforge.net/software/product/ROLLER/\" target=\"_blank\" aria-label=\"SourceForge Leader Badge\"><img src=\"{{ get_asset_url(\"/rolls-theme/images/sourceforge-fall-white.svg\") }}\" alt=\"SourceForge Leader Badge\" loading=\"lazy\" style=\"width: 125px; height: auto;\" /></a>'
+                    },
+                    {
+                        "code": '<a href=\"https://www.getapp.com/customer-management-software/point-of-sale/category-leaders\" target=\"_blank\" aria-label=\"Users love ROLLER Software on GetApp\"> <img border=\"0\" src=\"https://brand-assets.getapp.com/badge/9bda17d6-b82a-4c25-914b-e0eeed02163c.svg\" loading=\"lazy\" alt=\"GetApp ROLLER Software Category Leaders 2023\"/> </a>',
+                    },
+                    {
+                        "code": '<a href=\"https://slashdot.org/software/p/ROLLER/\" target=\"_blank\" aria-label=\"Slashdot Leader Badge\"><img src=\"{{ get_asset_url(\"/rolls-theme/images/slashdot-summer-white.svg\") }}\" alt=\"Slashdot Leader Badge\" loading=\"lazy\" style=\"width: 125px; height: auto;\" /></a>'
+                    }
+                ],
+                styles={
+                    "visibility": context.visibility || false,
+                    "size":"small",        
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+    {% dnd_column 
+        offset=7,
+        width=5,
+    %}
+        {% dnd_row %}
+            {# Module: Image #}
+            {% dnd_module 
+                path="@hubspot/linked_image",
+                img={
+                "src": context.img_url || get_asset_url("../images/grayscale-mountain.png"),
+                "size_type": "auto"
+                },
+                extra_classes="img-cover--square-md img-cover",
+                horizontal_alignment="CENTER"
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

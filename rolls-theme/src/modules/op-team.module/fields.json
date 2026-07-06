@@ -1,0 +1,161 @@
+[ {
+  "id" : "moderator-group",
+  "name" : "moderator",
+  "label" : "Moderator",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "moderator-full-name",
+    "name" : "full_name",
+    "label" : "Name",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Alyse Sklover"
+  }, {
+    "id" : "moderator-position",
+    "name" : "position",
+    "label" : "Position",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Senior Events and Partnerships Manager"
+  }, {
+    "id" : "moderator-company",
+    "name" : "company",
+    "label" : "Company",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : true,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ROLLER"
+  }, {
+    "id" : "moderator-image",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://via.placeholder.com/120x120/8b45ee/ffffff?text=Photo",
+      "alt" : "Moderator Photo",
+      "loading" : "lazy",
+      "width" : 120,
+      "height" : 120,
+      "max_width" : 120,
+      "max_height" : 120
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "full_name" : "Alyse Sklover",
+    "position" : "Senior Events and Partnerships Manager",
+    "company" : "ROLLER",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "https://via.placeholder.com/120x120/8b45ee/ffffff?text=Photo",
+      "alt" : "Moderator Photo",
+      "loading" : "lazy",
+      "width" : 120,
+      "height" : 120,
+      "max_width" : 120,
+      "max_height" : 120
+    }
+  }
+}, {
+  "id" : "operators-group",
+  "name" : "operators",
+  "label" : "Operators",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 3,
+    "sorting_label_field" : "operator-full-name",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "operator-full-name",
+    "name" : "full_name",
+    "label" : "Name",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Ed Golebiowski"
+  }, {
+    "id" : "operator-position",
+    "name" : "position",
+    "label" : "Position",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Owner / President"
+  }, {
+    "id" : "operator-company",
+    "name" : "company",
+    "label" : "Company",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : true,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Zero Gravity Trampoline Park\nCheap Skate Family Fun Center"
+  }, {
+    "id" : "operator-image",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://via.placeholder.com/120x120/8b45ee/ffffff?text=Photo",
+      "alt" : "Operator Photo",
+      "loading" : "lazy",
+      "width" : 120,
+      "height" : 120,
+      "max_width" : 120,
+      "max_height" : 120
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "full_name" : "Ed Golebiowski",
+    "position" : "Owner / President",
+    "company" : "Zero Gravity Trampoline Park\nCheap Skate Family Fun Center"
+  }, {
+    "full_name" : "Mike Whincup",
+    "position" : "Chief Operating Officer / Owner",
+    "company" : "Do The Beach Franchising\nGalaxy Multi Rides"
+  }, {
+    "full_name" : "Caroline Cannon",
+    "position" : "VP of Strategic Growth",
+    "company" : "Thrillz High Flying Adventure Park"
+  } ]
+} ]

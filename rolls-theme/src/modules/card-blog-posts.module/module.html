@@ -1,0 +1,35 @@
+{# Variables #}
+{# Content #}
+{% set card_blog_posts = module.card_blog_posts %}
+
+<dl id="cards-blog-posts-{{name}}" class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 py-2">
+    {% for card_blog_post in card_blog_posts %}
+        {% set card_blog_post_data =  {
+            'thumbnail': card_blog_post.card_blog_post_image,
+            'title': card_blog_post.card_blog_post_title,
+            'label': card_blog_post.card_blog_post_link_label,
+            'href': card_blog_post.card_blog_post_link.url.href,
+            'url_type': card_blog_post.card_blog_post.card_blog_post_link.url.type,
+            'no_follow': card_blog_post.card_blog_post.card_blog_post_link.no_follow,
+            'new_tab': card_blog_post.card_blog_post.card_blog_post_link.open_in_new_tab,
+        } %}
+        <div class="w-full">
+            <div
+            class="flex flex-col max-w-full bg-neutral-white w-full h-full box-shadow-onlight-navy-40 rounded-[32px]">
+            <div>
+                {% set sizeAttrs = 'width="400" height="220"' %}
+                {% set loadingAttr = card_blog_post_data.thumbnail.loading != 'disabled' ? 'loading="{{ card_blog_post_data.thumbnail.loading }}"' : '' %}
+                <img src="{{card_blog_post_data.thumbnail.src}}" alt="{{card_blog_post_data.thumbnail.alt}}" class="object-cover m-auto w-full rounded-t-[32px]" {{sizeAttrs}}>
+            </div>
+            <div class="flex flex-col gap-3 pt-4 pl-4 pb-4 pr-4 md:pl-6 md:pb-6 md:pr-6">
+                <div class="text-lg text-primary-50 font-bold">{{card_blog_post_data.title}}</div>
+                <div class="flex gap-2 text-primary-50 font-semibold">
+                    <div>{{card_blog_post_data.label}}</div>
+                    <div class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none"><path fill="#033180" d="m7.167 4-.94.94L9.28 8l-3.053 3.06.94.94 4-4-4-4Z"/></svg></div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+     {% endfor %}
+</dl>

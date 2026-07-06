@@ -1,0 +1,139 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: false
+  label: The Guest Experience Show
+  screenshotPath: ../images/template-previews/guest-experience-show.png
+-->
+
+<!doctype html>
+<html lang="{{ html_lang }}" {{ html_lang_dir }}>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page_meta.html_title }}</title>
+    {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
+    <meta name="description" content="{{ page_meta.meta_description }}">
+    
+    {{ require_css(get_asset_url('../css/main.css')) }}
+
+    <script src="https://fast.wistia.com/assets/external/channel.js" async></script>
+    <link rel="stylesheet" href="https://fast.wistia.com/embed/channel/project/2l49v3p0cj/font.css" />
+    {{ standard_header_includes }}
+    <script type="application/ld+json">
+        
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://www.roller.software/#organization",
+        "name": "ROLLER Software",
+        "legalName": "ROLLER Networks Pty Ltd",
+        "url": "https://www.roller.software",
+        "logo": "https://3375779.fs1.hubspotusercontent-na1.net/hubfs/3375779/ROLLER%20Logo.svg",
+        "description": "ROLLER Software is a cloud-based venue management platform for attractions and FECs to streamline operations and improve guest experience.",
+        "sameAs": [
+          "https://www.facebook.com/ROLLERSOFTWARE/",
+          "https://www.youtube.com/channel/UC7k0OBldm_7etXYmUrJopvA",
+          "https://www.instagram.com/rollersoftware/",
+          "https://www.linkedin.com/company/roller/"
+        ],
+        "foundingDate": "2010",
+        "contactPoint": [
+        {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "Worldwide",
+        "url": "https://www.roller.software/support"
+        },
+        {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "US",
+        "telephone": "+1 855 939 3313",
+        "url": "https://www.roller.software/support"
+        },
+        {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "UK",
+        "telephone": "+44 808 258 0167",
+        "url": "https://www.roller.software/support"
+        },
+        {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "AU",
+        "telephone": "+61 3 8592 6384",
+        "url": "https://www.roller.software/support"
+        }
+        ],
+        "potentialAction": {
+          "@type": "Action",
+          "name": "Get Started with ROLLER",
+          "target": "https://www.roller.software/get-started/"
+        }
+      }
+      </script>
+      
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "{{ request.full_url }}",
+        "url": "{{ request.full_url }}",
+        "name": "{{ page_meta.html_title }}",
+        "description": "{{ page_meta.meta_description }}",
+        "isPartOf": {
+          "@id": "https://www.roller.software/#website"
+        },
+        "potentialAction": {
+          "@type": "Action",
+          "name": "Get Started with ROLLER",
+          "target": "https://www.roller.software/get-started/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="body-wrapper {{ builtin_body_classes }}">
+
+        <div class="wistia_channel wistia_async_2l49v3p0cj mode=inline" style="min-height:100vh;position:relative;width:100%;"></div>
+
+    </div>
+    {{ standard_footer_includes }}
+   
+  </body>
+  <style>
+@media(max-width: 767px) {
+  .wistia_embed section > div > div {
+    background: rgba(0,0,0,0.8);
+    position: fixed;
+  }
+  .wistia_embed section > div > div h1{
+      font-size: 12px !important;
+  }
+  
+    .w-popover-overlay__media-embed-wrapper{
+        position: relative !important;
+height: auto !important;
+    }
+/*   .submitted-message{
+    display: none;
+  } */
+    .w-popover-overlay__media-embed-wrapper > div > div,
+    .w-popover-overlay__media-embed-wrapper > div > div > div
+  {
+        height: auto !important;
+    }
+  .w-popover-overlay__media-embed-wrapper  div,
+  .w-popover-overlay__media-embed-wrapper section{
+    overflow: visible !important;
+  } 
+  
+    .w-popover-overlay__phantom-for-sticky-media{
+        display: none;
+    }
+  #wistia_grid_212_top_inside{
+    height: 100vh !important;
+  }
+    }
+  </style>
+</html>

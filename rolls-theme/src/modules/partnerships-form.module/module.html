@@ -1,0 +1,91 @@
+{% set FORMID = module.form_field.form_id %}
+
+    <div id="footerHSForm" class="hidden"></div>
+    {% form
+        form_to_use="{{ FORMID }}"
+        response_response_type="{{ FORMID.response_type }}"
+        response_message="{{ FORMID.message }}"
+        response_redirect_id="{{ FORMID.redirect_id }}"
+        response_redirect_url="{{ FORMID.redirect_url }}"
+        gotowebinar_webinar_key="{{ FORMID.gotowebinar_webinar_key }}"
+    %}
+{% require_js position="header" async="true" %}
+    <script>
+        (() => {
+            const getUrlParameters = (url, names) => {
+                // Check if names is an array
+                if (!Array.isArray(names)) {
+                    console.error('Names must be an array');
+                    return {};
+                }
+                
+                const params = {};
+                const searchParams = new URLSearchParams(window.location.search);
+
+                // Iterate over each name in the names array
+                names.forEach(name => {
+                    const value = searchParams.get(name);
+                    // Check if the parameter exists in the URL
+                    if (value !== null) {
+                        console.log(name, value);
+                        params[name] = value;
+                    } else {
+                        console.log('No parameter found for', name);
+                        params[name] = null;
+                    }
+                });
+                
+                return params;
+            };
+
+            const hasClassPrefix = (element, prefix) => {
+                return Array.from(element.classList).some(className => className.match(new RegExp(prefix, 'i')));
+            };
+
+            const setInputValues = (formInputs, formValues) => {
+                const els = document.querySelectorAll(formInputs.map(formInput => `input[name="${formInput}"]`));
+
+                els.forEach((el, index) => {
+                    if (el) {
+                        const wrapper = el.closest('.hs-form-field');
+
+                        if (wrapper && hasClassPrefix(wrapper, 'partner')) {
+                            if (formValues[formInputs[index]] !== null && formValues[formInputs[index]] !== '') {
+                                wrapper.style.display = 'none'; 
+                                el.type = 'hidden'; 
+                            } else {
+                                wrapper.style.display = 'block';
+                                el.type = 'text'; 
+                            }
+                        }
+                    } else {
+                        console.log('Hubspot error: Input field not found for', formInputs[index]);
+                    }
+                });
+            };
+
+            const onFormReady = () => {
+                const url = new URL(window.location.href);
+
+                const params = getUrlParameters(url, ['partner_code', 'partner_contact_last_name', 'partner_contact_company', 'partner_contact_email', 'partner_contact_phone_number']);
+                setInputValues(['partner_code', 'partner_contact_last_name', 'partner_contact_company', 'partner_contact_email', 'partner_contact_phone_number'], params);
+            };
+
+            const getForm = () => {
+                try {
+                    hbspt.forms.create({
+                        portalId: {{ hub_id }},
+                        formId: "{{ FORMID }}",
+                        target: '#footerHSForm',
+                        onFormReady: onFormReady
+                    });
+                } catch (error) {
+                    console.log('Hubspot error: ', error);
+                }
+            };
+
+            getForm();
+        })();
+
+    </script>
+{% end_require_js%}

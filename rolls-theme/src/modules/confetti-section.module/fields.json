@@ -1,0 +1,12 @@
+[ {
+  "id" : "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
+  "name" : "trigger_class",
+  "label" : "Trigger Class",
+  "help_text" : "CSS class name of elements that should trigger confetti when they enter the viewport (default: confetti-trigger). Add this class to any element you want to trigger confetti.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "confetti-trigger"
+} ]

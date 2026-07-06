@@ -1,0 +1,222 @@
+<div class="pulse-pizza-chart card chart-card fade-in-up chart-container">
+  <h3 class="font-semibold mb-4 flex items-center">
+    {% if module.chart_icon.name %}
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-purple-900/50 mr-3">
+        {% icon name="{{ module.chart_icon.name }}" style="{{ module.chart_icon.type }}" %}
+      </span>
+    {% endif %}
+    {{ module.chart_title }}
+  </h3>
+  
+  <div class="flex items-center justify-between">
+    <!-- Pie Chart -->
+    <div class="relative w-64 h-64">
+      <svg viewBox="0 0 200 200" class="w-full h-full">
+        <!-- Predefined pie segments for up to 6 segments forming complete circle -->
+        {% for segment in module.segments %}
+          {% if loop.index == 1 %}
+            <!-- Segment 1: 12 o'clock to 2 o'clock (60 degrees) -->
+            <path d="M 100 100 L 100 20 A 80 80 0 0 1 169.28 60 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 2 %}
+            <!-- Segment 2: 2 o'clock to 4 o'clock (60 degrees) -->
+            <path d="M 100 100 L 169.28 60 A 80 80 0 0 1 169.28 140 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 3 %}
+            <!-- Segment 3: 4 o'clock to 6 o'clock (60 degrees) -->
+            <path d="M 100 100 L 169.28 140 A 80 80 0 0 1 100 180 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 4 %}
+            <!-- Segment 4: 6 o'clock to 8 o'clock (60 degrees) -->
+            <path d="M 100 100 L 100 180 A 80 80 0 0 1 30.72 140 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 5 %}
+            <!-- Segment 5: 8 o'clock to 10 o'clock (60 degrees) -->
+            <path d="M 100 100 L 30.72 140 A 80 80 0 0 1 30.72 60 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 6 %}
+            <!-- Segment 6: 10 o'clock back to 12 o'clock (60 degrees) - completes the circle -->
+            <path d="M 100 100 L 30.72 60 A 80 80 0 0 1 100 20 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 7 %}
+            <!-- Segment 7: Top-left slice (if needed) -->
+            <path d="M 100 100 L 34 75 A 80 80 0 0 1 70 25 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% elif loop.index == 8 %}
+            <!-- Segment 8: Complete the circle (if needed) -->
+            <path d="M 100 100 L 70 25 A 80 80 0 0 1 100 20 Z" 
+                  fill="{{ segment.color }}" 
+                  class="chart-element pie-segment"
+                  data-tooltip="{{ segment.tooltip or (segment.segment_label ~ ': ' ~ segment.value ~ '%') }}"
+                  data-segment="{{ loop.index0 }}"/>
+          {% endif %}
+        {% endfor %}
+        
+        <!-- Percentage labels on segments - centered in each 60-degree slice -->
+        {% if module.show_percentages %}
+          {% for segment in module.segments %}
+            {% if loop.index == 1 %}
+              <!-- Center of 1st segment (1 o'clock position) -->
+              <text x="125" y="55" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 2 %}
+              <!-- Center of 2nd segment (3 o'clock position) -->
+              <text x="145" y="100" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 3 %}
+              <!-- Center of 3rd segment (5 o'clock position) -->
+              <text x="125" y="145" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 4 %}
+              <!-- Center of 4th segment (7 o'clock position) -->
+              <text x="75" y="145" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 5 %}
+              <!-- Center of 5th segment (9 o'clock position) -->
+              <text x="55" y="100" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 6 %}
+              <!-- Center of 6th segment (11 o'clock position) -->
+              <text x="75" y="55" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 7 %}
+              <text x="70" y="50" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% elif loop.index == 8 %}
+              <text x="85" y="40" text-anchor="middle" fill="#fff" class="text-xs font-bold">{{ segment.value }}%</text>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </svg>
+      
+      <!-- Tooltip element -->
+      <div class="pie-tooltip" id="pie-tooltip-{{ name }}"></div>
+    </div>
+    
+    <!-- Legend -->
+    {% if module.show_legend %}
+      <div class="ml-8 space-y-2">
+        {% for segment in module.segments %}
+          <div class="flex items-center legend-item" data-segment="{{ loop.index0 }}">
+            <div class="w-4 h-4 mr-3" style="background-color: {{ segment.color }};"></div>
+            <span class="text-sm text-gray-400">{{ segment.segment_label }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+(function() {
+  const moduleId = 'pie-{{ name }}';
+  if (window[moduleId + '_initialized']) return;
+  window[moduleId + '_initialized'] = true;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('#pie-tooltip-{{ name }}')?.parentElement;
+    if (!container) return;
+    
+    const segments = container.querySelectorAll('.pie-segment');
+    const tooltip = document.getElementById('pie-tooltip-{{ name }}');
+    const legendItems = document.querySelectorAll('.legend-item');
+    
+    // Add hover interactions to pie segments
+    segments.forEach((segment, index) => {
+      segment.addEventListener('mouseenter', function(e) {
+        const tooltipText = segment.getAttribute('data-tooltip');
+        if (tooltipText && tooltip) {
+          tooltip.textContent = tooltipText;
+          tooltip.style.opacity = '1';
+          tooltip.style.visibility = 'visible';
+        }
+        segment.style.opacity = '0.8';
+        segment.style.transform = 'scale(1.05)';
+        segment.style.transformOrigin = '100px 100px';
+        
+        // Highlight corresponding legend item
+        const legendItem = document.querySelector(`.legend-item[data-segment="${index}"]`);
+        if (legendItem) {
+          legendItem.style.color = 'white';
+        }
+      });
+      
+      segment.addEventListener('mouseleave', function(e) {
+        if (tooltip) {
+          tooltip.style.opacity = '0';
+          tooltip.style.visibility = 'hidden';
+        }
+        segment.style.opacity = '1';
+        segment.style.transform = 'scale(1)';
+        
+        // Reset legend item
+        const legendItem = document.querySelector(`.legend-item[data-segment="${index}"]`);
+        if (legendItem) {
+          legendItem.style.color = '';
+        }
+      });
+      
+      segment.addEventListener('click', function(e) {
+        const tooltipText = segment.getAttribute('data-tooltip');
+        console.log('Clicked segment:', tooltipText);
+      });
+    });
+    
+    // Add hover interactions to legend items
+    legendItems.forEach((item, index) => {
+      item.addEventListener('mouseenter', function() {
+        item.style.color = 'white';
+        item.style.cursor = 'pointer';
+        
+        // Highlight corresponding pie segment
+        const segment = container.querySelector(`.pie-segment[data-segment="${index}"]`);
+        if (segment) {
+          segment.style.opacity = '0.8';
+          segment.style.transform = 'scale(1.05)';
+          segment.style.transformOrigin = '100px 100px';
+        }
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        item.style.color = '';
+        
+        // Reset pie segment
+        const segment = container.querySelector(`.pie-segment[data-segment="${index}"]`);
+        if (segment) {
+          segment.style.opacity = '1';
+          segment.style.transform = 'scale(1)';
+        }
+      });
+    });
+    
+    // Animate on scroll
+    const chartObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          chartObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    const chartElement = document.querySelector('.pulse-pizza-chart');
+    if (chartElement) {
+      chartObserver.observe(chartElement);
+    }
+  });
+})();
+</script>

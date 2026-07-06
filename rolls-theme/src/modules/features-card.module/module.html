@@ -1,0 +1,49 @@
+{# Variables #}
+{% set cards = module.cards %}
+
+{# Section Markup #}
+<div id="feature-cards-{{name}}" class="feature-cards features-card-mask">
+    <div
+        class="flex md:justify-center overflow-x-scroll hide-scroll-bar xl:mx-auto"
+      >
+        <div
+          class="flex flex-nowrap xl:ml-0 md:ml-20 ml-0 gap-3"
+        >
+            {% for card in cards %}
+
+                {% set href = card.features_link.url.href %}
+                {% set rel = [] %}
+                {% set url_type = card.features_link.url.type %}
+                {% set no_follow = card.features_link.no_follow %}
+                {% set new_tab = card.features_link.open_in_new_tab %}
+
+                {# Sets attributes used for the link field #}
+                {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set href = 'mailto:' + href %}
+                {% endif %}
+                {% if no_follow %}
+                {% do rel.append('nofollow') %}
+                {% endif %}
+                {% if new_tab %}
+                {% do rel.append('noopener') %}
+                {% endif %}
+
+
+                <div class="inline-block">
+                    {# TODO: Investigate jitter text when using scale  #}
+                    <div
+                    class="overflow-hidden rounded-lg transform ease-in transition duration-300 border-[1px] border-[#074dc5] hover:bg-primary-40 hover:shadow-xl h-full"
+                    >
+                        <a id="featured_card_{{ card.features_label|lower|replace(' ', '_', count) }}" class="mo-card-features flex flex-col xl:flex-row w-[140px] lg:w-auto h-full justify-center gap-2 items-center text-lg text-neutral-white font-semibold text-center" href="{{ href }}"
+                        {% if new_tab %}target="_blank"{% endif %}
+                        {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                        >
+                            {{ card.features_icon }}
+                            {{ card.features_label }}
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

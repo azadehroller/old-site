@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 180648216676,
+  "label" : "Module: Card Segmentaion",
+  "icon" : "fontawesome-5.14.0:Child:SOLID",
+  "is_available_for_new_content" : true
+}

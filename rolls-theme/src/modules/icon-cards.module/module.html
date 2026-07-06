@@ -1,0 +1,37 @@
+{# Variables #}
+{% set cards = module.cards %}
+
+{# Module markup #}
+<div class="icon-cards-wrapper grid gap-4 max-w-[1312px] mx-auto sm:grid-cols-3 sm:gap-4">
+{% for card in cards %}
+    <figure class="grid gap-2 sm:gap-3 sm:justify-items-center  sm:text-center m-0 max-w-[416px]">
+    {# Icon #}
+    {% if card.icon.src %}
+        <img 
+            src="{{ card.icon.src }}" 
+            alt="{{ card.icon.alt|default('Icon') }}" 
+            width="48" 
+            height="48"
+            loading="{{ card.icon.loading|default('lazy') }}"
+            class="w-12 h-12 block">
+      
+    {% endif %}
+
+    <figcaption class="flex flex-col gap-2 sm:gap-3 sm:text-center">
+        {# Heading #}
+        {% if card.heading %}
+        <h3 class="font-extrabold text-base leading-6 text-icon-card-heading m-0">
+            {{ card.heading }}
+        </h3>
+        {% endif %}
+
+        {# Description #}
+        {% if card.description %}
+        <div class="icon-cards-text font-normal text-base leading-6 text-[#011840] m-0 [&_p]:m-0 [&_p]:font-normal [&_p]:text-base [&_p]:leading-6 [&_p]:text-[#011840]">
+            {{ card.description }}
+        </div>
+        {% endif %}
+    </figcaption>
+    </figure>
+{% endfor %}
+</div>

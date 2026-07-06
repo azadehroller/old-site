@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 162239531061,
+  "label" : "Module: Events Listing",
+  "icon" : "fontawesome-5.14.0:Calendar%20Check",
+  "is_available_for_new_content" : true
+}

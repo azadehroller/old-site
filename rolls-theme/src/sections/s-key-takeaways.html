@@ -1,0 +1,217 @@
+<!--
+    templateType: section
+    label: Key Takeaways
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/hero.png
+    description: "Section for displaying key takeaways with important insights and actionable recommendations."
+-->
+{% dnd_section
+  vertical_alignment="TOP",
+  class="s-layout s-key-takeaways bg-dark"
+%}
+  {# Key Takeaways Module #}
+  {% dnd_column
+    offset=0,
+    width=12
+  %}
+    {% dnd_row %}
+      {% dnd_module 
+        path="../modules/pulse-key-takeaways",
+        label="Key Takeaways Section"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# CTA Section in the same column #}
+    {% dnd_row %}
+      <div class="cta-section card chart-card text-center py-12 fade-in-up mt-12">
+        <h2 class="text-4xl font-bold flex items-center justify-center">
+          <span class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-purple-900/50 mr-3">
+            <svg class="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </span>
+          Ready to grow your business?
+        </h2>
+        <p class="mt-4 max-w-2xl mx-auto text-gray-300">ROLLER's all-in-one platform helps you meet rising guest expectations while simplifying operations.</p>
+        <a href="#" class="inline-block mt-8 px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-full transition-transform duration-300 hover:scale-105">
+          Get Started with ROLLER
+        </a>
+      </div>
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+
+{% end_dnd_section %}
+
+<style>
+  .s-key-takeaways {
+    background-color: #0d0c22;
+    color: #e0e0e0;
+    padding: 4rem 0;
+  }
+  
+  .cta-section {
+    background-color: rgba(30, 27, 58, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .chart-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  .text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  
+  .font-bold {
+    font-weight: 700;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .inline-flex {
+    display: inline-flex;
+  }
+  
+  .w-12 {
+    width: 3rem;
+  }
+  
+  .h-12 {
+    height: 3rem;
+  }
+  
+  .w-6 {
+    width: 1.5rem;
+  }
+  
+  .h-6 {
+    height: 1.5rem;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
+  
+  .mr-3 {
+    margin-right: 0.75rem;
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  .mt-8 {
+    margin-top: 2rem;
+  }
+  
+  .mt-12 {
+    margin-top: 3rem;
+  }
+  
+  .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  .max-w-2xl {
+    max-width: 42rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .inline-block {
+    display: inline-block;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .text-purple-300 {
+    color: #d8b4fe;
+  }
+  
+  .text-gray-300 {
+    color: #d1d5db;
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  .bg-purple-600 {
+    background-color: #9333ea;
+  }
+  
+  .bg-purple-900\\/50 {
+    background-color: rgba(88, 28, 135, 0.5);
+  }
+  
+  .hover\\:bg-purple-700:hover {
+    background-color: #7e22ce;
+  }
+  
+  .transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .duration-300 {
+    transition-duration: 300ms;
+  }
+  
+  .hover\\:scale-105:hover {
+    transform: scale(1.05);
+  }
+  
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

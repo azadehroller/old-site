@@ -1,0 +1,85 @@
+/* Quote Module CLS Prevention Styles */
+
+/* Ensure consistent image containers with aspect ratios */
+.quote-avatar-container {
+  aspect-ratio: 1 / 1;
+  width: 72px;
+  height: 72px;
+}
+
+.quote-logo-container {
+  aspect-ratio: 148 / 80;
+  width: 90px;
+  height: 48px;
+}
+
+/* Prevent layout shifts during image loading */
+.quote-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure text containers maintain minimum heights */
+.quote-text-container {
+  min-height: 1.5rem;
+  line-height: 1.5;
+}
+
+.quote-author-container {
+  min-height: 2rem;
+}
+
+/* Stable grid layout */
+.quote-module-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-rows: auto 1fr auto;
+  min-height: 120px;
+}
+
+/* Prevent content jumping during conditional rendering */
+.quote-conditional-content {
+  transition: none;
+}
+
+/* Ensure proper image loading states */
+.quote-module img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Loading state for images */
+.quote-module img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Prevent flash of unstyled content */
+.quote-module {
+  contain: layout style;
+}
+
+/* Ensure consistent spacing regardless of content */
+.quote-module-grid > * {
+  min-height: 0;
+}
+
+/* Stable link container */
+.quote-link-container {
+  min-height: 2.5rem;
+}
+
+/* Prevent text reflow during font loading */
+.quote-text-container {
+  font-display: swap;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+/* Ensure proper aspect ratios are maintained */
+.quote-avatar-container,
+.quote-logo-container {
+  contain: size layout;
+  overflow: hidden;
+}

@@ -1,0 +1,141 @@
+[ {
+  "id" : "board_token",
+  "name" : "board_token",
+  "label" : "Greenhouse Board Token",
+  "help_text" : "The board token from your Greenhouse job board URL (e.g., 'roller' from boards.greenhouse.io/roller)",
+  "required" : true,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "roller"
+}, {
+  "id" : "jobs_limit",
+  "name" : "jobs_limit",
+  "label" : "Jobs Per Tab",
+  "help_text" : "Maximum number of jobs to display per tab (0 for unlimited)",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 1,
+  "max" : 50,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 4
+}, {
+  "id" : "show_filters",
+  "name" : "show_filters",
+  "label" : "Show Department Filters",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "all_filter_label",
+  "name" : "all_filter_label",
+  "label" : "All Filter Label",
+  "required" : false,
+  "locked" : false,
+  "visibility" : {
+    "controlling_field" : "show_filters",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "All"
+}, {
+  "id" : "departments",
+  "name" : "departments",
+  "label" : "Department Filters",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "departments.tab_name",
+    "default" : 3
+  },
+  "visibility" : {
+    "controlling_field" : "show_filters",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "children" : [ {
+    "id" : "departments.tab_name",
+    "name" : "tab_name",
+    "label" : "Tab Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Department"
+  }, {
+    "id" : "departments.keywords",
+    "name" : "keywords",
+    "label" : "Department Keywords",
+    "help_text" : "Comma-separated keywords to match department names (e.g., 'Finance, Accounting')",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Department"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "tab_name" : "Finance",
+    "keywords" : "Finance, Accounting, Tax"
+  }, {
+    "tab_name" : "GTM",
+    "keywords" : "Sales, Marketing, Revenue, Business Development"
+  }, {
+    "tab_name" : "Product & Tech",
+    "keywords" : "Product, Engineering, Technology, Tech, Software, Developer"
+  } ]
+}, {
+  "id" : "more_details_text",
+  "name" : "more_details_text",
+  "label" : "More Details Link Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "More details"
+}, {
+  "id" : "no_jobs_message",
+  "name" : "no_jobs_message",
+  "label" : "No Jobs Message",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "No open positions at this time. Please check back later."
+}, {
+  "id" : "loading_message",
+  "name" : "loading_message",
+  "label" : "Loading Message",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Loading open positions..."
+} ]

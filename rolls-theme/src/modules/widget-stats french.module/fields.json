@@ -1,0 +1,93 @@
+[ {
+  "id" : "cb24e83a-7e7a-a1a6-d3c0-bddb68ef77d0",
+  "name" : "text",
+  "label" : "Text",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "f44e6e6f-0136-830f-73dc-836405e6daa6",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "All-in-one venue management software"
+  }, {
+    "id" : "f232d04a-2b04-261f-3353-5fdd1b599b91",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Supporting your business every step of the way"
+  }, {
+    "id" : "40df1cc5-58d1-8464-6754-1ee055927bac",
+    "name" : "blurb",
+    "label" : "Blurb",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Whether you manage one venue or 100, you need a solution built to help you succeed. At ROLLER, we help operators do just that."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "All-in-one venue management software",
+    "title" : "Supporting your business every step of the way",
+    "blurb" : "Whether you manage one venue or 100, you need a solution built to help you succeed. At ROLLER, we help operators do just that."
+  }
+}, {
+  "id" : "618d7c31-2dab-1032-4b46-ded1dcd4d781",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : true,
+  "children" : [ {
+    "id" : "9bfe926d-6efe-51a4-a5ee-cf4ec1c10e93",
+    "name" : "orientation",
+    "label" : "Orientation",
+    "help_text" : "See designs for references: https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?node-id=2319-102365&t=az8O3DVA1IibxpNh-0",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "f3dec43f-c188-9ea1-007c-ab6961e676ce",
+      "name" : "horizontally",
+      "label" : "Horizontally",
+      "help_text" : "",
+      "inline_help_text" : "",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "horizontally" : false
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "orientation" : {
+      "horizontally" : false
+    }
+  }
+} ]

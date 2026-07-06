@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 212343674941,
+  "label" : "Interactive Summary",
+  "icon" : "../../images/module-icons/location.svg",
+  "is_available_for_new_content" : true
+}

@@ -1,0 +1,12 @@
+{% if module.takeaways|length > 0 %}
+  <section class="key-takeaways" aria-label="{{ module.title }}">
+    <h2 class="key-takeaways__title">{{ module.title }}</h2>
+    <ul class="key-takeaways__list">
+      {% for item in module.takeaways %}
+        {% if item.text %}
+          <li class="key-takeaways__item">{{ item.text }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}

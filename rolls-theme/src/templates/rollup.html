@@ -1,0 +1,175 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Rollup
+  screenshotPath: ../images/template-previews/rollup.png
+-->
+{% extends "./layouts/base.html" %}
+{% require_css %}
+  <style>
+  /* Fade-in and slide-up on scroll styles */
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translate3d(0px, 10px, 0px) scale3d(0.9, 0.9, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+  transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+}
+
+.fade-in-on-scroll.is-visible {
+  opacity: 1;
+  transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+  transform-style: preserve-3d;
+}
+.tpl-rollup .text-base,.tpl-rollup .text-base p,.tpl-rollup  p,.tpl-rollup  .text-lg p {
+  font-size: 16px;
+  line-height: 24px;
+}
+.tpl-rollup .text-base:last-child,.tpl-rollup .text-base p:last-child,.tpl-rollup  p:last-child,.tpl-rollup  .text-lg p:last-child   {
+  margin-bottom: 0 !important;
+}
+
+.tpl-rollup .dnd-section:first-of-type {
+ {# background-image: linear-gradient(
+    to right,
+    #0960F6 0%,
+    #00B8FF 25%,
+    #FFEE99 50%,
+    #FF8857 100%
+);
+background-image: linear-gradient(
+to right,
+#5AE9FD 0%,
+#3469F9 25%,
+#A554FF 50%,
+#FF290C 100%
+); #}
+
+{# background-image: 
+    radial-gradient(441.19% 161.32% at 110.05% 117.95%, rgba(255, 41, 12, 0.30) 0%, rgba(255, 41, 12, 0.00) 35%), 
+    radial-gradient(431.71% 157.85% at -7.69% -15.42%, rgba(9, 96, 246, 0.60) 0%, rgba(9, 96, 246, 0.00) 29.5%), 
+    radial-gradient(400.78% 141.42% at 0% 0%, #00B8FF 0%, rgba(0, 184, 255, 0.00) 55%), 
+    radial-gradient(400.78% 141.42% at 100% 100%, #FE9 0%, rgba(255, 238, 153, 0.00) 55%); #}
+    {# background: linear-gradient(to right, #00b8ff 0%, #aee9ff 35%, #ffea99 70%, #ffbb66 100%);
+    background : url('{{ get_asset_url('rolls-theme/images/rollup-bg.png') }}') no-repeat center center /cover; #}
+    {# background : url('{{ get_asset_url('rolls-theme/images/rollup-main-bg.png') }}') no-repeat center center /cover; #}
+
+    background : url('{{ get_asset_url('rolls-theme/images/mob.png') }}') no-repeat center center /cover; 
+    {# background : url('{{ get_asset_url('rolls-theme/images/bg-grad.png') }}') no-repeat center center /cover;  #}
+    {# background : url('{{ get_asset_url('rolls-theme/images/big-hero.png') }}') no-repeat center center /cover;  #}
+    background : url('{{ get_asset_url('rolls-theme/images/432.png') }}') no-repeat center center /cover;  
+    background-size: 100% 100%;
+    height: 225px;
+    display: flex !important;
+    margin-bottom: 56px;
+} 
+@media (min-width: 433px) {
+  .tpl-rollup .dnd-section:first-of-type {
+  {# background : url('{{ get_asset_url('rolls-theme/images/big-hero.png') }}') no-repeat center center /cover;  #}
+    height: 280px;
+  }
+}
+@media (min-width: 556px) {
+  .tpl-rollup .dnd-section:first-of-type {
+  {# background : url('{{ get_asset_url('rolls-theme/images/big-hero.png') }}') no-repeat center center /cover;  #}
+    height: 320px;
+  }
+}
+@media (min-width: 620px) {
+  .tpl-rollup .dnd-section:first-of-type {
+  {# background : url('{{ get_asset_url('rolls-theme/images/big-hero.png') }}') no-repeat center center /cover;  #}
+    height: 350px;
+  }
+}
+@media (min-width: 769px) {
+  .tpl-rollup .dnd-section:first-of-type {
+    background : url('{{ get_asset_url('rolls-theme/images/middle.png') }}') no-repeat center center /cover; 
+    height: 433px;
+    margin-bottom: 80px;
+  }
+}
+@media (min-width: 1024px) {
+  .tpl-rollup .dnd-section:first-of-type {
+    {# height: 360px; #}
+  }
+}
+@media (min-width: 1414px) {
+  .tpl-rollup .dnd-section:first-of-type {
+    height: 591px;
+  }
+}
+@media (min-width: 1921px) {
+  .tpl-rollup .dnd-section:first-of-type {
+    background : url('{{ get_asset_url('rolls-theme/images/desktop.png') }}') no-repeat center center /cover; 
+    {# background : url('{{ get_asset_url('rolls-theme/images/lg.png') }}') no-repeat center center /cover;  #}
+    {# height: 591px; #}
+  }
+}
+@media (min-width: 2500px) {
+  .tpl-rollup .dnd-section:first-of-type {
+    height: 920px;
+  }
+}
+</style>
+{% end_require_css %}
+{% block body %}
+
+{# All templates are recommended to have an h1 present for both accessibility and SEO best practice. This should be at the top of the template before any other textual content. The h1 element below is within a dnd area to allow content editors the ability to adjust the content and alignment of the text. #}
+
+{% dnd_area "dnd_area"
+  label="Main section",
+  class="body-container body-container--rollup"
+%}
+
+
+
+{% end_dnd_area %}
+{% endblock body %}
+{% require_js  position="footer" defer  %}
+  <script>
+  {# add intersection observer script to the footer #}
+  (function() {
+  // Check if Intersection Observer is supported
+  if (!('IntersectionObserver' in window)) {
+    // Fallback: show all elements if Intersection Observer is not supported
+    document.querySelectorAll('.fade-in-on-scroll').forEach(function(el) {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+  
+  // Create Intersection Observer
+  const observerOptions = {
+    root: null, // Use viewport as root
+    rootMargin: '0px',
+    threshold: 0.1 // Trigger when 10% of element is visible
+  };
+  
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        // Element is in view, add visible class
+        entry.target.classList.add('is-visible');
+        // Optionally unobserve after it's been shown (for performance)
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  // Initialize observer when DOM is ready
+  function initObserver() {
+    const elementsToObserve = document.querySelectorAll('.fade-in-on-scroll');
+    elementsToObserve.forEach(function(element) {
+      observer.observe(element);
+    });
+  }
+  
+  // Handle both cases: DOM already loaded or still loading
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initObserver);
+  } else {
+    initObserver();
+  }
+  })();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  {% end_require_js %}

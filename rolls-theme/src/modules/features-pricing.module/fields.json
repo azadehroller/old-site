@@ -1,0 +1,489 @@
+[ {
+  "id" : "f66cae2e-f1ce-abbd-09b0-6a46c0a9aa5a",
+  "name" : "cards",
+  "label" : "Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : "464be62f-1bd5-efec-6dbb-0f7b79730ee0",
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "464be62f-1bd5-efec-6dbb-0f7b79730ee0",
+    "name" : "header",
+    "label" : "Header",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "162c1a10-5eb7-6e06-630a-442338993afa",
+      "name" : "content",
+      "label" : "Content",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "6a37e516-c26a-5fe4-ff7a-b5ce456f8d6a",
+        "name" : "title",
+        "label" : "Title",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "Features Name"
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "title" : "Features Name"
+      }
+    }, {
+      "id" : "004650a8-0e3c-79da-af48-39e6ef4d73e7",
+      "name" : "price",
+      "label" : "Price",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "7432ad04-0bf8-38a7-598b-87977fa5fd6d",
+        "name" : "annually",
+        "label" : "Annually",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "9579eb25-10f3-261d-ffcc-d1c0cdca027a",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "c0482746-e65f-ce3b-2060-1a5398775259",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "450"
+        }, {
+          "id" : "cbb24351-f76f-2c68-fbe9-7c7c494d5773",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "280"
+        }, {
+          "id" : "f423bcbc-064f-8b95-00b1-c846769d4a0e",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "250"
+        }, {
+          "id" : "3b0beba8-ce6c-07f3-8577-0cd1d7ecb946",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "360"
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360"
+        }
+      }, {
+        "id" : "7f42177e-bc9b-36bc-a319-a48ea0c2a4d8",
+        "name" : "monthly",
+        "label" : "Monthly",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "eeb6ee75-e2dc-20ec-0e94-dead39562b3e",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "0b41587a-7072-7855-21e2-8f1527a8cadb",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "c0bd7053-76de-becc-7099-56863404a078",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "1603c025-a47c-a473-c384-7db00cebe61c",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "9cafd07f-3810-cb86-47f4-bab552a984b5",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "200"
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200"
+        }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "annually" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360"
+        },
+        "monthly" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200"
+        }
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "content" : {
+        "title" : "Features Name"
+      },
+      "price" : {
+        "annually" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360"
+        },
+        "monthly" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200"
+        }
+      }
+    }
+  }, {
+    "id" : "b09f76e1-433f-51cb-4849-76ab3e57fcfa",
+    "name" : "features",
+    "label" : "Features",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "88f727dc-4e18-7a07-e2b1-751faba48900",
+      "name" : "icon",
+      "label" : "Icon",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"none\"><path fill=\"#5087E5\" fill-rule=\"evenodd\" d=\"M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z\" clip-rule=\"evenodd\"/></svg>"
+    }, {
+      "id" : "58f0b0d6-f06e-d1b3-223c-30e0415b9090",
+      "name" : "heading",
+      "label" : "Heading",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Diam aliquam ut ullamcorper"
+    }, {
+      "id" : "086e89c4-e1cc-347d-0506-af7c0ae50b98",
+      "name" : "feature_items",
+      "label" : "Feature Items",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : null,
+        "max" : null,
+        "sorting_label_field" : null,
+        "default" : null
+      },
+      "children" : [ {
+        "id" : "c4610d3f-6e56-d507-3f67-86fefed052b7",
+        "name" : "features",
+        "label" : "Features",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "Sed ut at metus pellentesque"
+      }, {
+        "id" : "b69f67e8-2244-9078-1cf1-ff31e7cc17db",
+        "name" : "tooltip",
+        "label" : "Tooltip",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "Lorem ipsum dolor sit amet consectetur. Facilisi pharetra risus nullam amet gravida volutpat. Est non imperdiet mi maurisfringilla."
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "features" : "Sed ut at metus pellentesque",
+        "tooltip" : "Lorem ipsum dolor sit amet consectetur. Facilisi pharetra risus nullam amet gravida volutpat. Est non imperdiet mi maurisfringilla."
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"none\"><path fill=\"#5087E5\" fill-rule=\"evenodd\" d=\"M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z\" clip-rule=\"evenodd\"/></svg>",
+      "heading" : "Diam aliquam ut ullamcorper",
+      "feature_items" : {
+        "features" : "Sed ut at metus pellentesque",
+        "tooltip" : "Lorem ipsum dolor sit amet consectetur. Facilisi pharetra risus nullam amet gravida volutpat. Est non imperdiet mi maurisfringilla."
+      }
+    }
+  }, {
+    "id" : "8dba510f-64a5-224a-64de-df23a4d8452c",
+    "name" : "button",
+    "label" : "Button",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "c76ee3df-c1cf-b2d2-43db-a532e4e3f018",
+      "name" : "button_label",
+      "label" : "Button label",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Get started"
+    }, {
+      "id" : "e5467a1f-d8de-29e0-7b1e-cc9b82b328bb",
+      "name" : "link",
+      "label" : "Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "id" : "76e11578-d4c2-5694-588c-4e9acbc40db9",
+      "name" : "icon",
+      "label" : "Icon",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "button_label" : "Get started",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "header" : {
+      "content" : {
+        "title" : "Features Name"
+      },
+      "price" : {
+        "annually" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360"
+        },
+        "monthly" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200"
+        }
+      }
+    },
+    "features" : {
+      "icon" : "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"none\"><path fill=\"#5087E5\" fill-rule=\"evenodd\" d=\"M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z\" clip-rule=\"evenodd\"/></svg>",
+      "heading" : "Diam aliquam ut ullamcorper",
+      "feature_items" : {
+        "features" : "Sed ut at metus pellentesque",
+        "tooltip" : "Lorem ipsum dolor sit amet consectetur. Facilisi pharetra risus nullam amet gravida volutpat. Est non imperdiet mi maurisfringilla."
+      }
+    },
+    "button" : {
+      "button_label" : "Get started",
+      "link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }
+  }
+}, {
+  "id" : "4213c11c-5ad4-dc0b-8f49-35a5e621e7ae",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7da75c4c-a10d-78e9-aa85-9c650c7a4b50",
+    "name" : "button",
+    "label" : "Button",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "db5f805e-dcea-88fb-8868-3c28ce7fbbbb",
+      "name" : "kind",
+      "label" : "Kind",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "primary", "Primary" ], [ "secondary", "Secondary" ], [ "tertiary", "Tertiary" ], [ "ghost", "Ghost" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "primary"
+    }, {
+      "id" : "f6c048d7-bcc2-3ed1-01c4-b9841d115c9c",
+      "name" : "icon_position",
+      "label" : "Icon Position",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "left", "Left" ], [ "right", "Right" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "kind" : "primary"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button" : {
+      "kind" : "primary"
+    }
+  }
+} ]

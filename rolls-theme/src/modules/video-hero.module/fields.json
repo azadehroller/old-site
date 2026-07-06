@@ -1,0 +1,188 @@
+[ {
+  "id" : "a1b23456-7890-4abc-bdef-000000000001",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Area 51 moves at a drastic pace. ROLLER makes sure nothing holds them back."
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000002",
+  "name" : "heading_tag",
+  "label" : "Heading Tag",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ] ],
+  "multiple" : false,
+  "reordering_enabled" : false,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "h1"
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000003",
+  "name" : "subheading",
+  "label" : "Subheading",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : true,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "ROLLER's all-in-one system manages every location, every booking, and every guest, so your team can move fast and focus on people."
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000004",
+  "name" : "background_video_url",
+  "label" : "Background Video — MP4 URL",
+  "inline_help_text" : "URL of the self-hosted MP4 video that plays muted and looping behind the hero. Upload via HubSpot File Manager and paste the file URL here.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000017",
+  "name" : "background_video_webm_url",
+  "label" : "Background Video — WebM URL (optional)",
+  "inline_help_text" : "Optional WebM version of the background video. Browsers that support WebM will use it instead of MP4 for a smaller file size.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000005",
+  "name" : "poster_image",
+  "label" : "Poster / Fallback Image",
+  "inline_help_text" : "Displayed while the background video loads, or as a static fallback when no video ID is set.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "",
+    "alt" : "",
+    "loading" : "eager"
+  }
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000015",
+  "name" : "poster_focal_x",
+  "label" : "Poster Focal Point — X",
+  "inline_help_text" : "Horizontal anchor (0 = left edge, 50 = center, 100 = right edge). Drag to keep the subject visible at any screen width.",
+  "required" : false,
+  "locked" : false,
+  "display" : "slider",
+  "min" : 0,
+  "max" : 100,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 50
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000016",
+  "name" : "poster_focal_y",
+  "label" : "Poster Focal Point — Y",
+  "inline_help_text" : "Vertical anchor (0 = top edge, 50 = center, 100 = bottom edge). Lower values keep faces visible on landscape crops.",
+  "required" : false,
+  "locked" : false,
+  "display" : "slider",
+  "min" : 0,
+  "max" : 100,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 50
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000009",
+  "name" : "modal_video_id",
+  "label" : "Watch Button Video — Wistia ID",
+  "inline_help_text" : "The Wistia video ID that plays in a modal when the Watch button is clicked (e.g. <code>abc123xyz</code>).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000010",
+  "name" : "watch_button_text",
+  "label" : "Watch Button Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Watch their story"
+}, {
+  "id" : "a1b23456-7890-4abc-bdef-000000000011",
+  "name" : "modal_end_cta",
+  "label" : "End-of-Video CTA",
+  "inline_help_text" : "Overlay shown when the modal video finishes. Leave button text empty to disable.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "a1b23456-7890-4abc-bdef-000000000012",
+    "name" : "message",
+    "label" : "Message",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Ready to get started?"
+  }, {
+    "id" : "a1b23456-7890-4abc-bdef-000000000013",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Get started"
+  }, {
+    "id" : "a1b23456-7890-4abc-bdef-000000000014",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "message" : "Ready to get started?",
+    "button_text" : "Get started",
+    "button_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }
+} ]

@@ -1,0 +1,373 @@
+/* Special Metric Module Styles */
+.special-metric {
+  --icon-dark: #033180;
+  --icon-bright: #0960F6;
+  --animation-duration: 0.1s;
+  --animation-delay-base: 0.01s;
+}
+
+/* Tailwind utility classes */
+
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-cols-7 {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.grid-cols-11 {
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.grid-rows-7 {
+  grid-template-rows: repeat(7, minmax(0, 1fr));
+}
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-8 {
+  gap: 2rem;
+}
+
+.gap-x-6 {
+  column-gap: 1.5rem;
+}
+.
+.gap-\[10px\] {
+  gap: 10px;
+}
+
+.gap-y-\[10px\] {
+  row-gap: 10px;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.relative {
+  position: relative;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-w-\[400px\] {
+  max-width: 400px;
+}
+
+.max-w-\[142px\] {
+  max-width: 142px;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.w-\[22px\] {
+  width: 22px;
+}
+
+.h-\[22px\] {
+  height: 22px;
+}
+
+.block {
+  display: block;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+
+
+
+.items-center {
+  align-items: center;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-extrabold {
+  font-weight: 800;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.leading-none {
+  line-height: 1;
+}
+
+.leading-tight {
+  line-height: 1.25;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+@media (min-width: 1032px) {
+  .lg\:grid-cols-\[1fr_142px\] {
+    grid-template-columns: 1fr 142px;
+  }
+  .lg\:gap-0{
+    gap: 0;
+  }
+  .lg\:gap-16 {
+    gap: 4rem;
+  }
+  .lg\:ml-4{
+    margin-left: 24px;
+  }
+
+  .lg\:w-8 {
+    width: 2rem;
+  }
+
+  .lg\:h-8 {
+    height: 2rem;
+  }
+
+  .special-metric__printer-grid {
+    column-gap: 34px;
+  }
+}
+.special-metric__icons-wrapper {
+}
+
+.special-metric__icons-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 100%;
+  background-image: var(--divider-image);
+  background-repeat: no-repeat;
+  background-position: left center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.special-metric__icons-grid {
+  column-gap: 4px;
+}
+
+.special-metric__icon {
+  color: var(--icon-dark);
+  transition: color var(--animation-duration) ease-out;
+}
+
+/* Mobile: 20px × 20px */
+@media (max-width: 767px) {
+  .special-metric__icon,
+  .special-metric__printer-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .special-metric__icons-grid{
+    column-gap: 20px;
+  }
+}
+
+/* Animation state for icons */
+.special-metric__icon.is-animated {
+  color: var(--icon-bright);
+}
+
+/* Stat Section */
+.special-metric__stat {
+}
+
+.special-metric__stat-icon {
+  align-self: center;
+}
+
+.special-metric__stat-icon svg {
+}
+
+.special-metric__stat-content {
+}
+
+.special-metric__stat-content p {
+}
+
+/* Slide-up animation for H3 (stat number) - starts from lower position */
+@keyframes slideUpTitle {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide-up animation for P (stat text) - smaller slide distance */
+@keyframes slideUpText {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.special-metric__stat-number {
+  opacity: 0;
+  transform: translateY(30px);
+  /* Match metric module title size: 2rem (32px) on mobile, 3rem (48px) on desktop */
+  font-size: 2rem;
+  line-height: 100%;
+}
+
+@media (min-width: 768px) {
+  .special-metric__stat-number {
+    font-size: 3rem;
+  }
+}
+
+.special-metric__stat-text {
+  opacity: 0;
+  transform: translateY(20px);
+  /* Match metric module text size: 1rem (16px) */
+  font-size: 1rem;
+}
+
+/* Trigger animation when parent has is-visible class */
+/* H3 (stat number) animates first with larger slide distance, starts after icon animation completes (1300ms: 76 icons * 16ms delay + 100ms transition) */
+.special-metric.is-visible .special-metric__stat-number {
+  animation: slideUpTitle 200ms ease-out 1300ms forwards;
+}
+
+/* P (stat text) animates after H3 with a small delay */
+.special-metric.is-visible .special-metric__stat-text {
+  animation: slideUpText 200ms ease-out 1400ms forwards;
+}
+
+/* Printer icons - always dark, no animation */
+.special-metric__printer-wrapper {
+}
+
+.special-metric__printer-wrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 100%;
+  background-image: var(--divider-image);
+  background-repeat: no-repeat;
+  background-position: left center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Mobile-first: responsive grid that fills available space */
+.special-metric__printer-grid {
+  /* grid-template-columns: repeat(auto-fill, minmax(20px, 1fr)); */
+  grid-template-rows: none;
+  grid-auto-flow: row;
+}
+
+/* Desktop/Tablet: fixed 4 columns, 7 rows, column flow */
+@media (min-width: 1024px) {
+  .special-metric__printer-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(7, minmax(0, 1fr));
+    grid-auto-flow: column;
+  }
+}
+
+
+.special-metric__printer-icon {
+  color: var(--icon-dark);
+}
+
+/* Retail icon */
+.special-metric__retail-icon {
+}
+
+.special-metric__retail-icon svg {
+}
+
+/* Responsive adjustments */
+@media (max-width: 1023px) {
+  .special-metric {
+    grid-template-columns: 1fr;
+  }
+
+  .special-metric__icons-grid,
+  .special-metric__printer-grid {
+    max-width: 100%;
+  }
+
+  .special-metric__printer-grid {
+    grid-template-columns: repeat(auto-fill, minmax(32px, 0fr));
+  }
+}

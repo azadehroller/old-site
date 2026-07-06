@@ -1,0 +1,48 @@
+[ {
+  "id" : "greeting_image",
+  "name" : "greeting_image",
+  "label" : "Greeting Image",
+  "help_text" : "Handwritten greeting image (e.g., 'Hey There!')",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : true,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "",
+    "alt" : "Hey There!",
+    "loading" : "lazy"
+  }
+}, {
+  "id" : "body_content",
+  "name" : "body_content",
+  "label" : "Body Content",
+  "help_text" : "Add a blank line between paragraphs to create visual separation",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : true,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "As you explore our open roles, I want to share what makes ROLLER special. ROLLER is what it is today because of the incredible people on our team — talented, humble, curious, driven, and genuinely great to work with. I truly believe the journey matters more than the destination, and enjoying the work and the people around you is essential.\n\nAs we grow, we're not just looking for skills, but for people who want to work together with purpose and enjoy the journey along the way. If this resonates with you, we'd love to hear from you."
+}, {
+  "id" : "signature_image",
+  "name" : "signature_image",
+  "label" : "Signature Image",
+  "help_text" : "Handwritten signature image including name and title (e.g., 'Luke Finn, CEO and Founder')",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : true,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "",
+    "alt" : "Author signature",
+    "loading" : "lazy"
+  }
+} ]

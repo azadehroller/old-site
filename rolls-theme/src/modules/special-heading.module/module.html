@@ -1,0 +1,28 @@
+{% set top_main_heading = module.top_main_heading %}
+{% set main_heading = module.main_heading %}
+{% set date_text = module.date_text %}
+{% set date_secondary = module.date_secondary %}
+{% set description = module.description %}
+{% set high_priority = module.high_priority_loading %}
+  
+  {# Generate unique ID for accessibility #}
+  {% set unique_id = "special-heading-" ~ name|replace("_", "-") %}
+  
+  <header class="special-heading grid grid-cols-1 gap-y-3 lg:grid-cols-2 lg:gap-y-2 slg:gap-y-3 w-full max-w-screen-xl mx-auto text-roller-blue text-left" id="{{ unique_id }}" role="banner" >
+    <h1 class="max-w-[368px] special-heading-main m-0 uppercase lg:max-w-[500px] text-left row-start-1 lg:col-start-1 lg:row-start-1 self-center text-[48px] font-semibold leading-[100%] tracking-[-1.44px]  md:text-[68px] lg:text-[68px] slg:text-[108px] slg:tracking-[-3.24px]">
+      <span>{{ top_main_heading }}</span>
+      <span>{{ main_heading }}</span>
+    </h1> 
+    
+    <strong class="special-heading-date uppercase max-w-[368px] lg:max-w-[555px] lg:text-right row-start-2 lg:col-start-2 lg:row-start-1 lg:self-end lg:justify-self-end text-[48px] font-light leading-[75%] tracking-[-1.44px]  md:text-[58px] lg:text-[88px] slg:text-[108px] slg:tracking-[-3.24px]">
+      {{ date_text }}
+    </strong>
+    
+    <strong class="special-heading-date-secondary uppercase max-w-[368px] lg:max-w-[555px] lg:text-right row-start-3 lg:col-start-2 lg:row-start-2 lg:justify-self-end lg:self-start  text-[48px] font-light leading-[75%] tracking-[-1.44px]  md:text-[68px] lg:text-[88px] slg:text-[108px] slg:tracking-[-3.24px]">
+      {{ date_secondary }}
+    </strong>
+    <div class="text-left special-heading-description row-start-4 lg:mt-0 lg:col-start-1 lg:row-start-2">
+      {{ description }}
+    </div>
+    
+  </header>

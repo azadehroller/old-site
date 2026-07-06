@@ -1,0 +1,44 @@
+[ {
+  "id" : "section_title",
+  "name" : "section_title",
+  "label" : "Section Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "General habits"
+}, {
+  "id" : "section_subtitle",
+  "name" : "section_subtitle",
+  "label" : "Section Subtitle",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Have you ever wondered what factors influence when, where, and why a guest chooses to visit a venue? Read on to discover how experiences are the ultimate driver of guest decisions."
+}, {
+  "id" : "section_number",
+  "name" : "section_number",
+  "label" : "Section Number",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "01"
+}, {
+  "id" : "section_icon",
+  "name" : "section_icon",
+  "label" : "Section Icon",
+  "required" : false,
+  "locked" : false,
+  "icon_set" : "fontawesome-5.0.10",
+  "type" : "icon",
+  "display_width" : null,
+  "default" : {
+    "name" : "users",
+    "type" : "SOLID"
+  }
+} ]

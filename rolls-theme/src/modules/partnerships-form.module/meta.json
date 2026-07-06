@@ -1,0 +1,12 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "js_render_options" : {
+    "async" : true
+  },
+  "host_template_types" : [ "PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "module_id" : 181134074666,
+  "label" : "Module: Partnerships Form",
+  "icon" : "fontawesome-5.14.0:User%20Friends:SOLID",
+  "is_available_for_new_content" : true
+}

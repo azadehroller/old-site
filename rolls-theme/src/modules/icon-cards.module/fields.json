@@ -1,0 +1,99 @@
+[ {
+  "id" : "cards",
+  "name" : "cards",
+  "label" : "Icon Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 6,
+    "sorting_label_field" : "heading",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "icon",
+    "name" : "icon",
+    "label" : "Icon Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Icon",
+      "loading" : "lazy",
+      "width" : 48,
+      "height" : 48,
+      "max_width" : 48,
+      "max_height" : 48
+    }
+  }, {
+    "id" : "heading",
+    "name" : "heading",
+    "label" : "Heading",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "AI built for attractions:"
+  }, {
+    "id" : "description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "Understands your business, your capacity, events, guests, and goals, and transforms that data into instant insights"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "AI Icon",
+      "loading" : "lazy",
+      "width" : 48,
+      "height" : 48,
+      "max_width" : 48,
+      "max_height" : 48
+    },
+    "heading" : "AI built for attractions:",
+    "description" : "Understands your business, your capacity, events, guests, and goals, and transforms that data into instant insights"
+  }, {
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Insights Icon",
+      "loading" : "lazy",
+      "width" : 48,
+      "height" : 48,
+      "max_width" : 48,
+      "max_height" : 48
+    },
+    "heading" : "From data to insights in moments:",
+    "description" : "Delivers fast, data-driven answers so you can make confident decisions without hours spent in reports."
+  }, {
+    "icon" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Mobile Icon",
+      "loading" : "lazy",
+      "width" : 48,
+      "height" : 48,
+      "max_width" : 48,
+      "max_height" : 48
+    },
+    "heading" : "Intelligence in your pocket:",
+    "description" : "Keep insights at your fingertips, wherever you are, on the floor, on the go, or off the clock."
+  } ]
+} ]

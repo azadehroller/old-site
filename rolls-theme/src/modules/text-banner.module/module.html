@@ -1,0 +1,74 @@
+{% set background = module.banner_type.backgroundimage_field %}
+{% set swap_image_and_text = module.banner_type.swap_image_and_text %}
+{% set background_color = module.banner_type.background_color.color %}
+{% macro hex_to_rgba(hex, alpha) %}
+  {% set hex = hex|replace('#', '') %}
+  {% if hex|length == 3 %}
+    {% set r = hex[0]*2 %}
+    {% set g = hex[1]*2 %}
+    {% set b = hex[2]*2 %}
+  {% else %}
+    {% set r = hex[0:2] %}
+    {% set g = hex[2:4] %}
+    {% set b = hex[4:6] %}
+  {% endif %}
+  rgba({{ r|int(base=16) }}, {{ g|int(base=16) }}, {{ b|int(base=16) }}, {{ alpha }})
+{% endmacro %}
+
+{# Styles #}
+{% require_css %}
+    <style>
+    {% scope_css %}
+        .section-{{name}} {
+          background-color: {{background_color}};
+        }
+        .section-{{name}} .image {
+            {% if background %}background-image: url({{background.src}});{% endif %}
+        }
+        .section-{{name}} .image:before {
+          background: linear-gradient(90deg,rgba({{background_color| convert_rgb}}, 1) 0%, rgba({{background_color| convert_rgb}}, 0.70) 50%, rgba({{background_color| convert_rgb}}, 0.45) 75%, rgba({{background_color| convert_rgb}}, 0) 100%);
+        }
+        
+    {% end_scope_css %}
+    </style>
+{% end_require_css%}
+
+
+<div class="text-banner section-{{name}} dnd-section row-fluid-wrapper {% if module.banner_type.is_dark_theme %}dark-theme{% endif %} {% if swap_image_and_text %} image-on-left {% endif %}">
+  <div 
+  class="image"
+  style="{% if background %}background-image: url('{{ background.src }}');{% endif %}"
+></div>
+
+  <div class="row-fluid">
+    <div class="inner-container">
+      <div class="text-container dnd-column">
+        {% if module.eyebrow %}<strong class="eyebrow">{{ module.eyebrow }}</strong>{% endif %}
+        <h2>
+          {{ module.heading }}
+        </h2>
+
+        {% if module.text %}
+          <div class="content">
+            {{ module.text }}
+          </div>
+        {% endif %}
+
+        <div class="button-container">
+          {% for item in module.button_group %}
+            {% if item.link.url.href %}
+              <a 
+                class="relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold text-md transition sm:w-auto justify-center whitespace-nowrap rounded-3xl py-2 px-4 button-in-dark-bg"
+                href="{{ item.link.url.href }}" 
+                {% if item.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}
+              >
+                {{ item.button_text }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

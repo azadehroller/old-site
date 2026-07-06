@@ -1,0 +1,93 @@
+{% set FORMID = module.form_field.form_id %}
+{% set bbg = module.style.button_background %}
+
+<div class="form-wrapper{% if module.style.toggle_background %} dark-mode{% endif %} {% if module.style.blue_background_button %} dark-button {% endif %} {% if bbg == "blue" %} blue-button {% elif bbg == "dark"  %} dark-button  {% elif bbg == "gr_b_50"  %} gr-b-50  {% endif %}">
+    <div id="footerHSForm" class="hidden"></div>
+    {% form
+        form_to_use="{{ FORMID }}"
+        response_response_type="{{ FORMID.response_type }}"
+        response_message="{{ FORMID.message }}"
+        response_redirect_id="{{ FORMID.redirect_id }}"
+        response_redirect_url="{{ FORMID.redirect_url }}"
+        gotowebinar_webinar_key="{{ FORMID.gotowebinar_webinar_key }}"
+    %}
+</div>
+{% require_css %}
+<style>
+  .form-wrapper.dark-mode .hs-custom-form {
+  li:has(.hs-error-msg.hs-main-font-element)::before{
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-image: url("{{ get_asset_url('/rolls-theme/images/error.svg') }}");
+            background-size: contain;
+            background-repeat: no-repeat;
+            vertical-align: middle;
+  }
+  }
+</style>
+{% end_require_css%}
+{% require_js %}
+    <script>
+        (() => {
+            const getUrlParameters = (url, names) => {
+                // Check if names is an array
+                if (!Array.isArray(names)) {
+                    console.error('Names must be an array');
+                    return {};
+                }
+                
+                const params = {};
+                const searchParams = new URLSearchParams(window.location.search);
+
+                // Iterate over each name in the names array
+                names.forEach(name => {
+                    const value = searchParams.get(name);
+                    // Check if the parameter exists in the URL
+                    if (value !== null) {
+                        params[name] = value;
+                    } else {
+                        params[name] = null;
+                    }
+                });
+                
+                return params;
+            };
+
+            const setInputValues = (formInputs, formValues) => {
+                const els = document.querySelectorAll(formInputs.map(formInput => `input[name="${formInput}"]`));
+
+                els.forEach((el, index) => {
+                    if (el) {
+                        el.value;
+                    } else {
+                        console.log('Hubspot error: Input field not found for', formInputs[index]);
+                    }
+                });
+            };
+
+            const onFormReady = () => {
+                const url = new URL(window.location.href);
+                const params = getUrlParameters(url, ['customer_ref_id', 'promo_code']);
+                setInputValues(['customer_ref_id', 'promo_code'], params);
+            };
+
+            const getForm = () => {
+                try {
+                    hbspt.forms.create({
+                        portalId: {{ hub_id }},
+                        formId: "{{ FORMID }}",
+                        target: '#footerHSForm',
+                        onFormReady: onFormReady
+                    });
+                } catch (error) {
+                    console.log('Hubspot error: ', error);
+                }
+            };
+
+            getForm();
+        })();
+
+    </script>
+{% end_require_js%}

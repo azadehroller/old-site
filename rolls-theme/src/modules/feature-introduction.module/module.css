@@ -1,0 +1,248 @@
+:root {
+  --btn-primary-bg: #0960F6;
+  --btn-primary-hover: #011840;
+}
+
+/* CSS Custom Properties for gradient colors from Figma SVG */
+
+@property --＠gradient-color-1 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(7, 100%, 52%)
+}
+
+@property --＠gradient-color-2 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(265, 90%, 59%);
+}
+
+@property --＠gradient-color-3 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(218, 93%, 50%)
+}
+
+@property --＠gradient-color-4 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(218, 93%, 50%);
+}
+
+@property --＠gradient-color-5 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsla(183, 100%, 61%, 0.6);
+}
+
+@property --＠gradient-color-6 {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: hsl(183, 100%, 61%);
+}
+.feature-text{
+   & *  {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  & p{ margin-bottom: 16px;}
+ a{
+color: #0961f6;
+   &:hover{text-decoration: underline;}
+}
+}
+.feature-text p:last-of-type {
+  margin-bottom: 0;
+}
+@media (min-width: 768px){
+.feature-text{
+  & *  {
+    font-size: 18px;
+    line-height: 27px;
+  }
+  }}
+@media (max-width: 580px){
+  .feature-text {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+}
+/* Tailwind arbitrary value classes */
+.grid-cols-\[1fr_114px\] {
+  grid-template-columns: 1fr 114px;
+}
+
+.gap-\[24px\] {
+  gap: 24px;
+}
+.mt-3{
+  margin-top: 1rem;
+}
+.max-w-\[847px\] {
+  max-width: 847px;
+}
+
+.\[\&_p\]\:text-lg p {
+  font-size: 1.125rem;
+}
+
+.\[\&_p\]\:leading-\[27px\] p {
+  line-height: 27px;
+}
+
+.\[\&_p\]\:text-roller-blue p {
+  color: #011840;
+}
+
+/* Button background colors with CSS variables */
+.bg-\[var\(--btn-primary-bg\)\] {
+  background-color: var(--btn-primary-bg);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.hover\:bg-\[var\(--btn-primary-hover\)\]:hover {
+  background-color: var(--btn-primary-hover);
+}
+
+.hover\:border-\[var\(--btn-primary-hover\)\]:hover {
+  border-color: var(--btn-primary-hover);
+}
+
+.hover\:text-neutral-white:hover {
+  color: #fff;
+}
+
+/* Transition for buttons */
+.border.border-roller-blue {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Justify-self utility classes */
+.justify-self-center {
+  justify-self: center;
+}
+
+.justify-self-start {
+  justify-self: start;
+}
+
+.justify-self-end {
+  justify-self: end;
+}
+
+/* Responsive justify-self classes for small screens and up (640px+) */
+@media (min-width: 640px) {
+  .sm\:flex {
+    display: flex;
+  }
+
+  .sm\:justify-center {
+    justify-content: center;
+  }
+
+  .sm\:text-center {
+    text-align: center;
+  }
+
+  .sm\:justify-self-center {
+    justify-self: center;
+  }
+
+  .sm\:justify-self-start {
+    justify-self: start;
+  }
+  .sm\:block{display:block;}
+  .sm\:mt-\[160px\]{margin-top:160px;}
+  .sm\:justify-self-end {
+    justify-self: end;
+  }
+}
+
+/* Make buttons full width on mobile (below 640px) */
+@media (max-width: 639px) {
+  .grid a.flex {
+    width: 100%;
+  }
+}
+
+/* Text alignment utilities */
+.text-left {
+  text-align: left;
+}
+
+/* Gradient animation - shifts colors to create flowing effect */
+@keyframes gradient-change {
+  to {
+    --＠gradient-color-3: hsl(183, 100%, 61%);
+    --＠gradient-color-4: hsla(183, 100%, 61%, 0.6);
+    --＠gradient-color-1: hsl(218, 93%, 50%);
+    --＠gradient-color-6: hsl(218, 93%, 50%);
+    --＠gradient-color-1: hsl(265, 90%, 59%);
+    --＠gradient-color-5: hsl(7, 100%, 52%);
+  }
+} 
+.mt-\[64px\] {margin-top:64px;} 
+.feature-heading{
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 24px; 
+    margin-block-end: -8px;
+}
+.feature-buttons{
+  margin-block-start: 8px;
+}
+.feature-introduction-wrapper{gap: 24px;margin-block-end: 32px;}
+.dnd-section:has(.feature-introduction-wrapper){margin-block-start: 64px;}
+.feature-title-text{
+font-size: 32px;
+font-weight: 800;
+line-height: 40px;
+letter-spacing: -0.32px;
+}
+.feature-title-text-desktop{display: none;}
+.feature-title-text-mobile{display: block;}
+@media (min-width: 433px){
+    .feature-title-text-desktop{display: block;}
+.feature-title-text-mobile{display: none;}
+}
+.feature-button{font-size: 16px; line-height: 24px;}
+
+@media (min-width: 768px){
+.feature-heading{
+  font-size: 18px;
+  line-height: 27px; 
+  margin-block-end: 0;
+}
+.feature-title-text{
+font-size: 48px;
+line-height: 60px;
+letter-spacing: -0.48px;
+}
+  .feature-buttons{
+  margin-block-start: 24px;
+}
+  .feature-introduction-wrapper{margin-block-end: 48px;}
+.dnd-section:has(.feature-introduction-wrapper){margin-block-start:120px;}
+}
+.mb-\[32px\]{margin-bottom:32px}
+/* .feature-title-text{    display: grid;gap:8px;
+    grid-template-columns: 1fr 114px;} */
+/* @media (max-width: 452px){.feature-title-text{ 
+    grid-template-columns: 0fr 114px;}} */
+.feature-tag {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  margin-left: 8px;
+  white-space: nowrap;
+  border-radius: 980px;
+  border: 1px solid var(--ROLLER-Blue-50, #0960F6);
+  background: var(--Neutral-white, #FFF);
+  color: var(--ROLLER-Blue-50, #0960F6);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  padding: 1px 8px;
+  left: 100%;
+}

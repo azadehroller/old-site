@@ -1,0 +1,91 @@
+{# Variables #}
+{% set features = module.features %}
+{% set button_1 = module.button_1 %}
+{% set button_2 = module.button_2 %}
+{% set needs_wistia = (button_1.enabled and button_1.open_modal and button_1.video_id) or (button_2.enabled and button_2.open_modal and button_2.video_id) %}
+
+{# Button 1 #}
+{% set btn1_href = button_1.link.url.href %}
+{% set btn1_modal = button_1.open_modal and button_1.video_id %}
+
+{# Button 2 #}
+{% set btn2_href = button_2.link.url.href %}
+{% set btn2_modal = button_2.open_modal and button_2.video_id %}
+
+<section class="hero-full-introduction">
+  {% if module.heading %}
+  <h1>{{ module.heading|replace('\n', '<br>')|safe }}</h1>
+  {% endif %}
+
+  {% if module.content %}
+  <div class="content">
+    {{ module.content }}
+  </div>
+  {% endif %}
+
+  {% if features|length > 0 %}
+  <ul class="features">
+    {% for item in features %}
+      {% if item.feature_label %}
+        {% set href = item.link.url.href %}
+
+        <li>
+          {% if href %}
+          <a
+            class="card"
+            href="{{ href }}"
+            {% if item.link.url.type == 'EXTERNAL' and href[0:1] != '#' %}target="_blank" rel="noopener noreferrer"{% endif %}
+          >
+            {{ item.feature_label }}
+          </a>
+          {% else %}
+          <span class="card">{{ item.feature_label }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {% if button_1.enabled or button_2.enabled %}
+  <div class="actions">
+    {% if button_1.enabled and button_1.text %}
+      {% if btn1_modal %}
+      <div class="wistia_embed wistia_async_{{ button_1.video_id }} popover=true popoverContent=html" id="wistia-{{ button_1.video_id }}-1">
+        <a class="btn primary" href="#">{{ button_1.text }}</a>
+      </div>
+      {% else %}
+      <a
+        class="btn primary"
+        href="{{ btn1_href if btn1_href else '#' }}"
+        {% if button_1.link.url.type == 'EXTERNAL' and btn1_href and btn1_href[0:1] != '#' %}target="_blank" rel="noopener noreferrer"{% endif %}
+      >
+        {{ button_1.text }}
+      </a>
+      {% endif %}
+    {% endif %}
+
+    {% if button_2.enabled and button_2.text %}
+      {% if btn2_modal %}
+      <div class="wistia_embed wistia_async_{{ button_2.video_id }} popover=true popoverContent=html" id="wistia-{{ button_2.video_id }}-2">
+        <a class="btn secondary" href="#">{{ button_2.text }}</a>
+      </div>
+      {% else %}
+      <a
+        class="btn secondary"
+        href="{{ btn2_href if btn2_href else '#' }}"
+        {% if button_2.link.url.type == 'EXTERNAL' and btn2_href and btn2_href[0:1] != '#' %}target="_blank" rel="noopener noreferrer"{% endif %}
+      >
+        {{ button_2.text }}
+      </a>
+      {% endif %}
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+
+{% if needs_wistia %}
+{% require_js position="footer" defer="true" %}
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+{% end_require_js %}
+{% endif %}

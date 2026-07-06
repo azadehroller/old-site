@@ -1,0 +1,83 @@
+{# Variables #}
+{% set items = module.item %}
+
+<section id="faq-{{name}}">
+    <div class="mx-auto max-w-5xl py-24 sm:py-32 lg:px-8 lg:py-40">
+    <div class="mx-auto max-w-5xl py-24 sm:py-32 lg:px-8 lg:py-40">
+        <dl class="mt-2">
+        {% for item in items %}
+            <div class="py-3 border-b border-primary-50">
+                <dt id="js-faq-heading">
+                    <button type="button" class="flex w-full items-center justify-between text-left text-primary-50 font-semibold" aria-controls="faq-{{loop.index}}" aria-expanded="false">
+                        <h3 class="text-lg font-semibold leading-7">{{ item.title }}</h3>
+                        <span class="ml-6 flex h-7 items-center">
+                            <svg class="lg:h-4 lg:w-4" width="24" height="24" fill="none"><path fill="#033180" fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm-1 5v4H7v2h4v4h2v-4h4v-2h-4V7h-2Zm-7 5c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8Z" clip-rule="evenodd"/></svg>
+
+                            <svg class="hidden lg:h-4 lg:w-4" width="24" height="24" fill="none">
+                                <path fill="#033180" fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2ZM4 12c0 4.41 3.59 8 8 8s8-3.59 8-8-3.59-8-8-8-8 3.59-8 8Zm3-1v2h10v-2H7Z" clip-rule="evenodd"/>
+                            </svg>
+                        </span>
+                    </button>
+                </dt>
+                <dd class="mt-2 pr-12 hidden text-primary-50 [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4 [&>ul>li]:text-lg [&>div]:text-lg" id="faq-{{loop.index}}">
+                    <p class="text-lg leading-7 text-primary-50">{{ item.content }}</p>
+                </dd>
+            </div>
+        {% endfor %}
+        </dl>
+    </div>
+
+</section>
+
+{% require_js position="head" %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {% for item in items %}
+            {
+            "@type": "Question",
+            "name": "{{ item.title }}",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "{{ item.content|striptags|escapejson }}"
+            }
+            }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ]
+    }
+</script>
+{% end_require_js %}
+
+{% require_js position="footer" defer="true" %}
+    <script>
+        const faqHeaderElem = document.querySelectorAll('#js-faq-heading');
+
+        console.log(faqHeaderElem);
+
+        function toggleFaqs() {
+            for (const accordionHeader of faqHeaderElem) {
+                let target = accordionHeader.nextElementSibling;
+                let svgElements = accordionHeader.querySelectorAll('svg'); 
+
+                accordionHeader.onclick = () => {
+                    let expanded = accordionHeader.getAttribute('aria-expanded') === 'true' || false;
+                    accordionHeader.setAttribute('aria-expanded', !expanded);
+                    target.classList.toggle("hidden");
+                    accordionHeader.classList.toggle("-open");
+                    target.hidden = expanded;
+
+                    for (const svgElement of svgElements) {
+                        svgElement.classList.toggle("hidden");
+                    }
+                }
+            }
+        }
+
+        if (faqHeaderElem) {
+            toggleFaqs();
+        }
+        
+    </script>
+{% end_require_js %}

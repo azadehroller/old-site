@@ -1,0 +1,52 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: Events Premium Listing
+    screenshotPath: ../images/template-previews/events-premium.png
+-->
+
+{% extends "./layouts/base.html" %}
+
+{% block body %}
+    {% dnd_area "dnd_area"
+        label="Main section",
+        class="body-container body-container--events-premium"
+    %}
+
+        {% include_dnd_partial path="../sections/s-event-premium-header.html" 
+            context={
+                "background_color": '#033180',
+                "eyebrow": ' ',
+                "title": "Join us at event name lorem ipsum <year>",
+                "text": 'Date:<br>Location:<br>Booth number:',
+                'heading_type': 'h1',
+                "text_type": 'lg',
+                "theme": 'light',
+                "horizontal_align": "LEFT",
+                "visibility": true
+            }
+        %}
+
+        {% include_dnd_partial path="../sections/s-event-booth-programming.html" %}
+
+        {% include_dnd_partial path='../sections/s-featured-image.html' 
+            context={
+                "background_color": '#EBF2FE',
+                "eyebrow": 'EVENT FULL NAME OR EVENT ORGANISER’S FULL NAME',
+                "title": 'About event name',
+                "text": 'Event name is……. Brief, the event’s purpose & experience, attendee &audience profile, and vibe (if applicable)<br>Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus. ',
+                "text_align": 'LEFT',
+                "src": '',
+                "visibility": 'hide'
+            }
+        %}
+
+        {% include_dnd_partial path="../sections/s-event-listings.html" %}
+
+        {% include_dnd_partial path="../sections/s-event-listings.html" %}
+
+        {% include_dnd_partial path="../sections/s-testimonial-carousel.html"
+        %}
+
+    {% end_dnd_area %}
+{% endblock body %}

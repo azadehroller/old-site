@@ -1,0 +1,33 @@
+<!--
+    templateType: section
+    label: Customer Stories
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/customer-stories.png
+    description: "Global component for displaying Customer Testimonials."
+-->
+
+{% dnd_section
+   background_color="#033180",
+    class="s-layout s-customer-stories overflow-hidden"
+%}
+{% dnd_column 
+  %}
+   {% dnd_row %}
+        {# Module: Heading Composition #}
+        {% dnd_module path="../modules/heading-composition",
+            label="Modules: Header Composition",
+        %}
+        {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Testimonial Slider #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/testimonial-slider",
+        label="Modules: Testimonial Slider",
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+    
+  {% end_dnd_column %}
+{% end_dnd_section %}

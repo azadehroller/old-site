@@ -1,0 +1,308 @@
+/* Tailwind utility classes */
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-4 {
+    gap: 1.5rem;
+}
+
+.p-2 {
+    padding: 0.5rem;
+}
+
+.text-small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.letter-spacing-tight {
+    letter-spacing: -0.02em;
+}
+
+.text-2xl {
+    font-size: 3rem;
+    line-height: 100%;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.leading-\[100\%\] {
+    line-height: 100%;
+}
+
+.text-neutral-white {
+    color: #fff;
+}
+
+.items-end {
+    align-items: end;
+}
+
+.self-end {
+    align-self: end;
+}
+
+.self-center {
+    align-self: center;
+}
+
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.w-\[320px\] {
+    width: 320px;
+}
+
+.h-\[320px\] {
+    height: 320px;
+}
+
+.w-\[193px\] {
+    width: 193px;
+}
+
+.h-\[193px\] {
+    height: 193px;
+}
+
+.rounded-full {
+    border-radius: 9999px;
+}
+
+/* Grid template columns - Circle chart only */
+@media (min-width: 1280px) {
+    .md\:grid-cols-\[320px_193px\] {
+        grid-template-columns: 320px 193px;
+    }
+}
+
+/* Circle chart tablet sizes - between MD and XL breakpoint */
+@media (min-width: 768px) and (max-width: 1279px) {
+    .metric-circle-chart {
+        grid-template-columns: 220px 180px;
+    }
+    
+    .metric-circle-chart .metric.w-\[320px\] {
+        width: 220px;
+        height: 220px;
+        max-width: 220px;
+        max-height: 220px;
+    }
+    
+    .metric-circle-chart .metric.w-\[193px\] {
+        width: 180px;
+        height: 180px;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    
+    .metric-circle-chart figure.w-\[320px\] {
+        width: 220px;
+        height: 220px;
+        max-width: 220px;
+        max-height: 220px;
+    }
+    
+    .metric-circle-chart figure.w-\[193px\] {
+        width: 180px;
+        height: 180px;
+        max-width: 180px;
+        max-height: 180px;
+    }
+}
+
+/* Circle chart mobile sizes - below MD breakpoint */
+@media (max-width: 767px) {
+    .metric-circle-chart {
+        grid-template-columns: 180px 120px;
+    }
+    
+    .metric-circle-chart .metric.w-\[320px\] {
+        width: 180px;
+        height: 180px;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    
+    .metric-circle-chart .metric.w-\[193px\] {
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    .metric-circle-chart figure.w-\[320px\] {
+        width: 180px;
+        height: 180px;
+        max-width: 180px;
+        max-height: 180px;
+    }
+    
+    .metric-circle-chart figure.w-\[193px\] {
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        max-height: 120px;
+    }
+    
+    /* Line chart bars - match circle chart heights on mobile */
+    /* First metric (tall) - 210px */
+    .metric-line-chart figure.metric:first-child {
+        --percentage: 210px !important;
+    }
+    
+    /* Second metric (short) - 150px */
+    .metric-line-chart figure.metric:nth-child(2) {
+        --percentage: 150px !important;
+    }
+}
+
+/* custom css */
+
+.metric {
+    position: relative;
+    height: var(--percentage);
+    transform-origin: bottom;
+    background: linear-gradient(180deg, #0960F6 0%, rgba(9, 96, 246, 0.00) 100%);
+    /* Start hidden, animation only runs when parent has is-visible class */
+    transform: scaleY(0);
+    /* Maintain space even when scaled to 0 for Intersection Observer */
+    min-height: 1px;
+}
+
+/* Ensure figcaption is positioned above the metric */
+.metric .text-info {
+    position: relative;
+    z-index: 1;
+}
+
+/* Circle chart - override dimensions to use fixed width and height */
+.metric.w-\[320px\] {
+    width: 320px;
+}
+
+.metric.h-\[320px\] {
+    height: 320px;
+}
+
+.metric.w-\[193px\] {
+    width: 193px;
+}
+
+.metric.h-\[193px\] {
+    height: 193px;
+}
+
+/* Circle chart - radial gradient background starting from center */
+.metric-circle-chart .metric {
+    background: radial-gradient(50% 50% at 50% 50%, #011840 50%, #0960F6 100%);
+    transform: scale(0);
+    transform-origin: center;
+    /* Maintain space even when scaled to 0 for Intersection Observer */
+    min-width: 1px;
+    min-height: 1px;
+}
+
+/* Only animate when parent container is visible */
+.fade-in-on-scroll.is-visible.metric-line-chart .metric {
+    animation: metric-fill 700ms ease-in-out forwards;
+}
+
+.fade-in-on-scroll.is-visible.metric-circle-chart .metric {
+    animation: metric-circle-fill 700ms ease-in-out forwards;
+}
+
+.metric-title{
+    --text-size: 2rem; /* 32px on mobile */
+}
+
+@media (min-width: 768px) {
+    .metric-title{
+        --text-size: 3rem; /* 48px on desktop */
+    }
+}
+
+.metric-text{
+    --text-size: 1rem;
+}
+
+/* Slide-up animation for H3 (title) - starts from lower position */
+@keyframes slideUpTitle {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide-up animation for P (text) - smaller slide distance */
+@keyframes slideUpText {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.metric-text-animation {
+    /* Start hidden with opacity and translateY, animation starts after bar animation completes */
+    opacity: 0;
+    /* Ensure font-size is always set properly */
+    font-size: var(--text-size);
+}
+
+/* H3 (title) starts from lower position */
+.metric-title.metric-text-animation {
+    transform: translateY(30px);
+}
+
+/* P (text) starts from slightly lower position */
+.metric-text.metric-text-animation {
+    transform: translateY(20px);
+}
+
+/* Only animate text when parent container is visible, with 700ms delay to start after bar animation */
+/* H3 (title) animates first with larger slide distance */
+.fade-in-on-scroll.is-visible .metric-title.metric-text-animation {
+    animation: slideUpTitle 300ms ease-out 700ms forwards;
+}
+
+/* P (text) animates after H3 with a small delay */
+.fade-in-on-scroll.is-visible .metric-text.metric-text-animation {
+    animation: slideUpText 300ms ease-out 800ms forwards;
+}
+
+@keyframes metric-fill {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+@keyframes metric-circle-fill {
+    0% {
+        transform: translate(0%, 0%) scale(0);
+    }
+    100% {
+        transform: translate(0%, 0%) scale(1);
+    }
+}
+
+

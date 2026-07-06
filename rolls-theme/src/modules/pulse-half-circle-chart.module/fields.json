@@ -1,0 +1,119 @@
+[ {
+  "id" : "chart_title",
+  "name" : "chart_title",
+  "label" : "Chart Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Where guests want improvements"
+}, {
+  "id" : "chart_icon",
+  "name" : "chart_icon",
+  "label" : "Chart Icon",
+  "required" : false,
+  "locked" : false,
+  "icon_set" : "fontawesome-5.0.10",
+  "type" : "icon",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "segments",
+  "name" : "segments",
+  "label" : "Fan Segments",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : 6,
+    "sorting_label_field" : null,
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "segment_label",
+    "name" : "segment_label",
+    "label" : "Segment Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Item"
+  }, {
+    "id" : "value",
+    "name" : "value",
+    "label" : "Value (%)",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 0,
+    "max" : 100,
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 30
+  }, {
+    "id" : "color",
+    "name" : "color",
+    "label" : "Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#8b5cf6"
+    }
+  }, {
+    "id" : "tooltip",
+    "name" : "tooltip",
+    "label" : "Tooltip Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "segment_label" : "Waiting areas",
+    "value" : 48,
+    "color" : "#8b5cf6",
+    "tooltip" : "48% want better waiting areas"
+  }, {
+    "segment_label" : "Food & beverage",
+    "value" : 42,
+    "color" : "#9333ea",
+    "tooltip" : "42% want improved food options"
+  }, {
+    "segment_label" : "Facilities",
+    "value" : 38,
+    "color" : "#7c3aed",
+    "tooltip" : "38% want better facilities"
+  }, {
+    "segment_label" : "Staff service",
+    "value" : 34,
+    "color" : "#6d28d9",
+    "tooltip" : "34% want better staff service"
+  }, {
+    "segment_label" : "Activities",
+    "value" : 28,
+    "color" : "#581c87",
+    "tooltip" : "28% want more activities"
+  } ]
+}, {
+  "id" : "show_legend",
+  "name" : "show_legend",
+  "label" : "Show Legend",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+} ]

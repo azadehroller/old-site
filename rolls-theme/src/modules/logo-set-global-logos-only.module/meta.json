@@ -1,0 +1,13 @@
+{
+  "global" : true,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "smart_type" : "NOT_SMART",
+  "js_render_options" : {
+    "defer" : true
+  },
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 209058129818,
+  "label" : "Module: Logo Set (Global) - logos only",
+  "icon" : "../../images/module-icons/logo-set.svg",
+  "is_available_for_new_content" : true
+}

@@ -1,0 +1,1765 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: Events Default
+    screenshotPath: ../images/template-previews/events-premium-single.png
+-->
+
+{% extends "./layouts/base.html" %}
+
+{# Macros #}
+{% import "./macros/macros.html" as button %}
+
+{% macro btn_classes(bg_kind) %} {% set baseClasses = "relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold text-md transition ease-in-out duration-300 w-full sm:w-auto justify-center" %}
+  {% if bg_kind == 'primary' %}
+  {% set buttonClasses = baseClasses ~ " bg-secondary-50 hover:bg-secondary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {% elif bg_kind == 'secondary' %}
+  {% set buttonClasses = baseClasses ~ " bg-primary-50 hover:bg-primary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {% elif bg_kind == 'tertiary' %}
+  {% set buttonClasses = baseClasses ~ " bg-neutral-white hover:bg-neutral-20 rounded-3xl py-2 px-4 text-primary-50 border-[1px]" %}
+  {% elif bg_kind == 'ghost' %}
+  {% set buttonClasses = baseClasses ~ " bg-transparent text-primary-50 py-2" %}
+  {% elif bg_kind == 'primary-inverted' %}
+  {% set buttonClasses = baseClasses ~ " bg-neutral-white hover:bg-neutral-20 rounded-3xl py-2 px-4 text-secondary-50" %}
+  {% elif bg_kind == 'gx_score' %}
+  {% set buttonClasses = baseClasses ~ " bg-gx-90 hover:bg-primary-70 rounded-3xl py-2 px-4 text-neutral-white" %}
+  {% else %}
+  {% set buttonClasses = baseClasses %}
+  {% endif %}
+  {{ buttonClasses }}
+{% endmacro %}
+
+
+{# TODO: name|lower|replace(' ', '_') create a macro to handle #}
+
+{% require_css %}
+  <style>
+
+    .box-shadow-ondark-blue-10 {
+        box-shadow: var(--shadown-ondark-blue-10, 0px 8px 16px 0px rgba(1, 19, 50, 0.25), 0px 24px 40px 0px rgba(1, 19, 50, 0.50));
+
+        &:hover {
+            box-shadow: var(--shadown-ondark-blue-10, 0px 8px 16px 0px rgba(1, 19, 50, 0.25), 0px 24px 40px 0px rgba(1, 19, 50, 0.50));
+        }
+    }
+
+    .dropdown-wrapper-{{name|lower|replace(' ', '_')}} { 
+        position: relative;
+        grid-template-areas: "select";
+        align-items: center;
+    } 
+
+    .dropdown-wrapper-{{name|lower|replace(' ', '_')}}, .dropdown-wrapper-{{name|lower|replace(' ', '_')}}:after {
+        grid-area: select;
+    }
+
+    .dropdown-wrapper-{{name|lower|replace(' ', '_')}}:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        left: calc(100% - 60px);
+        transform: translateY(-50%);
+        width: 0.7em;
+        height: 0.4em;
+        background-color: var(--primary-50, #033180);
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        justify-self: end;
+    } 
+
+    #js-industryItemContainer_{{name|lower|replace(' ', '_')}}.js-industryItemContainer {
+        cursor: pointer;
+        display: flex;
+        height: 4rem;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: 4rem;
+      }
+
+      @media (max-width: 767px) {
+        #js-industryItemContainer_{{name|lower|replace(' ', '_')}}.js-industryItemContainer{
+          height: {{height_mob || 4 }}{{height_unit || rem}};
+          width: {{width_mob || 4 }}{{width_unit || rem}};
+        }
+      }
+      
+      #js-industryItemContainer_{{name|lower|replace(' ', '_')}}.js-industryItemContainer {
+        width: 48px;
+        height: 48px;
+      }
+
+      #js-toogleBTNWrapper-events.isExpanded svg, 
+      #js-toogleBTNWrapper-webinars.isExpanded svg {
+        transform: rotate(180deg);
+      }
+
+      {# Overwrite the button in the announcement section #}
+
+      .bg-announcement .hs-button {
+        display: block;
+        width: 100%;
+        font-weight: 600;
+        padding: .5rem 1.5rem;
+        line-height: 1.5rem;
+        letter-spacing: -.02em;
+        border-radius: 1.5rem;
+        transition: all, 0.3s, cubic-bezier(.4,0,.2,1);
+      }
+
+        @media (min-width: 768px) {
+            .bg-announcement .hs-button {
+                display: inline;
+            }
+        }
+
+    /* Add loading and error state styles */
+    .is-loading {
+        position: relative;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .is-loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 30px;
+        height: 30px;
+        margin: -15px 0 0 -15px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #033180;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    .has-error {
+        border: 1px solid #ff290c;
+        border-radius: 8px;
+        padding: 16px;
+        position: relative;
+    }
+
+    .has-error::before {
+        content: '⚠️';
+        position: absolute;
+        top: 8px;
+        right: 8px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+  </style>
+{% end_require_css %}
+
+{% block body %}
+
+<div class="body-container body-container--hubdb">
+  <div class="s-layout bg-events-default bg-cover bg-repeat-none">
+    <section class="container px-5">
+      <header class="grid gap-4 text-neutral-white">
+        <h1 class="text-secondary-50 uppercase font-extrabold small">
+          {% module "eyebrow_title" path="@hubspot/text"
+            label="Eyebrow title",
+            value="Eyebrow"
+          %}
+        </h1> 
+        <h2 class="h1-heading my-0">
+          {% module "events_title" path="@hubspot/text"
+            label="Events title",
+            value="Events"
+          %}
+        </h2>
+        {% module "text" path="@hubspot/rich_text"
+        %}
+      </header>
+    </section>
+  </div>
+  <div class="s-layout bg-[#F5F8FF]">
+    <section class="content-wrapper content-wrapper--vertical-spacing container px-5 flex flex-col gap-6">
+        {% set event_rows = hubdb_table_rows(17451681) %}
+        {% if event_rows|length > 0 %}
+            <div class="flex flex-col md:flex-row gap-5">
+                <div class="text-3xl text-primary-50 font-extrabold">Browsing events in</div>
+                <div class="dropdown-wrapper-{{name|lower|replace(' ', '_')}} md:w-[375px]">
+                <select id="js-ind-dropdown-{{name|lower|replace(' ', '_')}}" name="currency" class="bg-neutral-white text-navy-80 text-left rounded-[61.25rem] py-2 px-4 appearance-none cursor-pointer border border-primary-50 w-full">
+                    <option value="apac" data-region="apac">APAC</option>
+                    <option value="amer" data-region="amer">AMER</option>
+                    <option value="emea" data-region="emea">EMEA</option>
+                </select>
+                </div>
+            </div>
+            <ul id="js-events-listings" class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                {% for row in event_rows %}
+                    <li class="w-full {{row.event_region.name|lower}}">
+                        <div
+                            class="flex flex-col max-w-full bg-neutral-white w-full h-full sm:min-h-[275px] md:min-h-[275px] lg:min-h-[315px] box-shadow-onlight-navy-40 rounded-[32px] mo-card">
+                            <div class="flex flex-col gap-3">
+                                <div class="text-lg text-secondary-50 font-extrabold">{{row.event_date|lower|format_date('MMMM, dd, yyyy')}}
+                                </div>
+                                <div>
+                                    <span class="text-3xl text-primary-50 font-extrabold">{{ row.name }}</br></span>
+                                    <span class="text-primary-50">{{row.event_city}}, {{row.event_country}}</span>
+                                </div>
+                                {% if row.event_description %}
+                                    <p class="text-primary-50 mb-0">{{row.event_description}}</p>
+                                {% endif %}
+                            </div>
+                            {% if row.event_calendly_link %}
+                                <div class="flex flex-col md:flex-row wrap gap-3 mt-auto pt-5 ">
+                                    <a class="{{ button.buttons_settings(bg_kind = 'primary')}}" href="{{ row.event_calendly_link }}">Learn more</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div id="js-toogleBTNWrapper-events" class="gap-2 hidden">
+                <button id="toggleButton-events" class="text-lg text-primary-50 font-semibold" style="display: none;">View all events</button>
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="none">
+                    <path fill="#033180" fill-rule="evenodd" d="M2 12.5c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10-10-4.48-10-10Zm6-1 4 4 4-4H8Z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+            </div>
+        {% endif %}
+        <div id="js-no-items-found-events" class="text-center items-center justify-center hidden">
+            <h3 class="text-neutral-40">No Events found</h3>
+        </div>
+    </section>
+  </div>
+  <div class="s-layout bg-webinar-default bg-cover bg-repeat-none">
+    <section class="container px-5">
+      <header class="grid gap-4 text-neutral-white">
+        {% module "text-webinar" path="@hubspot/rich_text" %}
+      </header>
+    </section>
+  </div>
+  <div class="s-layout bg-[#F5F8FF]">
+    <section class="content-wrapper content-wrapper--vertical-spacing container px-5">
+        {% set webinar_rows = hubdb_table_rows(17451683) %}
+        {% if webinar_rows|length > 0 %}
+            <ul id="js-webinars-listings" class="flex flex-col gap-6">
+            {% for row in webinar_rows %}
+                <li class="flex flex-col border-t border-primary-50 py-4 gap-3 {{row.event_region.name|lower}}">
+                    <div class="text-lg text-secondary-50 font-extrabold">{{ row.event_date|lower|format_date("d, MMM, yyyy | h:mm a") }}</div>
+                {% set webinar_data = {'title': row.name, 'description': row.event_description, 'calendly_link': row.event_calendly_link} %}
+                    <div class="text-2xl text-primary-50 font-extrabold">{{webinar_data.title}}</div>
+                    <div class="text-primary-50">{{webinar_data.description}}</div>
+                    {% if webinar_data.calendly_link %}
+                    <div>
+                        <a href="{{webinar_data.calendly_link}}" target="_blank" class="{{ button.buttons_settings(bg_kind || 'primary') }}">Register</a>
+                    </div>
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+            <div id="js-toogleBTNWrapper-webinars" class="gap-2 hidden">
+                <button id="toggleButton-webinars" class="text-lg text-primary-50 font-semibold" style="display: none;">View all webinars</button>
+                <span class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" fill="none">
+                    <path fill="#033180" fill-rule="evenodd" d="M2 12.5c0-5.52 4.48-10 10-10s10 4.48 10 10-4.48 10-10 10-10-4.48-10-10Zm6-1 4 4 4-4H8Z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+            </div>
+            
+        {% endif %}
+        <div id="js-no-items-found-webinars" class="text-center items-center justify-center hidden">
+            <h3 class="text-neutral-40">No Webinars found</h3>
+        </div>
+    </section>
+  </div>
+  <div class="s-layout bg-announcement">
+    <section class="container px-5">
+      <header class="md:flex items-center gap-4 text-neutral-white">
+        <div class="flex flex-col gap-4 w-full md:w-3/4">
+            {% module "text-get-started" path="@hubspot/rich_text" %}
+        </div>
+        <div class="w-full md:w-1/4 text-center">
+            {% module "button" path="@hubspot/button" button_text="Subscribe", style={ "override_default_style": true, "button_font": { "color": "#FFFFFF", "size_unit": "px" }, "button_color": { "color": "#ff290c" }, "text_hover_color": { "color": "#ffffff"}, "button_hover_color": { "color": "#660c00" } }  %}
+        </div>
+      </header>
+    </section>
+  </div>
+</div>
+
+{% endblock %}
+
+{% require_js position="header" %}
+  <script>
+    
+    const userCountryIdEvents = '{{ request.geoip_country }}';
+
+    const countryList = [
+      {
+          "country": "Afghanistan",
+          "iso_3166": "af",
+          "region": "emea"
+      },
+      {
+          "country": "Åland Islands",
+          "iso_3166": "ax",
+          "region": "emea"
+      },
+      {
+          "country": "Albania",
+          "iso_3166": "al",
+          "region": "emea"
+      },
+      {
+          "country": "Algeria",
+          "iso_3166": "dz",
+          "region": "emea"
+      },
+      {
+          "country": "american Samoa",
+          "iso_3166": "as",
+          "region": "apac"
+      },
+      {
+          "country": "Andorra",
+          "iso_3166": "ad",
+          "region": "emea"
+      },
+      {
+          "country": "Angola",
+          "iso_3166": "ao",
+          "region": "emea"
+      },
+      {
+          "country": "Anguilla",
+          "iso_3166": "ai",
+          "region": "amer"
+      },
+      {
+          "country": "Antarctica",
+          "iso_3166": "aq",
+          "region": "apac"
+      },
+      {
+          "country": "Antigua and Barbuda",
+          "iso_3166": "ag",
+          "region": "amer"
+      },
+      {
+          "country": "Argentina",
+          "iso_3166": "ar",
+          "region": "amer"
+      },
+      {
+          "country": "Armenia",
+          "iso_3166": "am",
+          "region": "emea"
+      },
+      {
+          "country": "Aruba",
+          "iso_3166": "aw",
+          "region": "amer"
+      },
+      {
+          "country": "Australia",
+          "iso_3166": "au",
+          "region": "apac"
+      },
+      {
+          "country": "Austria",
+          "iso_3166": "at",
+          "region": "emea"
+      },
+      {
+          "country": "Azerbaijan",
+          "iso_3166": "az",
+          "region": "emea"
+      },
+      {
+          "country": "Bahamas",
+          "iso_3166": "bs",
+          "region": "amer"
+      },
+      {
+          "country": "Bahrain",
+          "iso_3166": "bh",
+          "region": "emea"
+      },
+      {
+          "country": "Bangladesh",
+          "iso_3166": "bd",
+          "region": "apac"
+      },
+      {
+          "country": "Barbados",
+          "iso_3166": "bb",
+          "region": "amer"
+      },
+      {
+          "country": "Belarus",
+          "iso_3166": "by",
+          "region": "emea"
+      },
+      {
+          "country": "Belgium",
+          "iso_3166": "be",
+          "region": "emea"
+      },
+      {
+          "country": "Belize",
+          "iso_3166": "bz",
+          "region": "amer"
+      },
+      {
+          "country": "Benin",
+          "iso_3166": "bj",
+          "region": "emea"
+      },
+      {
+          "country": "Bermuda",
+          "iso_3166": "bm",
+          "region": "amer"
+      },
+      {
+          "country": "Bhutan",
+          "iso_3166": "bt",
+          "region": "apac"
+      },
+      {
+          "country": "Bolivia (Plurinational State of)",
+          "iso_3166": "bo",
+          "region": "amer"
+      },
+      {
+          "country": "Bonaire, Sint Eustatius and Saba",
+          "iso_3166": "bq",
+          "region": "amer"
+      },
+      {
+          "country": "Bosnia and Herzegovina",
+          "iso_3166": "ba",
+          "region": "emea"
+      },
+      {
+          "country": "Botswana",
+          "iso_3166": "bw",
+          "region": "emea"
+      },
+      {
+          "country": "Bouvet Island",
+          "iso_3166": "bv",
+          "region": "emea"
+      },
+      {
+          "country": "Brazil",
+          "iso_3166": "br",
+          "region": "amer"
+      },
+      {
+          "country": "British Indian Ocean Territory",
+          "iso_3166": "io",
+          "region": "apac"
+      },
+      {
+          "country": "Brunei Darussalam",
+          "iso_3166": "bn",
+          "region": "apac"
+      },
+      {
+          "country": "Bulgaria",
+          "iso_3166": "bg",
+          "region": "emea"
+      },
+      {
+          "country": "Burkina Faso",
+          "iso_3166": "bf",
+          "region": "emea"
+      },
+      {
+          "country": "Burundi",
+          "iso_3166": "bi",
+          "region": "emea"
+      },
+      {
+          "country": "Cabo Verde",
+          "iso_3166": "cv",
+          "region": "emea"
+      },
+      {
+          "country": "Cambodia",
+          "iso_3166": "kh",
+          "region": "apac"
+      },
+      {
+          "country": "Cameroon",
+          "iso_3166": "cm",
+          "region": "emea"
+      },
+      {
+          "country": "Canada",
+          "iso_3166": "ca",
+          "region": "amer"
+      },
+      {
+          "country": "Cayman Islands",
+          "iso_3166": "ky",
+          "region": "amer"
+      },
+      {
+          "country": "Central African Republic",
+          "iso_3166": "cf",
+          "region": "emea"
+      },
+      {
+          "country": "Chad",
+          "iso_3166": "td",
+          "region": "emea"
+      },
+      {
+          "country": "Chile",
+          "iso_3166": "cl",
+          "region": "amer"
+      },
+      {
+          "country": "China",
+          "iso_3166": "cn",
+          "region": "apac"
+      },
+      {
+          "country": "Christmas Island",
+          "iso_3166": "cx",
+          "region": "apac"
+      },
+      {
+          "country": "Cocos (Keeling) Islands",
+          "iso_3166": "cc",
+          "region": "apac"
+      },
+      {
+          "country": "Colombia",
+          "iso_3166": "co",
+          "region": "amer"
+      },
+      {
+          "country": "Comoros",
+          "iso_3166": "km",
+          "region": "emea"
+      },
+      {
+          "country": "Congo",
+          "iso_3166": "cg",
+          "region": "emea"
+      },
+      {
+          "country": "Congo, Democratic Republic of the",
+          "iso_3166": "cd",
+          "region": "emea"
+      },
+      {
+          "country": "Cook Islands",
+          "iso_3166": "ck",
+          "region": "apac"
+      },
+      {
+          "country": "Costa Rica",
+          "iso_3166": "cr",
+          "region": "amer"
+      },
+      {
+          "country": "Côte d'Ivoire",
+          "iso_3166": "ci",
+          "region": "emea"
+      },
+      {
+          "country": "Croatia",
+          "iso_3166": "hr",
+          "region": "emea"
+      },
+      {
+          "country": "Cuba",
+          "iso_3166": "cu",
+          "region": "amer"
+      },
+      {
+          "country": "Curaçao",
+          "iso_3166": "cw",
+          "region": "amer"
+      },
+      {
+          "country": "Cyprus",
+          "iso_3166": "cy",
+          "region": "emea"
+      },
+      {
+          "country": "Czechia",
+          "iso_3166": "cz",
+          "region": "emea"
+      },
+      {
+          "country": "Denmark",
+          "iso_3166": "dk",
+          "region": "emea"
+      },
+      {
+          "country": "Djibouti",
+          "iso_3166": "dj",
+          "region": "emea"
+      },
+      {
+          "country": "Dominica",
+          "iso_3166": "dm",
+          "region": "amer"
+      },
+      {
+          "country": "Dominican Republic",
+          "iso_3166": "do",
+          "region": "amer"
+      },
+      {
+          "country": "Ecuador",
+          "iso_3166": "ec",
+          "region": "amer"
+      },
+      {
+          "country": "Egypt",
+          "iso_3166": "eg",
+          "region": "emea"
+      },
+      {
+          "country": "El Salvador",
+          "iso_3166": "sv",
+          "region": "amer"
+      },
+      {
+          "country": "Equatorial Guinea",
+          "iso_3166": "gq",
+          "region": "emea"
+      },
+      {
+          "country": "Eritrea",
+          "iso_3166": "er",
+          "region": "emea"
+      },
+      {
+          "country": "Estonia",
+          "iso_3166": "ee",
+          "region": "emea"
+      },
+      {
+          "country": "Eswatini",
+          "iso_3166": "sz",
+          "region": "emea"
+      },
+      {
+          "country": "Ethiopia",
+          "iso_3166": "et",
+          "region": "emea"
+      },
+      {
+          "country": "Falkland Islands (Malvinas)",
+          "iso_3166": "fk",
+          "region": "emea"
+      },
+      {
+          "country": "Faroe Islands",
+          "iso_3166": "fo",
+          "region": "emea"
+      },
+      {
+          "country": "Fiji",
+          "iso_3166": "fj",
+          "region": "apac"
+      },
+      {
+          "country": "Finland",
+          "iso_3166": "fi",
+          "region": "emea"
+      },
+      {
+          "country": "France",
+          "iso_3166": "fr",
+          "region": "emea"
+      },
+      {
+          "country": "French Guiana",
+          "iso_3166": "gf",
+          "region": "amer"
+      },
+      {
+          "country": "French Polynesia",
+          "iso_3166": "pf",
+          "region": "apac"
+      },
+      {
+          "country": "French Southern Territories",
+          "iso_3166": "tf",
+          "region": "emea"
+      },
+      {
+          "country": "Gabon",
+          "iso_3166": "ga",
+          "region": "emea"
+      },
+      {
+          "country": "Gambia",
+          "iso_3166": "gm",
+          "region": "emea"
+      },
+      {
+          "country": "Georgia",
+          "iso_3166": "ge",
+          "region": "emea"
+      },
+      {
+          "country": "Germany",
+          "iso_3166": "de",
+          "region": "emea"
+      },
+      {
+          "country": "Ghana",
+          "iso_3166": "gh",
+          "region": "emea"
+      },
+      {
+          "country": "Gibraltar",
+          "iso_3166": "gi",
+          "region": "emea"
+      },
+      {
+          "country": "Greece",
+          "iso_3166": "gr",
+          "region": "emea"
+      },
+      {
+          "country": "Greenland",
+          "iso_3166": "gl",
+          "region": "emea"
+      },
+      {
+          "country": "Grenada",
+          "iso_3166": "gd",
+          "region": "amer"
+      },
+      {
+          "country": "Guadeloupe",
+          "iso_3166": "gp",
+          "region": "amer"
+      },
+      {
+          "country": "Guam",
+          "iso_3166": "gu",
+          "region": "apac"
+      },
+      {
+          "country": "Guatemala",
+          "iso_3166": "gt",
+          "region": "amer"
+      },
+      {
+          "country": "Guernsey",
+          "iso_3166": "gg",
+          "region": "emea"
+      },
+      {
+          "country": "Guinea",
+          "iso_3166": "gn",
+          "region": "emea"
+      },
+      {
+          "country": "Guinea-Bissau",
+          "iso_3166": "gw",
+          "region": "emea"
+      },
+      {
+          "country": "Guyana",
+          "iso_3166": "gy",
+          "region": "amer"
+      },
+      {
+          "country": "Haiti",
+          "iso_3166": "ht",
+          "region": "amer"
+      },
+      {
+          "country": "Heard Island and McDonald Islands",
+          "iso_3166": "hm",
+          "region": "apac"
+      },
+      {
+          "country": "Holy See",
+          "iso_3166": "va",
+          "region": "emea"
+      },
+      {
+          "country": "Honduras",
+          "iso_3166": "hn",
+          "region": "amer"
+      },
+      {
+          "country": "Hong Kong",
+          "iso_3166": "hk",
+          "region": "apac"
+      },
+      {
+          "country": "Hungary",
+          "iso_3166": "hu",
+          "region": "emea"
+      },
+      {
+          "country": "Iceland",
+          "iso_3166": "is",
+          "region": "emea"
+      },
+      {
+          "country": "India",
+          "iso_3166": "in",
+          "region": "apac"
+      },
+      {
+          "country": "Indonesia",
+          "iso_3166": "id",
+          "region": "apac"
+      },
+      {
+          "country": "Iran, Islamic Republic of",
+          "iso_3166": "ir",
+          "region": "emea"
+      },
+      {
+          "country": "Iraq",
+          "iso_3166": "iq",
+          "region": "emea"
+      },
+      {
+          "country": "Ireland",
+          "iso_3166": "ie",
+          "region": "emea"
+      },
+      {
+          "country": "Isle of Man",
+          "iso_3166": "im",
+          "region": "emea"
+      },
+      {
+          "country": "Israel",
+          "iso_3166": "il",
+          "region": "emea"
+      },
+      {
+          "country": "Italy",
+          "iso_3166": "it",
+          "region": "emea"
+      },
+      {
+          "country": "Jamaica",
+          "iso_3166": "jm",
+          "region": "amer"
+      },
+      {
+          "country": "Japan",
+          "iso_3166": "jp",
+          "region": "apac"
+      },
+      {
+          "country": "Jersey",
+          "iso_3166": "je",
+          "region": "emea"
+      },
+      {
+          "country": "Jordan",
+          "iso_3166": "jo",
+          "region": "emea"
+      },
+      {
+          "country": "Kazakhstan",
+          "iso_3166": "kz",
+          "region": "emea"
+      },
+      {
+          "country": "Kenya",
+          "iso_3166": "ke",
+          "region": "emea"
+      },
+      {
+          "country": "Kiribati",
+          "iso_3166": "ki",
+          "region": "apac"
+      },
+      {
+          "country": "Korea, Democratic People's Republic of",
+          "iso_3166": "kp",
+          "region": "apac"
+      },
+      {
+          "country": "Korea, Republic of",
+          "iso_3166": "kr",
+          "region": "apac"
+      },
+      {
+          "country": "Kuwait",
+          "iso_3166": "kw",
+          "region": "emea"
+      },
+      {
+          "country": "Kyrgyzstan",
+          "iso_3166": "kg",
+          "region": "emea"
+      },
+      {
+          "country": "Lao People's Democratic Republic",
+          "iso_3166": "la",
+          "region": "apac"
+      },
+      {
+          "country": "Latvia",
+          "iso_3166": "lv",
+          "region": "emea"
+      },
+      {
+          "country": "Lebanon",
+          "iso_3166": "lb",
+          "region": "emea"
+      },
+      {
+          "country": "Lesotho",
+          "iso_3166": "ls",
+          "region": "emea"
+      },
+      {
+          "country": "Liberia",
+          "iso_3166": "lr",
+          "region": "emea"
+      },
+      {
+          "country": "Libya",
+          "iso_3166": "ly",
+          "region": "emea"
+      },
+      {
+          "country": "Liechtenstein",
+          "iso_3166": "li",
+          "region": "emea"
+      },
+      {
+          "country": "Lithuania",
+          "iso_3166": "lt",
+          "region": "emea"
+      },
+      {
+          "country": "Luxembourg",
+          "iso_3166": "lu",
+          "region": "emea"
+      },
+      {
+          "country": "Macao",
+          "iso_3166": "mo",
+          "region": "apac"
+      },
+      {
+          "country": "Macedonia, the former Yugoslav Republic of",
+          "iso_3166": "mk",
+          "region": "emea"
+      },
+      {
+          "country": "Madagascar",
+          "iso_3166": "mg",
+          "region": "emea"
+      },
+      {
+          "country": "Malawi",
+          "iso_3166": "mw",
+          "region": "emea"
+      },
+      {
+          "country": "Malaysia",
+          "iso_3166": "my",
+          "region": "apac"
+      },
+      {
+          "country": "Maldives",
+          "iso_3166": "mv",
+          "region": "apac"
+      },
+      {
+          "country": "Mali",
+          "iso_3166": "ml",
+          "region": "emea"
+      },
+      {
+          "country": "Malta",
+          "iso_3166": "mt",
+          "region": "emea"
+      },
+      {
+          "country": "Marshall Islands",
+          "iso_3166": "mh",
+          "region": "apac"
+      },
+      {
+          "country": "Martinique",
+          "iso_3166": "mq",
+          "region": "amer"
+      },
+      {
+          "country": "Mauritania",
+          "iso_3166": "mr",
+          "region": "emea"
+      },
+      {
+          "country": "Mauritius",
+          "iso_3166": "mu",
+          "region": "emea"
+      },
+      {
+          "country": "Mayotte",
+          "iso_3166": "yt",
+          "region": "emea"
+      },
+      {
+          "country": "Mexico",
+          "iso_3166": "mx",
+          "region": "amer"
+      },
+      {
+          "country": "Micronesia, Federated States of",
+          "iso_3166": "fm",
+          "region": "apac"
+      },
+      {
+          "country": "Moldova, Republic of",
+          "iso_3166": "md",
+          "region": "emea"
+      },
+      {
+          "country": "Monaco",
+          "iso_3166": "mc",
+          "region": "emea"
+      },
+      {
+          "country": "Mongolia",
+          "iso_3166": "mn",
+          "region": "apac"
+      },
+      {
+          "country": "Montenegro",
+          "iso_3166": "me",
+          "region": "emea"
+      },
+      {
+          "country": "Montserrat",
+          "iso_3166": "ms",
+          "region": "amer"
+      },
+      {
+          "country": "Morocco",
+          "iso_3166": "ma",
+          "region": "emea"
+      },
+      {
+          "country": "Mozambique",
+          "iso_3166": "mz",
+          "region": "emea"
+      },
+      {
+          "country": "Myanmar",
+          "iso_3166": "mm",
+          "region": "apac"
+      },
+      {
+          "country": "Namibia",
+          "iso_3166": "na",
+          "region": "emea"
+      },
+      {
+          "country": "Nauru",
+          "iso_3166": "nr",
+          "region": "apac"
+      },
+      {
+          "country": "Nepal",
+          "iso_3166": "np",
+          "region": "apac"
+      },
+      {
+          "country": "Netherlands",
+          "iso_3166": "nl",
+          "region": "emea"
+      },
+      {
+          "country": "New Caledonia",
+          "iso_3166": "nc",
+          "region": "apac"
+      },
+      {
+          "country": "New Zealand",
+          "iso_3166": "nz",
+          "region": "apac"
+      },
+      {
+          "country": "Nicaragua",
+          "iso_3166": "ni",
+          "region": "amer"
+      },
+      {
+          "country": "Niger",
+          "iso_3166": "ne",
+          "region": "emea"
+      },
+      {
+          "country": "Nigeria",
+          "iso_3166": "ng",
+          "region": "emea"
+      },
+      {
+          "country": "Niue",
+          "iso_3166": "nu",
+          "region": "apac"
+      },
+      {
+          "country": "Norfolk Island",
+          "iso_3166": "nf",
+          "region": "apac"
+      },
+      {
+          "country": "Northern Mariana Islands",
+          "iso_3166": "mp",
+          "region": "apac"
+      },
+      {
+          "country": "Norway",
+          "iso_3166": "no",
+          "region": "emea"
+      },
+      {
+          "country": "Oman",
+          "iso_3166": "om",
+          "region": "emea"
+      },
+      {
+          "country": "Pakistan",
+          "iso_3166": "pk",
+          "region": "apac"
+      },
+      {
+          "country": "Palau",
+          "iso_3166": "pw",
+          "region": "apac"
+      },
+      {
+          "country": "Palestine, State of",
+          "iso_3166": "ps",
+          "region": "emea"
+      },
+      {
+          "country": "Panama",
+          "iso_3166": "pa",
+          "region": "amer"
+      },
+      {
+          "country": "Papua New Guinea",
+          "iso_3166": "pg",
+          "region": "apac"
+      },
+      {
+          "country": "Paraguay",
+          "iso_3166": "py",
+          "region": "amer"
+      },
+      {
+          "country": "Peru",
+          "iso_3166": "pe",
+          "region": "amer"
+      },
+      {
+          "country": "Philippines",
+          "iso_3166": "ph",
+          "region": "apac"
+      },
+      {
+          "country": "Pitcairn",
+          "iso_3166": "pn",
+          "region": "apac"
+      },
+      {
+          "country": "Poland",
+          "iso_3166": "pl",
+          "region": "emea"
+      },
+      {
+          "country": "Portugal",
+          "iso_3166": "pt",
+          "region": "emea"
+      },
+      {
+          "country": "Puerto Rico",
+          "iso_3166": "pr",
+          "region": "amer"
+      },
+      {
+          "country": "Qatar",
+          "iso_3166": "qa",
+          "region": "emea"
+      },
+      {
+          "country": "Réunion",
+          "iso_3166": "re",
+          "region": "emea"
+      },
+      {
+          "country": "Romania",
+          "iso_3166": "ro",
+          "region": "emea"
+      },
+      {
+          "country": "Russian Federation",
+          "iso_3166": "ru",
+          "region": "emea"
+      },
+      {
+          "country": "Rwanda",
+          "iso_3166": "rw",
+          "region": "emea"
+      },
+      {
+          "country": "Saint Barthélemy",
+          "iso_3166": "bl",
+          "region": "amer"
+      },
+      {
+          "country": "Saint Helena, Ascension and Tristan da Cunha",
+          "iso_3166": "sh",
+          "region": "emea"
+      },
+      {
+          "country": "Saint Kitts and Nevis",
+          "iso_3166": "kn",
+          "region": "amer"
+      },
+      {
+          "country": "Saint Lucia",
+          "iso_3166": "lc",
+          "region": "amer"
+      },
+      {
+          "country": "Saint Martin (French part)",
+          "iso_3166": "mf",
+          "region": "amer"
+      },
+      {
+          "country": "Saint Pierre and Miquelon",
+          "iso_3166": "pm",
+          "region": "amer"
+      },
+      {
+          "country": "Saint Vincent and the Grenadines",
+          "iso_3166": "vc",
+          "region": "amer"
+      },
+      {
+          "country": "Samoa",
+          "iso_3166": "ws",
+          "region": "apac"
+      },
+      {
+          "country": "San Marino",
+          "iso_3166": "sm",
+          "region": "emea"
+      },
+      {
+          "country": "Sao Tome and Principe",
+          "iso_3166": "st",
+          "region": "emea"
+      },
+      {
+          "country": "Saudi Arabia",
+          "iso_3166": "sa",
+          "region": "emea"
+      },
+      {
+          "country": "Senegal",
+          "iso_3166": "sn",
+          "region": "emea"
+      },
+      {
+          "country": "Serbia",
+          "iso_3166": "rs",
+          "region": "emea"
+      },
+      {
+          "country": "Seychelles",
+          "iso_3166": "sc",
+          "region": "emea"
+      },
+      {
+          "country": "Sierra Leone",
+          "iso_3166": "sl",
+          "region": "emea"
+      },
+      {
+          "country": "Singapore",
+          "iso_3166": "sg",
+          "region": "apac"
+      },
+      {
+          "country": "Sint Maarten (Dutch part)",
+          "iso_3166": "sx",
+          "region": "amer"
+      },
+      {
+          "country": "Slovakia",
+          "iso_3166": "sk",
+          "region": "emea"
+      },
+      {
+          "country": "Slovenia",
+          "iso_3166": "si",
+          "region": "emea"
+      },
+      {
+          "country": "Solomon Islands",
+          "iso_3166": "sb",
+          "region": "apac"
+      },
+      {
+          "country": "Somalia",
+          "iso_3166": "so",
+          "region": "emea"
+      },
+      {
+          "country": "South Africa",
+          "iso_3166": "za",
+          "region": "emea"
+      },
+      {
+          "country": "South Georgia and the South Sandwich Islands",
+          "iso_3166": "gs",
+          "region": "emea"
+      },
+      {
+          "country": "South Sudan",
+          "iso_3166": "ss",
+          "region": "emea"
+      },
+      {
+          "country": "Spain",
+          "iso_3166": "es",
+          "region": "emea"
+      },
+      {
+          "country": "Sri Lanka",
+          "iso_3166": "lk",
+          "region": "apac"
+      },
+      {
+          "country": "Sudan",
+          "iso_3166": "sd",
+          "region": "emea"
+      },
+      {
+          "country": "Suriname",
+          "iso_3166": "sr",
+          "region": "amer"
+      },
+      {
+          "country": "Svalbard and Jan Mayen",
+          "iso_3166": "sj",
+          "region": "emea"
+      },
+      {
+          "country": "Sweden",
+          "iso_3166": "se",
+          "region": "emea"
+      },
+      {
+          "country": "Switzerland",
+          "iso_3166": "ch",
+          "region": "emea"
+      },
+      {
+          "country": "Syrian Arab Republic",
+          "iso_3166": "sy",
+          "region": "emea"
+      },
+      {
+          "country": "Taiwan, Province of China",
+          "iso_3166": "tw",
+          "region": "apac"
+      },
+      {
+          "country": "Tajikistan",
+          "iso_3166": "tj",
+          "region": "emea"
+      },
+      {
+          "country": "Tanzania, United Republic of",
+          "iso_3166": "tz",
+          "region": "emea"
+      },
+      {
+          "country": "Thailand",
+          "iso_3166": "th",
+          "region": "apac"
+      },
+      {
+          "country": "Timor-Leste",
+          "iso_3166": "tl",
+          "region": "apac"
+      },
+      {
+          "country": "Togo",
+          "iso_3166": "tg",
+          "region": "emea"
+      },
+      {
+          "country": "Tokelau",
+          "iso_3166": "tk",
+          "region": "apac"
+      },
+      {
+          "country": "Tonga",
+          "iso_3166": "to",
+          "region": "apac"
+      },
+      {
+          "country": "Trinidad and Tobago",
+          "iso_3166": "tt",
+          "region": "amer"
+      },
+      {
+          "country": "Tunisia",
+          "iso_3166": "tn",
+          "region": "emea"
+      },
+      {
+          "country": "Turkey",
+          "iso_3166": "tr",
+          "region": "emea"
+      },
+      {
+          "country": "Turkmenistan",
+          "iso_3166": "tm",
+          "region": "emea"
+      },
+      {
+          "country": "Turks and Caicos Islands",
+          "iso_3166": "tc",
+          "region": "amer"
+      },
+      {
+          "country": "Tuvalu",
+          "iso_3166": "tv",
+          "region": "apac"
+      },
+      {
+          "country": "Uganda",
+          "iso_3166": "ug",
+          "region": "emea"
+      },
+      {
+          "country": "Ukraine",
+          "iso_3166": "ua",
+          "region": "emea"
+      },
+      {
+          "country": "United Arab Emirates",
+          "iso_3166": "ae",
+          "region": "emea"
+      },
+      {
+          "country": "United Kingdom",
+          "iso_3166": "gb",
+          "region": "emea"
+      },
+      {
+          "country": "United States",
+          "iso_3166": "us",
+          "region": "amer"
+      },
+      {
+          "country": "United States Minor Outlying Islands",
+          "iso_3166": "um",
+          "region": "apac"
+      },
+      {
+          "country": "Uruguay",
+          "iso_3166": "uy",
+          "region": "amer"
+      },
+      {
+          "country": "Uzbekistan",
+          "iso_3166": "uz",
+          "region": "emea"
+      },
+      {
+          "country": "Vanuatu",
+          "iso_3166": "vu",
+          "region": "apac"
+      },
+      {
+          "country": "Venezuela, Bolivarian Republic of",
+          "iso_3166": "ve",
+          "region": "amer"
+      },
+      {
+          "country": "Viet Nam",
+          "iso_3166": "vn",
+          "region": "apac"
+      },
+      {
+          "country": "Virgin Islands, British",
+          "iso_3166": "vg",
+          "region": "amer"
+      },
+      {
+          "country": "Virgin Islands, U.S.",
+          "iso_3166": "vi",
+          "region": "amer"
+      },
+      {
+          "country": "Wallis and Futuna",
+          "iso_3166": "wf",
+          "region": "apac"
+      },
+      {
+          "country": "Western Sahara",
+          "iso_3166": "eh",
+          "region": "emea"
+      },
+      {
+          "country": "Yemen",
+          "iso_3166": "ye",
+          "region": "emea"
+      },
+      {
+          "country": "Zambia",
+          "iso_3166": "zm",
+          "region": "emea"
+      },
+      {
+          "country": "Zimbabwe",
+          "iso_3166": "zw",
+          "region": "emea"
+      }
+    ];
+
+    const getRegionOfCountry = (countryId) => {
+        return countryList.find(data => data["iso_3166"] === countryId)?.region.toLowerCase() ?? null;
+    }
+
+    const region = getRegionOfCountry(userCountryIdEvents);
+    const amerEvents = document.querySelector('.amer');
+    const apacEvents = document.querySelector('.apac');
+    const emeaEvents = document.querySelector('.emea');
+
+    const hideElement = (element) => {
+        if (element) {
+            element.style.display = 'none';
+        }
+    }
+
+    const showElement = (element) => {
+        if (element) {
+            element.style.display = 'flex';
+        }
+    }
+
+    // Determine the region and show/hide HTML elements accordingly
+    if (region === 'amer') {
+        hideElement(apacEvents);
+        hideElement(emeaEvents);
+        showElement(amerEvents);
+    } else if (region === 'apac') {
+        hideElement(amerEvents);
+        hideElement(emeaEvents);
+        showElement(apacEvents);
+    } else if (region === 'emea') {
+        hideElement(amerEvents);
+        hideElement(apacEvents);
+        showElement(emeaEvents);
+    } else if (region === 'uk') {
+        hideElement(amerEvents);
+        hideElement(apacEvents);
+        hideElement(emeaEvents);
+    } else {
+        console.log(`Country with ID ${userCountryIdEvents} not found in the data.`);
+    }
+
+    const manageEventListings = (name) => {
+        // Add loading state class
+        const loadingClass = 'is-loading';
+        const errorClass = 'has-error';
+        
+        const selectElement = document.getElementById(`js-ind-dropdown-{{name|lower|replace(' ', '_')}}`);
+        const listingsContainer = document.getElementById(`js-${name}-listings`);
+        
+        if (!selectElement || !listingsContainer) {
+            console.error(`Required elements not found for ${name} section`);
+            return;
+        }
+
+        // Add loading state
+        const setLoadingState = (isLoading) => {
+            if (isLoading) {
+                listingsContainer.classList.add(loadingClass);
+                selectElement.disabled = true;
+            } else {
+                listingsContainer.classList.remove(loadingClass);
+                selectElement.disabled = false;
+            }
+        };
+
+        const handleError = (error) => {
+            console.error(`Error in ${name} section:`, error);
+            listingsContainer.classList.add(errorClass);
+        };
+
+        const hideShowListItems = (listItems, toggleButton) => {
+            const hiddenItems = [];
+            if (listItems.length > 2) {
+                [...listItems].forEach((item, index) => {
+                    if (index >= 7) {
+                        item.classList.add("hidden");
+                        hiddenItems.push(item);
+                    }
+                });
+            }
+            return hiddenItems;
+        }
+
+        const toggleButtonHandler = (toggleButton, hiddenItems, toogleBTNWrapper) => {
+            toggleButton.addEventListener("click", () => {
+                hiddenItems.forEach((item) => {
+                    item.classList.toggle("hidden");
+                });
+
+                if (toggleButton.textContent === `View all ${name}`) {
+                    toggleButton.textContent = `View less ${name}`;
+                    toogleBTNWrapper.classList.add('isExpanded');
+                } else {
+                    toggleButton.textContent = `View all ${name}`;
+                    toogleBTNWrapper.classList.remove('isExpanded');
+                }
+            });
+        };
+
+        const selectElementHandler = (selectElement, listItems, toogleBTNWrapper, noItemsDiv, name) => {
+            const noItemsMessage = document.querySelector(`#js-no-items-found-${name}`);
+            const listingsContainer = document.querySelector(`#js-${name}-listings`);
+
+            const hideListItems = () => {
+                if (!listingsContainer) return;
+                [...listItems].forEach((item) => {
+                    item.style.display = "none";
+                });
+                toogleBTNWrapper.style.display = "none";
+            };
+
+            const showNoItemsDiv = () => {
+                if (noItemsMessage) {
+                    noItemsMessage.classList.remove('hidden');
+                }
+                if (listingsContainer) {
+                    listingsContainer.classList.add('hidden');
+                }
+            };
+
+            const hideNoItemsDiv = () => {
+                if (noItemsMessage) {
+                    noItemsMessage.classList.add('hidden');
+                }
+                if (listingsContainer) {
+                    listingsContainer.classList.remove('hidden');
+                }
+            };
+
+            const handleRegionChange = (selectedRegion) => {
+                try {
+                    setLoadingState(true);
+                    
+                    if (!selectedRegion || !listingsContainer) {
+                        hideListItems();
+                        showNoItemsDiv();
+                        return;
+                    }
+
+                    const filteredListItems = [...listItems].filter((item) => item.classList.contains(selectedRegion));
+
+                    if (filteredListItems.length === 0) {
+                        hideListItems();
+                        showNoItemsDiv();
+                    } else {
+                        hideNoItemsDiv();
+                        [...listItems].forEach((item) => {
+                            item.style.display = item.classList.contains(selectedRegion) ? "flex" : "none";
+                        });
+                    }
+                } catch (error) {
+                    handleError(error);
+                } finally {
+                    setLoadingState(false);
+                }
+            };
+
+            try {
+                // Initial state
+                const initialRegion = selectElement.options[selectElement.selectedIndex].dataset.region;
+                handleRegionChange(initialRegion);
+
+                // Handle change events
+                selectElement.addEventListener("change", () => {
+                    const selectedRegion = selectElement.options[selectElement.selectedIndex].dataset.region;
+                    handleRegionChange(selectedRegion);
+                });
+            } catch (error) {
+                handleError(error);
+            }
+        };
+
+        try {
+            const listItems = listingsContainer.getElementsByTagName("li");
+            const toggleButton = document.getElementById(`toggleButton-${name}`);
+            const toogleBTNWrapper = document.getElementById(`js-toogleBTNWrapper-${name}`);
+            const hiddenItems = [];
+
+            if (listItems.length > 0) {
+                setLoadingState(true);
+                try {
+                    hideShowListItems(listItems, toggleButton);
+                    toggleButtonHandler(toggleButton, hiddenItems, toogleBTNWrapper);
+                    selectElementHandler(selectElement, listItems, toogleBTNWrapper, null, name);
+                } catch (error) {
+                    handleError(error);
+                } finally {
+                    setLoadingState(false);
+                }
+            }
+        } catch (error) {
+            handleError(error);
+        }
+    };
+
+    const handleLoad = () => {
+        if (region) {
+            const selectVenue = document.querySelector("#js-ind-dropdown-{{name|lower|replace(' ', '_')}}");
+            if (selectVenue) {
+                const selectOptions = selectVenue.children;
+                for (const option of selectOptions) {
+                    if (option.getAttribute('data-region') === region) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    const initialize = () => {
+        handleLoad();
+        manageEventListings("events");
+        manageEventListings("webinars");
+    };
+
+    initialize();
+
+  </script>
+{% end_require_js %}

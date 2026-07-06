@@ -1,0 +1,13 @@
+<!--
+  templateType: "none"
+  isAvailableForNewContent: false
+-->
+
+{{ require_js('https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.2.0/quicklink.umd.js') }}
+<script>
+    window.addEventListener("load", () => {
+        quicklink.listen({
+            origins: true
+        });
+    });
+</script>

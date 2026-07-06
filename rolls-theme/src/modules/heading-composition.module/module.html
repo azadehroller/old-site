@@ -1,0 +1,112 @@
+{# Variables #}
+{% set eyebrow = module.content.eyebrow %}
+{% set title = module.content.title %}
+{% set text = module.content.text %}
+{% set styled_bullets = module.content.styled_bullets %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set heading_type = module.styles.heading_type %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set text_type = module.styles.text_type %}
+{% set eyebrow_type = module.styles.eyebrow_type %}
+{% set eyebrow_style = module.styles.eyebrow_style %}
+{% set display_type = module.styles.display_type %}
+{% set add_border_line = module.styles.add_border_line %}
+{% set title_style = module.styles.title_style %}
+
+{# Resolve semantic tag and visual display class #}
+{% set resolved_heading_tag = heading_type if heading_type else "h3" %}
+{% set resolved_display_type = display_type if display_type else resolved_heading_tag %}
+
+{% macro setEyebrowStyle(styleColor, defaultStyle='', onDarkStyle='') %}
+  {% set style = (styleColor == 'red') ? onDarkStyle : (styleColor == 'blue' ? defaultStyle : '') %}
+  {{ style }}
+{% endmacro %}
+
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='', smb='', enterprise='', industryReport='', industryReportOnLight='') %}
+  {% set textColor =
+    (themeColor == 'light') ? onDarkColor :
+    (themeColor == 'gxscore') ? gxColor :
+    (themeColor == 'smb') ? smb :
+    (themeColor == 'enterprise') ? enterprise :
+    (themeColor == 'industry_report') ? industryReport :
+    (themeColor == 'industry_report_onlight') ? industryReportOnLight :
+    defaultColor %}
+  {{ textColor }}
+{% endmacro %}
+
+{% macro heading(tag, title, display_class) %}
+  {% if title %}
+    <{{ tag }} class="{{ display_class }}-heading my-0 {% if tag == 'h1' %}text-balance{% endif %}">
+      {{ title }}
+    </{{ tag }}>
+  {% endif %}
+{% endmacro %}
+
+{% macro eyebrow(tag, eyebrow_text, theme, eyebrow_style) %}
+  {% set eyebrowClasses = "eyebrow" %}
+  {% if eyebrow_style == 'red' %}
+    {% set eyebrowClasses = "text-secondary-50" %}
+  {% elif eyebrow_style == 'blue' %}
+    {% set eyebrowClasses = "text-primary-50" %}
+  {% elif eyebrow_style == 'iris' %}
+    {% set eyebrowClasses = "text-iris-50" %}
+  {% elif eyebrow_style == 'iris_light' %}
+    {% set eyebrowClasses = "text-iris-40" %}
+  {% elif eyebrow_style == 'gradient' %}
+    {% set eyebrowClasses = "gradient" %}
+  {% elif eyebrow_style == 'bright_blue' %}
+    {% set eyebrowClasses = "bright-blue" %}
+  {% elif eyebrow_style == 'light_blue' %}
+    {% set eyebrowClasses = "light-blue" %}
+  {% elif eyebrow_style == 'light_purple' %}
+    {% set eyebrowClasses = "light-purple" %}
+  {% elif eyebrow_style == 'indigo' %}
+    {% set eyebrowClasses = "indigo" %}
+  {% elif eyebrow_style == 'iris_shade' %}
+    {% set eyebrowClasses = "iris_shade" %}
+  {% elif eyebrow_style == 'blue_50' %}
+    {% set eyebrowClasses = "blue-50" %}
+  {% elif eyebrow_style == 'blue_80' %}
+    {% set eyebrowClasses = "blue-80" %}
+  {% elif eyebrow_style == 'none' %}
+    {% set eyebrowClasses = "text-secondary-50" %}
+  {% else %}
+    {% set eyebrowClasses = setTextColor(theme, 'text-secondary-50', 'text-secondary-50', 'text-gx-90', 'text-secondary-50 border-2 border-secondary-50 rounded-full px-4 py-2', 'fancy-button bg-[#011840] text-navy-80 rounded-full px-4 py-2 relative overflow-hidden', 'text-[#0960F6]', 'text-[#0960F6]') %}
+  {% endif %}
+
+  <{{ tag if tag else "div" }} id="js-referred-name" class="eyebrow {{ eyebrowClasses }} uppercase font-extrabold {% if tag %}small{% endif %}">
+    {% if theme == 'enterprise' %}
+      <div class="fancy absolute inset-0 pointer-events-none"></div>
+    {% endif %}
+    <span class="relative">{{ eyebrow_text if eyebrow_text else "CUSTOMIZED TO YOUR VENUE" }}</span>
+  </{{ tag if tag else "div" }}>
+{% endmacro %}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+      .custom-text-wrapper.styled-bullets ul li::marker {
+        content: url({{ get_asset_url('/rolls-theme/images/ticked.svg') }});
+      }
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+<section class="heading-composition custom-text-wrapper custom-text-wrapper-content flex flex-col gap-4 text-{{ alignment|lower or "center" }} {{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80', 'text-primary-50 items-center', 'text-neutral-white items-center', 'text-neutral-white', 'text-primary-50') }} {% if styled_bullets %}styled-bullets{% endif %} {% if add_border_line %}add-border{% endif %}">
+
+  {% if eyebrow %}
+    {{ eyebrow(eyebrow_type, eyebrow, theme, eyebrow_style) }}
+  {% endif %}
+
+  {% if title %}
+    <div class="{{ title_style }} {{resolved_display_type}}-heading">
+      {{ heading(resolved_heading_tag, title, resolved_display_type) }}
+    </div>
+  {% endif %}
+
+  {% if text %}
+    <div class="text-{{ text_type }}">{{ text }}</div>
+  {% endif %}
+</section>

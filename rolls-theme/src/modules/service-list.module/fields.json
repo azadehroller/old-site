@@ -1,0 +1,186 @@
+[ {
+  "id" : "bc886c04-d88c-c0eb-13be-e00095827a4f",
+  "name" : "title",
+  "label" : "Service Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Implementation Packages"
+}, {
+  "id" : "d49d9e06-bcb8-f066-0c0d-89dfa09381bf",
+  "name" : "service_footer",
+  "label" : "Service Footer",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "*For the best ROLLER experience, we recommend all new ROLLER customers purchase an implementation package that aligns with their subscription selection."
+}, {
+  "id" : "ce44326b-5ef3-117b-0033-d2ada70b94ab",
+  "name" : "service",
+  "label" : "Service",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : null,
+    "sorting_label_field" : "a3e8e716-34b7-bdc5-b2b7-847173c5ac60",
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "a3e8e716-34b7-bdc5-b2b7-847173c5ac60",
+    "name" : "package",
+    "label" : "Service Package",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p><strong>Lite</strong></p>\nIncludes 3 hours of direct consultation and covers:<br>\n<ul>\n<li>Venue setup &amp; product configuration consultation&nbsp;</li>\n<li>Launch planning</li>\n<li>Operational training consultation</li>\n</ul>"
+  }, {
+    "id" : "24f7fd39-e7fb-014d-2a80-fbda343db4f0",
+    "name" : "prices",
+    "label" : "Prices",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "cb741817-4316-05f3-1969-880f5e1273f6",
+      "name" : "usd",
+      "label" : "USD",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "1300"
+    }, {
+      "id" : "ba1a18a9-5e5e-142a-3685-2cb5b6fcecf9",
+      "name" : "aud",
+      "label" : "AUD",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "1300"
+    }, {
+      "id" : "e7f01c8d-5458-797b-b8ae-2cf93f2c2f63",
+      "name" : "eur",
+      "label" : "EUR",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "1300"
+    }, {
+      "id" : "2a4fb583-47a7-acee-08da-24f4359a6663",
+      "name" : "gbp",
+      "label" : "GBP",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "1300"
+    }, {
+      "id" : "6a93689b-cfc4-b869-91d1-9a57f8fc1440",
+      "name" : "cad",
+      "label" : "CAD",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "1300"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "usd" : "1300",
+      "aud" : "1300",
+      "eur" : "1300",
+      "gbp" : "1300",
+      "cad" : "1300"
+    }
+  }, {
+    "id" : "8b777fd0-7ff5-30cd-9578-5c06b06bd781",
+    "name" : "display_link",
+    "label" : "Display Link",
+    "help_text" : "Update if a link is required to overwrite the price.",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "b317a6ed-4d05-7c28-a2d7-baeba55fab39",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "service.display_link",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "package" : "<p><strong>Lite</strong></p>\nIncludes 3 hours of direct consultation and covers:<br>\n<ul>\n<li>Venue setup &amp; product configuration consultation&nbsp;</li>\n<li>Launch planning</li>\n<li>Operational training consultation</li>\n</ul>",
+    "prices" : {
+      "AUD" : "1300"
+    },
+    "display_link" : false,
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "package" : "<p><strong>Lite</strong></p>\nIncludes 3 hours of direct consultation and covers:<br>\n<ul>\n<li>Venue setup &amp; product configuration consultation&nbsp;</li>\n<li>Launch planning</li>\n<li>Operational training consultation</li>\n</ul>",
+    "prices" : {
+      "AUD" : "1300"
+    },
+    "display_link" : false,
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

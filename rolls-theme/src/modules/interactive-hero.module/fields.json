@@ -1,0 +1,79 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow text",
+  "help_text" : "Small uppercase label shown above the title.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "FIND OUT WHAT YOUR GUESTS REALLY THINK"
+}, {
+  "id" : "title",
+  "name" : "title",
+  "label" : "Title",
+  "help_text" : "Main H1 heading.",
+  "required" : true,
+  "locked" : false,
+  "allow_new_line" : true,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Uncover guest insights: ROLLER's 2025 Pulse Report"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "help_text" : "Supporting paragraph beneath the title.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>We commissioned a survey of 2,000 guests from around the world to find out how they really feel about the attractions industry. From discovery and booking to post-visit impressions and future trends, there's a lot to unpack and act on.</p>"
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "Call to action",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "cta.button_label",
+    "name" : "button_label",
+    "label" : "Button label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Get Your Copy"
+  }, {
+    "id" : "cta.url",
+    "name" : "url",
+    "label" : "Button URL",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "type" : "url",
+    "display_width" : null,
+    "default" : {
+      "content_id" : null,
+      "href" : "#",
+      "type" : "EXTERNAL"
+    }
+  }, {
+    "id" : "cta.open_in_new_tab",
+    "name" : "open_in_new_tab",
+    "label" : "Open in new tab",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

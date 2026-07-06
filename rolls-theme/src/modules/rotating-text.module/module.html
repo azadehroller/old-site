@@ -1,0 +1,182 @@
+{# Variables #}
+{% set eyebrow  = module.content.eyebrow %}
+{% set title  = module.content.title %}
+{% set text  = module.content.text %}
+{% set rotating_heading  = module.content.rotate_heading %}
+{% set rotating_heading_group  = module.content.rotating_text %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set heading_type = module.styles.heading_type %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set text_type = module.styles.text_type %}
+{% set eyebrow_type = module.styles.eyebrow_type %}
+{% set display_type = module.styles.display_type %}
+{% set text_length = module.styles.rotating_text_length %}
+
+
+{% macro setHeight(tag, extra_classes, align) %}
+    {% set tag = tag if tag else "h3" %}
+    {% set css_class = extra_classes %}
+    
+    {% if tag == 'h1' %}
+        {% set css_class = css_class + ' h-[44px] sm:h-[45px] md:h-[44px] lg:h-[52px]' %}
+    {% elif tag == 'h2' %}
+        {% set css_class = css_class + ' h-[35px] md:h-[40px] lg:h-auto' %}
+    {% elif tag == 'h3' %}
+        {% set css_class = css_class + ' h-[35px] md:h-[45px] lg:h-[50px]' %}
+    {% elif tag == 'h4' %}
+        {% set css_class = css_class + ' h-[20px] md:h-[25px] lg:h-[30px]' %}
+    {% elif tag == 'h5' %}
+        {% set css_class = css_class + ' h-[20px] md:h-[25px] lg:h-[30px]' %}
+    {% elif tag == 'h6' %}
+        {% set css_class = css_class + ' h-[20px]' %}
+    {% endif %}
+    
+    {{ css_class }}
+{% endmacro %}
+
+{% require_css %}
+<style>
+    .rotation-wrapper-{{name}} {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    @media (min-width: 430px) {
+        .rotation-wrapper-{{name}} {
+            width: {{ alignment == 'CENTER' ? '100%' : '{{text_length || 50}}%' }};
+        }
+    }
+
+    /* CRITICAL: First item is visible by default for LCP */
+    .js-rotating-text-item-{{name}} {
+        display: none;
+        position: absolute;
+        left: 0;
+        bottom: {{ alignment == 'CENTER' ? '-5px' : '0' }};
+        width: {{ alignment == 'CENTER' ? '100%' : "auto" }};
+    }
+    
+    /* First item visible immediately without JS */
+    .js-rotating-text-item-{{name}}:first-child {
+        display: block;
+        position: relative;
+    }
+    
+    /* After JS loads, all items become absolute and animated */
+    .js-loaded .js-rotating-text-item-{{name}} {
+        display: block;
+        position: absolute;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    /* Active item is visible */
+    .js-loaded .js-rotating-text-item-{{name}}.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Exiting item moves up */
+    .js-loaded .js-rotating-text-item-{{name}}.exit {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+</style>
+{% end_require_css %}
+
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='') %}
+    {% set textColor = (themeColor == 'light') ? onDarkColor : (themeColor == 'gxscore') ? gxColor : defaultColor %}
+{{ textColor }}
+{% endmacro %}
+
+{% macro heading(tag, title, display_tag, extra_classes)%}<{{tag if tag else "h3"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {{extra_classes}} {% if tag == 'h1'%}text-balance{%endif%}">{{title if title else ""}}</{{tag if tag else "h1"}}>{% endmacro%}
+
+{% macro eyebrow(tag, eyebrow_type)%}<{{tag || "div"}} id="js-referred-name" class="{{ setTextColor(theme, 'text-secondary-50', 'text-secondary-50', 'text-gx-90') }} uppercase font-extrabold {% if eyebrow_type %}small{% endif %}">{{ eyebrow if eyebrow else "CUSTOMIZED TO YOUR VENUE"}}</{{tag || "div"}}>{% endmacro%}
+
+<header id="rotating-text-{{name}}" class="grid gap-4 text-{{alignment|lower || "center"}} {{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}">
+    {% if eyebrow %}
+        {{ eyebrow(eyebrow_type, eyebrow) }}
+    {% endif %}
+    <div class="flex {% if alignment == 'CENTER'%}is-centered flex-col justify-center items-center gap-0 md:gap-2{% else %}flex-col lg:flex-row items-start gap-2 md:gap-3{% endif %}">
+        <div>{{ heading(heading_type, title, display_type, "active") }}</div>
+        {% if rotating_heading_group and rotating_heading_group|selectattr('rotating_text_item')|list|length > 0 %}
+  <div class="rotation-wrapper-{{name}} {{ setHeight(heading_type, "") }}">
+    {% for item in rotating_heading_group if item.rotating_text_item %}
+      <div class="js-rotating-text-item-{{name}} mt-0 mb-0 s{{loop.index}} {% if loop.first %}active{% endif %}">
+        {{ heading(heading_type, item.rotating_text_item, display_type, null) }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+    </div>
+    {% if text %}
+        <div class="text-{{text_type}}">{{ text }}</div>
+    {% endif %}
+</header>
+
+{% require_js %}
+<script>
+    // Defer animation initialization to avoid blocking LCP
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initRotation);
+    } else {
+        // DOM already loaded, wait a bit for paint
+        requestAnimationFrame(() => {
+            setTimeout(initRotation, 100);
+        });
+    }
+    
+    function initRotation() {
+        const wrapper = document.querySelector('.rotation-wrapper-{{name}}');
+        const texts = document.querySelectorAll(".js-rotating-text-item-{{name}}");
+        const count = texts.length;
+        
+        // Only rotate if there are multiple items
+        if (count <= 1) return;
+        
+        // Small delay to ensure first paint completes
+        setTimeout(() => {
+            // Enable animations
+            if (wrapper) {
+                wrapper.classList.add('js-loaded');
+            }
+            
+            let currentIndex = 0;
+            
+            // Ensure first item is marked as active
+            texts[0].classList.add('active');
+            
+            function rotate() {
+                // Remove active from current
+                texts[currentIndex].classList.remove('active');
+                texts[currentIndex].classList.add('exit');
+                
+                // Move to next index
+                currentIndex = (currentIndex + 1) % count;
+                
+                // Add active to next
+                texts[currentIndex].classList.add('active');
+                texts[currentIndex].classList.remove('exit');
+                
+                // Clean up exit class from previous item after animation
+                setTimeout(() => {
+                    texts.forEach((text, idx) => {
+                        if (idx !== currentIndex) {
+                            text.classList.remove('exit');
+                        }
+                    });
+                }, 600);
+            }
+            
+            // Start rotating after initial delay
+            setInterval(rotate, 3500);
+            
+        }, 500);
+    }
+</script>
+{% end_require_js %}

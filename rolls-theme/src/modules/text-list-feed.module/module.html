@@ -1,0 +1,55 @@
+{# Variables #}
+{% set items  = module.items %}
+
+<section id="text-list-feed-{{name}}" class="grid grid-cols-1 md:grid-cols-4 gap-5 mt-3">
+    {% for item in items %}
+        {% set label = item.top_label%}
+        {% set listItems = item.item %}
+        <div class="text-base text-primary-50 flex flex-col gap-3">
+            {% if label %}
+                <div class="font-semibold">{{ label || "Top label title" }}</div>
+            {% endif %}
+             <ul class="flex flex-col mb-0 list">
+                {% for item in listItems %}
+                    {% set href = item.link.url.href %}
+                    {% set rel = [] %}
+                    {% set url_type = item.link.url.type %}
+                    {% set no_follow = item.link.no_follow %}
+                    {% set new_tab = item.link.open_in_new_tab %}
+
+                    {# Sets attributes used for the link field #}
+                    {% if url_type is equalto 'EMAIL_ADDRESS' %}
+                    {% set href = 'mailto:' + href %}
+                    {% endif %}
+                    {% if no_follow %}
+                    {% do rel.append('nofollow') %}
+                    {% endif %}
+                    {% if new_tab %}
+                    {% do rel.append('noopener') %}
+                    {% endif %}
+
+                    <li class="flex items-center gap-x-2 py-[8px]">
+                        {% if href %}
+                            <a href={{ href }} class="flex items-center gap-x-2 underline" {% if new_tab %}target="_blank"{% endif %}
+            {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M22.2402 5.59L11.6602 16.17L7.48016 12L6.07016 13.41L11.6602 19L23.6602 7L22.2402 5.59ZM18.0002 7L16.5902 5.59L10.2502 11.93L11.6602 13.34L18.0002 7ZM6.00016 19L0.410156 13.41L1.83016 12L7.41016 17.59L6.00016 19Z" fill="#074dc5"/>
+                                    </svg>
+                                </span>
+                                {{ item.text || "Lowest cost routing" }}
+                            </a>
+                            {% else %}
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M22.2402 5.59L11.6602 16.17L7.48016 12L6.07016 13.41L11.6602 19L23.6602 7L22.2402 5.59ZM18.0002 7L16.5902 5.59L10.2502 11.93L11.6602 13.34L18.0002 7ZM6.00016 19L0.410156 13.41L1.83016 12L7.41016 17.59L6.00016 19Z" fill="#074dc5"/>
+                                </svg>
+                            </span>
+                            {{ item.text || "Lowest cost routing" }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</section>

@@ -1,0 +1,205 @@
+.pulse-circle-chart {
+  background-color: rgba(30, 27, 58, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.pulse-circle-chart.chart-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background-color: rgba(40, 35, 78, 0.8);
+  border-color: rgba(168, 139, 250, 0.3);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(168, 139, 250, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pulse-circle-chart h3 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.pulse-circle-chart .inline-flex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(88, 28, 135, 0.5);
+  margin-right: 0.75rem;
+}
+
+.pulse-circle-chart .inline-flex svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #d8b4fe;
+}
+
+/* Fade in animation */
+.pulse-circle-chart.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.pulse-circle-chart.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Donut chart styles */
+.pulse-circle-chart .donut-container {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+}
+
+.pulse-circle-chart .chart-arc {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.8);
+}
+
+.pulse-circle-chart .chart-arc:hover {
+  filter: brightness(1.2);
+  stroke-width: 7;
+}
+
+.pulse-circle-chart .chart-arc.animated {
+  opacity: 1;
+  transform: rotate(-90deg) scale(1);
+}
+
+/* Tooltip styles */
+.pulse-circle-chart .donut-tooltip {
+  position: absolute;
+  background-color: rgba(17, 15, 41, 0.95);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Legend styles */
+.pulse-circle-chart ul {
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.pulse-circle-chart ul li {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pulse-circle-chart ul li:hover {
+  color: white;
+}
+
+.pulse-circle-chart ul li span {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+}
+
+/* Legend tooltip */
+.pulse-circle-chart li.chart-element[data-tooltip] {
+  position: relative;
+}
+
+.pulse-circle-chart li.chart-element[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: rgba(17, 15, 41, 0.95);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pulse-circle-chart li.chart-element[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Layout utilities */
+.pulse-circle-chart .flex {
+  display: flex;
+}
+
+.pulse-circle-chart .items-center {
+  align-items: center;
+}
+
+.pulse-circle-chart .justify-center {
+  justify-content: center;
+}
+
+.pulse-circle-chart .space-x-8 > * + * {
+  margin-left: 2rem;
+}
+
+.pulse-circle-chart .space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.pulse-circle-chart .text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.pulse-circle-chart .font-semibold {
+  font-weight: 600;
+}
+
+.pulse-circle-chart .text-center {
+  text-align: center;
+}
+
+.pulse-circle-chart .text-gray-300 {
+  color: #d1d5db;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pulse-circle-chart .flex {
+    flex-direction: column;
+  }
+  
+  .pulse-circle-chart .space-x-8 > * + * {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}

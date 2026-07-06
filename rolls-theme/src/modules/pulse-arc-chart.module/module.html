@@ -1,0 +1,120 @@
+<div class="pulse-arc-chart card chart-card fade-in-up flex flex-col items-center justify-center text-center chart-container">
+  <h3 class="font-semibold mb-4 flex items-center">
+    {% if module.chart_icon.name %}
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-purple-900/50 mr-3">
+        {% icon name="{{ module.chart_icon.name }}" style="{{ module.chart_icon.type }}" %}
+      </span>
+    {% endif %}
+    {{ module.chart_title }}
+  </h3>
+  
+  <div class="relative w-48 h-32 mb-4">
+    <svg class="w-full h-full" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+      <defs>
+        <clipPath id="gauge-clip-{{ name }}">
+          <rect x="-5" y="-5" width="210" height="110" class="gauge-clip-rect" />
+        </clipPath>
+      </defs>
+      <!-- Background arc -->
+      <path d="M 20 80 A 80 80 0 0 1 180 80" 
+            fill="none" 
+            stroke="{{ module.background_color.color }}" 
+            stroke-width="10" 
+            stroke-linecap="round"/>
+      <!-- Progress arc - clipped to show animation -->
+      <path d="M 20 80 A 80 80 0 0 1 180 80" 
+            fill="none" 
+            stroke="{{ module.arc_color.color }}" 
+            stroke-width="10" 
+            stroke-linecap="round"
+            clip-path="url(#gauge-clip-{{ name }})"
+            id="arc-gauge-{{ name }}"
+            data-tooltip="{{ module.tooltip_text }}"/>
+    </svg>
+    
+    <style>
+      #gauge-clip-{{ name }} .gauge-clip-rect {
+        width: 0;
+        transition: width 2s ease-out;
+      }
+      .gauge-animated-{{ name }} #gauge-clip-{{ name }} .gauge-clip-rect {
+        width: {{ (module.percentage / 100 * 185) + 5 }}px;
+      }
+    </style>
+    
+    <!-- Center text -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center mt-4">
+      <p class="text-4xl font-bold text-neutral-white">
+        <span class="counter " data-target="{{ module.percentage }}">0</span>%
+      </p>
+    </div>
+  </div>
+  
+  {% if module.description %}
+    <p class="text-neutral-white">{{ module.description }}</p>
+  {% endif %}
+</div>
+<script>
+(function() {
+  const moduleId = 'arc-{{ name }}';
+  if (window[moduleId + '_initialized']) return;
+  window[moduleId + '_initialized'] = true;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Counter animation
+    const animateCounter = (counter) => {
+      const target = +counter.getAttribute('data-target');
+      const duration = 2000;
+      const stepTime = 20;
+      const steps = duration / stepTime;
+      const increment = target / steps;
+      let current = 0;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          clearInterval(timer);
+          counter.innerText = target;
+        } else {
+          counter.innerText = Math.ceil(current);
+        }
+      }, stepTime);
+    };
+    
+    // Observer for animation
+    const chartObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Animate gauge
+          const arcGauge = document.getElementById('arc-gauge-{{ name }}');
+          if (arcGauge && !arcGauge.classList.contains('animated')) {
+            const svgElement = arcGauge.closest('svg');
+            setTimeout(() => {
+              svgElement.classList.add('gauge-animated-{{ name }}');
+            }, 300);
+            arcGauge.classList.add('animated');
+          }
+          
+          // Animate counter
+          const counter = entry.target.querySelector('.counter:not(.animated)');
+          if (counter) {
+            setTimeout(() => {
+              animateCounter(counter);
+              counter.classList.add('animated');
+            }, 300);
+          }
+          
+          chartObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    const chartElement = document.querySelector('.pulse-arc-chart');
+    if (chartElement) {
+      chartObserver.observe(chartElement);
+    }
+  });
+})();
+</script>

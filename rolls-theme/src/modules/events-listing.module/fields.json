@@ -1,0 +1,116 @@
+[ {
+  "id" : "f96c9395-ceb3-1a00-1b2f-28bfb4e9a395",
+  "name" : "event",
+  "label" : "Event",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : null,
+    "sorting_label_field" : "34a65c86-cc7e-a6f4-3ae1-bd01b83d1bc3",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "e0a9d60e-6d18-0fd0-5502-f77d85b43a6d",
+    "name" : "event_date_time",
+    "label" : "Event Date & Time",
+    "required" : true,
+    "locked" : false,
+    "step" : 30,
+    "type" : "datetime",
+    "display_width" : null,
+    "default" : 1710871200000
+  }, {
+    "id" : "34a65c86-cc7e-a6f4-3ae1-bd01b83d1bc3",
+    "name" : "event_title",
+    "label" : "Event Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Special event name"
+  }, {
+    "id" : "e1160bbd-05da-0dd6-b329-6ffd1a1ae464",
+    "name" : "event_description",
+    "label" : "Event Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<span>Lorem ipsum dolor sit amet consectetur. Enim fames amet condimentum nulla ultrices in dictum porttitor quisque. Quam sollicitudin .</span>"
+  }, {
+    "id" : "c5c3841e-1d7b-de72-5248-1da864357843",
+    "name" : "event_link",
+    "label" : "Event Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "id" : "fd25aab4-cea1-b552-a76a-3a257c0db5db",
+    "name" : "event_link_label",
+    "label" : "Event Link Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "event_date_time" : 1710871200000,
+    "event_title" : "Special event name",
+    "event_description" : "<span>Lorem ipsum dolor sit amet consectetur. Enim fames amet condimentum nulla ultrices in dictum porttitor quisque. Quam sollicitudin .</span>",
+    "event_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "event_date_time" : 1710871200000,
+    "event_title" : "Special event name",
+    "event_description" : "<span>Lorem ipsum dolor sit amet consectetur. Enim fames amet condimentum nulla ultrices in dictum porttitor quisque. Quam sollicitudin .</span>",
+    "event_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "event_date_time" : 1710871200000,
+    "event_title" : "Special event name",
+    "event_description" : "<span>Lorem ipsum dolor sit amet consectetur. Enim fames amet condimentum nulla ultrices in dictum porttitor quisque. Quam sollicitudin .</span>",
+    "event_link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : ""
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+} ]

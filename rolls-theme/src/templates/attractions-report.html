@@ -1,0 +1,212 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: Attractions Report 
+    screenshotPath: ../images/template-previews/reports.jpg
+-->
+{% extends "./layouts/base.html" %}
+
+
+{% require_css %}
+<style>
+.tpl-attractions-report{
+background: #011840;
+form input[type='submit'], form .hs-button{
+background-color: #0960F6;
+&:hover {
+  background-color: #93BAFF;
+  color: #011840;
+}
+}
+.custom-text-wrapper{
+  gap: 24px;  
+  div *:last-of-type{
+    margin-bottom: 0;
+  }
+}
+.button-wrapper{
+margin-top: 48px;
+}
+.dnd-section .button-wrapper .button:not(.transparent),form .hs-submit .actions,form input[type='submit'], form .hs-button{
+  width: 100%;
+}
+@media (min-width: 432px) {
+  .dnd-section .button-wrapper .button:not(.transparent),form .hs-submit .actions,form input[type='submit'], form .hs-button{
+    width: auto;
+  }
+}
+@media (max-width: 432px){
+.form-wrapper.dark-mode .hs-custom-form {
+    & .form-columns-2{
+    gap: 0 !important;
+    }
+}
+}
+.dnd-section:first-of-type {
+{# background-image: linear-gradient(180deg, #011840, #2e2e2e00 49%), 
+radial-gradient(circle farthest-corner at 50% 100%, #d3d7033d, #36363600 63%), 
+radial-gradient(circle farthest-corner at 100% 100%, #ffffff03, #0000 39%), 
+linear-gradient(180deg, #0000 70%, #0960F6), 
+radial-gradient(circle farthest-corner at 55% 0%, #0e0e0f, #2e2e2e00), 
+linear-gradient(180deg, #0960F6, #93baff 62%,#93baff), 
+url({{ get_asset_url('rolls-theme/images/smoke.gif') }});
+
+
+background-image: linear-gradient(180deg, #011840, #2e2e2e00 49%), 
+radial-gradient(circle farthest-corner at 50% 100%, #d3d7033d, #36363600 63%), 
+radial-gradient(circle farthest-corner at 100% 100%, #ffffff03, #0000 39%), 
+linear-gradient(180deg, #0000 70%, #0960F6), 
+radial-gradient(circle farthest-corner at 55% 0%, #0e0e0f, #2e2e2e00), 
+linear-gradient(180deg, #0960F6#, #93baff 62%, #6b6bad), 
+url({{ get_asset_url('rolls-theme/images/smoke.gif') }}); #}
+
+{# background-image: linear-gradient(180deg, #011840, #01184038 65%), 
+radial-gradient(circle farthest-corner at 70% 100%, #e4e4e473, #36363614 77%), 
+radial-gradient(circle farthest-corner at 100% 100%, #ffffff03, #0000 58%), 
+linear-gradient(180deg, #00000000 81%, #ffffff0d), 
+radial-gradient(circle farthest-corner at 75% 0%, #0960f6, #2e2e2e00), 
+linear-gradient(180deg, #011840, #0960f6 20% 20%, #93baff96),
+url({{ get_asset_url('rolls-theme/images/smoke.gif') }}); #}
+background-image: linear-gradient(180deg, #011840, #0960f647 81%), radial-gradient(circle farthest-corner at 70% 100%, #e4e4e473, #36363614 77%), radial-gradient(circle farthest-corner at 100% 100%, #0960f657, #0960f608 58%), linear-gradient(180deg, #00000000 81%, #ffffff0d), radial-gradient(circle farthest-corner at 75% 0%, #0960f6, #0960f614), linear-gradient(180deg, #0960f600, #0960f6 20% 20%, #93baff96),
+url({{ get_asset_url('rolls-theme/images/smoke.gif') }});
+background-image: linear-gradient(180deg, #011840, #0960f647 69%), radial-gradient(ellipse farthest-corner at 100% 100%, #0960f600, #0960f600 40%), radial-gradient(ellipse farthest-corner at 100% 100%, #0960f657, #0960f600 58%), linear-gradient(180deg, #011840 35%, #93baff00), radial-gradient(ellipse farthest-corner at 0% 0%, #0960f6, #0960f614), linear-gradient(180deg, #0960f6, #93baff00 50% 50%, #93baff96),
+url({{ get_asset_url('rolls-theme/images/smoke.gif') }});
+
+background-image: linear-gradient(180deg, #011840, #0960f647 69%), radial-gradient(ellipse farthest-corner at 100% 100%, #0960f600, #0960f600 40%), radial-gradient(ellipse farthest-corner at 100% 100%, #0960f657, #0960f600 58%), linear-gradient(180deg, #011840 35%, #93baff00), radial-gradient(ellipse farthest-corner at 0% 0%, #0960f6, #0960f614), linear-gradient(180deg, #0960f6, #93baff00 50% 50%, #93baff96), url({{ get_asset_url('rolls-theme/images/smoke.gif') }});
+background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+background-size: auto, auto, auto, auto, auto, auto, cover;
+background-attachment: scroll, scroll, scroll, scroll, scroll, scroll, scroll;
+.button-wrapper{
+margin-top: 32px;
+}
+}
+}
+@media (min-width: 1024px) {
+    .tpl-attractions-report{
+      .dnd-section:first-of-type {
+          background-image:linear-gradient(180deg, #011840, #0960f647 69%), radial-gradient(ellipse farthest-corner at 100% 100%, #0960f600, #0960f600 70%), radial-gradient(ellipse farthest-corner at 100% 100%, #0960f657, #0960f600 70%), linear-gradient(180deg, #011840 9%, #93baff00), radial-gradient(ellipse farthest-corner at 0% 0%, #0960f6, #0960f614), linear-gradient(180deg, #0960f6, #93baff00 70% 70%, #93baff96),
+          url({{ get_asset_url('rolls-theme/images/smoke.gif') }});
+      }
+    }
+}
+.tpl-attractions-report .header.dark:not(.is-fixed) {
+background: #011840;
+
+.header__logo {
+  display: block;
+}
+
+.header__logo--secondary {
+  display: none;
+}
+
+.main-nav__item a,
+.main-nav__item button {
+color: var(--neutral-white);
+
+  &:hover {
+    color: var(--neutral-white);
+
+    .main-nav__item-label {
+      color: var(--neutral-white);
+    }
+
+    .main-nav__item-icon {
+      fill: var(--neutral-white);
+    }
+  }
+}
+
+.main-nav__item-icon {
+  fill: var(--neutral-white);
+}
+
+.header__block-toggle {
+  color: var(--neutral-white);
+}
+
+.header__block-toggle-item {
+  background-color: var(--neutral-white);
+}
+
+.main-nav__item:last-child {
+  a {
+    color: var(--neutral-white);
+
+    &:hover {
+      color: var(--neutral-white);
+    }
+  }
+}
+}
+
+/* Fade-in on scroll styles */
+.fade-in-on-scroll {
+opacity: 0;
+transition: opacity 0.6s ease-in-out;
+}
+
+.fade-in-on-scroll.is-visible {
+opacity: 1;
+}
+
+</style>
+{% end_require_css %}
+
+{% require_js %}
+<script>
+(function() {
+// Check if Intersection Observer is supported
+if (!('IntersectionObserver' in window)) {
+  // Fallback: show all elements if Intersection Observer is not supported
+  document.querySelectorAll('.fade-in-on-scroll').forEach(function(el) {
+    el.classList.add('is-visible');
+  });
+  return;
+}
+
+// Create Intersection Observer
+const observerOptions = {
+  root: null, // Use viewport as root
+  rootMargin: '0px',
+  threshold: 0.1 // Trigger when 10% of element is visible
+};
+
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      // Element is in view, add visible class
+      entry.target.classList.add('is-visible');
+      // Optionally unobserve after it's been shown (for performance)
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Initialize observer when DOM is ready
+function initObserver() {
+  const elementsToObserve = document.querySelectorAll('.fade-in-on-scroll');
+  elementsToObserve.forEach(function(element) {
+    observer.observe(element);
+  });
+}
+
+// Handle both cases: DOM already loaded or still loading
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initObserver);
+} else {
+  initObserver();
+}
+})();
+</script>
+{% end_require_js %}
+{% block body %}
+{% dnd_area "dnd_area"
+label="Main section",
+class="body-container body-container--report"
+%}
+
+
+
+{% end_dnd_area %}
+{% endblock body %}

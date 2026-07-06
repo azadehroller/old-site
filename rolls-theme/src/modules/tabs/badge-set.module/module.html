@@ -1,0 +1,35 @@
+{# Variables #}
+{% set badges = module.badges %}
+
+{# Section Markup #}
+
+<section class="inline-flex flex-col">
+
+  <ul class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+    {% for item in badges %}
+        {% set href = item.badge_link.url.href %}
+        {% if item.badge_link.url.type == "EMAIL_ADDRESS" %}
+        {% set href = "mailto:" + href %}
+        {% endif %}
+        {% set rel = [] %}
+        {% if item.badge_link.no_follow %}
+        {% do rel.append("nofollow") %}
+        {% endif %}
+        {% if item.badge_link.open_in_new_tab %}
+        {% do rel.append("noopener") %}
+        {% endif %}
+
+        <li class="w-[125px] md:w-[150px]">
+            <a href="{{ href }}"
+                {% if item.badge_link.open_in_new_tab %}target="_blank"{% endif %}
+                {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+            >
+                {# Image #}
+                {% set sizeAttrs = 'width="125" height="101"' %}
+                {% set loadingAttr = item.badge.loading != 'disabled' ? 'loading="{{ item.badge.loading }}"' : '' %}
+                <img src="{{ item.badge.src }}" alt="{{ item.badge.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+            </a>
+        </li>
+    {% endfor %}
+  </ul>
+</section>

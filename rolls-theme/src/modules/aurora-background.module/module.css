@@ -1,0 +1,113 @@
+:root{
+  --page-bg: #0b0b14;
+  --content-max-w: min(70vw, 900px);
+  --content-max-h: min(70vh, 600px);
+  --card-radius: 18px;
+  --card-shadow: 0 8px 32px rgba(0,0,0,.3);
+}
+
+/* Module's aurora container - the WebGL background */
+.aurora-container[id^="aurora-"] {
+  background: var(--page-bg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 0;
+}
+
+/* Section's aurora container wrapper */
+.aurora-section .aurora-container#aurora {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Content overlay area */
+.aurora-section .center-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  text-align: center;
+}
+
+.aurora-section .center-content img,
+.aurora-section .center-content video {
+  width: 100%;
+  height: auto;
+  max-width: var(--content-max-w);
+  max-height: var(--content-max-h);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  object-fit: cover;
+  background: rgba(255,255,255,0.02);
+}
+
+.aurora-section .center-content::before {
+  content: "";
+  position: absolute;
+  width: calc(var(--content-max-w) + 10vw);
+  height: calc(var(--content-max-h) + 10vh);
+  border-radius: calc(var(--card-radius) * 1.5);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(60% 60% at 50% 50%, rgba(255,255,255,.12), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.aurora-section .center-content > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* The WebGL canvas gets injected as a child of .aurora-container */
+.aurora-container canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: transparent;  /* required so you can layer video/image */
+  pointer-events: none;      /* ensure it never eats clicks */
+  z-index: 0;                /* default: behind your content */
+}
+
+/* ========== Mode toggles ========== */
+/* Add .aurora-front on the container if you want the aurora overlaying the content */
+.aurora-container.aurora-front canvas {
+  z-index: 100;  /* canvas on top */
+}
+
+/* ========== Responsiveness ========== */
+@media (max-width: 768px) {
+  :root {
+    --content-max-w: min(88vw, 720px);
+    --content-max-h: min(60vh, 520px);
+    --card-radius: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --content-max-w: 92vw;
+    --content-max-h: 56vh;
+    --card-radius: 12px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-container canvas { animation: none; }
+}
+

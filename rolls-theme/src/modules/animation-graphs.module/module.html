@@ -1,0 +1,279 @@
+{# Variables #}
+{% set graphics_pie = module.graphic_pie %}
+{% set graphics_bar = module.graphic_bar %}
+{% set graphics_line = module.graphic_line %}
+{% set type = module.type %}
+{% set theme = module.styles.theme %}
+
+{%- macro setThemeColor(themeColor, defaultColor='', onIRColor='') -%}
+  {%- set colorMap = {
+    'default': defaultColor,
+    'industry_report': onIRColor
+  } -%}
+  {%- set bgColor = colorMap[themeColor] or defaultColor -%}
+  {{ bgColor }}
+{%- endmacro -%}    
+
+{% require_css %}
+    <style>
+        {% scope_css %}
+
+            {# Animation type == Pie #}
+            .animation-pie {
+                width: 100%;
+                height: auto;
+                max-width: 200px;
+                position: relative;
+            }
+
+            @media (min-width: 768px) {
+                .animation-pie {
+                    max-width: 245px;
+                }
+            }
+
+            .animation-pie svg, .animation-bar svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            circle {
+                fill: none;
+                stroke: transparent;
+                stroke-width: 30px;
+            }
+
+            circle#white {
+                fill: none;
+                stroke: #fff;
+                stroke-width: 25px;
+            }
+            
+            circle#neutral-10 {
+                fill: none;
+                stroke: #F2F2F2;
+                stroke-width: 20px;
+            }
+
+            .animation-pie .caption {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -45%);
+                transition-duration: 0.6s;
+                transition-property: opacity, transform;
+                transition-timing-function: ease-in-out;
+                opacity: 0;
+            }
+
+            {# Animation type == Bar #}
+            .animation-bar {
+                width: 100%;
+                height: auto;
+                max-width: {{ setThemeColor(theme, '180px', '118px') }};
+                margin: 0 {{ setThemeColor(theme, 'auto', '25px') }};
+                position: relative;
+            }
+
+            .animation-bar .caption {
+                opacity: 0;
+                transform: translateY(25%);
+                transition-duration: 0.6s;
+                transition-delay: 0.5s;
+                transition-property: opacity, transform;
+                transition-timing-function: ease-in-out;
+            }
+
+            {# Animation type == Line #}
+            .animation-line ul {
+                opacity: 0;
+                transform: translateY(5%);
+                transition-duration: 0.6s;
+                transition-delay: 0.5s;
+                transition-property: opacity, transform;
+                transition-timing-function: ease-in-out;
+            }
+
+        {% end_scope_css %}
+    </style>
+{% end_require_css %}
+{% if type == 'pie' %}
+    <div id="animation-graph-{{name}}" class="flex flex-row md:flex-col lg:grid lg:grid-cols-2 gap-3 md:gap-6 items-center justify-center py-4 js-slide-in {{ setThemeColor(theme, 'md:py-0', 'px-2 md:px-5 py-3 md:py-6 bg-[#F5F8FF] border-2 border-[#CEDFFD] rounded-[32px]') }}">
+        {% for graphic in graphics_pie %}
+            {% set second_calc = (653 - 653 * graphic.number/100) %}
+            {% require_css %}
+                <style>
+                    {% scope_css %}
+                        #animation-graph-{{name}}.animate circle#gradient-{{ loop.index }} {
+                        fill: none;
+                            stroke: url(#paint0_linear_2626_5283_{{name}});
+                            stroke-width: 37px;
+                            stroke-dasharray: 653;
+                            stroke-dashoffset: 653;
+                            animation: anim-{{ loop.index }} 1s linear forwards;
+                        }
+
+                        @keyframes anim-{{ loop.index }} {
+                            100% {
+                                stroke-dashoffset: {{second_calc}};
+                            }
+                        }
+
+                        #animation-graph-{{name}}.animate .caption {
+                            opacity: 1;
+                            transform: translate(-50%, -50%);
+                        }
+                    {% end_scope_css %}
+                </style>
+            {% end_require_css %}
+            <div class="animation-pie">
+                <svg width="245" height="245" fill="none" viewBox="0 0 245 245" xmlns="http://www.w3.org/2000/svg">
+                    <circle id="white" cx="122.5" cy="122.5" r="110" stroke-linecap="round" />
+                    <circle id="neutral-10" cx="122.5" cy="122.5" r="95" stroke-linecap="round" />
+                    <g style="mix-blend-mode:multiply">
+                        <circle id="gradient-{{ loop.index }}" class="{{ loop.index }}" cx="122.5" cy="122.5" r="104" stroke-linecap="butt" transform="rotate(-90,122.5,122.5)" />
+                    </g>
+                    <defs>
+                        <linearGradient id="paint0_linear_2626_5283_{{name}}" x1="314.162" y1="157.096" x2="157.097" y2="157.516" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="{{ setThemeColor(theme, '#9dbffb', '#0960F6') }}"/>
+                            <stop offset="1" stop-color="{{ setThemeColor(theme, '#fff3f2', '#00B8FF') }}"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="caption text-center {{ setThemeColor(theme, 'text-primary-40 ', 'text-[#0960F6]') }}">
+                    <div id="number" class="{{ setThemeColor(theme, 'text-3xl md:text-5xl', 'text-2xl md:text-4xl') }} font-extrabold" data-number="{{graphic.number || 55}}"></div>
+                    {% if graphic.caption %}
+                        <div class="{{ setThemeColor(theme, 'text-base', 'text-xs md:text-sm leading-3 md:leading-4') }}">{{graphic.caption}}</div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+{% endif %}
+
+{% if type == 'bar' %}
+    <div id="animation-graph-{{name}}" class="flex gap-3 md:gap-0 items-center justify-center js-slide-in {{ setThemeColor(theme, 'flex-row md:flex-col lg:grid lg:grid-cols-2 py-4 md:py-0', 'px-0 py-0 bg-[#F5F8FF] border-2 border-[#CEDFFD] rounded-[32px]') }}">
+        {% for graphic_bar in graphics_bar %}
+            {% require_css %}
+                <style>
+                    {% scope_css %}
+                        #animation-graph-{{name}}.animate .up-and-down-{{ loop.index }} {
+                            transform: scaleY(0.2);
+                            transform-origin: bottom center;
+                            animation: up-and-down-{{ loop.index }} 1s linear forwards;
+                        }
+
+                        @keyframes up-and-down-{{ loop.index }} {
+                            100% {
+                                transform: scaleY({{graphic_bar.number}});
+                            }
+                        }
+
+                        #animation-graph-{{name}}.animate .caption {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    {% end_scope_css %}
+                </style>
+            {% end_require_css %}
+        <div class="animation-bar">
+            <svg width="287" height="859" viewBox="0 0 287 859" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="up-and-down-{{ loop.index }}">
+                    <path d="M0 63.6133V795.162C0 830.276 64.0582 858.775 143.129 858.775C222.2 858.775 286.258 830.276 286.258 795.162V63.6133H0Z" fill="url(#paint0_linear_2325_2343_{{name}})"/>
+                    <ellipse id="Oval-5" fill="url(#paint1_linear_2325_2343_{{name}})" cx="143" cy="60" rx="143" ry="50"></ellipse>
+                </g>
+                <defs>
+                    <linearGradient id="paint0_linear_2325_2343_{{name}}" x1="286.205" y1="268.936" x2="0.00401046" y2="270.006" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="{{ setThemeColor(theme, '#9dbffb', '#0960F6') }}"/>
+                    <stop offset="1" stop-color="{{ setThemeColor(theme, '#fff3f2', '#00B8FF') }}"/>
+                    </linearGradient>
+                    <linearGradient id="paint1_linear_2325_2343_{{name}}" x1="143.129" y1="0" x2="143.129" y2="127.226" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="{{ setThemeColor(theme, '#cedffd', '#0960F6') }}"/>
+                    <stop offset="1" stop-color="{{ setThemeColor(theme, '#FFECE6', '#00B8FF') }}"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="caption {{ setThemeColor(theme, 'text-primary-40 p-4', 'pt-3 pb-4 px-0 text-[#0960F6]') }}">
+                <div class="{{ setThemeColor(theme, 'text-3xl md:text-5xl', 'text-2xl md:text-5xl') }} font-extrabold">{{graphic_bar.caption.cap_number}}x</div>
+                {% if graphic_bar.caption.cap_text %}
+                    <div>{{graphic_bar.caption.cap_text}}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% if !type %}
+    <div style="background-color: #f5f8fa;  border: 1px dashed #516f90; padding: 15px; text-align: center">
+    <p style="color: #7c98b6; font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-size: 14px; font-style: italic; font-weight: 700;">No Graph type selecter</p>
+    <h2 style="color: #7c98b6; font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-style: italic; font-weight: 400; line-height: 1.6">Select one of the option</h2>
+  </div>
+{% endif %}
+
+<script>
+    (function() {
+
+        function updateCounter(counter) {
+            if(counter.count >= counter.target) {
+                return counter;
+            }
+
+            return {
+                ...counter,
+                count: counter.count + 1,
+            }
+        }
+
+        function updateCounters(counters) {
+            return counters.map(updateCounter);
+        }
+
+        function shouldContinueAnimation(counters) {
+            return counters.some((counter) => counter.count < counter.target);
+        }
+
+        function startAnimation(entries, observer) {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    let numbers = Array.from(entry.target.querySelectorAll("[data-number]"));
+
+                    let counters = numbers.map((number) => {
+                        let dataNumber = number.getAttribute("data-number");
+                        return { element: number, count: 0, target: parseInt(dataNumber) };
+                    });
+
+                    function animate() {
+                        counters = updateCounters(counters);
+
+                        counters.forEach((counter) => {
+                            counter.element.innerHTML = `${counter.count}%`;
+                        });
+
+                        if (shouldContinueAnimation(counters)) {
+                            requestAnimationFrame(animate);
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+
+                    {# Add CSS to trigger animation #}
+                    entry.target.classList.add("animate");
+
+                    // Once the animtion starts, disconnect the observer
+                    observer.disconnect();
+                }
+            });
+        }
+
+        const section = document.querySelector("#animation-graph-{{name}}"); // Replace 'section-id' with the actual ID of the section
+
+        const observer = new IntersectionObserver(startAnimation, {
+            root: null,
+            rootMargin: "200px",
+            threshold: 0.35, // Adjust the threshold value as needed
+        });
+
+        observer.observe(section);
+        
+    })();
+</script>

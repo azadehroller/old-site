@@ -1,0 +1,44 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macros %}
+
+{# Variables #}
+{% set eyebrow  = module.content.eyebrow %}
+{% set title  = module.content.title %}
+{% set text  = module.content.text %}
+{% set badges  = module.badges %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set heading_type = module.styles.heading_type %}
+{% set alignment = module.styles.textalignment.text_align %}
+{% set text_type = module.styles.text_type %}
+{% set eyebrow_type = module.styles.eyebrow_type %}
+{% set display_type = module.styles.display_type %}
+{% set background_image = module.styles.backgroundimage.src %}
+
+{% macro heading(tag, title, display_tag)%}<{{tag if tag else "h3"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {% if tag == 'h1'%}text-balance{%endif%}">{{title if title else "An established partner with a bold outlook"}}</{{tag if tag else "h1"}}>{% endmacro%}
+
+{% macro eyebrow(tag, eyebrow_type)%}<{{tag || "div"}} id="js-referred-name" class="{{ macros.setTextColor(theme, 'text-secondary-50', 'text-secondary-50', 'text-gx-90') }} uppercase font-extrabold {% if eyebrow_type %}small{% endif %}">{{ eyebrow if eyebrow else "CUSTOMIZED TO YOUR VENUE"}}</{{tag || "div"}}>{% endmacro%}
+
+<div class="global global-review flex flex-col lg:flex-row lg:items-center gap-4 box-shadow-ondark-blue-10-nohover rounded-3xl p-6 bg-user-review bg-cover">
+    <header class="flex flex-col gap-4 lg:w-3/4 text-{{alignment|lower || "left"}} {{ macros.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}">
+        {% if eyebrow %}
+            {{ eyebrow(eyebrow_type, eyebrow) }}
+        {% endif %}
+        <div class="my-0">
+        {{ heading(heading_type, title, display_type) }}
+        </div>
+        {% if text %}
+            <div class="text-{{text_type || "base"}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4 [&>ul>li]:ml-2">{{ text }}</div>
+        {% endif %}
+    </header>
+    {% if badges %}
+        <div class="flex lg:justify-end gap-4 lg:w-1/4">
+            {% for badge in badges %}
+                <div>
+                    {{ macros.image(badge) }}
+                </div>
+            {% endfor %}  
+        </div>
+    {% endif %}
+</div>

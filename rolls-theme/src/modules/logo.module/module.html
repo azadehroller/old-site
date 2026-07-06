@@ -1,0 +1,71 @@
+{# Variables #}
+{% set link_href = module.link.url.href %}
+{% set override = module.logo.override_inherited_src %}
+{% set src = module.logo.src %}
+{% set alt = module.logo.alt %}
+{% set width = module.logo.width %}
+{% set height = module.logo.height %}
+{% set suppress_company_name = module.logo.suppress_company_name %}
+{% set heading = module.heading_style %}
+{% set in_new_tab = module.link.open_in_new_tab %}
+{% set spacing = module.styles.layout.spacing.css %}
+
+    {# Styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      {% if width %}
+        .logo {
+          max-width: {{ width }}px;
+        }
+      {% else %}
+        .logo {
+          max-width: 120px;
+        }
+      {% endif %}
+
+      {% if height %}
+        .logo {
+          min-height: {{ height }}px;
+        }
+      {% endif %}
+
+      {% if spacing %}
+        .logo {
+          {{ spacing }}
+        }
+      {% endif %}
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# Markup #}
+{% unless (link_href is string_startingwith "http") or (link_href is string_startingwith "/") or (link_href is string_startingwith "mailto") or (link_href is string_startingwith "#") or !link_href %}
+  {% set link = "//" ~ link_href %}
+{% else %}
+  {% set link = link_href || "" %}
+{% endunless %}
+
+{% if override && src %}
+  {# override_inherited_src and src #}
+  {% set sizeAttrs = 'width="{{ width }}" height="{{ height }}"' %}
+  <a href="{{link}}" id="{{name}}">
+    <span class="sr-only">Go to homepage</span>
+    <img src="{{ src }}" alt="{{ alt }}" title="{{ alt }}" {{ sizeAttrs }}>
+  </a>
+  {% elif override && !src %}
+    {# override_inherited_src and NOT src #}
+    {% logo "logo_widget"
+      heading_style="{{ heading }}",
+      link='{{ link }}',
+      open_in_new_tab='{{ in_new_tab }}',
+      override_inherited_src='{{ override }}',
+      src='',
+      suppress_company_name='{{ suppress_company_name }}',
+    %}
+
+  {% else %}
+    {% logo "logo_widget" 
+      no_wrapper=true,
+      suppress_company_name='{{ suppress_company_name }}' %}
+{% endif %}

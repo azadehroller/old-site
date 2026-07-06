@@ -1,0 +1,111 @@
+<div id="hubspot-form-wrapper"></div>
+
+<div id="hubspot-meeting-wrapper" style="display:none;">
+  <iframe
+    id="hubspot-meeting-iframe"
+    src=""
+    width="100%"
+    height="700"
+    frameborder="0"
+    style="border: none;"
+  ></iframe>
+</div>
+
+<script src="//js.hsforms.net/forms/embed/v2.js"></script>
+
+<script>
+  // Variables to persist values across callbacks
+  let submittedEmail = "";
+  let submittedFirstName = "";
+  let submittedLastName = "";
+
+  hbspt.forms.create({
+    portalId: "3375779",
+    formId: "{{ module.form_id }}",
+    target: "#hubspot-form-wrapper",
+
+    onFormReady: function ($form) {
+      console.log("✅ HubSpot form iframe loaded");
+
+      // Wait a moment for the iframe & internal form to be ready
+      setTimeout(() => {
+        const iframe = document.querySelector("#hubspot-form-wrapper iframe");
+        if (!iframe) {
+          console.error("❌ HubSpot form iframe not found");
+          return;
+        }
+
+        const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const hsForm = innerDoc.querySelector("form");
+
+        if (!hsForm) {
+          console.error("❌ HubSpot inner form not found");
+          return;
+        }
+
+        console.log("🎯 HubSpot internal form detected");
+
+        // Capture values right when user submits (before HubSpot clears/redirects)
+        hsForm.addEventListener("submit", function () {
+          const emailField = innerDoc.querySelector("input[name=email]")?.value || "";
+          const firstName  = innerDoc.querySelector("input[name=firstname]")?.value || "";
+          const lastName   = innerDoc.querySelector("input[name=lastname]")?.value || "";
+
+          submittedEmail     = emailField;
+          submittedFirstName = firstName;
+          submittedLastName  = lastName;
+
+          console.log("📧 Captured Email before submit:", submittedEmail);
+          console.log("👤 Captured Name before submit:", `${submittedFirstName} ${submittedLastName}`.trim());
+        });
+      }, 500);
+    },
+
+    // Fires only after successful submission (no validation errors)
+    onFormSubmitted: function ($form) {
+      console.log("📨 HubSpot form submitted successfully");
+
+      const formWrapper = document.getElementById("hubspot-form-wrapper");
+
+      // Use the values we captured on submit
+      const emailField = submittedEmail || "";
+      const firstName  = submittedFirstName || "";
+      const lastName   = submittedLastName || "";
+      const fullName   = `${firstName} ${lastName}`.trim();
+
+      console.log("📧 Using captured Email:", emailField);
+      console.log("👤 Using captured Name:", fullName);
+
+      const baseMeetingUrl = "{{ module.hubspot_meeting_link }}";
+
+      const params = new URLSearchParams();
+      if (emailField) params.append("email", emailField);
+      if (firstName)  params.append("firstname", firstName);
+      if (lastName)   params.append("lastname", lastName);
+
+      const meetingUrl =
+        params.toString()
+          ? `${baseMeetingUrl}${baseMeetingUrl.includes("?") ? "&" : "?"}${params.toString()}`
+          : baseMeetingUrl;
+
+      console.log("🗓 HubSpot meeting URL:", meetingUrl);
+
+      const wrapper = document.getElementById("hubspot-meeting-wrapper");
+      const meetingIframe = document.getElementById("hubspot-meeting-iframe");
+
+      if (wrapper && meetingIframe) {
+        // Hide the form wrapper
+        if (formWrapper) {
+          formWrapper.style.display = "none";
+        }
+
+        // Show the meeting calendar with prefilled data
+        meetingIframe.src = meetingUrl;
+        wrapper.style.display = "block";
+
+        // Optional: scroll to the calendar
+        // wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  });
+</script>

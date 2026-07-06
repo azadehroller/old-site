@@ -1,0 +1,65 @@
+[ {
+  "id" : "bdefa806-1619-d6d5-1cc8-1f95b152f0d6",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "201d9907-203b-c8ab-bad8-0d91c22286d0",
+    "name" : "boolean_field",
+    "label" : "Boolean",
+    "help_text" : "Remove extra ",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "boolean_field" : false
+  }
+}, {
+  "id" : "ca21403c-c76d-3248-e465-4940e39da4f9",
+  "name" : "item",
+  "label" : "Item",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "698996a1-6c57-f649-6335-ff1a14caac64",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "FAQ Title"
+  }, {
+    "id" : "76ea7bc9-a54e-0ef5-273b-90c7524081b9",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "A payment processor is a service provider that manages the logistics of accepting credit and debit card payment methods. Payment processors push card data from purchase location (in venue, online) and the various financial institutions that participate in the transaction."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+} ]

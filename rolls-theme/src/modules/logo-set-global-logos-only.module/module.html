@@ -1,0 +1,145 @@
+{# Variables #}
+{% set title = module.title %}
+{% set layout = module.layout %}
+{% set logos = module.logos %}
+{% set logos_amer = module.amer.logos %}
+{% set logos_apac = module.apac.logos %}
+{% set logos_emea = module.emea.logos %}
+{% set logos_uk = module.uk.logos %}
+{% set region = module.region %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+{% set alignment = module.styles.textalignment.text_align %}
+
+
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='') %}
+    {% set textColor = (themeColor == 'light') ? onDarkColor : (themeColor == 'gxscore') ? gxColor : defaultColor %}
+{{ textColor }}
+{% endmacro %}
+
+
+{% require_css %}
+  <style>
+  {% scope_css %} 
+    .amer-logos,.apac-logos,.emea-logos,.uk-logos{display:none}
+     .scroller {
+        min-height: 106px; /* Prevent CLS by reserving space for logos */
+        position: relative;
+        contain: layout style; /* Containment to prevent layout recalculations */
+    }
+
+     .scroller__inner {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        will-change: transform; /* Optimize for animation */
+    }
+
+    /* Pre-define dimensions before animation starts */
+    .scroller:not([data-animated]) .scroller__inner {
+        min-height: 106px;
+    }
+
+    .scroller[data-animated="true"] {
+        overflow: hidden;
+        width: 100%;
+        margin: 0 auto;
+        -webkit-mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+        mask: linear-gradient(90deg, transparent, #fff 20%, #fff 80%, transparent);
+    }
+
+    .scroller[data-animated="true"] .scroller__inner {
+        width: fit-content;
+        animation: scroll 30s linear infinite;
+    }
+
+    @keyframes scroll {
+        to {
+            transform: translate(calc(-50% - 0.5rem));
+        }
+    }
+
+    /* Ensure logo containers have consistent dimensions to prevent CLS */
+    .scroller__inner > div {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 150px;
+        height: 106px;
+    }
+
+    @media screen and (min-width: 768px) {
+        .scroller__inner > div {
+            min-width: 194px;
+        }
+    }
+
+    /* Disable carousel on larger screens */
+/*     @media screen and (min-width: 1032px) {
+        .scroller[data-animated="true"] .scroller__inner {
+            animation: none;
+        }
+
+        .scroller[data-animated="true"] {
+            -webkit-mask: none;
+            mask: none;
+        }
+    } */
+
+  {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{% macro logoSrc(logo) %}
+    {# Image #}
+    {% if logo.type == "img" %}
+        {% set sizeAttrs = 'width="194" height="106"' %}
+        {% set loadingAttr = logo.img.loading != 'disabled' ? 'loading="{{ logo.img.loading }}"' : '' %}
+        <img src="{{ logo.img.src }}" alt="{{ logo.img.alt }}" {{ loadingAttr }} {{ sizeAttrs }} class="object-contain" style="aspect-ratio: 194/106;">
+    {% else %}
+        <div style="width: 194px; height: 106px; display: flex; align-items: center; justify-content: center;">
+            {{ logo.svg }}
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro logoItems(item, resized) %}
+    {% for logo in item %}
+        <div class="{{resized ? 'w-[150px] md:w-[194px]' : 'm-auto'}}">
+            {# Image #}
+            {{ logoSrc(logo) }}
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+{# Section Markup #}
+<section id="logo-set-{{name}}" class="relative flex flex-col gap-3 min-w-[1px] max-w-full" data-country="{{ personalization.location.country_code }}"
+  style="visibility:hidden">
+    <h2 class="font-semibold text-lg block {{ setTextColor(theme, 'text-neutral-white', 'text-primary-50', 'text-gx-80') }} m-0 text-{{alignment|lower || "left"}}">
+      Trusted by over 3,000 venues worldwide
+    </h2>
+  {% if !region %}
+    <div class="scroller">
+      <div class="grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos, true)}}
+      </div>
+    </div>
+    {% else %}
+    <div class="scroller">
+      <div class="amer-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+       {{ logoItems(logos_amer, true) }}
+      </div>
+      <div class="apac-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos_apac, true) }}
+      </div>
+      <div class="emea-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos_emea, true) }}
+      </div>
+      <div class="uk-logos grid grid-cols-3 md:grid-cols-6 gap-3 m-0 scroller__inner">
+        {{ logoItems(logos_uk, true) }}
+      </div>
+    </div>
+  {% endif %}
+</section>

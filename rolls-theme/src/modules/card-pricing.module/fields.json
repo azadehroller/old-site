@@ -1,0 +1,1076 @@
+[ {
+  "id" : "d4eab5ba-9222-a782-4893-2313383a07ec",
+  "name" : "pricing_tile_content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "4011b10a-a2cb-8e0c-f721-ed3c26141666",
+    "name" : "currency_dropdown",
+    "label" : "Currency Dropdown",
+    "inline_help_text" : "Show/Hide currency dropdown",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "4996e9e1-b543-4b3e-8755-31899edc603b",
+    "name" : "hide_add_ons",
+    "label" : "Hide Add-ons",
+    "inline_help_text" : "Show/Hide add-ons section",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "f50f14eb-9219-374f-c635-ac1bfaf5af19",
+    "name" : "tile",
+    "label" : "Tile",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : null,
+      "max" : null,
+      "sorting_label_field" : null,
+      "default" : null
+    },
+    "children" : [ {
+      "id" : "ce8decfc-4f78-af1c-6313-cb484ac017f0",
+      "name" : "package",
+      "label" : "Package",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "lite", "Lite" ], [ "pro", "Pro" ], [ "premium", "Premium" ], [ "enterprise", "Enterprise" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "1fe70366-4b33-b340-0894-59c9a0a7408f",
+      "name" : "subtitle",
+      "label" : "Subtitle",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "30aeda5e-c6ae-30bd-740d-636745fbc3a4",
+      "name" : "rates_label",
+      "label" : "Rates label",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Credit Card Rates*"
+    }, {
+      "id" : "863afef6-bd91-b7c1-efa9-59ff9b930b4a",
+      "name" : "most_popular",
+      "label" : "Most Popular",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    }, {
+      "id" : "pricing_tile_content.tile.roller_recommends",
+      "name" : "roller_recommends",
+      "label" : "ROLLER Recommends",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    }, {
+      "id" : "bf695183-13e6-2445-abbc-256ea83644b1",
+      "name" : "price",
+      "label" : "Hero Price",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "58ec96ca-8543-0deb-4793-bcf6131cd481",
+        "name" : "monthly",
+        "label" : "Annualy",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "0b9f6bce-4d06-3533-e6d2-1f1d62082659",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "40e1010f-cc31-1a22-15c2-1fc053472a62",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "89534f55-4bf8-b4f9-fe03-567e8b24869b",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "18ffd02e-012a-f8cc-9265-61c3bc6a8020",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "00f3e14c-ad94-5083-8aae-59c39efd0e7e",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : { }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "monthly" : { }
+      }
+    }, {
+      "id" : "00055b30-6a69-6e92-507e-93a70763de86",
+      "name" : "additional_pricing_details",
+      "label" : "Additional Pricing Details",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "0e3af458-d034-0aa4-231d-fccda4836f72",
+        "name" : "overwrite_text",
+        "label" : "Overwrite Text",
+        "required" : false,
+        "locked" : false,
+        "display" : "toggle",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "e7cba328-99bc-53b1-f842-d48643cf4ceb",
+        "name" : "billed_text",
+        "label" : "Billed",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : null,
+          "controlling_field_path" : "pricing_tile_content.tile.additional_pricing_details.overwrite_text",
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "cecd78c7-89ca-01ca-4d54-78d97de0bd3b",
+        "name" : "monthly",
+        "label" : "Monthly",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "3b1999c0-0e4e-cd87-4cff-6d0ef5e402c4",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "5b4fcd0c-78bf-02d1-6d44-f1108240a8f1",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "d80b51ac-72cc-2f70-a330-faef52f453dd",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "5a72e2ef-aa93-e490-31be-34388a28e123",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "902fbd49-5e6d-91eb-b7b0-0a880d36be3c",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : { }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "overwrite_text" : false,
+        "monthly" : { }
+      }
+    }, {
+      "id" : "5bf016c2-9ad6-2ca5-89da-3ee2e51bbdf7",
+      "name" : "credit_card_rates",
+      "label" : "Credit Card Rates",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "7f91c37b-51dc-638e-ebb9-3bde27d861eb",
+        "name" : "monthly",
+        "label" : "Monthly",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "9cb4a95e-fc19-0736-c63b-4f39a081de66",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "2a1dcd6d-31ee-c59f-e26b-db99ce0f2a11",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "92967dc4-8ab0-5215-833c-772b6d96bec5",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "8ac762bc-6c14-bbe6-b17e-8cf45e1e7029",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        }, {
+          "id" : "916443a4-300b-6af3-d30c-2ec37f1c1a79",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : { }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "monthly" : { }
+      }
+    }, {
+      "id" : "pricing_tile_content.tile.features_title",
+      "name" : "features_title",
+      "label" : "Features list label",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Includes:"
+    }, {
+      "id" : "f1a24081-d28b-ba1d-6596-cf9490a8a902",
+      "name" : "features",
+      "label" : "Features",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : null,
+        "max" : null,
+        "sorting_label_field" : null,
+        "default" : null
+      },
+      "children" : [ {
+        "id" : "cb8b056e-4908-3391-ecc1-2c5aa6ca7f89",
+        "name" : "title",
+        "label" : "Title",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : [ ]
+    }, {
+      "id" : "f47173e3-7479-8d20-2678-06bd6b291eba",
+      "name" : "call_to_action",
+      "label" : "Call to action",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "none", "None" ], [ "button", "Button" ], [ "form_modal", "Modal with form" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "none"
+    }, {
+      "id" : "00b0fbaf-6624-d76c-1524-0dd684780f65",
+      "name" : "button",
+      "label" : "Button",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : 1,
+        "max" : 2,
+        "sorting_label_field" : "41f392c1-2b1c-9c45-8b01-404877b28814",
+        "default" : 1
+      },
+      "children" : [ {
+        "id" : "1358f2ae-76d0-5c1d-7199-3640e134b263",
+        "name" : "colour",
+        "label" : "Colour",
+        "required" : false,
+        "locked" : false,
+        "display" : "select",
+        "choices" : [ [ "red", "Red" ], [ "navy", "Navy" ] ],
+        "multiple" : false,
+        "reordering_enabled" : true,
+        "preset" : null,
+        "type" : "choice",
+        "display_width" : null,
+        "default" : "red"
+      }, {
+        "id" : "24fc114d-3249-7ca1-53a6-b1901cbcab6e",
+        "name" : "kind",
+        "label" : "Kind",
+        "required" : false,
+        "locked" : false,
+        "display" : "select",
+        "choices" : [ [ "solid", "Solid" ], [ "tertiary", "Tertiary" ], [ "icon", "Icon" ] ],
+        "multiple" : false,
+        "reordering_enabled" : true,
+        "preset" : null,
+        "type" : "choice",
+        "display_width" : null
+      }, {
+        "id" : "657472fe-c280-d7a1-943c-0b8b414943ae",
+        "name" : "corner_type",
+        "label" : "Corner Type",
+        "required" : false,
+        "locked" : false,
+        "display" : "select",
+        "choices" : [ [ "supreme", "Supreme" ], [ "crispy", "Crispy" ], [ "sharp", "Sharp" ] ],
+        "multiple" : false,
+        "reordering_enabled" : true,
+        "preset" : null,
+        "type" : "choice",
+        "display_width" : null,
+        "default" : "crispy"
+      }, {
+        "id" : "165a241a-1b48-3521-a4a6-37a0a48edaf3",
+        "name" : "size",
+        "label" : "Size",
+        "inline_help_text" : "*TBA",
+        "required" : false,
+        "locked" : false,
+        "display" : "select",
+        "choices" : [ [ "standard", "Standard" ], [ "slim", "Slim*" ], [ "bulky", "Bulky*" ] ],
+        "multiple" : false,
+        "reordering_enabled" : true,
+        "preset" : null,
+        "type" : "choice",
+        "display_width" : null,
+        "default" : "standard"
+      }, {
+        "id" : "41f392c1-2b1c-9c45-8b01-404877b28814",
+        "name" : "button_text",
+        "label" : "Text",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "e4409816-b2a9-0809-5498-9492e9e63aaf",
+        "name" : "button_url",
+        "label" : "URL",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "f47173e3-7479-8d20-2678-06bd6b291eba",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "button",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "supported_types" : [ "EXTERNAL", "CONTENT" ],
+        "type" : "url",
+        "display_width" : null,
+        "default" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "CONTENT"
+        }
+      }, {
+        "id" : "8813d36c-dfb2-5b1e-fefb-9cc156d80e76",
+        "name" : "form_field",
+        "label" : "Form",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "f47173e3-7479-8d20-2678-06bd6b291eba",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "form_modal",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "type" : "form",
+        "display_width" : null,
+        "default" : {
+          "response_type" : "inline",
+          "message" : "Thanks for submitting the form."
+        }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : [ {
+        "colour" : "red",
+        "corner_type" : "crispy",
+        "size" : "standard",
+        "button_url" : {
+          "content_id" : null,
+          "href" : "",
+          "type" : "CONTENT"
+        },
+        "form_field" : {
+          "response_type" : "inline",
+          "message" : "Thanks for submitting the form."
+        }
+      } ]
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ ]
+  }, {
+    "id" : "59bb9d5a-0967-ceed-8b88-eae5271cf406",
+    "name" : "add_on_title",
+    "label" : "Add-On Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Available Add-ons"
+  }, {
+    "id" : "3f8bba53-41de-7889-a2c6-6788e6ace708",
+    "name" : "add_ons",
+    "label" : "Add-ons",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : 6,
+      "sorting_label_field" : "07f40688-2018-3f98-fd5d-9c53e6387170",
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "07f40688-2018-3f98-fd5d-9c53e6387170",
+      "name" : "title",
+      "label" : "Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "8ba62948-c4d9-d7a8-7a78-d20da351a439",
+      "name" : "icon",
+      "label" : "Icon",
+      "inline_help_text" : "Select an icon from the list.",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "hq", "Hq" ], [ "waivers", "Waivers" ], [ "advanced_gx_score", "Advanced GX Score" ], [ "api_webhook_access", "API & Webhook Access" ], [ "mobile_checkin", "Mobile Checkin" ], [ "implementation_services", "Implementation services" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "066f5f55-b16c-df3c-f6af-a5807d70208e",
+      "name" : "content",
+      "label" : "Content",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "9c74015b-0896-ed43-62b7-6e025995cec8",
+      "name" : "link_text",
+      "label" : "Link Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "b5f5e356-e096-83e1-94b0-3961106e3dd0",
+      "name" : "link_url",
+      "label" : "Link URL",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG", "CALL_TO_ACTION" ],
+      "type" : "url",
+      "display_width" : null,
+      "default" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "EXTERNAL"
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "link_url" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "EXTERNAL"
+      }
+    } ]
+  }, {
+    "id" : "cc959242-eb72-e033-cdd2-5eb962cdc235",
+    "name" : "plan_features",
+    "label" : "Plan Features",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : "75e7b999-528c-5c17-539b-15b73ac691bd",
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "75e7b999-528c-5c17-539b-15b73ac691bd",
+      "name" : "title",
+      "label" : "Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "3cf563a3-d4bf-91dc-7726-fb65bd33dce8",
+      "name" : "heading",
+      "label" : "Heading",
+      "inline_help_text" : "Define if the item is a category item or not.",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : false
+    }, {
+      "id" : "320d2fa4-0d5d-85fd-8e6e-a6b68706bf0c",
+      "name" : "url",
+      "label" : "URL",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "CONTENT", "EXTERNAL" ],
+      "type" : "url",
+      "display_width" : null,
+      "default" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "CONTENT"
+      }
+    }, {
+      "id" : "767c7145-eb23-5c63-e8e9-76231e5376c2",
+      "name" : "support_tooltip",
+      "label" : "Support Tooltip",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "3cf563a3-d4bf-91dc-7726-fb65bd33dce8",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    }, {
+      "id" : "312e23fe-f151-8829-e8e5-af856a8a9dfe",
+      "name" : "plan_lite",
+      "label" : "Plan Lite",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "3cf563a3-d4bf-91dc-7726-fb65bd33dce8",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "children" : [ {
+        "id" : "8d72afa0-6658-d3c9-a750-0a39df38bce0",
+        "name" : "lite",
+        "label" : "Lite",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "83a92714-8bb9-ae49-0465-d031def96c21",
+        "name" : "overwrite_icon",
+        "label" : "Overwrite Icon",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "442202a6-0dcb-e274-f203-5dc0e73668ca",
+        "name" : "text",
+        "label" : "Text",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "83a92714-8bb9-ae49-0465-d031def96c21",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "519657a9-0337-9df4-3ab2-f37cbf5a0728",
+        "name" : "tooltip",
+        "label" : "Tooltip",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "83a92714-8bb9-ae49-0465-d031def96c21",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "lite" : false,
+        "overwrite_icon" : false
+      }
+    }, {
+      "id" : "f51baf3b-c435-5711-f7b0-e3eed5ee48e4",
+      "name" : "plan_pro",
+      "label" : "Plan Pro",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "3cf563a3-d4bf-91dc-7726-fb65bd33dce8",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "children" : [ {
+        "id" : "3ca19bd1-bf06-d5ec-ffd6-82bf3198f368",
+        "name" : "pro",
+        "label" : "Pro",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "27322d89-5135-23f3-1a8b-0916f3fe88af",
+        "name" : "overwrite_icon",
+        "label" : "Overwrite Icon",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "8ae22db1-c7ff-696a-c940-e91b775d017a",
+        "name" : "text",
+        "label" : "Text",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "27322d89-5135-23f3-1a8b-0916f3fe88af",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "897487a0-4484-5802-fe4f-db9f5f2bdc2d",
+        "name" : "tooltip",
+        "label" : "Tooltip",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "27322d89-5135-23f3-1a8b-0916f3fe88af",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "pro" : false,
+        "overwrite_icon" : false
+      }
+    }, {
+      "id" : "6ef3ccbe-1a38-b0a0-cc87-83930f01c42b",
+      "name" : "plan_premium",
+      "label" : "Plan Premium",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "3cf563a3-d4bf-91dc-7726-fb65bd33dce8",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "children" : [ {
+        "id" : "09da4a4f-ac17-cca5-c23d-1cb4859f9314",
+        "name" : "premium",
+        "label" : "Premium",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "670be283-5991-e62e-548e-d6e281802b83",
+        "name" : "overwrite_icon",
+        "label" : "Overwrite Icon",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "854b39df-130f-f2ac-6409-c7eb11786cd5",
+        "name" : "text",
+        "label" : "Text",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "670be283-5991-e62e-548e-d6e281802b83",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "ef36572f-f4a9-440b-8262-1c07fc32078b",
+        "name" : "tooltip",
+        "label" : "Tooltip",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "670be283-5991-e62e-548e-d6e281802b83",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "premium" : false,
+        "overwrite_icon" : false
+      }
+    }, {
+      "id" : "b4b41901-cdd7-3d2e-d4c4-9f74b7564d86",
+      "name" : "plan_enterprise",
+      "label" : "Plan Enterprise",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : "3cf563a3-d4bf-91dc-7726-fb65bd33dce8",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "false",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "children" : [ {
+        "id" : "2fe60907-9cec-27cb-d629-b7229738488b",
+        "name" : "enterprise",
+        "label" : "Enterprise",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "ba258bb8-8bb6-ad86-6b77-605b99ac8735",
+        "name" : "overwrite_icon",
+        "label" : "Overwrite Icon",
+        "required" : false,
+        "locked" : false,
+        "display" : "checkbox",
+        "type" : "boolean",
+        "display_width" : null,
+        "default" : false
+      }, {
+        "id" : "def4b600-c0f1-91ac-20f9-c1ed30a89c06",
+        "name" : "text",
+        "label" : "Text",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "ba258bb8-8bb6-ad86-6b77-605b99ac8735",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "20e1bbbe-c5c5-213a-02a3-55f1473a1d29",
+        "name" : "tooltip",
+        "label" : "Tooltip",
+        "required" : false,
+        "locked" : false,
+        "visibility" : {
+          "controlling_field" : "ba258bb8-8bb6-ad86-6b77-605b99ac8735",
+          "controlling_field_path" : null,
+          "controlling_value_regex" : "true",
+          "property" : null,
+          "operator" : "EQUAL",
+          "access" : null
+        },
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "enterprise" : false,
+        "overwrite_icon" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "heading" : false,
+      "plan_lite" : {
+        "lite" : false,
+        "overwrite_icon" : false
+      },
+      "plan_pro" : {
+        "pro" : false,
+        "overwrite_icon" : false
+      },
+      "plan_premium" : {
+        "premium" : false,
+        "overwrite_icon" : false
+      },
+      "plan_enterprise" : {
+        "enterprise" : false,
+        "overwrite_icon" : false
+      },
+      "url_field" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "CONTENT"
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "currency_dropdown" : false,
+    "hide_add_ons" : false,
+    "tile" : [ ],
+    "add_on_title" : "Available Add-ons",
+    "add_ons" : [ {
+      "link_url" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "EXTERNAL"
+      }
+    } ],
+    "plan_features" : [ {
+      "heading" : false,
+      "plan_lite" : {
+        "lite" : false,
+        "overwrite_icon" : false
+      },
+      "plan_pro" : {
+        "pro" : false,
+        "overwrite_icon" : false
+      },
+      "plan_premium" : {
+        "premium" : false,
+        "overwrite_icon" : false
+      },
+      "plan_enterprise" : {
+        "enterprise" : false,
+        "overwrite_icon" : false
+      },
+      "url_field" : {
+        "content_id" : null,
+        "href" : "",
+        "type" : "CONTENT"
+      }
+    } ]
+  }
+} ]

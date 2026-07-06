@@ -1,0 +1,19 @@
+/* Interactive SVG Module Styles */
+
+.interactive-svg {
+      max-width: 366px;
+    margin-inline: auto;
+}
+
+.interactive-svg svg {
+  width: auto !important;
+  max-width: 406px;
+  margin-inline: auto;
+   filter: drop-shadow(0 0 5px rgba(123, 246, 249, 0.5));
+}
+@media (max-width: 576px){
+  .interactive-svg svg ,.interactive-svg {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+}

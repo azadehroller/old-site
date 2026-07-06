@@ -1,0 +1,118 @@
+[ {
+  "id" : "d1d6a7df-d68c-5311-aed8-a14973cc6a4f",
+  "name" : "images",
+  "label" : "Images",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 3,
+    "max" : null,
+    "sorting_label_field" : null,
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "image",
+    "name" : "image",
+    "label" : "Image",
+    "help_text" : "Select an image from the file manager. Use 'Custom' size type to set specific dimensions.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 270,
+      "height" : 380
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 270,
+      "height" : 380
+    }
+  }, {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 270,
+      "height" : 380
+    }
+  }, {
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 270,
+      "height" : 380
+    }
+  } ]
+}, {
+  "id" : "container_width",
+  "name" : "container_width",
+  "label" : "Container Width",
+  "help_text" : "Width of the stacked images container",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 100,
+  "max" : 1000,
+  "step" : 10,
+  "suffix" : "px",
+  "type" : "number",
+  "display_width" : null,
+  "default" : 270
+}, {
+  "id" : "container_height",
+  "name" : "container_height",
+  "label" : "Container Height",
+  "help_text" : "Height of the stacked images container",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 100,
+  "max" : 1000,
+  "step" : 10,
+  "suffix" : "px",
+  "type" : "number",
+  "display_width" : null,
+  "default" : 380
+}, {
+  "id" : "dc4ee0e0-ca5b-393a-18bd-0a9dbfe88643",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "cfc3e7ad-d7b7-1c28-a913-c64a91edbeaa",
+    "name" : "alignment_field",
+    "label" : "Alignment",
+    "required" : false,
+    "locked" : false,
+    "alignment_direction" : "BOTH",
+    "type" : "alignment",
+    "display_width" : null,
+    "default" : { }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "alignment_field" : { }
+  }
+} ]

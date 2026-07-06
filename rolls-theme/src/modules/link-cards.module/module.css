@@ -1,0 +1,36 @@
+/* Link Cards Module Styles */
+
+/* Tailwind utility equivalents */
+.max-w-\[1312px\] {
+  max-width: 1312px;
+}
+.max-w-\[346px\] {
+  max-width: 346px;
+}
+
+.text-\[\#005EFF\] {
+  color: #005EFF;
+}
+
+.card-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Link card hover effects */
+.link-card-link:hover .link-card-svg {
+  transform: translateX(0.5rem); /* 8px */
+}
+
+.link-card-link:hover .link-card-svg-path-1 {
+  fill: #053d9e;
+}
+
+.link-card-link:hover .link-card-svg-path-2 {
+  fill: #ebf2fe;
+}
+.py-\[1px\]{padding-block:1px;}
+
+.dnd-section:has(.link-cards-wrapper ){padding-bottom:48px !important;}
+@media (min-width: 769px){  
+.dnd-section:has(.link-cards-wrapper ){padding-bottom:80px !important;}
+}

@@ -1,0 +1,235 @@
+[ {
+  "id" : "cards",
+  "name" : "cards",
+  "label" : "Link Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 3,
+    "sorting_label_field" : "category_text",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "category_type",
+    "name" : "category_type",
+    "label" : "Category Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "save-time", "Save Time" ], [ "boost-revenue", "Boost Revenue" ], [ "guest-experience", "Guest Experience" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "save-time"
+  }, {
+    "id" : "category_text",
+    "name" : "category_text",
+    "label" : "Category Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Save time"
+  }, {
+    "id" : "description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "Lorem ipsum dolor sit amet consectetur. Vitae lectus arcu consequat integer condimentum."
+  }, {
+    "id" : "links",
+    "name" : "links",
+    "label" : "Links",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 0,
+      "max" : 20,
+      "sorting_label_field" : "text",
+      "default" : 3
+    },
+    "children" : [ {
+      "id" : "text",
+      "name" : "text",
+      "label" : "Link Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Capacity view in POS"
+    }, {
+      "id" : "url",
+      "name" : "url",
+      "label" : "Link URL",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "text" : "Capacity view in POS",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Inventory turnover rates",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Customer feedback trends",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "category_type" : "save-time",
+    "category_text" : "Save time",
+    "description" : "Lorem ipsum dolor sit amet consectetur. Vitae lectus arcu consequat integer condimentum.",
+    "links" : [ {
+      "text" : "Capacity view in POS",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Inventory turnover rates",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Customer feedback trends",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  }, {
+    "category_type" : "boost-revenue",
+    "category_text" : "Boost revenue",
+    "description" : "Lorem ipsum dolor sit amet consectetur. Nulla sed cras quis libero convallis.",
+    "links" : [ {
+      "text" : "Capacity view in POS",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Inventory turnover rates",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Customer feedback trends",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  }, {
+    "category_type" : "guest-experience",
+    "category_text" : "Guest experience",
+    "description" : "Lorem ipsum dolor sit amet consectetur. Posuere elementum quam proin accumsan arcu ac.",
+    "links" : [ {
+      "text" : "Capacity view in POS",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Inventory turnover rates",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "text" : "Customer feedback trends",
+      "url" : {
+        "url" : {
+          "href" : "",
+          "type" : "EXTERNAL"
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    } ]
+  } ]
+} ]

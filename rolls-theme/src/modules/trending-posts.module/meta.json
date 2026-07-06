@@ -1,0 +1,10 @@
+{
+  "global" : true,
+  "content_types" : [ "BLOG_POST" ],
+  "smart_type" : "NOT_SMART",
+  "host_template_types" : [ "BLOG_POST" ],
+  "module_id" : 208416292231,
+  "label" : "Trending Posts",
+  "icon" : "../../images/module-icons/info-circle-solid.svg",
+  "is_available_for_new_content" : false
+}

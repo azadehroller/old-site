@@ -1,0 +1,46 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macros %}
+
+{# Variables #}
+{# Content #}
+{% set card_partners = module.card_partners %}
+
+{# Styles #}
+{% set theme = module.styles.theme %}
+
+<dl id="cards-partners-{{name}}" class="grid grid-cols-1 lg:grid-cols-{{ card_partners|length }} xl:grid-cols-{{ card_partners|length }} gap-5 py-2">
+    {% for card_partners in card_partners %}
+        {% set card_partners_data =  {
+            'thumb': card_partners.card_thumb,
+            'title': card_partners.card_title,
+            'content': card_partners.card_content,
+            'links': card_partners.links,
+            'label': card_partners.card_link_label,
+            'href': card_partners.card_link.url.href,
+            'url_type': card_partners.card_link.url.type,
+            'no_follow': card_partners.card_link.no_follow,
+            'new_tab': card_partners.card_link.open_in_new_tab,
+            'loading': card_partners.card_thumb.loading
+        } %}
+        <div class="flex flex-col gap-3 max-w-full {{ macros.setTextColor(theme, 'bg-neutral-white', 'bg-primary-60', 'bg-gx-80') }} w-full h-full box-shadow-onlight-navy-40 rounded-[32px] overflow-hidden">
+            <div class="w-full [&>img]:w-full [&>img]:object-cover">{{ macros.image(card_partners.card_thumb) }}</div>
+            <div class="flex flex-col gap-4 py-2 px-[32px] md:px-6 {{ macros.setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }}">
+                <span class="text-[2rem] leading-10 font-extrabold">{{ card_partners_data.title }}</br></span>
+                <span class="leading-6">{{card_partners_data.content}}</span>
+            </div>
+            <div class="flex flex-col md:flex-row wrap px-[32px] md:px-6 gap-3 mt-auto pb-5">
+                {% for link in card_partners_data.links %}
+                    {% if link.card_link.url.href %}
+                        <a class="{{ macros.buttons_settings(link.kind || 'primary') }} relative inline-flex items-center gap-2 group" href="{{ link.card_link.url.href }}">
+                        <span class="{% if link.kind == 'ghost' %}text-primary-50{% else %}text-neutral-white{% endif %}">{{link.card_link_label}}</span>
+                        {% if link.kind == 'ghost'  %}
+                        <span><svg width="24" height="24" fill="none" class="transition-transform ease-out duration-300 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg"><path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6Z" fill="#033180"/></svg>
+                        </span>
+                        {% endif %}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</dl>

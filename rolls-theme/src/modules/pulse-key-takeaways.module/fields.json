@@ -1,0 +1,183 @@
+[ {
+  "id" : "section_title",
+  "name" : "section_title",
+  "label" : "Section Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Key takeaways"
+}, {
+  "id" : "section_subtitle",
+  "name" : "section_subtitle",
+  "label" : "Section Subtitle",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "The most impactful insights to guide your strategic focus moving forward."
+}, {
+  "id" : "section_number",
+  "name" : "section_number",
+  "label" : "Section Number",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "04"
+}, {
+  "id" : "section_icon",
+  "name" : "section_icon",
+  "label" : "Section Icon",
+  "required" : false,
+  "locked" : false,
+  "icon_set" : "fontawesome-5.0.10",
+  "type" : "icon",
+  "display_width" : null,
+  "default" : { }
+}, {
+  "id" : "takeaways",
+  "name" : "takeaways",
+  "label" : "Key Takeaways",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 6,
+    "sorting_label_field" : null,
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "number",
+    "name" : "number",
+    "label" : "Card Number",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "01"
+  }, {
+    "id" : "percentage",
+    "name" : "percentage",
+    "label" : "Percentage",
+    "required" : false,
+    "locked" : false,
+    "display" : "text",
+    "min" : 0,
+    "max" : 100,
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 50
+  }, {
+    "id" : "title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Takeaway Title"
+  }, {
+    "id" : "description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Description of the key takeaway."
+  }, {
+    "id" : "gradient_from",
+    "name" : "gradient_from",
+    "label" : "Gradient From Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#a78bfa"
+    }
+  }, {
+    "id" : "gradient_to",
+    "name" : "gradient_to",
+    "label" : "Gradient To Color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#9333ea"
+    }
+  }, {
+    "id" : "background_gradient",
+    "name" : "background_gradient",
+    "label" : "Background Gradient",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "linear-gradient(to bottom right, #160f34, #1a1140)"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "number" : "01",
+    "percentage" : 79,
+    "title" : "Experiences are key",
+    "description" : "of guests identify great past experiences as the main reason they return to a venue.",
+    "gradient_from" : "#a78bfa",
+    "gradient_to" : "#9333ea",
+    "background_gradient" : "linear-gradient(to bottom right, #160f34, #1a1140)"
+  }, {
+    "number" : "02",
+    "percentage" : 90,
+    "title" : "Online booking preferred",
+    "description" : "of guests prefer to book online for convenience and to secure discounts.",
+    "gradient_from" : "#8b5cf6",
+    "gradient_to" : "#7c3aed",
+    "background_gradient" : "linear-gradient(to bottom right, #0a0612, #000000)"
+  }, {
+    "number" : "03",
+    "percentage" : 90,
+    "title" : "Self-service in demand",
+    "description" : "of guests want self-service options like mobile ordering and self-check-in.",
+    "gradient_from" : "#9333ea",
+    "gradient_to" : "#6d28d9",
+    "background_gradient" : "linear-gradient(to bottom right, #160f34, #1a1140)"
+  }, {
+    "number" : "04",
+    "percentage" : 79,
+    "title" : "Sustainability sells",
+    "description" : "of guests consider sustainability when making purchase decisions.",
+    "gradient_from" : "#818cf8",
+    "gradient_to" : "#9333ea",
+    "background_gradient" : "linear-gradient(to bottom right, #0a0612, #000000)"
+  }, {
+    "number" : "05",
+    "percentage" : 76,
+    "title" : "Premium willingness",
+    "description" : "of guests would pay more for enhanced experiences with better service and fewer crowds.",
+    "gradient_from" : "#6366f1",
+    "gradient_to" : "#7c3aed",
+    "background_gradient" : "linear-gradient(to bottom right, #160f34, #1a1140)"
+  }, {
+    "number" : "06",
+    "percentage" : 23,
+    "title" : "Tech simplicity wins",
+    "description" : "want faster online checkouts as the leading innovation they want to see.",
+    "gradient_from" : "#4f46e5",
+    "gradient_to" : "#6d28d9",
+    "background_gradient" : "linear-gradient(to bottom right, #0a0612, #000000)"
+  } ]
+} ]

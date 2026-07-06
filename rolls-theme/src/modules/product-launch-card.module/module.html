@@ -1,0 +1,130 @@
+{# Product Launch Card Module #}
+
+{# ---------- Variables ---------- #}
+{% set eyebrow      = module.content.eyebrow %}
+{% set title        = module.content.title %}
+{% set description  = module.content.description %}
+{% set image        = module.content.image %}
+{% set mobile_image        = module.content.mobile_image %}
+{% set features     = module.features %}
+
+{% set btn_text      = module.cta.button_text %}
+{% set btn_href      = module.cta.button_link.url.href %}
+{% set btn_url_type  = module.cta.button_link.url.type %}
+{% set btn_no_follow = module.cta.button_link.no_follow %}
+{% set btn_new_tab   = module.cta.button_link.open_in_new_tab %}
+{% set show_arrow    = module.cta.show_arrow %}
+{% set btn_rel       = [] %}
+
+{% if btn_url_type is equalto 'EMAIL_ADDRESS' %}
+  {% set btn_href = 'mailto:' + btn_href %}
+{% endif %}
+{% if btn_no_follow %}{% do btn_rel.append('nofollow') %}{% endif %}
+{% if btn_new_tab %}{% do btn_rel.append('noopener') %}{% endif %}
+
+{% set max_width           = module.styles.max_width || 1024 %}
+{% set eyebrow_color       = module.styles.eyebrow_color.color       || '#0960F6' %}
+{% set title_color         = module.styles.title_color.color         || '#033180' %}
+{% set text_color          = module.styles.text_color.color          || '#033180' %}
+{% set feature_text_color  = module.styles.feature_text_color.color  || '#0960F6' %}
+{% set feature_icon_bg     = module.styles.feature_icon_bg.color     || '#EBF2FE' %}
+{% set feature_icon_color  = module.styles.feature_icon_color.color  || '#0960F6' %}
+{% set card_bg             = module.styles.card_bg.color             || '#FFFFFF' %}
+{% set image_bg            = module.styles.image_bg.color             || '#FFFFFF' %}
+{% set button_kind         = module.styles.button_kind               || 'industry_report' %}
+
+{# ---------- Markup ---------- #}
+<article class="plc-card" style="
+  --plc-max-width: 1312px;
+  --plc-card-bg: #FFFFFF;
+  --plc-image-bg: #FFFFFF;
+  --plc-eyebrow-color: #0960f6;;
+  --plc-title-color: #011840;
+  --plc-text-color: #011840;
+  --plc-feature-text-color: #0960F6;
+  --plc-feature-icon-bg: #EBF2FE;
+  --plc-feature-icon-color: #0960F6;
+">
+
+<div class="plc-image-wrap">
+  {% if image.src %}
+    {% set desktopSizeAttrs   = 'width="{{ image.width }}" height="{{ image.height }}"' %}
+    {% set desktopLoadingAttr = image.loading != 'disabled' ? 'loading="{{ image.loading }}"' : '' %}
+    <img class="plc-image plc-image--desktop"
+      src="{{ image.src }}"
+      alt="{{ image.alt }}"
+      decoding="async"
+      {{ desktopLoadingAttr }}
+      {{ desktopSizeAttrs }}>
+  {% endif %}
+
+  {% if mobile_image.src %}
+    {% set mobileSizeAttrs   = 'width="{{ mobile_image.width }}" height="{{ mobile_image.height }}"' %}
+    {% set mobileLoadingAttr = mobile_image.loading != 'disabled' ? 'loading="{{ mobile_image.loading }}"' : '' %}
+    <img class="plc-image plc-image--mobile"
+      src="{{ mobile_image.src }}"
+      alt="{{ mobile_image.alt || image.alt }}"
+      decoding="async"
+      {{ mobileLoadingAttr }}
+      {{ mobileSizeAttrs }}>
+  {% endif %}
+</div>
+
+  <div class="plc-body">
+    <header class="plc-intro">
+      {% if eyebrow %}<p class="plc-eyebrow">{{ eyebrow }}</p>{% endif %}
+      {% if title %}<h2 class="plc-title">{{ title }}</h2>{% endif %}
+      {% if description %}<div class="plc-description">{{ description }}</div>{% endif %}
+    </header>
+
+    {% if features %}
+      <ul class="plc-features">
+        {% for feature in features %}
+          {% set f_href      = feature.link.url.href %}
+          {% set f_url_type  = feature.link.url.type %}
+          {% set f_no_follow = feature.link.no_follow %}
+          {% set f_new_tab   = feature.link.open_in_new_tab %}
+          {% set f_rel       = [] %}
+          {% if f_url_type is equalto 'EMAIL_ADDRESS' %}{% set f_href = 'mailto:' + f_href %}{% endif %}
+          {% if f_no_follow %}{% do f_rel.append('nofollow') %}{% endif %}
+          {% if f_new_tab %}{% do f_rel.append('noopener') %}{% endif %}
+
+          <li class="plc-feature">
+            {% if (feature.icon_image and feature.icon_image.src) or (feature.icon and feature.icon.name) %}
+              <span class="plc-feature-icon" aria-hidden="true">
+                {% if feature.icon_image and feature.icon_image.src %}
+                  <img src="{{ feature.icon_image.src }}" alt="" loading="lazy" decoding="async">
+                {% else %}
+                  {% icon name="{{ feature.icon.name }}" style="{{ feature.icon.type }}" unicode="{{ feature.icon.unicode }}" width="14" height="14" %}
+                {% endif %}
+              </span>
+            {% endif %}
+
+            {% if f_href %}
+              <a class="plc-feature-link" href="{{ f_href }}"
+                {% if f_new_tab %}target="_blank"{% endif %}{% if f_rel %} rel="{{ f_rel|join(' ') }}"{% endif %}>
+                {% if feature.title %}<span>{{ feature.title }}</span>{% endif %}{% if feature.description %} <span>{{ feature.description }}</span>{% endif %}
+              </a>
+            {% else %}
+              <span class="plc-feature-text">
+                {% if feature.title %}<span>{{ feature.title }}</span>{% endif %}{% if feature.description %} <span>{{ feature.description }}</span>{% endif %}
+              </span>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if btn_text or btn_href %}
+      <a class="plc-button" data-kind="{{ button_kind }}" href="{{ btn_href }}"
+        {% if btn_new_tab %}target="_blank"{% endif %}{% if btn_rel %} rel="{{ btn_rel|join(' ') }}"{% endif %}>
+        <span class="plc-button-text">{{ btn_text || 'More detail' }}</span>
+        {% if show_arrow %}
+          <svg class="plc-button-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z" fill="currentColor"/>
+          </svg>
+        {% endif %}
+      </a>
+    {% endif %}
+  </div>
+</article>

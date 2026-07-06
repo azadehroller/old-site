@@ -1,0 +1,40 @@
+[ {
+  "id" : "title",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Key takeaways"
+}, {
+  "id" : "takeaways",
+  "name" : "takeaways",
+  "label" : "Takeaways",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "takeaways.text",
+    "default" : 0
+  },
+  "children" : [ {
+    "id" : "takeaways.text",
+    "name" : "text",
+    "label" : "Takeaway",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+} ]

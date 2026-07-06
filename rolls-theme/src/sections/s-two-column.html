@@ -1,0 +1,130 @@
+<!--
+    templateType: section
+    label: Two Column Section
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/two-column.png
+    description: "New two column layout with equal heights"
+-->
+{% dnd_section
+  vertical_alignment="STRETCH",
+  class="s-two-column-section"
+%}
+  {% dnd_column
+    offset=0,
+    width=6
+  %}
+    {% dnd_row %}
+      {% dnd_module
+        path="@hubspot/rich_text",
+        html="<h3>Column 1</h3><p>Drag any module here</p>"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+  {% dnd_column
+    offset=6,
+    width=6
+  %}
+    {% dnd_row %}
+      {% dnd_module
+        path="@hubspot/rich_text",
+        html="<h3>Column 2</h3><p>Drag any module here</p>"
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+{% end_dnd_section %}
+
+<style>
+  /* Section wrapper styles */
+  .s-two-column-section {
+    padding: 3rem 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto !important;
+  }
+  
+  /* Style HubSpot's row-fluid to use flexbox for equal heights */
+  .s-two-column-section > .row-fluid {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: stretch;
+    margin: 0;
+  }
+  
+  /* Style the span6 columns (HubSpot's 50% width columns) */
+  .s-two-column-section > .row-fluid > .span6 {
+    flex: 1 1 100%; /* Mobile: full width */
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  
+  /* Add card styling to the column's inner wrapper */
+  .s-two-column-section .span6 .row-fluid-wrapper {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .s-two-column-section .span6 .row-fluid-wrapper:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+  }
+  
+  /* Ensure inner content takes full height */
+  .s-two-column-section .span6 .row-fluid-wrapper .row-fluid {
+    flex: 1;
+    display: flex !important;
+    flex-direction: column;
+  }
+  
+  .s-two-column-section .span6 .row-fluid-wrapper .widget-span {
+    flex: 1;
+  }
+  
+  /* Tablet and Desktop: 2 columns side by side */
+  @media (min-width: 768px) {
+    .s-two-column-section {
+      padding: 4rem 2rem;
+    }
+    
+    .s-two-column-section > .row-fluid > .span6 {
+      flex: 1 1 calc(50% - 1rem) !important; /* Two columns with gap */
+      max-width: calc(50% - 1rem) !important;
+      width: calc(50% - 1rem) !important;
+    }
+  }
+  
+  /* Remove HubSpot's default margins */
+  .s-two-column-section .row-fluid-wrapper {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .s-two-column-section .span6 .row-fluid-wrapper {
+      background: #1a1a1a;
+      border: 1px solid #333;
+    }
+  }
+  
+  /* Ensure drag and drop areas work properly in editor */
+  .hs-inline-edit .s-two-column-section .span6 .row-fluid-wrapper {
+    min-height: 200px;
+  }
+  
+  /* Fix for HubSpot's default styles */
+  .s-two-column-section .dnd-column {
+    padding: 0 !important;
+  }
+</style>

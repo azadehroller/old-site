@@ -1,0 +1,65 @@
+<!--
+  templateType: "none"
+  isAvailableForNewContent: false
+-->
+
+{% set topic = content.topic_list[0] %}
+{% set topicFiltered = topic.name|string|lower|replace('-', '_')|replace(' ', '_')|replace(',', '')|replace('_&_', '_') %}
+<article class="blog-index__post {{ topicFiltered }} item">
+  {% if content.featured_image %}
+  <a href="{{ content.absolute_url }}" class="blog-index__post-image">
+    {% set sizeAttrs = 'width="{{ content.featured_image_width }}" height="{{ content.featured_image_height }}"' %}
+    <img
+      src="{{ content.featured_image }}"
+      srcset="{{ content.featured_image }} 320w,
+      {{ content.featured_image }} 2x,
+      {{ content.featured_image }} 3x"
+      {{ sizeAttrs }}
+      data-src={{ content.featured_image }}
+      alt="{{content.featured_image_alt_text}}"
+      class="lazyload"
+      loading="lazy"
+    />
+
+
+  </a>
+  {% endif %}
+  <div class="blog-index__post-content">
+    {% if content.topic_list %}
+      {% set topic = content.topic_list[0] %}
+      <a class="blog-header__tag" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>
+    {% endif %}
+    <h3 class="blog-index__post-title">
+      <a href="{{ content.absolute_url }}">{{ content.name }}</a>
+    </h3>
+    <p class="blog-index__post-date text-secondary">
+      <time datetime="{{ content.publish_date | datetimeformat('%Y-%m-%d') }}">{{ content.publish_date|datetimeformat('%B %e, %Y') }}</time>
+      <span> | </span>
+      {% set initialPostWords = content.post_body|striptags|wordcount %} {% set
+        calculatedPostWords = (initialPostWords/100) * 100 %} {% set
+        finishedPostWords = calculatedPostWords|divide(300)|round(2) %} {% set
+        number = finishedPostWords|round %} {% if number < 1 %} {% else %}
+        <span class="blog-post__readingtime">
+          <span class="blog-post__readingtime-icon"
+            ><svg
+              width="16"
+              height="16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6 .667h4V2H6V.667Zm1.333 8.666v-4h1.334v4H7.333Zm5.354-4.406.946-.947c-.286-.34-.6-.66-.94-.94l-.946.947A5.975 5.975 0 0 0 8 2.667a6 6 0 1 0 6 6 5.975 5.975 0 0 0-1.313-3.74Zm-9.354 3.74A4.663 4.663 0 0 0 8 13.333a4.663 4.663 0 0 0 4.667-4.666A4.663 4.663 0 0 0 8 4a4.663 4.663 0 0 0-4.667 4.667Z"
+                fill="#033180"
+              /></svg></span>
+        {{ finishedPostWords|round }} {% if number <= 1 %}min{%else%}mins{%endif%}
+        </span>
+        {% endif %}
+    </p>
+    <p class="show-featured text-secondary text-small">
+      By {{ content.blog_post_author.display_name }}, {{ content.display_name }}
+      <span>{{ content.updated|datetimeformat('%B %e, %Y') }}</span>
+    </p>
+  </div>
+</article> 

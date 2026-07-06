@@ -1,0 +1,71 @@
+<div id="vwo-form-container-{{ name }}"></div>
+
+{% require_js %}
+<script src="//js.hsforms.net/forms/embed/v2.js"></script>
+
+<script>
+/**
+ * Store VWO variant globally
+ */
+window.vwoVariantData = null;
+
+/**
+ * VWO listener (agency logic, slightly adapted to store value)
+ */
+window.VWO = window.VWO || [];
+
+window.VWO.push(['onEventReceive', 'vA', function(data) {
+  var experimentId = data[1];
+
+  var cookieName = '_vis_opt_exp_' + experimentId + '_combi';
+  var match = document.cookie.match(
+    new RegExp('(?:^|; )' + cookieName + '=([^;]*)')
+  );
+
+  var combiValue = match ? match[1] : null;
+
+  if (combiValue) {
+    var label = (combiValue === '1')
+      ? 'Control'
+      : 'Variation ' + (parseInt(combiValue) - 1);
+
+    var value = 'Campaign ' + experimentId + ': ' + label;
+
+    // ✅ Store for later use in form
+    window.vwoVariantData = value;
+
+    console.log('[VWO] Stored:', value);
+  }
+}]);
+
+
+/**
+ * HubSpot form embed
+ */
+hbspt.forms.create({
+  portalId: "3375779",
+  formId: "{{ module.form_id }}",
+  target: "#vwo-form-container-{{ name }}",
+
+onFormReady: function($form) {
+
+  function applyVariant() {
+    if (window.vwoVariantData) {
+      var field = $form.querySelector('[name="vwo_variant"]');
+      if (field) {
+        field.value = window.vwoVariantData;
+        console.log('[VWO] Injected:', window.vwoVariantData);
+      }
+    }
+  }
+
+  // Initial attempts
+  applyVariant();
+  setTimeout(applyVariant, 300);
+  setTimeout(applyVariant, 800);
+  setTimeout(applyVariant, 1500);
+
+}
+});
+</script>
+{% end_require_js %}

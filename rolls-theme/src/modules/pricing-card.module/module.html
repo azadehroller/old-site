@@ -1,0 +1,56 @@
+{# Variables #}
+{% set plans_table_id = module.hubdb.hubdbtable_plans %}
+{% set plans = hubdb_table_rows(plans_table_id) %}
+
+{% set features_table_id = module.hubdb.hubdbtable_features %}
+{% set features = hubdb_table_rows(features_table_id, "&orderBy=order") %}
+
+
+{# Section Markup #}
+
+<section class="pricing-cards-{{name}}">
+    <div class="flex items-center justify-center gap-5">
+        {% for plan in plans %}
+            <div class="mo-card bg-neutral-white rounded-[32px] box-shadow-onlight px-4 md:px-6 relative">
+                <header class="flex flex-col gap-y-3">
+                    <div class="text-lg uppercase font-extrabold text-secondary-50">{{ plan.name }}</div>
+                    <div>
+                        <div class="flex gap-1">
+                            <div class="text-5xl font-extrabold text-primary-50">
+                                <span>${{ plan.usd_monthly }}</span>
+                                {# <span>${{ plan.aud_monthly }}</span>
+                                <span>£{{ plan.gbp_monthly }}</span>
+                                <span>€{{ plan.eur_monthly }}</span>
+                                <span>${{ plan.cad_monthly }}</span> #}
+                                /mo
+                            </div>
+                            <div class="flex flex-col gap-y-2">
+                                {% if plan.billed_annually %}
+                                    <div class="bg-primary-10 font-semibold py-1 px-2 text-primary-40 text-center rounded-3xl">billed annually</div>
+                                {% endif %}
+                                {% if plan.per_connected_venue %}
+                                    <div class="bg-green-10 py-1 px-2 text-green-60 font-semibold text-center rounded-3xl">per connected venue</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="text-primary-50">or 
+                        <span>${{plan.usd_annual}}</span>/mo billed monthly</div>
+                    </div>
+                    <div class="text-base font-semibold text-secondary-50">{{ plan.fees }}</div>
+                </header>
+                <ul>
+                    {% if plan.name === "Lite" %}
+                    {% for feature in features %}
+                    <li>{{features.name}}</li>
+                    {% endfor %}
+                    {%endif%}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>`
+</section>
+
+<script>
+console.log({{ module|tojson }});
+console.log({{ plans_table_id|tojson }});
+</script>

@@ -1,0 +1,221 @@
+[ {
+  "id" : "66c1dace-3dc2-af08-bd73-d1bb81b7399d",
+  "name" : "items",
+  "label" : "Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 2,
+    "max" : null,
+    "sorting_label_field" : "d85a44a4-43e7-0e89-db9f-693d5d645b56",
+    "default" : 2
+  },
+  "children" : [ {
+    "id" : "e2bc74c5-d501-cde4-cdb0-8d8cbf9556f3",
+    "name" : "icon",
+    "label" : "Icon",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "settings.animation",
+      "controlling_value_regex" : "false",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "picker" : "file",
+    "id" : "5b30c983-0dca-d08d-098a-2e925c6524e4",
+    "name" : "animation_file",
+    "label" : "Animation File",
+    "required" : false,
+    "locked" : false,
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "settings.animation",
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    },
+    "type" : "file",
+    "display_width" : null,
+    "default" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Mini-golf_onDark.json"
+  }, {
+    "id" : "d85a44a4-43e7-0e89-db9f-693d5d645b56",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "5500e00c-6b2d-1544-7702-22fc1939b8a9",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null
+  }, {
+    "id" : "abdaa6b8-6c9f-5a3b-571a-475a4bb11a27",
+    "name" : "link_label",
+    "label" : "Link Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "2dbe2652-b4b3-f1f7-1c59-5552b544bf8f",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "https://www.roller.software/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "animation_file" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Mini-golf_onDark.json",
+    "link_label" : "",
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "https://www.roller.software/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "animation_file" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Mini-golf_onDark.json",
+    "link_label" : "",
+    "link" : {
+      "url" : {
+        "content_id" : null,
+        "type" : "EXTERNAL",
+        "href" : "https://www.roller.software/"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ]
+}, {
+  "id" : "762da87c-2914-be10-ad9f-9e7d461b74d4",
+  "name" : "image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "41787d9a-a2bd-bfc8-3653-80525d4b8b8b",
+    "name" : "image_src",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : null,
+      "loading" : "lazy",
+      "width" : 416,
+      "height" : 528
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "image_src" : {
+      "size_type" : "auto",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : null,
+      "loading" : "lazy",
+      "width" : 416,
+      "height" : 528
+    }
+  }
+}, {
+  "id" : "419321e5-01da-a508-d9be-d0665d58e37d",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "29f370db-ed71-c584-f088-d9d26e6304c1",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "light", "OnDark" ], [ "dark", "OnLight" ], [ "gxscore", "GxScore" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "dark"
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "theme" : "dark"
+  }
+}, {
+  "id" : "77a0a21e-4c0c-a406-7303-6cfe25ae981a",
+  "name" : "settings",
+  "label" : "Settings",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "6495428c-e6cd-2dec-ae56-8d4ec0fc8ab7",
+    "name" : "animation",
+    "label" : "Animation",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "animation" : false
+  }
+} ]

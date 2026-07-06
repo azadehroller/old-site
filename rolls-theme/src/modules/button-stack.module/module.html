@@ -1,0 +1,169 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+{% set spacing = module.styles.layout.spacing.css %}
+{% set alignment = module.styles.layout.alignment.horizontal_align %}
+
+{# Animation #}
+{% set animation = module.styles.animation.type %}
+
+{# Styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      ul { list-style-type: none; }
+      li { margin-left: 0; }
+      {% if spacing %}
+        .btn-list {
+          {{ spacing }}
+        }
+      {% endif %}
+
+      /**
+       * This CSS is used to ensure that a video embedded using Wistia
+       * will be displayed at full width on screens with a maximum width of 624 pixels.
+       * This code snippet is part of a larger HTML-HubL codebase.
+       *
+       * Using `display: inline` ensures that the video is displayed at full width
+       * on screens with a maximum width of 624 pixels. This is because the
+       * `.wistia_embed` class is used by Wistia to render the video, and it has
+       * `display: block` by default, which would cause the video to be displayed
+       * at a fixed width rather than at full width.
+       */
+      {% if video_id %}
+        .wistia_embed {
+          display: inline;
+        }
+      {% endif %}
+
+      /**
+       * Code snippet to ensure that a video embedded using Wistia is displayed at full width on screens with a maximum width of 624 pixels.
+       * This code snippet is part of a larger HTML-HubL codebase.
+       */
+
+      @media (max-width: 624px) {
+        {# need to force to be full-width as per designs  #}
+        {# !important had to be used here #}
+        .wistia_embed > div {
+          width: 100% !important; 
+        }
+      }
+
+      @keyframes pulse {
+        to {
+          box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);
+        }
+      }
+
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+      }
+
+      .bg {
+        animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+        background: #ff290c;
+        box-shadow: 0 0 0 0 #ff290c;
+      }
+      
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+<ul id='js-button-stack' class="flex flex-col list-none sm:flex-row wrap gap-3 justify-{% if alignment == 'LEFT'%}start{% elif alignment == "RIGHT" %}end{% else %}center{% endif %} btn-list m-0 w-full md:w-auto">
+    {% for item in module.button_list %}
+        {% set url_type = item.button_settings.button_link.url.type %}
+        {% set rel = [] %}
+        {% set href = item.button_settings.button_link.url.href %}
+        {% set no_follow = item.button_settings.button_link.no_follow %}
+        {% set new_tab = item.button_settings.button_link.open_in_new_tab %}
+        {% set btn_label = item.button_settings.btn_label %}
+        {% set icon_position = item.btn_icon.icon_position %}
+        {% set icon_type = item.btn_icon.icon_type %}
+        {% set icon_field_svg = item.btn_icon.icon_field_svg %}
+
+        {% set bg_kind = item.button_styles.bg_kind %}
+
+        {% if url_type is equalto 'EMAIL_ADDRESS' %}
+          {% set href = 'mailto:' + href %}
+        {% endif %}
+        {% if no_follow %}
+          {% do rel.append('nofollow') %}
+        {% endif %}
+        {% if new_tab %}
+          {% do rel.append('noopener') %}
+        {% endif %}
+
+        {# Modal Form #}
+        {% set modal_trigger = item.button_settings.modal_trigger %}
+        {% set modal_id = item.button_settings.form.form_id %}
+
+        {# Modal Wistia Video #}
+        {% set modal_trigger_video = item.button_settings.modal_trigger_video %}
+        {% set video_id = item.button_settings.video_id %}
+
+        {# form variables #}
+        {% set response_type = item.button_settings.form.response_type %}
+        {% set message = item.button_settings.form.message %}
+        {% set redirect_id = item.button_settings.form.redirect_id %}
+        {% set redirect_url = item.button_settings.form.redirect_url %}
+        {% set gotowebinar_webinar_key = item.button_settings.form.gotowebinar_webinar_key %}
+
+        {% macro btn_trigger() %}
+          {% if animation == 'pulse' %}
+            <div class="bg"></div>
+          {% endif %}
+          <a 
+            href="{{ modal_trigger or modal_trigger_video ? null : href || "https://www.roller.software/"}}" 
+            class="button-all button {{ button.buttons_settings(bg_kind || 'primary') }} {{ bg_kind }}" 
+            id="{{ name }}_{{ btn_label|lower|replace(' ', '_') }}"
+            {% if new_tab %}target="_blank"{% endif %}
+            {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+            {% if modal_trigger %}data-reveal-id="contact-form-{{ modal_id }}"{% endif %}
+          >
+            {% if icon_field_svg %}
+              <div class="flex justify-center items-center {% if icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+                {{icon_field_svg}}
+              </div>
+            {% endif %}
+            {# Button label #}
+            <span id="{{ modal_trigger ? "js-modal-trigger" : null }}">{{ btn_label || "Button" }}</span>
+          </a>
+        {% endmacro %}
+        {% if btn_label %}
+          <li class="ml-0 flex">
+            {{ video_id ? '<div class="w-full wistia_embed wistia_async_{{ video_id }} popover=true popoverContent=html" id="wistia-{{ video_id }}-{{loop.index}}">{{ btn_trigger() }}</div>' : '{{ btn_trigger() }}' }}
+          </li>
+        {% endif %}
+        {% if modal_trigger %}
+          <div id="contact-form-{{ modal_id }}" class="modal modal--small">
+            <button class="btn close-modal"><span class="material-icons"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#000" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg></span></button>
+            <div class="modal-content">
+              <div class="modal-form">
+                {% form
+                  form_to_use="{{ modal_id }}"
+                  response_response_type="{{ response_type }}"
+                  response_message="{{ message }}"
+                  response_redirect_id="{{ redirect_id }}"
+                  response_redirect_url="{{ redirect_url }}"
+                  gotowebinar_webinar_key="{{ gotowebinar_webinar_key }}"
+                %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if video_id %}
+          {% require_js position="footer" defer="true" %}
+            <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+          {% end_require_js %}
+        {% endif %}
+    {% endfor %}
+</ul>
+{% require_js position="footer" %}
+  <script>
+    document.querySelectorAll('#js-button-stack a[data-reveal-id]').forEach(function(t){t.addEventListener("click",function(e){e.preventDefault();var id=t.getAttribute("data-reveal-id"),m=document.getElementById(id);if(!m)return;var bg=document.querySelector(".modal-bg");bg||(bg=document.createElement("div"),bg.className="modal-bg",bg.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:999;display:none;",document.body.appendChild(bg));function fi(el,d,cb){el.style.display="block";var o=0,s=d/100,ti=setInterval(function(){o+=s;el.style.opacity=o;if(o>=1){clearInterval(ti);if(cb)cb()}},10)}function fo(el,d,cb){var o=1,s=d/100,ti=setInterval(function(){o-=s;el.style.opacity=o;if(o<=0){clearInterval(ti);el.style.display="none";if(cb)cb()}},10)}function cl(){document.body.classList.remove("modal-open");bg&&fo(bg,300);fo(m,300,function(){m.style.visibility="hidden";m.style.opacity=1});if(m._esc){document.removeEventListener("keyup",m._esc);m._esc=null}}document.body.classList.add("modal-open");m.style.opacity=0;m.style.visibility="visible";m.style.top="110px";fi(bg,150);setTimeout(function(){fi(m,300)},150);var cb=m.querySelector(".close-modal");if(cb)cb.onclick=cl;bg.style.cursor="pointer";bg.onclick=cl;m._esc=function(ev){if(ev.key==="Escape")cl()};document.addEventListener("keyup",m._esc)})});
+  </script>
+{% end_require_js %}

@@ -1,0 +1,301 @@
+[ {
+  "id" : "content",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "content.eyebrow",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "2025 NOVEMBER"
+  }, {
+    "id" : "content.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Meet ROLLER iQ"
+  }, {
+    "id" : "content.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Looking to take your trampoline park to the next level? From boosting birthday party bookings to enhancing guest safety, discover expert tips to drive long-term success.</p>"
+  }, {
+    "id" : "content.image",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Product Launch visual",
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "cbffdd1a-d78f-f9eb-dd85-1cda9eb01a0a",
+    "name" : "mobile_image",
+    "label" : "Mobile Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Product Launch visual",
+      "loading" : "lazy"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "2025 NOVEMBER",
+    "title" : "Meet ROLLER iQ",
+    "description" : "<p>Looking to take your trampoline park to the next level? From boosting birthday party bookings to enhancing guest safety, discover expert tips to drive long-term success.</p>",
+    "image" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Product Launch visual",
+      "loading" : "lazy"
+    },
+    "mobile_image" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "Product Launch visual",
+      "loading" : "lazy"
+    }
+  }
+}, {
+  "id" : "features",
+  "name" : "features",
+  "label" : "Feature list",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 6,
+    "sorting_label_field" : "title",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "features.icon",
+    "name" : "icon",
+    "label" : "Icon",
+    "help_text" : "Choose a FontAwesome icon for this feature.",
+    "required" : false,
+    "locked" : false,
+    "icon_set" : "fontawesome-6.4.2",
+    "type" : "icon",
+    "display_width" : null,
+    "default" : {
+      "name" : "star",
+      "unicode" : "f005",
+      "type" : "SOLID"
+    }
+  }, {
+    "id" : "features.icon_image",
+    "name" : "icon_image",
+    "label" : "Icon Image (optional)",
+    "help_text" : "Optional: upload a custom SVG/PNG icon. If provided, it overrides the FontAwesome icon.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "features.title",
+    "name" : "title",
+    "label" : "Title",
+    "help_text" : "Shown bold at the start of the line, e.g. 'ROLLER iQ'.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "ROLLER iQ"
+  }, {
+    "id" : "features.description",
+    "name" : "description",
+    "label" : "Description",
+    "help_text" : "Shown after the title, e.g. '— AI that works like part of your team'.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "— AI that works like part of your team"
+  }, {
+    "id" : "features.link",
+    "name" : "link",
+    "label" : "Link (optional)",
+    "help_text" : "Optional: make the feature line a link.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "icon" : {
+      "name" : "star",
+      "unicode" : "f005",
+      "type" : "SOLID"
+    },
+    "title" : "ROLLER iQ",
+    "description" : "— AI that works like part of your team"
+  }, {
+    "icon" : {
+      "name" : "dollar-sign",
+      "unicode" : "24",
+      "type" : "SOLID"
+    },
+    "title" : "Price Rules",
+    "description" : "— Your always-on pricing strategy"
+  }, {
+    "icon" : {
+      "name" : "plug",
+      "unicode" : "f1e6",
+      "type" : "SOLID"
+    },
+    "title" : "Channel Management",
+    "description" : "— Get discovered by more guests"
+  } ]
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "CTA",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "cta.button_text",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "More detail"
+  }, {
+    "id" : "cta.button_link",
+    "name" : "button_link",
+    "label" : "Button Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "id" : "cta.show_arrow",
+    "name" : "show_arrow",
+    "label" : "Show arrow icon",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button_text" : "More detail",
+    "button_link" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    },
+    "show_arrow" : true
+  }
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.button_kind",
+    "name" : "button_kind",
+    "label" : "Button Style",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "primary", "Primary" ], [ "secondary", "Secondary" ], [ "tertiary", "Tertiary" ], [ "ghost", "Ghost" ], [ "industry_report", "Industry Report (Blue #0960F6)" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "industry_report"
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button_kind" : "industry_report"
+  }
+} ]

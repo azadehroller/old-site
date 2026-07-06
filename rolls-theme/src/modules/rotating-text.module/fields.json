@@ -1,0 +1,203 @@
+[ {
+  "id" : "2f9fc1e4-d423-d55d-6b65-8bcedf0a9f56",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "16e32264-0cdd-bb3c-564a-ccef98f65c1a",
+    "name" : "rotating_text_length",
+    "label" : "Rotating Text length",
+    "inline_help_text" : "The CH unit (character unit) limits the width of text elements by restricting the number of characters per line, preventing eye strain. It's based on the width of the digit zero in a specific font. For example, 10ch in Times New Roman limits the width to 10 zeros of that font.",
+    "required" : false,
+    "locked" : false,
+    "display" : "slider",
+    "min" : 10,
+    "max" : 80,
+    "step" : 1,
+    "type" : "number",
+    "display_width" : null,
+    "default" : 10
+  }, {
+    "id" : "5e37450a-bb1c-f183-28de-03d8d30fc440",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : true,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "light", "OnDark" ], [ "dark", "OnLight" ], [ "gxscore", "GxScore" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "dark"
+  }, {
+    "id" : "f43369fa-e4d9-28ee-2dbe-1e4564c2086c",
+    "name" : "textalignment",
+    "label" : "Text alignment",
+    "required" : false,
+    "locked" : false,
+    "type" : "textalignment",
+    "display_width" : null,
+    "default" : {
+      "text_align" : "CENTER"
+    }
+  }, {
+    "id" : "516952f4-bb18-4a7f-433f-3651ee0d99b5",
+    "name" : "eyebrow_type",
+    "label" : "Eyebrow Type",
+    "inline_help_text" : "Select the Heading Type, H1, H2, H3, H4 and etc. <br>\nFor more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ], [ "div", "div" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "div"
+  }, {
+    "id" : "248f3a7d-cf1c-8153-afd4-4cbd0065f284",
+    "name" : "heading_type",
+    "label" : "Heading Type",
+    "inline_help_text" : "Select the Heading Type, H1, H2, H3, H4 and etc. <br>\nFor more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null
+  }, {
+    "id" : "d74db4ec-4012-d209-c21e-3f767234b3c1",
+    "name" : "display_type",
+    "label" : "Display Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ], [ "s8", "S8" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null
+  }, {
+    "id" : "c280ad28-2679-a845-56b5-232622bfbc9b",
+    "name" : "text_type",
+    "label" : "Text Type",
+    "inline_help_text" : "For more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "2xl", "S3" ], [ "lg", "S2" ], [ "base", "S1" ], [ "sm", "S0" ], [ "xs", "s00" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "rotating_text_length" : 10,
+    "theme" : "dark",
+    "textalignment" : {
+      "text_align" : "CENTER"
+    },
+    "eyebrow_type" : "div"
+  }
+}, {
+  "id" : "c7f72ca0-29f3-144f-b549-d55f2aa81d70",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "f6ca9071-c41e-2b8a-1d1e-73439d25d667",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "CUSTOMIZED TO YOUR VENUE"
+  }, {
+    "id" : "b4bd5b93-4719-e726-7ea0-0647b85320ad",
+    "name" : "title",
+    "label" : "Title",
+    "required" : true,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Implementation Services"
+  }, {
+    "id" : "bd7f65ce-046e-2e79-4503-5d9018965204",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice &amp; guided training sessions to get the most value from ROLLER."
+  }, {
+    "id" : "c52e588f-9050-b041-e043-2037470355ec",
+    "name" : "rotating_text",
+    "label" : "Rotating Text",
+    "help_text" : "You need to provide more than one item for the rotating to work.",
+    "inline_help_text" : "You need to provide more than one item for the rotating to work.",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 0,
+      "max" : null,
+      "sorting_label_field" : "87d04bb9-40f8-783d-d06a-5d4d5e0e84af",
+      "default" : 0
+    },
+    "visibility" : {
+      "controlling_field" : null,
+      "controlling_field_path" : "styles.rotating_text_length",
+      "controlling_value_regex" : null,
+      "property" : null,
+      "operator" : null,
+      "access" : null
+    },
+    "children" : [ {
+      "id" : "87d04bb9-40f8-783d-d06a-5d4d5e0e84af",
+      "name" : "rotating_text_item",
+      "label" : "Rotating Text Item",
+      "help_text" : "You need to provide more than one item for the rotating to work.",
+      "inline_help_text" : "You need to provide more than one item for the rotating to work.",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "CUSTOMIZED TO YOUR VENUE",
+    "title" : "Implementation Services",
+    "text" : "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice &amp; guided training sessions to get the most value from ROLLER.",
+    "rotating_text" : [ ]
+  }
+} ]

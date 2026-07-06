@@ -1,0 +1,253 @@
+/* Open Jobs list inside tabs */
+.tabs-container.open-jobs .open-jobs__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tabs-container.open-jobs .open-jobs__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #033180;
+  margin-left: 0;
+  gap: 32px;
+}
+
+.tabs-container.open-jobs .open-jobs__item:first-child {
+  border-top: 1px solid #033180;
+}
+
+.tabs-container.open-jobs .open-jobs__info {
+  flex: 1;
+}
+
+.tabs-container.open-jobs .open-jobs__title {
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1E3A8A;
+  line-height: 1.4;
+}
+
+.tabs-container.open-jobs .open-jobs__location {
+  margin: 0;
+  color: #1E3A8A;
+  font-weight: 400;
+    font-size: 16px;
+}
+.tabs-container.open-jobs .open-jobs__link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1E3A8A;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.tabs-container.open-jobs .open-jobs__link:hover {
+  text-decoration: underline;
+  .open-jobs__link-arrow{
+  transform: translateX(8px);
+}
+}
+
+.tabs-container.open-jobs .open-jobs__link-arrow {
+  transition: all .35s;
+  transform: translateX(0);
+}
+
+.tabs-container.open-jobs .open-jobs__loading,
+.tabs-container.open-jobs .open-jobs__no-jobs {
+  padding: 40px 0;
+  text-align: center;
+  color: #6B7280;
+  font-size: 16px;
+}
+
+.tabs-container.open-jobs .open-jobs__error {
+  padding: 20px;
+  background-color: #FEF2F2;
+  border-radius: 8px;
+  color: #DC2626;
+  text-align: center;
+}
+
+
+/* Tabs Module Additional Styles */
+
+.tabs-container {
+  --tabs-primary-color: #0960F6;
+  --tabs-dark-color: #033180;
+  --tabs-light-bg: #F5F8FF;
+  --tabs-white: #FFFFFF;
+}
+.tabs-container {
+  width: 100%;
+}
+
+/* Tab Selector */
+.tabs-selector {
+/*    display: flex; */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 16px;
+  margin-bottom: 32px;
+  background-color: #F5F8FF;
+  border-radius: 100vw;
+  &.open-jobs-selector{
+margin-bottom: 24px;
+}
+}
+@media screen and (min-width: 433px){
+  .tabs-container.open-jobs .open-jobs__location,.tabs-container.open-jobs .open-jobs__title{
+    font-size: 18px;
+  }
+
+}
+@media screen and (min-width: 786px){
+    .tabs-selector{margin-bottom: 48px;}
+.tabs-selector{
+ &.open-jobs-selector{
+margin-bottom: 32px;
+}
+  }
+  .tabs-container.open-jobs .open-jobs__title {
+  margin-bottom: 16px;
+}
+}
+.tab-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.tab-button {
+  color: #033180;
+}
+
+.tab-button.active {
+  background-color: #0960F6;
+  color: #FFFFFF;
+  border-radius: 100vw;
+
+}
+
+/* Underline Style */
+.tab-button.underline {
+  background-color: transparent;
+  color: #033180;
+  border-radius: 0;
+  padding: 8px 16px;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button.underline:hover {
+  border-bottom-color: #033180;
+}
+
+.tab-button.underline.active {
+  color: #0960F6;
+  border-bottom-color: #0960F6;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+
+.tab-description {
+  color: #033180;
+  max-width: 100%;
+}
+
+.tab-description p {
+  margin: 0;
+}
+
+/* CTA Button */
+.tab-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #033180;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tab-cta:hover {
+  color: #033180;
+  .tab-cta-icon{
+   transform: translateX(8px);
+}
+}
+
+.tab-cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background-color: #0960F6;
+  border-radius: 980px;
+  transition: all 0.3s ease;
+   transform: translateX(0)
+}
+
+.tab-cta:hover .tab-cta-icon {
+  background-color: #033180;
+}
+
+.tab-cta-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Focus styles for accessibility */
+.tab-button:focus {
+  outline: 2px solid var(--tabs-primary-color);
+  outline-offset: 2px;
+}
+
+.tab-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.tab-button:focus-visible {
+  outline: 2px solid var(--tabs-primary-color);
+  outline-offset: 2px;
+}
+
+/* Animation for tab content */
+.tab-content {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-content.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.tab-heading {
+  color: #033180;
+  margin-bottom: 24px;
+}

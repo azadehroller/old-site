@@ -1,0 +1,80 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+{% import "../../templates/macros/macros.html" as image %}
+
+{# Variables #}
+{% set thumbnail = module.thumbnail %}
+{% set cta_label = module.cta_label %}
+{% set video_id = module.video_id %}
+
+{# Styles #}
+{% set border = module.style.border%}
+{% set shadow = module.style.light_background_shadow%}
+
+
+
+{% require_css %}
+    <style>
+    {% scope_css %}
+        .wistia_click_to_play { width: 100%; height: 100%; }
+        .wistia_click_to_play:hover span:before { background: #fff; }
+        /* Reserve space to prevent layout shift */
+        .relative.max-w-\[548px\] {
+            aspect-ratio: 548 / 310;
+            contain: layout;
+      
+        }
+  .relative.inner-wrapper{
+    max-width:640px
+}
+@media screen and (min-width: 1201px){
+      .relative.inner-wrapper{
+    max-width:450px
+}
+      }
+      @media screen and (min-width: 1440px){
+      .relative.inner-wrapper{
+    max-width: 640px
+}
+      }
+      .shadow-on-light{
+        box-shadow: 0 24px 40px 0 rgba(7, 77, 197, 0.10), 0 8px 16px 0 rgba(7, 77, 197, 0.05);
+      }
+      .dnd-section .dnd-column:has(.relative.image-video-modal.inner-wrapper){padding: 0px;}
+    {% end_scope_css %}
+    </style>
+{% end_require_css %}
+
+<div id="image-video-modal-{{name}}" class="inline">
+    {# Container with max width and relative positioning #}
+    <div class="relative image-video-modal inner-wrapper max-w-[548px]">
+        {# Thumbnail image container #}
+        <div>
+            <img src="{{ resize_image_url(thumbnail.src|escape_html, 548, 310, 548) }}" 
+                 alt="{{thumbnail.alt}}" 
+                 class="w-full relative rounded-3xl {% if !border %}border border-[#0960F6]{% endif %}  {% if shadow %} shadow-on-light {% else %} box-shadow-ondark-blue-10-nohover{% endif %}" 
+                 width="548" 
+                 height="310" 
+                 loading="{{ thumbnail.loading|default('lazy') }}"
+                 fetchpriority="high"
+                 decoding="async">
+        </div>
+        {# Video player overlay centered absolutely #}
+        <div 
+            class="wistia_embed wistia_async_{{ video_id }} top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute w-full h-full flex justify-center items-center popover=true popoverContent=html" 
+            id="wistia-{{ video_id }}-{{loop.index}}"
+            role="button"
+            aria-label="Play video"
+            data-video={{ video_id }}
+            >
+                <span 
+                    id="{{ video_id }}"
+                    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] md:w-[120px] md:h-[120px] flex items-center justify-center before:absolute before:w-[100px] before:h-[100px] before:md:w-[120px] before:md:h-[120px] before:rounded-full before:backdrop-blur-sm before:bg-neutral-white/40 before:top-0 before:left-0 before:block -z-10 before:transition-all before:ease-in-out before:duration-300 hover:before:bg-neutral-white"
+                    onclick="return false;"
+                >
+                    <svg class="relative ms-[0.5rem] hidden md:block" width="44" height="55" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M42.911 27.933c-.247.584-.963 1.044-2.396 1.963L5.212 52.54c-1.643 1.054-2.465 1.58-3.144 1.532a2.044 2.044 0 0 1-1.49-.818c-.409-.546-.409-1.522-.409-3.476V4.49c0-1.954 0-2.93.409-3.476a2.05 2.05 0 0 1 1.49-.817c.68-.05 1.5.477 3.144 1.53l35.303 22.644c1.433.919 2.15 1.379 2.396 1.963a2.053 2.053 0 0 1 0 1.6v-.002Z" fill="#0960F6"/></svg>
+                    <svg class="relative ms-[0.5rem] block md:hidden" width="37" height="46" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M36.093 23.777c-.206.487-.803.87-1.997 1.636l-29.42 18.87c-1.369.877-2.053 1.316-2.62 1.276a1.704 1.704 0 0 1-1.241-.681c-.34-.455-.34-1.269-.34-2.897V4.243c0-1.629 0-2.442.34-2.897A1.71 1.71 0 0 1 2.057.665c.566-.042 1.25.398 2.62 1.276L34.095 20.81c1.194.766 1.791 1.149 1.997 1.636.18.426.18.906 0 1.332Z" fill="#0960F6"/></svg>
+                </span>
+            </div>
+    </div>
+</div>

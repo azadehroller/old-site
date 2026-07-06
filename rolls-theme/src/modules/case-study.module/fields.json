@@ -1,0 +1,270 @@
+[ {
+  "id" : "story_segments",
+  "name" : "story_segments",
+  "label" : "Story sections",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "story_segments.title",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "story_segments.section_id",
+    "name" : "section_id",
+    "label" : "Section ID (anchor)",
+    "help_text" : "Optional. Adds an id attribute to this section so it can be linked to, e.g. #the-challenge.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.eyebrow",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.content",
+    "name" : "content",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.quote_body",
+    "name" : "quote_body",
+    "label" : "Quote",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.quote_credit_name",
+    "name" : "quote_credit_name",
+    "label" : "Quote attribution — name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.quote_credit_role",
+    "name" : "quote_credit_role",
+    "label" : "Quote attribution — role",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "story_segments.body_after_quote",
+    "name" : "body_after_quote",
+    "label" : "Text after quote",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "section_id" : "",
+    "eyebrow" : "THE PROBLEM",
+    "title" : "The Challenge for Area51",
+    "content" : "<p>Lorem ipsum dolor sit amet consectetur. Sem augue ut eu nisl. Venenatis leo malesuada morbi semper urna vestibulum condimentum eu diam. Volutpat fames sit justo mattis maecenas vitae netus. Donec lacinia vitae ullamcorper convallis. Id ullamcorper consequat nunc in enim nisl volutpat egestas dolor. Facilisis mi volutpat eget molestie. Convallis pulvinar rhoncus vitae ipsum. Semper sed consectetur pulvinar a magna. Metus placerat neque ut tempus viverra laoreet nunc volutpat.</p><p>Pellentesque pulvinar sagittis morbi ullamcorper vitae varius. Imperdiet nulla pretium blandit non vulputate quis et nulla ultrices. Integer dolor pretium donec ultrices vestibulum eget et nulla scelerisque. In facilisi suscipit tellus ut suspendisse sed. Consectetur nisl sed nibh magnis lacus diam. Tortor elementum eu sapien nunc. Convallis sodales lectus fermentum vulputate eu. Eget proin nunc feugiat nulla lorem sem. Sit vel lectus magna et dui pellentesque justo. Laoreet ligula ac etiam eget erat vulputate proin non ultrices. Varius vivamus rhoncus lorem varius in in.</p>",
+    "quote_body" : "<p>We move at such a drastic pace, manage multiple locations day to day operation. Our last system was really clunky, so it was really hard to move from A to B without going through too many loopholes.</p>",
+    "quote_credit_name" : "Michael Affleck",
+    "quote_credit_role" : "Chief Operating Officer, Area51",
+    "body_after_quote" : "<p>Nunc turpis pretium leo mauris velit nunc a. Sem quis viverra elementum placerat eget. Sit scelerisque faucibus suscipit morbi sagittis. Varius tincidunt consectetur orci nisl condimentum nam odio. Leo vitae bibendum aliquet faucibus morbi augue.</p><p>Amet nibh interdum faucibus et in mattis sodales blandit ut. Neque mauris feugiat id amet. Netus nec maecenas congue pretium. Non gravida molestie nunc diam eu scelerisque amet ipsum. Proin sit nunc ornare diam sed volutpat nibh. Mauris aliquam amet sollicitudin eget. Ut sed velit sodales habitant faucibus et. Aliquam egestas hendrerit placerat malesuada lacus et in.</p><p>Quis dapibus dignissim neque enim orci at amet. Maecenas non egestas adipiscing purus ultrices ornare. In consequat neque nullam ut tempus amet sagittis. At diam nullam faucibus non id. In volutpat eget turpis proin in egestas odio et cras. Sit sem lacinia ut pulvinar. Nunc pretium mauris vitae diam enim lectus. Suspendisse vel ultrices id sed amet semper purus. Sed nullam egestas consequat sed sed praesent sit lacus. Odio sed mauris rhoncus eget mauris adipiscing maecenas tincidunt dictum. Est aenean eu sollicitudin senectus ullamcorper sit mattis nec enim.</p>"
+  }, {
+    "section_id" : "",
+    "eyebrow" : "THE SOLUTION",
+    "title" : "The Challenge for Area51",
+    "content" : "<p>Lorem ipsum dolor sit amet consectetur. Sem augue ut eu nisl. Venenatis leo malesuada morbi semper urna vestibulum condimentum eu diam. Volutpat fames sit justo mattis maecenas vitae netus. Donec lacinia vitae ullamcorper convallis. Id ullamcorper consequat nunc in enim nisl volutpat egestas dolor. Facilisis mi volutpat eget molestie. Convallis pulvinar rhoncus vitae ipsum. Semper sed consectetur pulvinar a magna. Metus placerat neque ut tempus viverra laoreet nunc volutpat.</p>",
+    "quote_body" : "<p>We know ROLLER will take off most of our workload. We can focus on the best thing of all, which is people. We had 15,000 people come through our doors in the first two weeks.</p>",
+    "quote_credit_name" : "Michael Affleck",
+    "quote_credit_role" : "Chief Operating Officer, Area51",
+    "body_after_quote" : "<p>Pellentesque pulvinar sagittis morbi ullamcorper vitae varius. Imperdiet nulla pretium blandit non vulputate quis et nulla ultrices. Integer dolor pretium donec ultrices vestibulum eget et nulla scelerisque. In facilisi suscipit tellus ut suspendisse sed. Consectetur nisl sed nibh magnis lacus diam. Tortor elementum eu sapien nunc. Convallis sodales lectus fermentum vulputate eu. Eget proin nunc feugiat nulla lorem sem. Sit vel lectus magna et dui pellentesque justo. Laoreet ligula ac etiam eget erat vulputate proin non ultrices. Varius vivamus rhoncus lorem varius in in.</p><p>Nunc turpis pretium leo mauris velit nunc a. Sem quis viverra elementum placerat eget. Sit scelerisque faucibus suscipit morbi sagittis. Varius tincidunt consectetur orci nisl condimentum nam odio. Leo vitae bibendum aliquet faucibus morbi augue.</p><p>Amet nibh interdum faucibus et in mattis sodales blandit ut. Neque mauris feugiat id amet. Netus nec maecenas congue pretium. Non gravida molestie nunc diam eu scelerisque amet ipsum. Proin sit nunc ornare diam sed volutpat nibh. Mauris aliquam amet sollicitudin eget. Ut sed velit sodales habitant faucibus et. Aliquam egestas hendrerit placerat malesuada lacus et in.</p><p>Quis dapibus dignissim neque enim orci at amet. Maecenas non egestas adipiscing purus ultrices ornare. In consequat neque nullam ut tempus amet sagittis. At diam nullam faucibus non id. In volutpat eget turpis proin in egestas odio et cras. Sit sem lacinia ut pulvinar. Nunc pretium mauris vitae diam enim lectus. Suspendisse vel ultrices id sed amet semper purus. Sed nullam egestas consequat sed sed praesent sit lacus. Odio sed mauris rhoncus eget mauris adipiscing maecenas tincidunt dictum. Est aenean eu sollicitudin senectus ullamcorper sit mattis nec enim.</p>"
+  }, {
+    "section_id" : "",
+    "eyebrow" : "",
+    "title" : "",
+    "content" : "",
+    "quote_body" : "<p>I don't worry, I don't care, I don't stress. What works best for us is able to utilize the all in one system that ROLLER has.</p>",
+    "quote_credit_name" : "Michael Affleck",
+    "quote_credit_role" : "Chief Operating Officer, Area51",
+    "body_after_quote" : ""
+  } ]
+}, {
+  "id" : "result_label",
+  "name" : "result_label",
+  "label" : "Result — label",
+  "help_text" : "Shown as emphasized text (not a heading).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "THE RESULT"
+}, {
+  "id" : "result_stats",
+  "name" : "result_stats",
+  "label" : "Result — stats",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "result_stats.stat_value",
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "result_stats.stat_value",
+    "name" : "stat_value",
+    "label" : "Value",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "result_stats.stat_label",
+    "name" : "stat_label",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "stat_value" : "136",
+    "stat_label" : "party bookings in 24 hrs"
+  }, {
+    "stat_value" : "15k",
+    "stat_label" : "guests in first 2 weeks"
+  }, {
+    "stat_value" : "5min",
+    "stat_label" : "to train new staff on reception"
+  }, {
+    "stat_value" : "19",
+    "stat_label" : "venues targeted by end of 2028"
+  } ]
+}, {
+  "id" : "result_logo",
+  "name" : "result_logo",
+  "label" : "Result — powered by logo",
+  "help_text" : "Small lockup shown at the bottom of the result card, e.g. a 'Powered by ROLLER' image.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : false,
+  "resizable" : false,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "size_type" : "auto",
+    "src" : "",
+    "alt" : "Powered by ROLLER",
+    "loading" : "lazy",
+    "width" : 140,
+    "height" : 24,
+    "max_width" : 140,
+    "max_height" : 24
+  }
+}, {
+  "id" : "product_tags_label",
+  "name" : "product_tags_label",
+  "label" : "Product tags — label",
+  "help_text" : "Shown as emphasized text (not a heading).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "ROLLER PRODUCT USED"
+}, {
+  "id" : "product_tags",
+  "name" : "product_tags",
+  "label" : "Product tags",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "product_tags.tag_label",
+    "default" : 0
+  },
+  "children" : [ {
+    "id" : "product_tags.tag_label",
+    "name" : "tag_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "product_tags.tag_icon",
+    "name" : "tag_icon",
+    "label" : "Icon",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : false,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy",
+      "width" : 24,
+      "height" : 24,
+      "max_width" : 24,
+      "max_height" : 24
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+} ]

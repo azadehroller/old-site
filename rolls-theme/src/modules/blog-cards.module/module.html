@@ -1,0 +1,174 @@
+{# Step 1: Collect all post IDs from all sections #}
+{% set all_post_ids = [] %}
+{% set all_post_ids_test = [] %}
+{% for section in module.blog_sections %}
+  {% for slug_entry in section.post_slugs %}
+    {% do all_post_ids.append(slug_entry.slug) %}
+    {% do all_post_ids_test.append(page_field) %}
+  {% endfor %}
+{% endfor %}
+<!-- <code>{{all_post_ids_test|pprint}}</code> -->
+{# Step 2: Fetch all posts in one call #}
+{% set posts_by_id = content_by_ids(all_post_ids) %}
+<div class="blog-group-menu-container">
+  <div class="blog-group-menu-wrapper">
+    <div>
+    <ul class="blog-group-menu gap-4">
+      <li>
+        <button data-select="all" class="active">All</button>
+      </li>
+      {% for section in module.blog_sections %}
+        <li>
+          <button data-select="{{ section.section_subtitle|lower|replace(' ', '_') }}">{{ section.section_subtitle }}</button>
+        </li>
+      {% endfor %}
+    </ul>
+      </div>
+  </div>
+</div>
+<div class="blog-group-posts">
+  <div data-item="all" class="blog-group-container gap-6">
+    {% for section in module.blog_sections %}
+      <section class="blog-group-card">
+        <div class="side-icon">
+          {% if section.icon %}
+            <img src="{{ section.icon.src }}" />
+          {% else %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="124" height="124" viewBox="0 0 124 124" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M90.417 23.25C96.462 23.25 102.765 24.025 108.5 25.8333C112.375 27.125 115.734 28.675 118.834 31V106.433C118.834 107.725 117.542 109.017 116.25 109.017C115.734 109.017 115.475 109.017 114.959 108.758C107.725 104.883 98.942 103.333 90.417 103.333C81.6337 103.333 68.9753 106.692 62.0003 111.083C54.5087 105.4 43.6587 103.333 33.5837 103.333C26.092 103.333 16.017 105.658 9.04199 109.017C8.78366 109.017 8.58991 109.081 8.39616 109.146C8.20241 109.21 8.00866 109.275 7.75033 109.275C6.45866 109.275 5.16699 107.983 5.16699 106.692V31C12.6587 25.3167 23.5087 23.25 33.5837 23.25C43.6587 23.25 54.5087 25.3167 62.0003 31C69.492 25.3167 80.342 23.25 90.417 23.25ZM90.417 93C96.617 93 102.817 93.775 108.5 95.5833V36.1667C102.817 34.3583 96.617 33.5833 90.417 33.5833C81.6337 33.5833 68.9753 36.9417 62.0003 41.3333V100.75C68.9753 96.3583 81.6337 93 90.417 93Z" fill="#CEDFFD"/>
+            </svg>
+          {% endif %}
+        </div>
+
+        <div class="listing">
+          <header>
+            <h2 class="uppercase font-extrabold small text-[#0960F6]">{{ section.section_subtitle }}</h2>
+            <h3 class="font-bold leading-tight">{{ section.section_title }}</h3>
+            <p>{{ section.section_description }}</p>
+          </header>
+          {% set unique_class = "resource-links-" ~ loop.index0 %}
+          <ul class="resource-links {{ section.section_blog_types }} {{ unique_class }}">
+            <style>
+              .{{ unique_class }} li:before {
+                background: url('{{ get_asset_url("rolls-theme/images/" ~ (section.section_blog_types || "v1") ~ ".svg") }}') no-repeat center center;
+              }
+            </style>
+            {% for slug_entry in section.post_slugs %}
+              {% set link = slug_entry.link.url %}
+              {% set title = slug_entry.title %}
+              {% set post = posts_by_id[slug_entry.slug] %}
+              <li>
+              {% if post && post.absolute_url  %}
+                <a href="{{ post.absolute_url   }}" class="flex items-start gap-3 text-[#0960F6] hover:text-[#074DC5] transition-colors duration-200 group resource-link">
+                  
+                  {{ post.name  }}
+                </a>
+                {% else if link  %}
+                <a href="{{ link   }}" class="flex items-start gap-3 text-[#0960F6] hover:text-[#074DC5] transition-colors duration-200 group resource-link">
+                  {{ title }}
+                </a>
+              {% else %}
+                <em><b>Error post not found:</b> </em>
+              {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+
+          <footer>
+            <button data-select="{{ section.section_subtitle|lower|replace(' ', '_') }}" class="gap-2 inline-flex items-center cursor-pointer tracking-tight font-semibold text-md sm:w-auto justify-center test whitespace-nowrap bg-neutral-white rounded-3xl py-2 px-3 pl-4 border-[1px] text-[#0960F6] border-[#0960F6] button-with-arrow-inside">
+              More detail
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                <path fill="#0960F6" d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8Z"/>
+              </svg>
+            </button>
+          </footer>
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+
+  {% for section in module.blog_sections %}
+    <div data-item="{{ section.section_subtitle|lower|replace(' ', '_') }}" class="blog-post-group hidden">
+      <header>
+        <h2>{{ section.section_title }}</h2>
+        <p>{{ section.section_description }}</p>
+      </header>
+
+      {% for slug_entry in section.post_slugs %}
+        {% set post = posts_by_id[slug_entry.slug] %}
+        {% set title = slug_entry.title %}
+        {% set image = slug_entry.image %}
+        {% set summary = slug_entry.summary %}
+        {% set link = slug_entry.link.url %}
+
+          
+          <article class="blog-post-detailed">
+            {% if post && post.featured_image  %}
+              <header style="background-image: url('{{ post.featured_image  }}')">
+            {% else if image  %} 
+                <header style="background-image: url('{{ image.src }}')">
+            {% endif %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none">
+              <path fill="#fff" fill-rule="evenodd" d="M8 2.666h10.667l8 8v16c0 1.467-1.2 2.667-2.666 2.667H7.987a2.663 2.663 0 0 1-2.653-2.667V5.333c0-1.467 1.2-2.667 2.667-2.667Zm2.667 21.333h10.667v-2.666H10.667v2.666Zm10.667-5.333H10.667v-2.667h10.667v2.667Zm-4-14v7.333h7.333l-7.333-7.333Z" clip-rule="evenodd"/>
+            </svg>
+            {% if post && post.name %}
+              <h3>{{ post.name  }}</h3>
+            {% else if  title %}
+              <h3>{{ title }}</h3>
+            {% endif %}
+         
+            </header>
+            <div class="content">
+              {% set clean_text = post.post_summary | striptags %}
+              {% set truncated = clean_text|truncate(300, False, '') %}
+              {% set remaining = clean_text[truncated|length:] %}
+              {% set new_clean_text = summary | striptags %}
+              {% set new_truncated = new_clean_text|truncate(300, False, '') %}
+              {% set new_remaining = new_clean_text[truncated|length:] %}
+  
+              <p class="truncatable">
+                {% if post && post.post_summary %}
+                  {{ truncated }}
+                {% else if   summary %}
+                  {{ new_truncated }}
+                {% endif %}
+               
+                <span class="more-container">
+                  <span class="ellipsis">… </span>
+                  <span class="more-text">
+                    {% if post  && post.post_summary %}
+                       {{ remaining }}
+                    {% else if summary  %}
+                      {{ new_remaining }}
+                    {% endif %}
+                 
+                  </span>
+<!--                   <button class="toggle-more">more</button> -->
+                </span>
+              </p>
+              {% if post && post.absolute_url %}
+                 <a href="{{ post.absolute_url }}" target="_blank" class="link-and-arrow">
+                  Read more 
+                  <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                      <path fill="#fff" d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8Z"/>
+                    </svg>
+                  </i>
+                </a>
+              {% else if link  %}
+              
+                <a href="{{ link }}" target="_blank" class="link-and-arrow">
+                  Read more 
+                  <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+                      <path fill="#fff" d="m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8Z"/>
+                    </svg>
+                  </i>
+                </a>
+              {% endif %}
+            </div>
+          </article>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>

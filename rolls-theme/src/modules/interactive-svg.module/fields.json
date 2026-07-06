@@ -1,0 +1,21 @@
+[ {
+  "id" : "svg_content",
+  "name" : "svg_content",
+  "label" : "SVG Code",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : true,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "enable_animation",
+  "name" : "enable_animation",
+  "label" : "Enable Animation",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+} ]

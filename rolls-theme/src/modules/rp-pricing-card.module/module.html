@@ -1,0 +1,537 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+
+{# Cards #}
+{% set cards = module.cards %}
+{% set cardColItems = cardColItems %}
+
+{# Fees #}
+{% set fees = module.table %}
+
+{# Content #}
+{% set eyebrow  = module.content.eyebrow %}
+{% set title  = module.content.title %}
+{% set text  = module.content.text %}
+
+{# Styles #}
+{% set theme = module.styles.content.theme %}
+{% set heading_type = module.styles.content.heading_type %}
+{% set alignment = module.styles.content.textalignment.text_align %}
+{% set text_type = module.styles.content.text_type %}
+{% set eyebrow_type = module.styles.content.eyebrow_type %}
+{% set display_type = module.styles.content.display_type %}
+
+{% macro heading(tag, title, display_tag)%}
+<{{tag || "h1"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {% if tag == 'h1'%}text-balance{%endif%}">{{title || "ROLLER Payments"}}</{{tag || "h1"}}>
+{% endmacro%}
+
+{% macro eyebrow(tag, eyebrow_type)%}
+<{{tag || "div"}} class="bg-pill-gradient from-primary-50 to-secondary-60 bg-clip-text text-lg font-extrabold text-transparent px-4 py-2 {% if eyebrow_type %}small{% endif %}">{{ eyebrow || "ROLLER Payment"}}</{{tag || "div"}}>
+{% endmacro%}
+
+{# Styles #}
+{% set button_styles_kind = module.styles.button.kind %}
+{% set button_styles_icon_position = module.styles.button.icon_position %}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+
+        #js-rp-prices-{{name}} > span {
+            display: none;
+        }
+
+        #js-rp-prices-{{name}} > span.-active {
+            display: inline;
+        }
+
+        .fee-title:hover .tooltip {
+            opacity: 1;
+            transition-timing-function: cubic-bezier(.165,.84,.44,1);
+            transform: translateY(calc(-100% - 1px));
+        }
+
+        .tooltip {
+            opacity: 0;
+            position: absolute;
+            left: -16px;
+            right: -10px;
+            top: 0;
+            border-radius: 8px;
+            pointer-events: none;
+            background: #fff;
+            color: #033180;
+            font-weight: 600;
+            transition: transform, opacity, .15s ease-in-out;
+            transform-origin: 20px calc(100% + 12px);
+            transform: translateY(calc(-100% + 10px)) scale(.75);
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+        }
+
+        .tooltip:before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 34px;
+            width: 12px;
+            height: 12px;
+            transform: rotate(45deg);
+            border-radius: 0 0 4px 0;
+            background-color: inherit;
+            box-shadow: 3px 3px 5px rgba(82,95,127,.04);
+        }
+
+        .tooltip-right {
+            width: fit-content;
+            transform-origin: right calc(100% + 20px);
+        }
+        
+        .tooltip-right:before {
+            content: "";
+            position: absolute;
+            left: calc(100% - 40px);
+        }
+
+        .tooltip-middle {
+            left: -40px;
+            right: -40px;
+            width: fit-content;
+            transform-origin: center bottom;
+        }
+
+        .tooltip-middle:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+        }
+
+      {# Button wrapper #}
+      {% if alignment %}
+        .button-wrapper {
+          text-align: {{ alignment.horizontal_align }};
+        }
+      {% endif %}
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+<section id="rp-pricing-{{name}}" class="grid gap-5 scroll-mt-10">
+    <div class="flex flex-col lg:grid lg:grid-cols-4 gap-5">
+        <header class="grid gap-4 text-{{alignment|lower || "left"}} {{ theme == 'light' ? "text-neutral-white" : "text-primary-50" }}">
+            {% if eyebrow %}
+                <div class="w-fit relative inline-flex justify-center items-center border-gradient border-gradient-purple border-4 border-transparent rounded-[61.25rem]">
+                    {{ eyebrow(eyebrow_type, eyebrow) }}
+                </div>
+            {% endif %}
+            {{ heading(heading_type, title, display_type) }}
+            {% if text %}
+                <div class="text-{{text_type}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4 [&>ul>li]:ml-2">{{ text || "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice & guided training sessions to get the most value from ROLLER." }}</div>
+            {% endif %}
+        </header>
+        <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-{{ cards|length }} justify-center gap-4 md:gap-3 lg:gap-5 md:mx-auto my-4">
+            {% for card in cards %}
+                {# Header title #}
+                {% set title = card.header.content.title %}
+                {% set subtitle = card.header.content.subtitle %}
+                {% set network_fee = card.header.content.network_fee %}
+                {% set network_fee_anchor_link = card.header.content.network_fee_anchor_link.url.href %}
+
+                {# Header Prices #}
+                {% set credit_card_fees_usd = card.header.price.credit_card_fees.usd %}
+                {% set credit_card_fees_aud = card.header.price.credit_card_fees.aud %}
+                {% set credit_card_fees_eur = card.header.price.credit_card_fees.eur %}
+                {% set credit_card_fees_gbp = card.header.price.credit_card_fees.gbp %}
+                {% set credit_card_fees_cad = card.header.price.credit_card_fees.cad %}
+                {% set transaction_fees_usd = card.header.price.transaction_fees.usd %}
+                {% set transaction_fees_aud = card.header.price.transaction_fees.aud %}
+                {% set transaction_fees_eur = card.header.price.transaction_fees.eur %}
+                {% set transaction_fees_gbp = card.header.price.transaction_fees.gbp %}
+                {% set transaction_fees_cad = card.header.price.transaction_fees.cad %}
+
+                {# Tooltip #}
+                {% set credit_card_fees_tooltip = card.header.price.credit_card_fees.tooltip %}
+                {% set transaction_fees_tooltip = card.header.price.transaction_fees.tooltip %}
+
+                {# Features #}
+                {% set features_items = card.features.feature_items %}
+                {% set features_icon = card.features.icon %}
+                {% set heading = card.features.heading %}
+
+                {# Button #}
+                {% set button_label = card.button.button_label %}
+                {% set button_url_type =  card.button.link.url.type %}
+                {% set button_href =  card.button.link.url.href %}
+                {% set button_rel = [] %}
+                {% set button_no_follow =  card.button.link.no_follow %}
+                {% set button_new_tab =  card.button.link.open_in_new_tab %}
+                {% set button_icon = card.button.icon %}
+
+                {% if button_url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set {% set button_href =  card.button.link.url.href %}
+                = 'mailto:' + href %}
+                {% endif %}
+                {% if button_no_follow %}
+                {% do rel.append('nofollow') %}
+                {% endif %}
+                {% if button_new_tab %}
+                {% do rel.append('noopener') %}
+                {% endif %}
+
+            <div class="text-center bg-neutral-white rounded-[32px] box-shadow-onlight p-5 relative flex flex-col justify-center gap-5">
+                <div class="flex flex-col gap-y-3">
+                    <div class="text-lg uppercase font-extrabold text-secondary-50">{{ title }}</div>
+                    <div class="text-base text-primary-50">{{ subtitle }}</div>
+                    <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2">
+                            <h2 class="flex flex-row justify-center tracking-tighter">
+                                <span id="js-rp-prices-{{name}}" class="text-primary-50 fee-title relative">
+                                    <span class="-usd -active">{{ credit_card_fees_usd }}+</span>
+                                    <span class="-aud">{{ credit_card_fees_usd || "1%" }}+</span>
+                                    <span class="-gbp">{{ credit_card_fees_usd || "1%" }}+</span>
+                                    <span class="-eur">{{ credit_card_fees_usd || "1%" }}+</span>
+                                    <span class="-ca">{{ credit_card_fees_usd || "1%" }}+</span>
+                                    {% if credit_card_fees_tooltip %}
+                                        <div class="tooltip tooltip-middle box-shadow-onlight">{{ credit_card_fees_tooltip || 'Visa & Mastercard fees' }}</div>
+                                    {% endif %}
+                                </span>
+                                <span id="js-rp-prices-{{name}}" class="flex font-extrabold text-primary-50 fee-title relative">
+                                    <span class="-usd -active">{{ transaction_fees_usd || "25¢" }}</span>
+                                    <span class="-aud">{{ transaction_fees_aud || "25¢" }}</span>
+                                    <span class="-gbp">{{ transaction_fees_gbp || "25¢" }}</span>
+                                    <span class="-eur">{{ transaction_fees_eur || "25¢" }}</span>
+                                    <span class="-ca">{{ transaction_fees_cad || "25¢" }}</span>
+                                    {% if transaction_fees_tooltip %}
+                                        <div class="tooltip tooltip-middle box-shadow-onlight">{{ transaction_fees_tooltip || 'Transaction fee' }}</div>
+                                    {% endif %}
+                                </span>
+                            </h2>
+                            {% if network_fee %}
+                                <a id="js-scrollTo-{{name}}" href="{{network_fee_anchor_link}}" class=" text-primary-50">{{ network_fee || 'network fee' }}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if button_label %}
+                <div class="mt-auto">
+                    <a class="{{ button.buttons_settings(button_styles_kind || 'primary') }} font-serif" href="{{ href }}"
+                    id="button_{{name}}"
+                    {% if button_new_tab %}target="_blank"{% endif %}
+                    {% if button_rel %}rel="{{ button_rel|join(" ") }}"{% endif %}
+                    >
+                        {% if svg_icon %}
+                        <div class="flex justify-center items-center {% if button_styles_icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+                            {{svg_icon}}
+                        </div>
+                        {% endif %}
+                        {# Button label #}
+                        <span>{{ button_label }}</span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="flex justify-center md:justify-end">
+        <div class="inline-block relative w-[6rem]">
+            <select id="currency" name="currency" class="block appearance-none w-full bg-transparent border-0 px-2 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-primary-50 text-base font-semibold">
+                <option value="usd" data-curr="usd">$USD</option>
+                <option value="aud" data-curr="aud">$AUD</option>
+                <option value="gbp" data-curr="gbp">£GBP</option>
+                <option value="eur" data-curr="eur">€EUR</option>
+                <option value="ca" data-curr="ca">$CAD</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-primary-50">
+                <svg class="fill-primary-50 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+        </div>
+    </div>
+    <div class="hidden lg:block">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div></div>
+            {# TODO: add a default value for the cards length #}
+            <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-{{ cards|length }} gap-5">
+            {% for card in cards %}
+                {% set title = card.header.content.title %}
+                <div class="bg-[#EDF4FF] mix-blend-multiply py-2 px-3 text-primary-50 font-semibold capitalize text-center text-lg">{{title}}</div>
+            {% endfor %}
+            </div>
+        </div>
+        <div>
+            {% for fee in fees %}
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-x-4 transition ease-in{% if !fee.content.heading %} notHeadingElem row-item hover:bg-[#CEDFFD]{% else %} pt-4{% endif%}">
+                <div class="relative grid gap-4 text-primary-50 fee-title {% if fee.content.heading %}border-l-2 py-2 px-3 font-semibold {%  else %}py-2 px-3{% endif %}">
+                    <div class="flex items-center">
+                        {{fee.content.title}}
+                        {% if fee.content.tooltip %}<span class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="#6ba0fa" fill-rule="evenodd" d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z" clip-rule="evenodd"/></svg></span>{% endif %}
+                        {% if fee.content.tooltip %}
+                            <div class="tooltip tooltip-right box-shadow-onlight">{{ fee.content.tooltip }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-{{cardColItems}} justify-center gap-5 md:mx-auto text-center text-sm text-primary-50">
+                    <div id="js-rp-prices-{{name}}" class="py-2 px-3 {% if fee.content.heading %}bg-transparent {% else %} bg-[#EDF4FF] mix-blend-multiply{% endif %}">
+                        <span class="-usd -active">{{ fee.fees.annually.usd }}</span>
+                        <span class="-aud">{{ fee.fees.annually.aud || null }}</span>
+                        <span class="-gbp">{{ fee.fees.annually.gbp || null }}</span>
+                        <span class="-eur">{{ fee.fees.annually.eur || null }}</span>
+                        <span class="-ca">{{ fee.fees.annually.cad || null }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="block lg:hidden">
+        {% for fee in fees %}
+            <div class="row-item relative grid gap-4 text-primary-50 {% if !fee.content.heading %}notHeadingElem{% endif %} {% if fee.content.heading %}border-l-2 py-2 px-3 font-semibold {%  else %}py-3 px-0{% endif %}">
+                <div class="flex flex-col">
+                    <div id="js-fee-heading" class="flex {% if !fee.content.heading %}cursor-pointer px-3{% endif %}">
+                    {# TODO: update markup, remove faq #}
+                    <span aria-controls="faq-{{loop.index}}" aria-expanded="false">
+                            {{fee.content.title}}
+                        </span>
+                        {% if !fee.content.heading %}
+                        <span class="ml-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4.94 5.72668L8 8.78002L11.06 5.72668L12 6.66668L8 10.6667L4 6.66668L4.94 5.72668Z" fill="#053994"/>
+                            </svg>
+                            <svg class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M4.94 10.2733L8 7.21998L11.06 10.2733L12 9.33331L8 5.33331L4 9.33331L4.94 10.2733Z" fill="#053994"/>
+                            </svg>
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% if !fee.content.heading %}
+                    <div hidden>
+                        <div class="grid grid-cols-5 mt-3 bg-primary-10">
+                            <div class="text-sm col-span-2">
+                            {% for card in cards %}
+                                {% set title = card.header.content.title %}
+                                <div class="py-2 px-3 text-primary-50 font-semibold capitalize">{{title}}</div>
+                            {% endfor %}
+                            </div>
+                            <div class="grid text-sm col-span-3">
+                                <div id="js-rp-prices-{{name}}" class="flex justify-center items-center py-2 px-3 {% if fee.content.heading %}bg-transparent {% else %} bg-primary-10{% endif %}">
+                                    <span class="-usd -active">{{ fee.fees.annually.usd }}</span>
+                                    <span class="-aud">{{ fee.fees.annually.aud || null }}</span>
+                                    <span class="-gbp">{{ fee.fees.annually.gbp || null }}</span>
+                                    <span class="-eur">{{ fee.fees.annually.eur || null }}</span>
+                                    <span class="-ca">{{ fee.fees.annually.cad || null }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="py-2 flex justify-center gap-2 text-primary-50 font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 8L6 14L7.41 15.41L12 10.83L16.59 15.41L18 14L12 8Z" fill="#033180"/>
+        </svg>
+        <span id="js-back-to-top-{{name}}" class="cursor-pointer">Back to top</span>
+    </div>
+</section>
+
+{# JavaScript #}
+{% require_js %}
+    <script>
+        const btnBacktoTopEl = document.querySelector('#js-back-to-top-{{name}}');
+        const scrollToSection = document.querySelector('#js-scrollTo-{{name}}');
+
+        /**
+         * Toggles the presence of a specified class on an HTML element based on a given condition.
+         * 
+         * @param {HTMLElement} element - The HTML element on which the class will be toggled.
+         * @param {string} className - The name of the class to be toggled.
+         * @param {boolean} condition - The condition that determines whether the class should be added or removed.
+         * @returns {void}
+         */
+        const toggleClass = (element, className, condition) => {
+            if (condition) {
+                element.classList.add(className);
+            } else {
+                element.classList.remove(className);
+            }
+        };
+
+        /**
+         * Toggles the visibility of an accordion element.
+         * 
+         * @param {HTMLElement} accordionHeader - The header element of the accordion.
+         */
+        const toggleAccordion = (accordionHeader) => {
+            const target = accordionHeader.nextElementSibling;
+            const svgElements = accordionHeader.querySelectorAll('svg');
+            const expanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+
+            accordionHeader.setAttribute('aria-expanded', !expanded);
+            target.classList.remove("hidden");
+            accordionHeader.classList.add("-open");
+            accordionHeader.classList.remove("-closed");
+            target.hidden = expanded;
+
+            svgElements.forEach((svgElement) => {
+                svgElement.classList.toggle("hidden");
+            });
+        };
+
+        /**
+         * Function to toggle fees.
+         * Adds event listeners to elements with the id 'js-fee-heading'.
+         * When one of these elements is clicked, it calls the 'toggleAccordion' function passing the clicked element as an argument.
+         */
+        const toggleFees = () => {
+            const feeHeadingElems = document.querySelectorAll('#js-fee-heading');
+
+            console.log("toggle");
+
+            feeHeadingElems.forEach((accordionHeader) => {
+                accordionHeader.addEventListener('click', () => {
+                    toggleAccordion(accordionHeader);
+                });
+            });
+        };
+
+        /**
+         * Handles the click event on an accordion header.
+         * @param {HTMLElement} accordionHeader - The header element of an accordion.
+         */
+        const handleAccordionClick = (accordionHeader) => {
+            toggleAccordion(accordionHeader);
+        };
+
+        /**
+         * Function to handle the change event of a select element and update the active currency on the page.
+         * @function selectUpdateCurrency
+         */
+        const selectUpdateCurrency = () => {
+            const selectVenue = document.querySelector("#currency");
+
+            selectVenue.addEventListener("change", (e) => {
+                const selectedCurrencyOption = e.target.options[e.target.selectedIndex];
+                const c = selectedCurrencyOption.getAttribute("data-curr");
+
+                const tileActiveElements = document.querySelectorAll(
+                    "#js-rp-prices-{{name}} > span.-active"
+                );
+
+                tileActiveElements.forEach(function (tileActiveElement) {
+                    tileActiveElement.classList.remove("-active");
+                });
+
+                const tileElements = document.querySelectorAll(
+                    "#js-rp-prices-{{name}} > span.-" + c
+                );
+
+                tileElements.forEach(function (tileElement) {
+                    tileElement.classList.add("-active");
+                });
+
+                tileElements.forEach((el) => {
+                    const parentRow = el.closest('.row-item');
+
+                    if (parentRow && el) {
+                        if (
+                            c &&
+                            !el.textContent.trim() &&
+                            el.classList.contains("-active") &&
+                            parentRow.classList.contains('notHeadingElem')
+                        ) {
+                            if (!parentRow.classList.contains("hidden")) {
+                                parentRow.classList.add("hidden");
+                            }
+                        } else {
+                            if (parentRow.classList.contains("hidden")) {
+                                parentRow.classList.remove("hidden");
+                            }
+                        }
+                    }
+                });
+            });
+        };
+
+        /**
+         * Function to handle the loading of data and perform currency conversion and UI updates.
+         * @param {string} startingCurrency - The starting currency.
+         */
+        const handleLoad = () => {
+            if (startingCurrency) {
+                const selectPricesElements = document.querySelectorAll('#js-rp-prices-{{name}} > span');
+
+                const selectVenue = document.querySelector("#currency");
+                const selectOptions = selectVenue.children;
+
+                for (const option of selectOptions) {
+                    if (option.getAttribute('data-curr') === startingCurrency) {
+                        document.querySelector(`#currency option[value='${startingCurrency}']`).selected = true;
+
+                        selectPricesElements.forEach((el) => {
+                            const isCurrencyMatch = el.classList.contains('-' + startingCurrency);
+                            toggleClass(el, '-active', isCurrencyMatch);
+                            
+                            const parentRow = el.parentNode.parentNode.parentNode;
+                            const isSpanEmpty = !el.textContent.trim();
+
+                            if (isSpanEmpty && isCurrencyMatch) {
+                                if (window.innerWidth >= 1032) {
+                                    if (!parentRow.classList.contains('hidden') && parentRow.classList.contains('notHeadingElem')) {
+                                        parentRow.classList.add('hidden');
+                                    }
+                                } else {
+                                    const parentRowMobile = parentRow.parentNode.parentNode.parentNode;
+                                    if (!parentRowMobile.classList.contains('hidden') && parentRowMobile.classList.contains('notHeadingElem')) {
+                                        parentRowMobile.classList.add('hidden');
+                                    }
+                                }
+                            }
+                        });
+                        break;
+                    }
+                }
+                selectUpdateCurrency();
+            }
+        }
+
+        /**
+         * This code snippet defines a function called `handleBackToTopClick` that is responsible for scrolling the page to a specific element when a button is clicked.
+         *
+         * @example
+         * handleBackToTopClick();
+         */
+        const handleBackToTopClick = () => {
+            const scrollToElement = (elId) => {
+                const targetEl = document.getElementById(elId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({ block: "start", behavior: 'smooth'});
+                } else {
+                    console.error(`Element with id ${elId} not found`);
+                }
+            };
+
+            scrollToElement("rp-pricing-{{name}}");
+        };
+
+        /**
+         * @name initialize
+         * @description Initializes the code by adding a 'load' event listener to the window object.
+         * When the 'load' event is triggered, the 'handleLoad' function will be called.
+         */
+        const initialize = () => {
+            window.addEventListener('load', handleLoad);
+            window.addEventListener('load', toggleFees);
+            btnBacktoTopEl.addEventListener("click", handleBackToTopClick);
+        };
+
+        // Call the main initialize function
+        initialize();
+
+    </script>
+{% end_require_js %}

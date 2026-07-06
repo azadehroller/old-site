@@ -1,0 +1,99 @@
+<style>
+  .special-metric {
+    --divider-image: url('{{ get_asset_url("../../images/divider.png") }}');
+  }
+</style>
+
+<div class="special-metric fade-in-on-scroll grid grid-cols-1 lg:grid-cols-[1fr_142px] gap-6">
+  <!-- First Figure: Left Side with Animated Icons and Stats -->
+  <figure class="special-metric__icons-wrapper relative pl-3 flex flex-col justify-between">
+    <div class="special-metric__icons-grid grid grid-cols-11 gap-[10px] relative w-full max-w-[400px]">
+      {% for i in range(1, 77) %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none" class="special-metric__icon block" data-icon-index="{{ i }}">
+        <mask id="mask0_4386_11043_{{ i }}" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="25" height="25">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0672 4.01709C16.2394 4.01723 16.4086 4.06164 16.5587 4.14606C16.7088 4.23047 16.8346 4.35205 16.9241 4.49912L25.2981 18.2517C22.5706 20.3325 19.4052 21.5041 16.0672 21.5041C12.7264 21.5041 9.55977 20.3392 6.83496 18.2557L10.7997 11.7416C11.4027 12.0609 12.1049 12.1378 12.7628 11.9569C13.4207 11.7759 13.9847 11.3506 14.3396 10.7679C14.6946 10.1851 14.8137 9.48888 14.6726 8.82128C14.5316 8.15369 14.141 7.56511 13.5807 7.17573L15.2102 4.49912C15.2998 4.35205 15.4256 4.23047 15.5757 4.14606C15.7258 4.06164 15.895 4.01723 16.0672 4.01709ZM20.0841 16.0679C20.0841 16.7781 19.802 17.4592 19.2998 17.9615C18.7975 18.4637 18.1164 18.7458 17.4062 18.7458C16.6959 18.7458 16.0148 18.4637 15.5126 17.9615C15.0104 17.4592 14.7282 16.7781 14.7282 16.0679C14.7282 15.3576 15.0104 14.6765 15.5126 14.1743C16.0148 13.6721 16.6959 13.3899 17.4062 13.3899C18.1164 13.3899 18.7975 13.6721 19.2998 14.1743C19.802 14.6765 20.0841 15.3576 20.0841 16.0679Z" fill="#121331"/>
+          <path d="M5.78438 19.9797L4.16422 22.6429C4.03696 22.8514 3.99002 23.099 4.03216 23.3396C4.0743 23.5801 4.20265 23.797 4.39318 23.9498C7.70286 26.6088 11.8222 28.0564 16.0677 28.0524C20.3132 28.0564 24.4325 26.6088 27.7422 23.9498C27.933 23.7972 28.0616 23.5804 28.104 23.3398C28.1464 23.0993 28.0996 22.8515 27.9725 22.6429L26.3483 19.9771C23.349 22.2131 19.8275 23.5133 16.0677 23.5133C12.3079 23.5133 8.7877 22.2238 5.78438 19.9797Z" fill="#121331"/>
+        </mask>
+        <g mask="url(#mask0_4386_11043_{{ i }})">
+          <path d="M27.1141 23.1637C23.9832 25.6813 20.0851 27.0516 16.0675 27.0467C11.8765 27.0467 8.04708 25.5873 5.021 23.1637L7.19013 19.6021C9.68063 21.3829 12.7603 22.4273 16.0675 22.4273C19.3748 22.4273 22.4544 21.3829 24.9449 19.6021L27.1141 23.1637Z" fill="currentColor" stroke="currentColor" stroke-width="2.00846" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M24.9452 19.6024C22.3536 21.4479 19.2493 22.4358 16.0678 22.4277C12.7606 22.4277 9.68092 21.3833 7.19043 19.6024L16.0678 5.021L24.9452 19.6024Z" fill="currentColor" stroke="currentColor" stroke-width="2.00846" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      {% endfor %}
+    </div>
+
+    <!-- Stat Below Icons -->
+    <figcaption class="special-metric__stat mt-6 flex items-center text-white">
+      <div class="special-metric__stat-icon w-[64px] h-[64px] self-center flex-shrink-0 text-white flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" style="margin-left: -10px;">
+      <path d="M32.0626 25.9289C31.312 25.926 30.5849 26.1904 30.0115 26.6747C29.4381 27.159 29.0559 27.8316 28.9332 28.5721C28.8105 29.3126 28.9555 30.0725 29.3421 30.7159C29.7286 31.3592 30.3316 31.844 31.043 32.0833L38.3078 34.5837V42.679C38.3058 43.5898 37.9431 44.4628 37.299 45.1069C36.6549 45.751 35.782 46.1137 34.8711 46.1156H19.0944C18.1835 46.1137 17.3105 45.751 16.6665 45.1069C16.0224 44.4628 15.6597 43.5898 15.6577 42.679V9.61778C15.6606 8.70735 16.0237 7.83507 16.6676 7.19144C17.3115 6.54781 18.1839 6.18513 19.0944 6.18262H34.8711C35.7816 6.18497 36.6541 6.5476 37.2981 7.19127C37.942 7.83493 38.305 8.70731 38.3078 9.61778V28.1302L33.0657 26.0926C32.7338 25.9824 31.945 25.9318 32.0626 25.9289Z" stroke="white" stroke-width="1.78605" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M29.8585 10.2178H24.1045" stroke="white" stroke-width="1.78605" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M48.6444 45.0037L35.4767 53.8119L27.1567 46.1155H34.871C35.7818 46.1135 36.6548 45.7508 37.2989 45.1068C37.9429 44.4627 38.3057 43.5897 38.3076 42.6789V34.5836L31.0429 32.0831C30.332 31.8433 29.7297 31.3585 29.3436 30.7153C28.9575 30.0721 28.8128 29.3125 28.9354 28.5724C29.058 27.8322 29.4399 27.1599 30.0128 26.6756C30.5857 26.1912 31.3122 25.9265 32.0624 25.9287C31.9448 25.9287 32.7337 25.9823 33.0656 26.0954L38.3076 28.13L43.1433 29.8149H43.1508C43.531 30.0132 43.8666 30.2872 44.1372 30.6199C44.4077 30.9526 44.6074 31.3371 44.724 31.7497L47.0325 40.0102L48.6444 45.0037Z" stroke="white" stroke-width="1.78605" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M48.6432 45.0039L51.3223 49.0061L38.1576 57.8173L35.4771 53.8121" stroke="white" stroke-width="1.78605" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+      </div>
+      <div class="special-metric__stat-content text-white grid">
+        <strong class="special-metric__stat-number text-4xl font-bold leading-none">
+          <span class="font-extrabold">3.3</span><span class="font-semibold">x</span>
+        </strong>
+        <p class="special-metric__stat-text text-xs leading-tight opacity-90 text-white mb-0">
+          Mobile F&B orders are 3.3x higher than POS
+        </p>
+      </div>
+    </figcaption>
+  </figure>
+
+  <!-- Second Figure: Right Side with Printer Icons and Retail Icon -->
+  <figure class="special-metric__printer-wrapper relative pl-3 flex flex-col justify-between">
+    <div class="special-metric__printer-grid grid grid-cols-4 grid-rows-7 gap-[10px] relative w-full">
+      {% for i in range(1, 25) %}
+      <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none" class="special-metric__printer-icon block">
+        <mask id="mask0_4386_11820_{{ i }}" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="4" width="25" height="25">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16.0687 4.0166C16.2408 4.01675 16.4101 4.06116 16.5602 4.14557C16.7102 4.22998 16.8361 4.35156 16.9256 4.49863L25.2995 18.2512C22.572 20.332 19.4067 21.5036 16.0687 21.5036C12.7279 21.5036 9.56124 20.3387 6.83643 18.2553L10.8011 11.7411C11.4042 12.0604 12.1063 12.1374 12.7642 11.9564C13.4221 11.7754 13.9861 11.3501 14.3411 10.7674C14.696 10.1846 14.8151 9.48839 14.6741 8.8208C14.5331 8.1532 14.1425 7.56462 13.5822 7.17524L15.2117 4.49863C15.3012 4.35156 15.4271 4.22998 15.5772 4.14557C15.7272 4.06116 15.8965 4.01675 16.0687 4.0166ZM20.0856 16.0674C20.0856 16.7776 19.8034 17.4588 19.3012 17.961C18.799 18.4632 18.1179 18.7453 17.4076 18.7453C16.6974 18.7453 16.0162 18.4632 15.514 17.961C15.0118 17.4588 14.7297 16.7776 14.7297 16.0674C14.7297 15.3571 15.0118 14.676 15.514 14.1738C16.0162 13.6716 16.6974 13.3894 17.4076 13.3894C18.1179 13.3894 18.799 13.6716 19.3012 14.1738C19.8034 14.676 20.0856 15.3571 20.0856 16.0674Z" fill="#121331"/>
+          <path d="M5.78438 19.9797L4.16422 22.6429C4.03696 22.8514 3.99002 23.099 4.03216 23.3396C4.0743 23.5801 4.20265 23.797 4.39318 23.9498C7.70286 26.6088 11.8222 28.0564 16.0677 28.0524C20.3132 28.0564 24.4325 26.6088 27.7422 23.9498C27.933 23.7972 28.0616 23.5804 28.104 23.3398C28.1464 23.0993 28.0996 22.8515 27.9725 22.6429L26.3483 19.9771C23.349 22.2131 19.8275 23.5133 16.0677 23.5133C12.3079 23.5133 8.7877 22.2238 5.78438 19.9797Z" fill="#121331"/>
+        </mask>
+        <g mask="url(#mask0_4386_11820_{{ i }})">
+          <path d="M27.115 23.1637C23.9842 25.6813 20.086 27.0516 16.0685 27.0467C11.8775 27.0467 8.04805 25.5873 5.02197 23.1637L7.19111 19.6021C9.6816 21.3829 12.7612 22.4273 16.0685 22.4273C19.3758 22.4273 22.4554 21.3829 24.9459 19.6021L27.115 23.1637Z" fill="#033180" stroke="#033180" stroke-width="2.00846" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M24.9462 19.6024C22.3546 21.4479 19.2503 22.4358 16.0688 22.4277C12.7615 22.4277 9.6819 21.3833 7.19141 19.6024L16.0688 5.021L24.9462 19.6024Z" fill="#033180" stroke="#033180" stroke-width="2.00846" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+      </svg>
+      {% endfor %}
+    </div>
+
+    <!-- Retail Icon Below -->
+    <figcaption class="special-metric__retail-icon mt-6 flex items-center text-white">
+      <div class="special-metric__stat-icon w-[64px] h-[64px] self-center flex-shrink-0 text-white flex items-end">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" class="block w-full h-full">
+          <path d="M37.9688 20.108V14.1396" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M41.9424 14.1396V20.108" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M46.3632 8.18604H33.5781V14.1395H46.3632V8.18604Z" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M55.8442 45.9165H8.18652V54.0579C8.18652 55.0402 8.99024 55.8439 9.97257 55.8439H54.0582C55.0405 55.8439 55.8442 55.0402 55.8442 54.0579V45.9165Z" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M11.1631 45.9163C11.1631 45.9163 11.818 32.7888 13.217 24.6772C13.6784 22.0279 15.9705 20.1079 18.6496 20.1079H19.5129" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M27.0293 20.1079H37.9688H41.9428H45.3809C48.06 20.1079 50.3521 22.0428 50.8135 24.6772C52.2126 32.7888 52.8674 45.9163 52.8674 45.9163" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M46.1396 24.603H33.7861V31.524H46.1396V24.603Z" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19.5127 28.0407V12.77L21.388 14.2584L23.2783 12.77L25.1536 14.2584L27.029 12.77V28.0407" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M51.3492 50.8872H37.9092" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M26.1206 50.8872H12.6807" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M29.1128 28.0557H17.2803" stroke="white" stroke-width="1.8" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M32 50.8613V50.8762" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21.1055 35.2109V35.2258" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25.2803 35.23V35.2449" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25.2803 38.5151V38.53" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21.0977 38.5151V38.53" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M25.2803 41.8008V41.8157" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21.0977 41.8223V41.8372" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M35.5498 35.229V35.2439" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M39.9707 35.2075V35.2224" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44.3613 35.2075V35.2224" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44.3613 38.5254V38.5403" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M39.9707 41.8271V41.842" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M44.3535 41.812V41.8269" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M35.5498 41.8418V41.8567" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M39.9707 38.5034V38.5183" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M35.5498 38.4961V38.511" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="text-white mb-0">POS</p>
+    </figcaption>
+  </figure>
+</div>

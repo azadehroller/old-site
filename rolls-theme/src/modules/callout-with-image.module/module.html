@@ -1,0 +1,104 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+
+{# Content #}
+{% set eyebrow  = module.content.eyebrow %}
+{% set title  = module.content.title %}
+{% set text  = module.content.text %}
+{% set image  = module.image.image_src %}
+
+{# CTA #}
+{% set btn_label = module.cta.button_text %}
+{% set href = module.cta.button_link.url.href %}
+{% set rel = [] %}
+{% set url_type = module.cta.button_link.url.type %}
+{% set no_follow = module.cta.button_link.no_follow %}
+{% set new_tab = module.cta.button_link.open_in_new_tab %}
+{% set svg_icon = module.cta.svg_icon_code %}
+{% set icon_position = module.cta.icon_position %}
+
+
+{# Styles #}
+
+{# Content #}
+{% set theme = module.styles.content.theme %}
+{% set heading_type = module.styles.content.heading_type %}
+{% set alignment = module.styles.content.textalignment.text_align %}
+{% set text_type = module.styles.content.text_type %}
+{% set eyebrow_type = module.styles.content.eyebrow_type %}
+{% set display_type = module.styles.content.display_type %}
+
+{# CTA #}
+{% set bg_kind = module.styles.cta.bg_kind %}
+{% set alignment = module.styles.cta.alignment %}
+
+{# Sets attributes used for the link field #}
+
+{% if url_type is equalto 'EMAIL_ADDRESS' %}
+  {% set href = 'mailto:' + href %}
+{% endif %}
+{% if no_follow %}
+  {% do rel.append('nofollow') %}
+{% endif %}
+{% if new_tab %}
+  {% do rel.append('noopener') %}
+{% endif %}
+
+{# Module styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+
+      {# Button wrapper #}
+      {% if alignment %}
+        .button-wrapper {
+          text-align: {{ alignment.horizontal_align }};
+        }
+      {% endif %}
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{% macro heading(tag, title, display_tag)%}
+<{{tag || "h3"}} class="{% if display_tag %}{{display_tag}}-heading{% endif %} my-0 {% if tag == 'h1'%}text-balance{%endif%}">{{title || "Implementation Services"}}</{{tag || "h1"}}>
+{% endmacro%}
+
+{% macro eyebrow(tag, eyebrow_type)%}
+<{{tag || "div"}} class="text-secondary-50 uppercase font-extrabold {% if eyebrow_type %}small{% endif %}">{{ eyebrow || "CUSTOMIZED TO YOUR VENUE"}}</{{tag || "div"}}>
+{% endmacro%}
+
+<section id="callout-with-image-{{name}}" class="grid grid-cols-1 md:grid-cols-2 items-end bg-neutral-white rounded-[32px] box-shadow-onlight px-6 md:px-0 pl-6 md:pl-6 relative">
+    <header class="grid gap-4 py-6 text-{{alignment|lower || "left"}} {{ theme == 'light' ? "text-neutral-white" : "text-primary-50" }}">
+        {% if eyebrow %}
+            {{ eyebrow(eyebrow_type, eyebrow) }}
+        {% endif %}
+        {{ heading(heading_type, title, display_type) }}
+        {% if text %}
+            <div class="text-{{text_type || "base"}} [&>ul]:list-disc [&>ul]:list-inside [&>ul]:mt-4">{{ text || "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice & guided training sessions to get the most value from ROLLER." }}</div>
+        {% endif %}
+        <div class="button-wrapper mt-4 {% if alignment.horizontal_align == 'LEFT'%}text-left {% elif alignment.horizontal_align == 'CENTER' %}text-center {% elif alignment.horizontal_align == 'RIGHT' %}text-right{% endif%}">
+            <a class="{{ button.buttons_settings(bg_kind || 'primary') }} font-serif" href="{{ href }}"
+            id="button_{{name}}"
+            {% if new_tab %}target="_blank"{% endif %}
+            {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+            >
+            {% if svg_icon %}
+                <div class="flex justify-center items-center {% if icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+                {{svg_icon}}
+                </div>
+            {% endif %}
+                {# Button label #}
+                <span>{{ btn_label || "Let’s Chat" }}</span>
+            </a>
+        </div>
+    </header>
+    <figure class="[&>img]:aspect-video">
+        {% set sizeAttrs = 'width="{{ image.width }}" height="{{ image.height }}"' %}
+        {% set loadingAttr = image.loading != 'disabled' ? 'loading="{{ image.loading }}"' : '' %}
+        <img src='{{image.src || get_asset_url("../../images/grayscale-mountain.png")}}' alt="{{ image.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+    </figure>
+</section>
+

@@ -1,0 +1,10 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "categories" : [ "DESIGN" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 199468273751,
+  "label" : "Special Metric",
+  "icon" : "📊",
+  "is_available_for_new_content" : true
+}

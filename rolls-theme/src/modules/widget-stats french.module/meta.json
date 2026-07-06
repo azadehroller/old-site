@@ -1,0 +1,10 @@
+{
+  "global" : true,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "smart_type" : "NOT_SMART",
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 212697464654,
+  "label" : "French stats",
+  "icon" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/ballot_24px.svg",
+  "is_available_for_new_content" : true
+}

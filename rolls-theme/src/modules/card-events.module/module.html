@@ -1,0 +1,37 @@
+{# Variables #}
+{# Content #}
+{% set card_events = module.card_events %}
+
+<dl id="cards-events-{{name}}" class="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 py-2">
+    {% for card_event in card_events %}
+        {% set card_event_data =  {
+            'title': card_event.card_event_title,
+            'date': card_event.card_event_date,
+            'city': card_event.card_event_city,
+            'country': card_event.card_event_country,
+            'label': card_event.card_event_link_label,
+            'href': card_event.card_event_link.url.href,
+            'url_type': card_event.card_blog_post.card_event_link.url.type,
+            'no_follow': card_event.card_blog_post.card_event_link.no_follow,
+            'new_tab': card_event.card_blog_post.card_event_link.open_in_new_tab,
+        } %}
+        <div class="w-full">
+            <div
+            class="flex flex-col max-w-full bg-neutral-white w-full h-full box-shadow-onlight-navy-40 rounded-[32px] mo-card">
+                <div class="flex flex-col gap-3">
+                    <div class="text-lg text-secondary-50 font-extrabold">{{card_event_data.date|lower|format_date('dd, MMMM, yyyy')}}
+                    </div>
+                    <div>
+                        <span class="text-3xl text-primary-50 font-extrabold">{{ card_event_data.title }}</br></span>
+                        <span class="text-primary-50">{{card_event_data.city}}, {{card_event_data.country}}</span>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row wrap gap-3 mt-auto pt-5 ">
+                    {% if card_event_data.href %}
+                    <a class="relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold text-md transition ease-in-out duration-300 w-full sm:w-auto justify-center bg-secondary-50 hover:bg-secondary-70 rounded-3xl py-2 px-4 text-neutral-white" href="{{ card_event_data.href }}">{{card_event_data.label}}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</dl>

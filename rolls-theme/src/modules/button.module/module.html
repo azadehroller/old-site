@@ -1,0 +1,108 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as button %}
+
+{# Variables #}
+{% set btn_label = module.settings.button_text %}
+{% set href = module.settings.link.url.href %}
+{% set rel = [] %}
+{% set url_type = module.settings.link.url.type %}
+{% set no_follow = module.settings.link.no_follow %}
+{% set new_tab = module.settings.link.open_in_new_tab %}
+
+{% set svg_icon = module.btn_icon.icon_field_svg %}
+{% set icon_position = module.btn_icon.icon_position %}
+
+{% set bg_kind = module.styles.background.bg_kind %}
+{% set btn_width = module.styles.alignment.button_width %}
+
+{% set alignment = module.styles.alignment.alignment %}
+{% set spacing_field = module.styles.alignment.spacing_field %}
+{% set spacing_field_mobile = module.styles.alignment.spacing_field_mobile %}
+{% set dark_text_ipad_only = module.styles.dark_text_ipad_only %}
+
+
+
+
+{# Animation #}
+{% set animation = module.styles.animation.type %}
+
+{# Sets attributes used for the link field #}
+
+{% if url_type is equalto 'EMAIL_ADDRESS' %}
+  {% set href = 'mailto:' + href %}
+{% endif %}
+{% if no_follow %}
+  {% do rel.append('nofollow') %}
+{% endif %}
+{% if new_tab %}
+  {% do rel.append('noopener') %}
+{% endif %}
+
+{# Module styles #}
+
+{% require_css %}
+  <style>
+    {% scope_css %}
+
+      {# Button wrapper #}
+      .button-wrapper {
+      {% if alignment %}
+        text-align: {{ alignment.horizontal_align }};
+      {% endif %}
+      {% if spacing_field_mobile %}
+        {{ spacing_field_mobile.css }}
+      {% endif %}
+    }
+    @media screen and (min-width: 768px){
+ .button-wrapper {
+      {% if spacing_field %}
+        {{ spacing_field.css }}
+      {% endif %}
+    }
+}
+      @keyframes pulse {
+        to {
+          box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);
+        }
+      }
+
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 1.5rem;
+        animation: pulse 2s infinite cubic-bezier(0.66, 0, 0, 1);
+        background: #ff290c;
+        box-shadow: 0 0 0 0 #ff290c;
+      }
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+
+{# Button #}
+<div class="button-wrapper relative {% if alignment.horizontal_align == 'LEFT'%}text-left {% elif alignment.horizontal_align == 'CENTER' %}text-center {% elif alignment.horizontal_align == 'RIGHT' %}text-right{% endif%}">
+  {% if animation == 'pulse' %}
+    <div class="bg"></div>
+  {% endif %}
+  <a 
+    class="button {{ button.buttons_settings(bg_kind || 'primary') }} {{ bg_kind }}  {% if  btn_width == 'full' %} button-full {% else %} button-auto {% endif %}  {% if  dark_text_ipad_only %} dark-text-ipad {% endif %} "
+    href="{{ href }}"
+    id="button_{{name}}"
+  {% if new_tab %}target="_blank"{% endif %}
+  {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+  >
+  {% if svg_icon %}
+    <div class="icon flex justify-center items-center {% if icon_position == 'right' %}mr-0 ml-2 order-1{% else%}mr-2{% endif %}">
+      {{svg_icon}}
+    </div>
+  {% endif %}
+    {# Button label #}
+    {% if animation == 'scrollto' or not animation or animation == 'none' %}
+      {{ btn_label || "Button" }}
+    {% else %}
+      <span id="{{ modal_trigger ? "js-modal-trigger" : null }}">{{ btn_label || "Button" }}</span>
+    {% endif %}
+  </a>
+</div>

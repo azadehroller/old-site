@@ -1,0 +1,94 @@
+{# Link Cards Module #}
+
+{# Module styles - Only for ::after pseudo-elements #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      .link-card-category-tag::after {
+        content: '';
+        display: inline-flex;
+        width: 28px;
+        height: 28px;
+        background: #0960F6;
+        border-radius: 980px;
+        align-items: center;
+        justify-content: center;
+        background-repeat: no-repeat;
+        background-position: center;
+        flex-shrink: 0;
+        bacsize: 28px 28px;
+      }
+
+      .link-card-category-tag[data-category="save-time"]::after {
+        background-image: url('{{ get_asset_url("../../images/time-icon.svg") }}');
+      }
+
+      .link-card-category-tag[data-category="boost-revenue"]::after {
+        background-image: url('{{ get_asset_url("../../images/money-icon.svg") }}');
+      }
+
+      .link-card-category-tag[data-category="guest-experience"]::after {
+        background-image: url('{{ get_asset_url("../../images/heart-icon.svg") }}');
+      }
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# Module markup #}
+<div class="link-cards-wrapper flex gap-[32px] lg:gap-6 max-w-[1312px] mx-auto md:flex-row flex-col">
+  {% for card in module.cards %}
+    <article class="flex flex-col gap-3 flex-1 min-w-0">
+      {# Category with icon #}
+      <strong class="link-card-category-tag flex items-center font-semibold text-base leading-6 text-[#005EFF] whitespace-nowrap" data-category="{{ card.category_type }}">
+        <span class="px-3 py-[1px] border rounded-full bg-white">{{ card.category_text }}</span>
+      </strong>
+
+      {# Description #}
+      {% if card.description %}
+        <div class="card-text text-base max-w-[346px] mb-2 leading-6 text-[#011840] [&_p]:m-0">
+          {{ card.description }}
+        </div>
+      {% endif %}
+
+      {# Links List #}
+      {% if card.links %}
+        <ul class="flex flex-col gap-3 list-none p-0 m-0">
+          {% for link in card.links %}
+            {% if link.text %}
+              {% set link_href = link.url.url.href %}
+              {% set link_rel = [] %}
+              {% set link_url_type = link.url.url.type %}
+              {% set link_no_follow = link.url.no_follow %}
+              {% set link_new_tab = link.url.open_in_new_tab %}
+
+              {% if link_url_type is equalto 'EMAIL_ADDRESS' %}
+                {% set link_href = 'mailto:' + link_href %}
+              {% endif %}
+              {% if link_no_follow %}
+                {% do link_rel.append('nofollow') %}
+              {% endif %}
+              {% if link_new_tab %}
+                {% do link_rel.append('noopener') %}
+              {% endif %}
+
+              <li class="flex items-center gap-2 ml-0">
+                <a
+                  href="{{ link_href }}"
+                  class="link-card-link flex items-center gap-2 font-semibold text-base leading-6 text-[#011840] no-underline whitespace-nowrap"
+                  {% if link_new_tab %}target="_blank"{% endif %}
+                  {% if link_rel %}rel="{{ link_rel|join(" ") }}"{% endif %}
+                >
+                  {{ link.text }}
+                  <svg class="link-card-svg shrink-0 transition-transform duration-300" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path class="link-card-svg-path-1" d="M0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12Z" fill="#EBF2FE"/>
+                    <path class="link-card-svg-path-2" d="M12.0003 6.6665L11.0603 7.6065L14.7803 11.3332H6.66699V12.6665H14.7803L11.0603 16.3932L12.0003 17.3332L17.3337 11.9998L12.0003 6.6665Z" fill="#005EFF"/>
+                  </svg>
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>

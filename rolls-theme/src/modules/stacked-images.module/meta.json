@@ -1,0 +1,12 @@
+{
+  "content_tags" : [ {
+    "name" : "IMAGE",
+    "source" : "USER"
+  } ],
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST" ],
+  "module_id" : 205064941899,
+  "label" : "Stacked Images",
+  "is_available_for_new_content" : true
+}

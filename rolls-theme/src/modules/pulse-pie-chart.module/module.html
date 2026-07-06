@@ -1,0 +1,147 @@
+<!-- Pulse Pie Chart Module -->
+{% set chart_title = module.chart_settings.chart_title %}
+{% set chart_subtitle = module.chart_settings.chart_subtitle %}
+{% set show_percentages = module.chart_settings.show_percentages %}
+{% set show_legend = module.chart_settings.show_legend %}
+{% set animation_duration = module.chart_settings.animation_duration %}
+{% set chart_size = module.chart_style.chart_size %}
+{% set donut_mode = module.chart_style.donut_mode %}
+{% set legend_position = module.chart_style.legend_position %}
+{% set hover_effect = module.chart_style.hover_effect %}
+{% set chart_data = module.chart_data %}
+
+<!-- Calculate total value -->
+{% set total_value = 0 %}
+{% for item in chart_data %}
+  {% set total_value = total_value + item.segment_value %}
+{% endfor %}
+
+<div class="pulse-pie-chart-container mb-8">
+  {% if chart_title %}
+    <h3 class="text-2xl font-bold text-gray-900 mb-2 text-center">{{ chart_title }}</h3>
+  {% endif %}
+  
+  {% if chart_subtitle %}
+    <p class="text-gray-600 mb-6 text-center">{{ chart_subtitle }}</p>
+  {% endif %}
+
+  <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+    <div class="flex items-center justify-center gap-8">
+      
+      <!-- Chart SVG -->
+      <div class="pulse-pie-chart" 
+           data-animation-duration="{{ animation_duration }}"
+           data-show-percentages="{{ show_percentages }}"
+           data-hover-effect="{{ hover_effect }}"
+           data-total-value="{{ total_value }}"
+           data-donut-mode="{{ donut_mode }}">
+        
+        <svg width="{{ chart_size }}" height="{{ chart_size }}" class="chart-svg">
+          <!-- Generate pie segments -->
+          {% set start_angle = -90 %}
+          {% for item in chart_data %}
+            {% if total_value > 0 %}
+              {% set item_percentage = (item.segment_value * 100) / total_value %}
+              {% set item_angle = (item.segment_value * 360) / total_value %}
+            {% else %}
+              {% set item_percentage = 0 %}
+              {% set item_angle = 0 %}
+            {% endif %}
+            {% set end_angle = start_angle + item_angle %}
+            
+            <!-- Calculate path coordinates -->
+            {% set outer_radius = (chart_size / 2) * 0.85 %}
+            {% if donut_mode %}
+              {% set inner_radius = (chart_size / 2) * 0.4 %}
+            {% else %}
+              {% set inner_radius = 0 %}
+            {% endif %}
+            
+            <g class="pie-segment" 
+               data-value="{{ item.segment_value }}"
+               data-label="{{ item.segment_label }}"
+               data-percentage="{{ item_percentage }}"
+               data-color="{{ item.segment_color.color }}"
+               data-start-angle="{{ start_angle }}"
+               data-end-angle="{{ end_angle }}">
+              
+              <!-- Segment path -->
+              <path class="segment-path" 
+                    fill="{{ item.segment_color.color }}" 
+                    stroke="white" 
+                    stroke-width="2"
+                    style="opacity: 0.9;">
+              </path>
+              
+              <!-- Percentage label -->
+              {% if show_percentages %}
+                <text class="segment-label" 
+                      fill="#0A1B3E" 
+                      font-size="14" 
+                      font-weight="600" 
+                      text-anchor="middle" 
+                      dominant-baseline="central"
+                      style="opacity: 0;">
+                  <tspan>{{ item_percentage | round }}%</tspan>
+                </text>
+              {% endif %}
+            </g>
+            
+            {% set start_angle = end_angle %}
+          {% endfor %}
+          
+          <!-- Center content for donut mode -->
+          {% if donut_mode %}
+            <circle cx="{{ chart_size / 2 }}" cy="{{ chart_size / 2 }}" 
+                    r="{{ (chart_size / 2) * 0.4 }}" 
+                    fill="white">
+            </circle>
+            <g class="center-content">
+              <text x="{{ chart_size / 2 }}" y="{{ chart_size / 2 - 5 }}" 
+                    text-anchor="middle" 
+                    dominant-baseline="central"
+                    class="text-lg font-bold">
+                Total
+              </text>
+              <text x="{{ chart_size / 2 }}" y="{{ chart_size / 2 + 15 }}" 
+                    text-anchor="middle" 
+                    dominant-baseline="central"
+                    class="text-sm font-medium">
+                {{ total_value }}
+              </text>
+            </g>
+          {% endif %}
+        </svg>
+        
+        <!-- Hover tooltip -->
+        <div class="pie-tooltip absolute bg-gray-900 text-white px-3 py-2 rounded-lg text-sm 
+                   opacity-0 pointer-events-none transition-all duration-200 z-20">
+          <div class="tooltip-content"></div>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      {% if show_legend %}
+        <div class="pulse-pie-legend">
+          <div class="flex flex-col gap-3">
+            {% for item in chart_data %}
+              {% if total_value > 0 %}
+                {% set item_percentage = (item.segment_value * 100) / total_value %}
+              {% else %}
+                {% set item_percentage = 0 %}
+              {% endif %}
+              <div class="legend-item flex items-center gap-2 cursor-pointer hover:opacity-75 transition-opacity"
+                   data-segment-label="{{ item.segment_label }}">
+                <div class="w-4 h-4 rounded-full flex-shrink-0" 
+                     style="background-color: {{ item.segment_color.color }};"></div>
+                <span class="text-sm text-gray-600 font-medium">
+                  {{ item.segment_label }} ({{ item_percentage | round }}%)
+                </span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

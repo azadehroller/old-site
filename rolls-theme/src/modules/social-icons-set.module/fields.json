@@ -1,0 +1,89 @@
+[ {
+  "id" : "656eb1c7-3615-871e-c8b4-93dde3c00461",
+  "name" : "social_icons_settings",
+  "label" : "Social Icons Settings",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "79654b17-8445-8f9f-9b66-91dddaaaec91",
+    "name" : "social_icons",
+    "label" : "Icons",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "e516c0fe-e917-d3c3-80e8-10a2ec9112c7",
+      "name" : "social_image",
+      "label" : "Icon",
+      "required" : false,
+      "locked" : false,
+      "occurrence" : {
+        "min" : 0,
+        "max" : 3,
+        "sorting_label_field" : null,
+        "default" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/spotify.png",
+        "alt" : "spotify",
+        "loading" : "lazy",
+        "width" : 32,
+        "height" : 32,
+        "max_width" : 32,
+        "max_height" : 32
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "social_image" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/spotify.png",
+        "alt" : "spotify",
+        "loading" : "lazy",
+        "width" : 32,
+        "height" : 32,
+        "max_width" : 32,
+        "max_height" : 32
+      }
+    }
+  }, {
+    "id" : "a330a8ae-a235-a5e3-f1cc-59c6b226f906",
+    "name" : "social_text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Subscribe on your favorite podcast app"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "social_icons" : {
+      "social_image" : {
+        "size_type" : "auto",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/spotify.png",
+        "alt" : "spotify",
+        "loading" : "lazy",
+        "width" : 32,
+        "height" : 32,
+        "max_width" : 32,
+        "max_height" : 32
+      }
+    },
+    "social_text" : "Subscribe on your favorite podcast app"
+  }
+} ]

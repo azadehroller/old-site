@@ -1,0 +1,12 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "js_render_options" : {
+    "defer" : true
+  },
+  "host_template_types" : [ "PAGE" ],
+  "module_id" : 200985075814,
+  "label" : "Animated Hero",
+  "icon" : "fontawesome-5.14.0:Image:SOLID",
+  "is_available_for_new_content" : true
+}

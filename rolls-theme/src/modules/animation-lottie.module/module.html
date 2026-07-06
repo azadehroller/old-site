@@ -1,0 +1,71 @@
+{# Variables #}
+{% set lottie = module.lottie_file %}
+{% set width_desk = module.styles.width.desktop %}
+{% set width_mob = module.styles.width.mobile %}
+{% set width_unit = module.styles.width.unit %}
+{% set height_desk = module.styles.height.desktop %}
+{% set height_mob = module.styles.height.mobile %}
+{% set height_unit = module.styles.height.unit %}
+
+{# Styles #}
+{% require_css %}
+  <style>
+    {% scope_css %}
+      #animation-container_{{name}}.animation-container {
+        cursor: pointer;
+        display: flex;
+        height: {{height_desk || 4}}{{height_unit || rem}};
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        width: {{width_desk || 4}}{{width_unit || rem}};
+      }
+
+      @media (max-width: 767px) {
+        #animation-container_{{name}}.animation-container{
+          height: {{height_mob || 4 }}{{height_unit || rem}};
+          width: {{width_mob || 4 }}{{width_unit || rem}};
+        }
+      }
+      
+      #animation-container_{{name}}.animation-container {
+        width: 64px;
+        height: 64px;
+      }
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# Placeholder #}
+{% if is_in_editor and !lottie %}
+  <div style="background-color: #f5f8fa;  border: 1px dashed #516f90; padding: 15px; text-align: center">
+    <p style="color: #7c98b6; font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-size: 14px; font-style: italic; font-weight: 700;">No animation source</p>
+    <h2 style="color: #7c98b6; font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif; font-style: italic; font-weight: 400; line-height: 1.6">Select or upload animation JSON file</h2>
+  </div>
+{% endif %}
+
+{# Markup #}
+{% if lottie %}
+  <div id="animation-container_{{name}}" class="animation-container"></div>
+  {# External assets #}
+  {{ require_js('https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js', "footer") }} 
+  {# Javascript #}
+  {% require_js position="footer" defer="true" %}
+  <script>
+
+    (function () {
+      window.addEventListener('load', (event) => {
+        var container = document.getElementById("animation-container_{{name}}");
+        lottie.loadAnimation({
+          container: container,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '{{lottie}}' // the path to the animated json
+        });
+      });
+    })();
+
+  </script> 
+    {% end_require_js %}
+{% endif %}

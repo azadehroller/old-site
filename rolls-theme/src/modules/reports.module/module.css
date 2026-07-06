@@ -1,0 +1,135 @@
+/* Escape brackets in class name for Tailwind arbitrary value */
+.dnd-section:has(.reports-container) {
+    padding-top: 32px;
+    padding-bottom: 64px;
+    position: relative;
+/*     > .row-fluid {
+        padding-block-end: 0;
+    } */
+}
+@media (min-width: 768px) {
+    .dnd-section:has(.reports-container) {
+         padding-top: 40px;
+         padding-bottom: 80px;
+         > .row-fluid {
+            {# padding-block-end: 250px; #}
+        }
+    }
+}
+.reports-container{
+  gap: 32px;
+  @media (min-width: 768px){grid-template-columns: 2fr 1fr; }
+  @media (min-width: 1440px) {grid-template-columns: 976px 1fr; }
+}
+.reports-content{
+  gap: 24px;
+}
+.reports-list{gap: 32px;}
+.reports-content-eyebrow  {
+    color: var(--ROLLER-Blue-70, #6BA0FA);
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 24px;
+    text-transform: uppercase;
+    margin-block-end: 24px;
+    display: block;
+  margin-block-end: 16px;
+  @media (min-width: 768px){margin-block-end:24px;font-size: 18px;
+    line-height: 27px;}
+}
+.reports-main-heading,.reports-content h2{
+    font-size: 32px;
+  font-weight: 800;
+  line-height: 40px;
+  letter-spacing: -0.32px;
+   @media (min-width: 768px) {
+    font-size: 40px;
+    line-height: 50px;
+    letter-spacing: -0.4px;
+  }
+}
+/* Grid columns for reports container */
+@media (min-width: 768px) {
+    .md\:grid-cols-\[2fr_1fr\] {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* Gap utilities */
+.gap-12 {
+    gap: 3rem;
+}
+.gap-\[32px\]{gap:32px;}
+@media (min-width: 768px) {
+    .md\:gap-20 {
+        gap: 80px;
+    }
+    .md\:gap-4 {
+        gap: 1.5rem;
+    }
+}
+
+/* Report item with left border via ::before */
+.report-item {
+    position: relative;
+    padding-left: 16px;
+    gap: 24px;
+}
+.report-link{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+}
+.report-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #6BA0FA;
+}
+.report-item-title{
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 30px;
+}
+/* Custom typography utilities */
+.text-\[32px\] {
+    font-size: 32px;
+}
+
+.leading-\[40px\] {
+    line-height: 40px;
+}
+.leading-\[30px\] {
+    line-height: 30px;
+}
+.tracking-\[-0\.32px\] {
+    letter-spacing: -0.32px;
+}
+
+@media (min-width: 768px) {
+    .md\:text-\[48px\] {
+        font-size: 48px;
+    }
+    
+    .md\:leading-\[60px\] {
+        line-height: 60px;
+    }
+    .md\:gap-\[48px\]{gap:48px;}
+    .md\:tracking-\[-0\.48px\] {
+        letter-spacing: -0.48px;
+    }
+}
+.description{
+  :where(p,li){
+ font-size: 16px;
+  line-height: 24px;
+  @media (min-width: 768px) {
+     font-size: 18px;
+  line-height: 27px;
+  }
+  }
+}
+.description p:last-of-type{margin-bottom:0;}

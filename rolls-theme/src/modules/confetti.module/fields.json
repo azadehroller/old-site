@@ -1,0 +1,11 @@
+[ {
+  "id" : "e2576933-342e-3319-b8f3-ea50f6ed1c35",
+  "name" : "target",
+  "label" : "Target",
+  "help_text" : "Please enter the name of the div that you want to target for the confetti effect.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null
+} ]

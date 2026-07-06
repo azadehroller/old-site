@@ -1,0 +1,147 @@
+[ {
+  "id" : "5b1a5051-4755-5611-ef93-281c0aebcbac",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "95552e71-bd2b-e69f-fbd4-94044ead2e52",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "light", "OnDark" ], [ "dark", "OnLight" ], [ "gxscore", "GxScore" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "dark"
+  }, {
+    "id" : "0e0545a4-2ab2-f891-9c27-70194f76b37f",
+    "name" : "spacing",
+    "label" : "Spacing",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "margin" : {
+        "top" : {
+          "value" : 3,
+          "units" : "rem"
+        },
+        "bottom" : {
+          "value" : 3,
+          "units" : "rem"
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "theme" : "dark",
+    "spacing" : {
+      "margin" : {
+        "top" : {
+          "value" : 3,
+          "units" : "rem"
+        },
+        "bottom" : {
+          "value" : 3,
+          "units" : "rem"
+        }
+      }
+    }
+  }
+}, {
+  "id" : "a8d85994-74b5-3181-0f5c-1db43ca617a7",
+  "name" : "slide",
+  "label" : "Slide",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : 4,
+    "sorting_label_field" : null,
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "94761857-a911-b107-e31d-1e0ff494bdd5",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Title item"
+  }, {
+    "id" : "c1e126cd-79dc-9f6e-db45-f42a3137ec1e",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "size_type" : "auto",
+      "src" : "https://{{portal_id}}.fs1.hubspotusercontent-na1.net/hubfs/{{portal_id}}/Imported%20images/grayscale-mountain.png",
+      "alt" : null,
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "7055195d-81c0-b0fb-429e-17fdaeb4b60b",
+    "name" : "link_label",
+    "label" : "Link Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn more"
+  }, {
+    "id" : "c7973e4a-d87e-0bf5-b568-9dd97a771c59",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "content_id" : null,
+        "href" : "https://www.roller.software/",
+        "type" : "EXTERNAL"
+      },
+      "open_in_new_tab" : false,
+      "no_follow" : false
+    }
+  }, {
+    "id" : "20272e42-c4bc-620b-d8c4-6b5d6626d4e4",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Allows guests to seamlessly sign waivers, membership agreements, and complete forms – all within the online booking."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+} ]

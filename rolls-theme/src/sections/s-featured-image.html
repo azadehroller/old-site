@@ -1,0 +1,60 @@
+<!--
+    templateType: section
+    label: Featured Image
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/featured-image.png
+    description: "Stand alone landscape image (2:1 aspect ratio) to feature product, VW, customer, etc."
+-->
+
+{% dnd_section 
+  vertical_alignment="MIDDLE",
+  class="s-layout s-featured-image"
+    background_color={{ context.background_color or "#fff" }},
+%}
+    {% dnd_column
+    %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+                content={
+                    "eyebrow": context.eyebrow || "CUSTOMER NAME HERE",
+                    "title": context.title || "“Sed sagittis risus proin lacinia at viverra sed ut at",
+                    "text":  context.text || "Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus. Sed sagittis risus proin lacinia at viverra sed ut at. Metus pellentesque aliquam et lacus ultrices vulputate aliquet."
+                },
+                styles={
+                    "textalignment": {
+                        "text_align": context.text_align || "CENTER",
+                    },
+                    "heading_type": context.heading_type || "h2",                
+                    "text_type": context.text_type || "base",
+                    "eyebrow_type": context.eyebrow_type || "div",
+                    "theme": context.theme || "dark",
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Button Stack #}
+            {% dnd_module 
+                path="../modules/button-stack",
+                label="Button Stack",
+                extra_classes={{"my-2 md:my-3"}}
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Image #}
+            {% dnd_module 
+                path="@hubspot/linked_image",
+                img={
+                    "src": context.img_url || get_asset_url("../images/grayscale-mountain.png"),
+                    "size_type": "auto"
+                },
+                extra_classes="img-cover--square-lg img-cover mt-3 md:mt-6",
+                horizontal_alignment="CENTER"
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

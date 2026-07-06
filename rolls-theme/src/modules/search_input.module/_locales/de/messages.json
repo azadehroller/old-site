@@ -1,0 +1,77 @@
+{
+  "content_types.blog_posts.label" : {
+    "message" : "Blog-Beiträge",
+    "description" : "",
+    "placeholders" : null
+  },
+  "content_types.knowledge_articles.label" : {
+    "message" : "Wissensdatenbank-Artikel",
+    "description" : "",
+    "placeholders" : null
+  },
+  "content_types.label" : {
+    "message" : "Suchergebnisse beinhalten",
+    "description" : "",
+    "placeholders" : null
+  },
+  "content_types.landing_pages.label" : {
+    "message" : "Landingpages",
+    "description" : "",
+    "placeholders" : null
+  },
+  "content_types.website_pages.label" : {
+    "message" : "Website-Seiten",
+    "description" : "",
+    "placeholders" : null
+  },
+  "field_label.label" : {
+    "message" : "Label-Text",
+    "description" : "",
+    "placeholders" : null
+  },
+  "include_search_button.label" : {
+    "message" : "Suche-Button einbeziehen",
+    "description" : "",
+    "placeholders" : null
+  },
+  "name" : {
+    "message" : "Website-Sucheingabe",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder.default" : {
+    "message" : "Suchen",
+    "description" : "",
+    "placeholders" : null
+  },
+  "placeholder.label" : {
+    "message" : "Platzhaltertext",
+    "description" : "",
+    "placeholders" : null
+  },
+  "results.label" : {
+    "message" : "Ergebnisse",
+    "description" : "",
+    "placeholders" : null
+  },
+  "results.path_id.inline_help_text" : {
+    "message" : "Hierher werden Besucher weitergeleitet, wenn Sie nach einem Suchbegriff gesucht haben. Wählen Sie eine Seite aus, die das Suchergebnismodul enthält.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "results.path_id.label" : {
+    "message" : "Suchergebnisseite",
+    "description" : "",
+    "placeholders" : null
+  },
+  "results.use_custom_search_results_template.inline_help_text" : {
+    "message" : "Aktivieren Sie diese Einstellung, um eine benutzerdefinierte Suchergebnisseite anstelle der globalen Standardsuchergebnisseite zu verwenden.",
+    "description" : "",
+    "placeholders" : null
+  },
+  "results.use_custom_search_results_template.label" : {
+    "message" : "Benutzerdefinierte Suchergebnisseite verwenden",
+    "description" : "",
+    "placeholders" : null
+  }
+}

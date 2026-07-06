@@ -1,0 +1,63 @@
+<!--
+    templateType: section
+    label: Hero
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/hero.png
+    description: "Global component for displaying hero section, title, features and logo block, suggested to be placed on the top of the page."
+-->
+{% dnd_section
+  vertical_alignment={{ "MIDDLE" }},
+  class="s-layout s-hero bg-hero"
+%}
+  {# Main content #}
+  {% dnd_column
+    offset=0,
+    width=12,
+    extra_classes="gap-4"
+  %}
+    {# Heading #}
+    {% dnd_row %}
+      {% dnd_module path="../modules/heading-composition",
+        label="Modules: Header Composition",
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Features Card #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/features-card",
+        extra_classes="text-center relative",
+        label="Modules: Features Card",
+        extra_classes={{"my-2 md:my-3"}}
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Button #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/button",
+        extra_classes="text-center",
+        label="Modules: Button",
+        extra_classes={{"my-2 md:my-3"}}
+        butto_settings={
+            "button_text": "See all features",
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Logo Set #}
+    {% dnd_row %}
+      {% dnd_module
+        path="../modules/logo-set",
+        extra_classes="text-center",
+        label="Modules: Logo Set",
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+  {% end_dnd_column %}
+
+{% end_dnd_section %}

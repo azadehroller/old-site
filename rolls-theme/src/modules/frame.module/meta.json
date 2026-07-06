@@ -1,0 +1,10 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "categories" : [ "BODY_CONTENT", "MEDIA" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 199088096417,
+  "label" : "Frame",
+  "icon" : "VIDEO",
+  "is_available_for_new_content" : true
+}

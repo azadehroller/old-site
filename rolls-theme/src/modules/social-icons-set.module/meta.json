@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING", "BLOG_POST" ],
+  "host_template_types" : [ "PAGE", "BLOG_POST", "BLOG_LISTING" ],
+  "module_id" : 108434467959,
+  "label" : "Modules: Social Icons Set",
+  "icon" : "fontawesome-5.14.0:Cookie%20Bite:SOLID",
+  "is_available_for_new_content" : true
+}

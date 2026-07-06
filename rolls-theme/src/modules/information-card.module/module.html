@@ -1,0 +1,117 @@
+<div class="information-card max-w-[1312px] mx-auto transition-all duration-[400ms] ease">
+  {% for card in module.cards %}
+
+    {# ==================== Desktop Image Logic ==================== #}
+    {% if card.background_image.image.src %}
+      {% set bg_image_url = card.background_image.image.src %}
+      {% set bg_width = card.background_image.image.width %}
+      {% set bg_height = card.background_image.image.height %}
+      {% if bg_width and bg_height %}
+        {% set aspect_ratio = (bg_width / bg_height)|round(3) %}
+      {% else %}
+        {% set aspect_ratio = "" %}
+      {% endif %}
+    {% else %}
+      {% set bg_image_url = "" %}
+      {% set aspect_ratio = "" %}
+    {% endif %}
+
+    {# ==================== Mobile Image Logic ==================== #}
+    {% if card.background_image.mobile_image.src %}
+      {% set mobile_image_url = card.background_image.mobile_image.src %}
+      {% set mobile_w = card.background_image.mobile_image.width %}
+      {% set mobile_h = card.background_image.mobile_image.height %}
+      {% if mobile_w and mobile_h %}
+        {% set mobile_ratio = (mobile_w / mobile_h)|round(3) %}
+      {% else %}
+        {% set mobile_ratio = "" %}
+      {% endif %}
+    {% else %}
+      {% set mobile_image_url = "" %}
+      {% set mobile_ratio = "" %}
+    {% endif %}
+
+    <figure
+      class="
+        information-card-item
+        theme-{{ card.theme|default('white') }}
+        fade-in-on-scroll
+        overflow-hidden
+        relative
+        break-inside-avoid
+        bg-cover bg-no-repeat bg-center
+        {% if loop.last and module.style_settings.last_card_span_all %} span-all-columns{% endif %}
+        {% if mobile_image_url %} has-mobile-bg{% endif %}
+      "
+      {% if bg_image_url %}
+        style="background-image: url('{{ bg_image_url }}');{% if aspect_ratio %} aspect-ratio: {{ aspect_ratio }};{% endif %}"
+      {% endif %}
+      {% if mobile_image_url %} data-mobile-bg="{{ mobile_image_url }}" {% endif %}
+      {% if mobile_ratio %} data-mobile-ratio="{{ mobile_ratio }}" {% endif %}
+    >
+      <figcaption class="inline-flex flex-col gap-[24px] opacity-0">
+        {% if card.heading %}
+          <h2 class="text-2xl font-semibold">{{ card.heading }}</h2>
+        {% endif %}
+        {% if card.body %}
+          <div class="prose">{{ card.body }}</div>
+        {% endif %}
+        {% if card.cta_link.url.href %}
+          <a 
+            href="{{ card.cta_link.url.href }}" 
+            class="btn-primary"
+            {% if card.cta_link.open_in_new_tab %}target="_blank"{% endif %}
+            {% if card.cta_link.rel %}rel="{{ card.cta_link.rel }}"{% endif %}
+          >
+            {{ card.cta_link.text|default('Learn more') }}
+          </a>
+        {% endif %}
+      </figcaption>
+    </figure>
+
+  {% endfor %}
+</div>
+
+<style>
+  @media (max-width: 767px) {
+    .information-card-item.has-mobile-bg {
+      background-image: var(--mobile-bg) !important;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var items = document.querySelectorAll('.information-card-item.has-mobile-bg');
+
+  items.forEach(function(el) {
+    var mobileBg = el.getAttribute('data-mobile-bg');
+    var mobileRatio = el.getAttribute('data-mobile-ratio');
+
+    // Save original desktop ratio
+    var desktopRatio = el.style.aspectRatio;
+
+    // Apply CSS variable for mobile background
+    if (mobileBg) {
+      el.style.setProperty('--mobile-bg', "url('" + mobileBg + "')");
+    }
+
+    function applyCorrectAspectRatio() {
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        if (mobileRatio) {
+          el.style.aspectRatio = mobileRatio;
+        }
+      } else {
+        if (desktopRatio) {
+          el.style.aspectRatio = desktopRatio;
+        } else {
+          el.style.removeProperty("aspect-ratio");
+        }
+      }
+    }
+
+    applyCorrectAspectRatio();
+    window.addEventListener("resize", applyCorrectAspectRatio);
+  });
+})();
+</script>

@@ -1,0 +1,189 @@
+.media-frame-wrapper { position: relative; width: 100%; }
+.media-frame-container {
+  position: relative;
+  border-radius: 52px;
+  padding: 24px;
+  background: rgba(255,255,255,0.4);
+  backdrop-filter: blur(10px);
+}
+.media-frame-inner { position: relative; border-radius: 28px; overflow: visible; }
+.wistia_embed{
+    inset: 0;
+    transform: none;
+}
+.media-frame-content {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  border-radius: 28px;
+}
+.media-frame-background-image,
+.media-frame-image {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* Play Button */
+.media-frame-play-button {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border: none; background: transparent;
+  width: 120px; height: 120px;
+  cursor: pointer; z-index: 10;
+  transition: transform .3s ease, opacity .2s ease;
+}
+.media-frame-play-button:hover { transform: translate(-50%, -50%) scale(1.1); }
+.play-icon { width: 100%; height: 100%; }
+
+.media-frame-wrapper.is-playing .media-frame-play-button {
+  opacity: 0; pointer-events: none;
+}
+
+/* Modal */
+.media-frame-modal {
+  position: absolute; inset: 0;
+  display: none; opacity: 0;
+  transition: opacity .25s ease;
+  border-radius: inherit; pointer-events: none;
+}
+.media-frame-modal[aria-hidden="false"] {
+  display: block; opacity: 1; pointer-events: none;
+}
+
+.media-frame-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.15);
+  border-radius: inherit;
+  z-index: 1; pointer-events: auto;
+}
+
+/* Video area */
+.media-frame-video-container {
+  position: absolute; inset: 0;
+  z-index: 2; background: #000;
+  border-radius: inherit; pointer-events: auto;
+}
+.media-frame-video-container iframe,
+.media-frame-video-container video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: none; object-fit: contain;
+  pointer-events: auto;
+}
+
+/* Close button (fixed) */
+.media-frame-modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px !important; height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.4);
+  color: #fff;
+  cursor: pointer; pointer-events: auto;
+  transition: transform .2s ease, background .2s ease;
+}
+.media-frame-modal-close:hover {
+  transform: scale(1.1);
+  background: rgba(0,0,0,.7);
+}
+.media-frame-modal-close svg { width: 20px; height: 20px; }
+
+/* Wistia slot should take full box */
+.media-frame-wistia-slot { position: absolute; inset: 0; }
+
+/* Accessibility helper */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) { .media-frame-play-button { width: 80px; height: 80px; } }
+@media (max-width: 480px) { .media-frame-play-button { width: 60px; height: 60px; } }
+/* Hide Wistia's big play overlay button */
+.media-frame-video-container .w-big-play-button,
+.media-frame-video-container .w-overlay {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Keep our close button circular and on top */
+.video-image-main-wrapper{
+backdrop-filter: blur(10px);
+    background: hsla(0, 0%, 100%, .4);
+    border-radius: 52px;
+    padding: 24px;
+    position: relative;
+
+  background: rgba(255, 255, 255, 0.2);
+  /* backdrop-filter: blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
+  /* border: 2px solid rgba(255, 255, 255, 0.5); */
+  border-radius: 36px;
+  padding: 24px;
+  width: 100%;
+  /* border-image: linear-gradient(0deg,rgba(1,25,65,.02) 0,hsla(0,0%,100%,.5)); */
+  /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); */
+  /* border: 2.129px solid rgba(1, 24, 64, 0.02); background: rgba(255, 255, 255, 0.40); backdrop-filter: blur(14.589666366577148px); */
+  box-sizing: border-box;
+  color: #FFF;
+  background: transparent;
+  background-clip: padding-box;
+  /* !importanté */
+  border: solid 2px transparent;
+  /* !importanté */
+  /* border-radius: 1em; */
+  position: relative;
+  border-radius: 52px;
+  border: 1.459px solid rgba(1, 24, 64, 0.00);
+  background: rgba(255, 255, 255, 0.40);
+  backdrop-filter: blur(10px);
+}
+.video-image-main-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  /* margin: -5px; */
+  /* !importanté */
+  border-radius: inherit;
+  /* !importanté */
+  background: linear-gradient(0deg, rgba(1, 24, 64, .02), rgba(1, 24, 64, .02));
+}
+.wistia_embed{
+
+}
+.media-frame-modal-close { z-index: 9999; }
+.video-image-container{    border-radius: 28px;
+    overflow: visible;
+    position: relative;}
+.image-wrapper{border-radius: 28px;
+    /* height: 0; */
+/*     padding-bottom: 56.25%; */
+    position: relative;
+    width: 100%;}
+.video-image-container  .video-image{
+/* width:auto !important; */
+border-radius: 28px; }
+@media (max-width: 768px) {
+  .video-image-main-wrapper {
+    border-radius: 24px;
+    padding: 8px;
+  }
+.video-image{
+    border-radius: 20px !important;
+  }
+}

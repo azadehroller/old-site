@@ -1,0 +1,128 @@
+{% import "../../templates/macros/macros.html" as macro %}
+{% set theme = module.styles.theme %}
+{# ... (your macros can stay the same) ... #}
+{% macro setTextColor(themeColor, defaultColor='', onDarkColor='', gxColor='') %}
+    {% set textColor = (themeColor == 'light') ? onDarkColor : (themeColor == 'gxscore') ? gxColor : defaultColor %}
+{{ textColor }}
+{% endmacro %}
+{% macro logoSrc(logo) %}
+    {% if logo.type == "img" %}
+        {% set sizeAttrs = 'width="194" height="106"' %}
+        {% set loadingAttr = logo.img.loading != 'disabled' ? 'loading="{{ logo.img.loading }}"' : '' %}
+        <img src="{{ logo.img.src }}" alt="{{ logo.img.alt }}" {{ sizeAttrs }} {{ loadingAttr }} style="aspect-ratio: 194/106;">
+    {% else %}
+        <div style="width: 194px; height: 106px; display: flex; align-items: center; justify-content: center;">
+            {{ logo.svg }}
+        </div>
+    {% endif %}
+{% endmacro %}
+{% macro logoItems(item, resized) %}
+    {% for logo in item %}
+        <div class="logo-set__logo">
+            {{ logoSrc(logo) }}
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+{# Variables #}
+{% set title = module.title %}
+{% set custom_title = module.custom_title %}
+{% set logos = module.logos %}
+{% set logos_amer = module.amer.logos %}
+{% set logos_apac = module.apac.logos %}
+{% set logos_emea = module.emea.logos %}
+{% set logos_uk = module.uk.logos %}
+{% set region = module.region %}
+{% set divider = module.styles.divider %}
+
+{% require_css %}
+<style>
+  /* Prevent CLS with explicit dimensions */
+  .scroller {
+    min-height: 106px;
+    position: relative;
+    contain: layout style;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  }
+
+  .scroller__inner {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    align-items: center;
+    will-change: transform;
+    min-height: 106px;
+  }
+
+  /* Ensure logo containers have consistent dimensions */
+  .logo-set__logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 194px;
+    height: 106px;
+  }
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 1rem));
+    }
+  }
+
+  .scroller[data-animated="true"] .scroller__inner {
+    width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+
+  /* Disable carousel on larger screens */
+/*   @media screen and (min-width: 1032px) {
+    .scroller[data-animated="true"] .scroller__inner {
+      animation: none;
+    }
+
+    .scroller[data-animated="true"] {
+      -webkit-mask: none;
+      mask: none;
+    }
+  } */
+</style>
+{% end_require_css %}
+
+{# FIX: The parent module has an inline style to hide it until the JS is ready. #}
+<div class="global global-logo-set logo-set-module" data-country="{{ personalization.location.country_code }}" style="visibility: hidden;">
+  
+  {% if divider %}
+    <div class="mt-3 w-full h-[1px] bg-neutral-white"></div> 
+  {% endif %}
+  {% if custom_title  %}
+  <h2 class="font-semibold logo-set-heading text-lg block {{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }} m-0 text-{{alignment|lower || "left"}}">
+      {{ custom_title }}
+    </h2>
+  {% else %}
+    <h2 class="font-semibold text-lg block {{ setTextColor(theme, 'text-primary-50', 'text-neutral-white', 'text-gx-80') }} m-0 text-{{alignment|lower || "left"}}">
+      Trusted by over 3,000 venues worldwide
+    </h2>
+  {% endif %}
+  {% if not region %}
+    {# Default view: This doesn't need to be hidden as it's the only one. #}
+    <div class="scroller">
+        <div class="scroller__inner" data-logos="default">
+            {{ logoItems(logos, true) }}
+        </div>
+    </div>
+  {% else %}
+    {# Regional view: Each logo set is hidden with an inline style="display: none;" #}
+    <div class="logo-set__logos--regional">
+      <div class="scroller">
+         <div class="scroller__inner" data-logos="amer" style="display: none;">{{ logoItems(logos_amer, true) }}</div>
+         <div class="scroller__inner" data-logos="apac" style="display: none;">{{ logoItems(logos_apac, true) }}</div>
+         <div class="scroller__inner" data-logos="emea" style="display: none;">{{ logoItems(logos_emea, true) }}</div>
+         <div class="scroller__inner" data-logos="uk" style="display: none;">{{ logoItems(logos_uk, true) }}</div>
+      </div>
+    </div>
+  {% endif %}
+
+</div>

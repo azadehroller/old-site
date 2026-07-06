@@ -1,0 +1,67 @@
+[ {
+  "id" : "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "name" : "text_loops",
+    "label" : "Text Loops",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 0,
+      "max" : 4,
+      "sorting_label_field" : null,
+      "default" : 1
+    },
+    "children" : [ {
+      "id" : "c3d4e5f6-a7b8-9012-cdef-123456789012",
+      "name" : "text",
+      "label" : "Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null
+  }, {
+    "id" : "d4e5f6a7-b8c9-0123-def0-234567890123",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy"
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "text_loops" : [ {
+      "text" : ""
+    } ],
+    "image" : {
+      "src" : "",
+      "alt" : "",
+      "loading" : "lazy"
+    }
+  }
+} ]

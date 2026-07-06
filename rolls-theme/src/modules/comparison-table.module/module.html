@@ -1,0 +1,22 @@
+{# Variables #}
+{% set comparison_items = module.comparison_items %}
+
+<section id="comparison-table-{{name}}" class="my-4">
+    <div class="md:flex w-full table-auto box-shadow-onlight-blue-40">
+        {% for comparison in comparison_items %}
+            <div class="comparison w-full md:w-1/{{loop.length}}">
+                <div class="py-3 px-2 text-center {% if comparison.comparison_competitor %}bg-primary-70{%else%}bg-primary-40{% endif %}">
+                    <h3 class="text-2xl text-neutral-white">{{ comparison.comparison_title }}</h3>
+                </div>
+                <ul class="m-0">
+                    {% for item in comparison.comparison_items %}
+                        <li class="{% cycle "bg-[#F5F8FF]","bg-neutral-white" %} flex flex-row gap-2 py-3 px-4 text-base text-primary-50">
+                            <span>{% if comparison.comparison_competitor %}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#E50B0B"/></svg>{%else%}<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9.00039 16.2L4.80039 12L3.40039 13.4L9.00039 19L21.0004 6.99998L19.6004 5.59998L9.00039 16.2Z" fill="#18F273"/></svg>{% endif %}</span>
+                            <span>{{ item.comparison_item }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</section>

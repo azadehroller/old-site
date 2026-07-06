@@ -1,0 +1,907 @@
+  
+{% require_css %}
+  <style>
+    {% scope_css %}
+
+    {# Module wrapper #}
+      {# Button #}
+
+      .btn-colour-red {
+        background-color: var(--red, #ff290c);
+        border: 2px solid var(--red, #ff290c);
+      }
+
+      .btn-colour-red:hover,
+      .btn-colour-red:focus {
+        background-color: #660c00;
+        border: 2px solid var(--red, #660c00);
+        text-decoration: none;
+      }
+
+      .btn-colour-navy {
+        background-color: var(--blue, #033180);
+      }
+
+      .btn-colour-navy:hover,
+      .btn-colour-navy:focus {
+        background-color: var(--blue-tint-1, #011332);
+        text-decoration: none;
+      }
+
+      {# Tertiary Styles #}
+      .btn-kind-tertiary.btn-colour-navy {
+        background-color: transparent;
+        border: solid 1px var(--blue, #033180);
+        color: var(--blue, #033180);
+      }
+
+      .btn-kind-tertiary.btn-colour-navy:hover,
+      .btn-kind-tertiary.btn-colour-navy:focus {
+        background-color: var(--blue, #033180);
+        border: solid 1px var(--blue, #033180);
+        color: var(--white, #fff);
+      }
+
+      .btn-kind-tertiary.btn-colour-red {
+        background-color: transparent;
+        border: solid 1px var(--red, #ff290c);
+        color: var(--red, #ff290c);
+      }
+
+      {# Corner Styles #}
+      .btn-corner-supreme, 
+      .card-corner-supreme {
+        border-radius: 980px;
+      }
+
+      .btn-corner-crispy, 
+      .card-corner-crispy {
+        border-radius: 980px;
+      }
+
+      .btn-corner-sharp, 
+      .card-corner-sharp {
+        border-radius: 0;
+      }
+
+      .btn.btn-size-slim {
+        padding: var(--spacing-xs) var(--spacing-lg);
+      }
+
+      .btn {
+        --spacing-xs: 8px;
+        --spacing-md: calc(var(--spacing-xs) * 2);
+        --spacing-lg: calc(var(--spacing-xs) * 3);
+        --spacing-xlg: calc(var(--spacing-xs) * 4);
+        font-size: 14px;
+        line-height: 24px;
+        color: var(--white, #fff);
+        padding: 8px 24px 8px 24px;
+        transition: background 250ms,border 250ms,color 250ms;
+        width: 100%;
+        text-align: center;
+      }
+
+       .btn.close-modal {
+        color: #9D9A9B;
+       }
+
+      .btn:hover {
+        text-decoration: none;
+      }
+      
+      .card {
+        filter: none;
+      }
+
+      .card-box-shadow-soft {
+        box-shadow: none;
+      }
+
+      .card__content {
+        text-align: left;
+        color: var(--blue, #033180);
+      }
+      {# 
+        TODO: Re-write card logic, too many overwrites
+      #}
+
+      .addons-content .card__content {
+          color: var(--blue, #033180);
+      }
+
+      .addons-content {
+        padding: 32px;
+        background: #FAFCFF;
+        display: block;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: 1fr;
+        grid-column-gap: 32px;
+        grid-row-gap: 32px;
+      }
+
+      @media(min-width: 768px) and (max-width: 1400px) {
+        .addons-content {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(2, 1fr); 
+          
+        }
+      }
+
+      @media(min-width: 1400px) {
+         .addons-content {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          grid-template-rows: 1fr;
+          grid-column-gap: 32px;
+         }
+      }
+
+      .addons-content .card {
+        background: transparent;
+        margin: 0 0 32px;
+      }
+
+      @media(min-width: 768px) {
+        .addons-content .card {
+          margin: 0;
+        }
+      }
+
+      .section-cards__wrapper {
+        display: inherit;
+      }
+
+      .tile {
+        margin: 0;
+      }
+
+      .tile {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        padding: 48px var(--spacing-xlg) var(--spacing-xlg);
+        transition: box-shadow 0.2s ease-in-out;
+      }
+
+      .tile:hover {
+        box-shadow: 0px 24px 60px 0px #074DC533;
+      }
+
+      .tile.is-popular,
+      .tile.is-recommended {
+          padding: 0 32px var(--spacing-xlg);
+          margin-top: calc(var(--spacing-lg)*-1.19);
+          mix-blend-mode: normal;
+          border-radius: 32px;
+      }
+
+      .tile.is-popular:before {
+        content: none;
+      }
+
+      .tile.is-recommended:before {
+          content: none;
+      }
+
+      .tile.is-popular.pro:before,
+      .tile.is-recommended.pro:before {
+        content: none;
+      }
+
+      .tile.is-popular .pricing-select__tiles--tag--popular {
+        display: block;
+      }
+
+      .tile .pricing-select__tiles--tag--popular {
+        display: none;
+      }
+
+      .tile.is-recommended .pricing-select__tiles--tag {
+        color: var(--white, #fff);
+        z-index: 1;
+      }
+
+      .tile:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 12px;
+        border-radius: 16px 16px 0px 0px;
+      }
+
+      .tile.-lite:before {
+        background: #5087E5;
+      }
+
+      .tile.-pro:before {
+        background: #8BACDA;
+      }
+
+      .tile.-premium:before {
+        background: #124DB2;
+      }
+      .tile.-enterprise:before {
+        background: #032663;
+      }
+
+      .section-callout__wrapper {
+        margin-bottom: 40px;
+      }
+
+      @media(min-width: 768px) {
+        .btn {
+          font-size: 16px;
+          text-align: center;
+        }
+
+        .section-cards__wrapper {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 32px;
+        }
+
+        .card-box-shadow-soft {
+          box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-callout__wrapper {
+          margin-bottom: 60px;
+        }
+      }
+
+      @media(min-width: 768px) and (max-width: 1400px) {
+        .section-cards__wrapper {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media(min-width: 992px) {
+        .tile {
+          gap: 2rem;
+          margin: 0;
+        }
+      }
+
+      {# Update Table #}
+
+      .fee-title:hover .tooltip {
+            opacity: 1;
+            transition-timing-function: cubic-bezier(.165,.84,.44,1);
+            transform: translateY(calc(-100% - 1px));
+        }
+
+        .tooltip {
+            opacity: 0;
+            position: absolute;
+            left: 27px;
+            right: -10px;
+            top: 0;
+            border-radius: 8px;
+            pointer-events: none;
+            background: #fff;
+            color: #033180;
+            font-weight: 600;
+            transition: transform, opacity, .15s ease-in-out;
+            transform-origin: 20px calc(100% + 12px);
+            transform: translateY(calc(-100% + 10px)) scale(.75);
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+        }
+
+        .tooltip:before {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 34px;
+            width: 12px;
+            height: 12px;
+            transform: rotate(45deg);
+            border-radius: 0 0 4px 0;
+            background-color: inherit;
+            box-shadow: 3px 3px 5px rgba(82,95,127,.04);
+        }
+
+        .tooltip-right {
+            width: fit-content;
+            transform-origin: right calc(100% + 20px);
+        }
+        
+        .tooltip-right:before {
+            content: "";
+            position: absolute;
+            left: calc(100% - 40px);
+        }
+
+        .tooltip-middle {
+            left: -40px;
+            right: -40px;
+            width: fit-content;
+            transform-origin: center bottom;
+        }
+
+        .tooltip-middle:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+        }
+
+
+    {% end_scope_css %}
+  </style>
+{% end_require_css %}
+
+{# TODO: Come up with a beter naming convention for the blocks!! #}
+{# TODO: update markup to use the section settings from module.css #}
+
+<section id="card-pricing-{{name}}">
+  <div class="section-pricing__wrapper flex flex-col gap-5 md:gap-7">
+    <div class="pricing-content__wrapper">
+      <div class="pricing-content__wrapper--container flex flex-col gap-6">
+        <div class="flex justify-center md:justify-end {% if module.pricing_tile_content.currency_dropdown %}invisible{% endif %}">
+          <div class="inline-block relative w-[6rem]">
+              <select id="currency" name="currency" class="block appearance-none w-full bg-transparent border-0 px-2 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline text-primary-50 text-base font-semibold">
+                  <option value="usd" data-curr="usd">$USD</option>
+                  <option value="aud" data-curr="aud">$AUD</option>
+                  <option value="gbp" data-curr="gbp">£GBP</option>
+                  <option value="eur" data-curr="eur">€EUR</option>
+                  <option value="ca" data-curr="ca">$CAD</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-primary-50">
+                  <svg class="fill-primary-50 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              </div>
+          </div>
+        </div>
+        <div class="pricing-select__tiles">
+          {% for item in module.pricing_tile_content.tile %}
+          <div class="tile mo-card bg-neutral-white rounded-b-[32px] box-shadow-onlight xl:w-[304px] xl:min-w-[304px] -{{item.package}} {% if item.roller_recommends %}is-recommended{% endif %} {% if item.most_popular %}is-popular{% endif %} {% if item.roller_recommends %}is-recommended{% endif %}" data-plan="{{item.package}}">
+            <div>
+              {% if item.most_popular %}
+                <div class="pricing-select__tiles--tag--popular bg-announcement text-neutral-white  rounded-t-[32px]">Most Popular</div>
+              {% endif %}
+              {% if item.roller_recommends %}
+                <div class="pricing-select__tiles--tag bg-secondary-50 rounded-t-[32px]">ROLLER Recommends</div>
+              {% endif %}
+              <div class="flex flex-col gap-2">
+                <div class="pricing-select__tiles--package text-secondary-50">{{item.package}}</div>
+                <div class="pricing-select__tiles--subtitle text-primary-50">{{item.subtitle}}</div>
+              </div>
+              {% if loop.index != 4 %}
+                {% if item.additional_pricing_details %}
+                  <div class="pricing-select__tiles--additional text-primary-50">
+                  {% if item.additional_pricing_details.overwrite_text %}
+                    <p style="display: block;">{{ item.additional_pricing_details.billed_text || "Billed annually" }}</p>
+                  {% else %}
+                  {% if item.additional_pricing_details.monthly.usd %}
+                  <p class="-usd -monthly -active">Billed annually or <br> ${{ item.additional_pricing_details.monthly.usd }}/mo billed monthly</p>
+                  {% endif %}
+
+                  {% if item.additional_pricing_details.monthly.aud %}
+                  <p class="-aud -monthly">Billed annually or <br> ${{ item.additional_pricing_details.monthly.aud }}/mo billed monthly</p>
+                  {% endif %}
+
+                  {% if item.additional_pricing_details.monthly.gbp %}
+                  <p class="-gbp -monthly">Billed annually or <br> £{{ item.additional_pricing_details.monthly.gbp }}/mo billed monthly</p>
+                  {% endif %}
+                  
+                  {% if item.additional_pricing_details.monthly.eur %}
+                  <p class="-eur -monthly">Billed annually or <br> €{{ item.additional_pricing_details.monthly.eur }}/mo billed monthly</p>
+                  {% endif %}
+
+                  {% if item.additional_pricing_details.monthly.cad %}
+                  <p class="-ca -monthly">Billed annually or <br> ${{ item.additional_pricing_details.monthly.cad }}/mo billed monthly</p>
+                  {% endif %}
+                {% endif %}
+              {% endif %}
+              </div>
+              {% endif %}
+              <div class="pricing-select__tiles--rates text-primary-50">
+                {% if loop.index != 4 %}
+                  {% if item.rates_label %}
+                    <div class="pricing-select__tiles--rates__label font-normal">{{ item.rates_label || "Credit Card Rates*" }} </div>
+                  {% endif %}
+                {% endif %}
+                {% if item.credit_card_rates.monthly.usd %}
+                  <p class="-usd -monthly -active">{{ item.credit_card_rates.monthly.usd }}</p>
+                {% endif %}
+                {% if item.credit_card_rates.monthly.usd %}
+                  <p class="-aud -monthly">{{ item.credit_card_rates.monthly.aud }}</p>
+                {% endif %}
+                {% if item.credit_card_rates.monthly.usd %}
+                  <p class="-gbp -monthly">{{ item.credit_card_rates.monthly.gbp }}</p>
+                {% endif %}
+                {% if item.credit_card_rates.monthly.usd %}
+                  <p class="-eur -monthly">{{ item.credit_card_rates.monthly.eur }}</p>
+                {% endif %}
+                {% if item.credit_card_rates.monthly.usd %}
+                  <p class="-ca -monthly">{{ item.credit_card_rates.monthly.cad }}</p>
+                {% endif %}
+              </div>
+            </div>
+            <div class="h-[1px] w-full bg-primary-50"></div>
+            <div>
+              <div class="pricing-select__tiles--features text-primary-50">
+                {% if item.features_title %}
+                <div class="pricing-select__tiles--features__label">{{ item.features_title }}</div>
+                {% endif %}
+                  <ul class="text-primary-50">
+                  {% for feature in item.features %}
+                    <li>{{ feature.title }}</li>
+                  {% endfor %}
+                  </ul>
+              </div>
+            </div>
+            <div class="mt-auto">
+              <div class="pricing-select__tiles--ctas">
+                  <div class="section-ctas">
+                  {% set plan = item.package %}
+                  {% if item.call_to_action == 'button' %}
+                    {% for item in item.button %}
+                      <a href="{{ item.button_url.href }}" class="btn font-semibold text-neutral-white btn-colour-{{item.colour ? item.colour : "blue"}} btn-kind-{{item.kind ? item.kind : "solid" }} btn-corner-{{ item.corner_type ? item.corner_type : "crispy" }} btn-size-{{ item.size ? item.size : "standard" }}">{{ item.button_text || "Get started" }}</a>
+                    {% endfor %}
+                  {% endif %}
+                  {% if item.call_to_action == 'form_modal' %}
+                    {% for item in item.button %}
+                      <a data-price="{{ plan|capitalize }}" href="#" class="btn font-semibold btn-colour-{{item.colour}} btn-kind-{{item.kind ? item.kind : "solid"}} btn-corner-{{ item.corner_type ? item.corner_type : "crispy" }} btn-size-{{ item.size ? item.size : "standard" }}" data-reveal-id="contact-form-{{ item.form_field.form_id }}">{{ item.button_text || "Get started" }}</a>
+                    {% endfor %}
+                  {% endif%}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if item.call_to_action == 'form_modal' %}
+            {% for item in item.button %}
+            <div id="contact-form-{{ item.form_field.form_id }}" class="modal modal--small">
+              <button class="btn close-modal"><span class="material-icons">close</span></button>
+              <div class="modal-content">
+                <div class="modal-form">
+                  {% form
+                    form_to_use="{{ item.form_field.form_id }}"
+                    response_response_type="{{ item.form_field.response_type }}"
+                    response_message="{{ item.form_field.message }}"
+                    response_redirect_id="{{ item.form_field.redirect_id }}"
+                    response_redirect_url="{{ item.form_field.redirect_url }}"
+                    gotowebinar_webinar_key="{{ item.form_field.gotowebinar_webinar_key }}"
+                  %}
+                </div>
+              </div>
+            </div>
+              {% require_js %}
+                <script>
+                  (function () {
+                    const plansElem = document.querySelectorAll("[data-price]");
+
+                    // Function for executing code on document ready
+                    function domReady(callback) {
+                        if (['interactive', 'complete'].indexOf(document.readyState) >= 0) {
+                            callback();
+                        } else {
+                            document.addEventListener('DOMContentLoaded', callback);
+                        }
+                    }
+
+                    // Get the input values from the modal form
+                    function setValue(formInput, formValue) {
+                        const el = document.querySelector('input[name="' + formInput + '"]');
+                        if (el) {
+                            el.value = formValue;
+                            el.dispatchEvent(new Event('change'));
+                        }
+                    }
+
+                    // Get the assigned form
+                    function getDemoModalFormPlan(plan) {
+                        try {
+                            hbspt.forms.create({
+                                portalId: {{ hub_id }},
+                                formId: "{{ item.form_field.form_id }}",
+                                onFormReady: function () {
+                                    setValue('v2_what_are_you_interested_in_', plan);
+                                }
+                            })
+                        }
+                        catch (error) {
+                            console.log('Hubspot erro: ', error);
+                        }
+                    }
+
+                    // Loop through the plan cards
+                    function getSelectedPlan() {
+                        for (const plan of plansElem) {
+                            plan.addEventListener('click', e => {
+                                e.preventDefault();
+                                const planId = plan.dataset.price;
+                                getDemoModalFormPlan(planId);
+                            });
+                        }
+                    }
+
+                    domReady(function () {
+                      if (!document.body) {
+                          return;
+                      } else {
+                        // Call function
+                        getSelectedPlan();
+                      }
+                    });
+                  })();
+                </script>
+              {% end_require_js%}
+            {% endfor %}
+          {% endif %}
+        {% endfor%}
+        </div>
+      </div>
+    </div>
+    {% if module.pricing_tile_content.plan_features %}
+    <div class="pricing__trigger">
+      <div id="js-pricing-trigger" class="inline cursor-pointer btn btn-colour-navy btn-kind-tertiary btn-corner-supreme btn-size-standard font-semibold">Compare plan features</div>
+    </div>
+    <div class="pricing__features">
+      <div id="js-sticky-table-header">
+        <div class="pricing__features--sticky m-0 block sticky z-10">
+          <div class="pricing__features--row-plans grid grid-cols-4 gap-4">
+            <div>&nbsp;</div>
+            <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 gap-5">
+            {% for item in module.pricing_tile_content.tile %}
+              <div class="pricing__features--sticky__item box-shadow-onlight" >
+                <div class="text-secondary-50 font-semibold">
+                  {{ item.package|title }}
+                </div>
+                <div class="pricing__features--sticky__item-cta">
+                  {% if item.call_to_action == 'button' %}
+                    {% for item in item.button %}
+                      <a href="{{ item.button_url.href }}" class="btn w-full block font-semibold btn-colour-{{item.colour ? item.colour : "blue"}} btn-kind-{{item.kind}} btn-corner-{{ item.corner_type ? item.corner_type : "crispy" }} btn-size-{{ item.size ? item.size : "standard" }}">{{ item.button_text || "Get started" }}</a>
+                    {% endfor %}
+                    {% else %}
+                      {% for item in item.button %}
+                      <a href="{{ item.button_url.href }}" class="btn w-full block font-semibold btn-colour-{{item.colour ? item.colour : "blue"}} btn-kind-{{item.kind}} btn-corner-{{ item.corner_type ? item.corner_type : "crispy" }} btn-size-{{ item.size ? item.size : "standard" }}">{{ item.button_text || "Get started" }}</a>
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {# Updated Table #}
+      <div class="hidden lg:block">
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <div></div>
+            {# TODO: add a default value for the cards length #}
+            <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-{{ module.pricing_tile_content.tile|length }} gap-5">
+            {% for card in module.pricing_tile_content.tile %}
+                {% set title = card.package|title %}
+                <div class="bg-accent-primary-30 py-2 px-3 text-primary-50 font-semibold capitalize text-center text-lg">{{title || "Package Title"}}</div>
+            {% endfor %}
+            </div>
+          </div>
+          <div>
+            {% for feature in module.pricing_tile_content.plan_features %}
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-x-4 transition ease-in{% if !feature.heading %} notHeadingElem row-item hover:bg-accent-primary-95{% else %} pt-4{% endif%}">
+                  <div class="relative grid gap-4 text-primary-50 fee-title {% if feature.heading %}border-l-2 py-2 px-3 font-semibold {%  else %}py-2 px-3{% endif %}">
+                  <div class="flex items-center">
+                    {% if feature.url.href %}
+                      {% set target = feature.url.type == 'EXTERNAL' ? 'target="_blank"' : null %}
+                      <a href="{{feature.url.href}}" {{ target }} class="underline">{{ feature.title }}</a>
+                    {% else %}
+                      {{ feature.title }}
+                    {% endif %}
+                    {% if feature.support_tooltip %}<span class="ml-auto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="#6ba0fa" fill-rule="evenodd" d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z" clip-rule="evenodd"/></svg></span>{% endif %}
+                    {% if feature.support_tooltip %}
+                        <div class="tooltip tooltip-right box-shadow-onlight">{{ feature.support_tooltip }}</div>
+                    {% endif %}
+                  </div>
+                  </div>
+                <div class="col-span-3 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 justify-center gap-5 md:mx-auto text-center text-sm text-primary-50 relative">
+                  {% for plan in [feature.plan_lite, feature.plan_pro, feature.plan_premium, feature.plan_enterprise] %}
+                  <div id="js-rp-prices-{{name}}" class="py-2 px-3 flex justify-center items-center gap-1 fee-title relative {% if feature.heading %}bg-transparent {% else %} bg-accent-primary-30{% endif %}">
+                    {% if plan.overwrite_icon %}
+                      {{ plan.text }}
+                        {% if plan.tooltip %}<span {% if loop.last %}class="ml-auto"{% endif %}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"><path fill="#6ba0fa" fill-rule="evenodd" d="M1.333 8A6.67 6.67 0 0 1 8 1.333 6.67 6.67 0 0 1 14.667 8 6.67 6.67 0 0 1 8 14.667 6.67 6.67 0 0 1 1.333 8Zm7.334 2.667V12H7.333v-1.333h1.334ZM8 13.333A5.34 5.34 0 0 1 2.667 8 5.34 5.34 0 0 1 8 2.667 5.34 5.34 0 0 1 13.333 8 5.34 5.34 0 0 1 8 13.333ZM5.333 6.667a2.666 2.666 0 1 1 5.334 0c0 .855-.527 1.315-1.04 1.763-.486.426-.96.84-.96 1.57H7.333c0-1.214.628-1.696 1.18-2.119.434-.332.82-.628.82-1.214 0-.734-.6-1.334-1.333-1.334s-1.333.6-1.333 1.334H5.333Z" clip-rule="evenodd"/></svg></span>{% endif %}
+                      {% if plan.tooltip %}
+                          <div class="tooltip {% if loop.last %}tooltip-middle{% else %}tooltip-middle{% endif %} box-shadow-onlight">{{ plan.tooltip }}</div>
+                      {% endif %}
+                      {% else %}
+                      {% if !feature.heading %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#6ba0fa" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+      </div>
+      <div class="block lg:hidden">
+        {% for feature in module.pricing_tile_content.plan_features %}
+          <div class="row-item relative grid gap-4 text-primary-50 {% if !feature.heading %}notHeadingElem{% endif %} {% if feature.heading %}border-l-2 py-2 px-3 font-semibold {%  else %}py-3 px-0{% endif %}">
+            <div class="flex flex-col">
+              <div id="js-fee-heading" class="flex {% if !feature.heading %}cursor-pointer px-3{% endif %}">
+                <span aria-controls="faq-{{loop.index}}" aria-expanded="false">
+                    {{feature.title}}
+                </span>
+                {% if !feature.heading %}
+                <span class="ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4.94 5.72668L8 8.78002L11.06 5.72668L12 6.66668L8 10.6667L4 6.66668L4.94 5.72668Z" fill="#053994"/>
+                    </svg>
+                    <svg class="hidden" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4.94 10.2733L8 7.21998L11.06 10.2733L12 9.33331L8 5.33331L4 9.33331L4.94 10.2733Z" fill="#053994"/>
+                    </svg>
+                </span>
+                {% endif %}
+              </div>
+              {% if !feature.heading %}
+              <div hidden>
+                  <div class="grid grid-cols-5 mt-3 bg-primary-10">
+                      <div class="text-sm col-span-2">
+                      {% for card in module.pricing_tile_content.tile %}
+                          {% set title = card.package|title %}
+                          <div class="py-2 px-3 text-primary-50 font-semibold capitalize">{{title}}</div>
+                      {% endfor %}
+                      </div>
+                      <div class="grid text-sm col-span-3">
+                        {% for plan in [feature.plan_lite, feature.plan_pro, feature.plan_premium, feature.plan_enterprise] %}
+                          <div id="js-rp-prices-{{name}}" class="flex justify-start py-2 px-3 {% if feature.heading %}bg-transparent {% else %} bg-primary-10{% endif %}">
+                            {% if plan.overwrite_icon %}
+                              {{ plan.text }}
+                            {% else %}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"><path fill="#6ba0fa" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z"/></svg>
+                          {% endif %}
+                        </div>
+                        {% endfor %}
+                      </div>
+                  </div>
+              </div>
+              {% endif %}    
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {# end updated table #}
+      <div class="pt-5 pb-2 flex justify-center gap-2 text-primary-50 font-semibold">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 8L6 14L7.41 15.41L12 10.83L16.59 15.41L18 14L12 8Z" fill="#033180"/>
+        </svg>
+        <span id="js-back-to-top-{{name}}" class="cursor-pointer">Back to top</span>
+      </div>
+    </div>
+    <div id="js-sticky-header-stopper"></div>
+    {% endif %}
+    {% if module.pricing_tile_content.add_ons and !module.pricing_tile_content.hide_add_ons %}
+      <div class="pricing__addons">
+        <div class="pricing__addons--wrapper">
+          <div class="addons-header">
+            <div class="addons-header__title">{{ module.pricing_tile_content.add_on_title || "Available Add-ons" }}</div>
+          </div>
+          <div class="addons-content">
+            {% for addon in module.pricing_tile_content.add_ons %}
+            <div class="card">
+              <div class="card__icon">
+                {% if (addon.icon == 'hq') %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><g fill="#143D82" clip-path="url(#a)"><path d="M10.244 29.607H4.558a.516.516 0 0 1-.518-.518v-7.455c0-.288.23-.518.518-.518h5.686c.288 0 .519.23.519.518v7.455c0 .288-.23.518-.519.518Zm-5.167-1.036h4.649v-6.419h-4.65v6.419Z"/><path d="M7.414 29.41a.516.516 0 0 1-.518-.518v-7.044c0-.288.23-.518.518-.518h.016c.288 0 .519.23.519.518v7.036a.523.523 0 0 1-.296.468.599.599 0 0 1-.24.058Z"/><path d="M.51 29.608a.517.517 0 0 1-.362-.149.537.537 0 0 1-.148-.37V2.775c0-.288.23-.519.518-.519l13.865-.016a.517.517 0 0 1 .519.518v26.323c0 .288-.23.518-.519.518L.51 29.608ZM1.03 3.285v25.286l12.828-.017V3.277l-12.828.008Z"/><path d="M5.159 7.564a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .518.23.518.519v2.04c0 .288-.23.519-.518.519ZM7.365 7.564a.516.516 0 0 1-.519-.519v-2.04c0-.288.23-.519.519-.519.288 0 .518.23.518.519v2.04c0 .288-.23.519-.518.519ZM9.561 7.564a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .519.23.519.519v2.04c0 .288-.23.519-.519.519ZM5.159 11.637a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .518.23.518.519v2.04c0 .288-.23.519-.518.519ZM7.365 11.637a.516.516 0 0 1-.519-.519v-2.04c0-.288.23-.519.519-.519.288 0 .518.23.518.519v2.04c0 .288-.23.519-.518.519ZM9.561 11.637a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .519.23.519.519v2.04c0 .288-.23.519-.519.519ZM5.159 15.718a.516.516 0 0 1-.518-.518v-2.041c0-.288.23-.518.518-.518.288 0 .518.23.518.518v2.04c0 .289-.23.519-.518.519ZM7.365 15.718a.516.516 0 0 1-.519-.518v-2.041c0-.288.23-.518.519-.518.288 0 .518.23.518.518v2.04c0 .289-.23.519-.518.519ZM9.561 15.718a.516.516 0 0 1-.518-.518v-2.041c0-.288.23-.518.518-.518.288 0 .519.23.519.518v2.04c0 .289-.23.519-.519.519ZM5.159 19.8a.516.516 0 0 1-.518-.52v-2.04c0-.288.23-.518.518-.518.288 0 .518.23.518.518v2.04c0 .28-.23.52-.518.52ZM7.365 19.8a.516.516 0 0 1-.519-.52v-2.04c0-.288.23-.518.519-.518.288 0 .518.23.518.518v2.04c0 .28-.23.52-.518.52ZM9.561 19.8a.516.516 0 0 1-.518-.52v-2.04c0-.288.23-.518.518-.518.288 0 .519.23.519.518v2.04c0 .28-.23.52-.519.52ZM11.766 7.564a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .519.23.519.519v2.04c0 .288-.23.519-.519.519ZM11.766 11.637a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .519.23.519.519v2.04c0 .288-.23.519-.519.519ZM11.766 15.718a.516.516 0 0 1-.518-.518v-2.041c0-.288.23-.518.518-.518.288 0 .519.23.519.518v2.04c0 .289-.23.519-.519.519ZM11.766 19.8a.516.516 0 0 1-.518-.52v-2.04c0-.288.23-.518.518-.518.288 0 .519.23.519.518v2.04c0 .28-.23.52-.519.52ZM2.962 7.564a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .519.23.519.519v2.04c0 .288-.23.519-.519.519ZM2.962 11.637a.516.516 0 0 1-.518-.519v-2.04c0-.288.23-.519.518-.519.288 0 .519.23.519.519v2.04c0 .288-.23.519-.519.519ZM2.962 15.718a.516.516 0 0 1-.518-.518v-2.041c0-.288.23-.518.518-.518.288 0 .519.23.519.518v2.04c0 .289-.23.519-.519.519ZM2.962 19.8a.516.516 0 0 1-.518-.52v-2.04c0-.288.23-.518.518-.518.288 0 .519.23.519.518v2.04c0 .28-.23.52-.519.52ZM23.072 29.575h-8.738a.516.516 0 0 1-.519-.519c0-.288.23-.518.519-.518h8.22v-17.7h-8.22a.516.516 0 0 1-.519-.518c0-.288.23-.518.519-.518h8.738c.288 0 .519.23.519.518v18.736c0 .288-.23.518-.519.518Z"/><path d="M21.048 13.67H16.35a.516.516 0 0 1-.519-.52c0-.287.23-.518.519-.518h4.698c.288 0 .519.23.519.519 0 .288-.23.518-.519.518ZM21.048 15.866H16.35a.516.516 0 0 1-.519-.518c0-.288.23-.519.519-.519h4.698c.288 0 .519.23.519.519 0 .288-.23.518-.519.518ZM21.048 18.063H16.35a.516.516 0 0 1-.519-.518c0-.288.23-.519.519-.519h4.698c.288 0 .519.23.519.519 0 .288-.23.518-.519.518ZM21.048 20.26H16.35a.516.516 0 0 1-.519-.518c0-.288.23-.519.519-.519h4.698c.288 0 .519.23.519.519 0 .288-.23.518-.519.518ZM21.048 22.449H16.35a.516.516 0 0 1-.519-.519c0-.288.23-.518.519-.518h4.698c.288 0 .519.23.519.518 0 .288-.23.519-.519.519ZM21.048 24.646H16.35a.516.516 0 0 1-.519-.518c0-.288.23-.519.519-.519h4.698c.288 0 .519.23.519.518 0 .289-.23.519-.519.519ZM21.048 26.843H16.35a.516.516 0 0 1-.519-.519c0-.288.23-.518.519-.518h4.698c.288 0 .519.23.519.518 0 .288-.23.519-.519.519Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h32v32H0z"/></clipPath></defs></svg>
+                {% elif (addon.icon == 'waivers') %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><path fill="#143D82" d="M19.35 8.443v-.016c0-.017 0-.041-.008-.065a.25.25 0 0 0-.017-.065c0-.008 0-.008-.008-.016l-.024-.057c-.008-.016-.024-.032-.032-.057 0-.008-.009-.008-.009-.016-.016-.016-.024-.032-.04-.049l-5.405-5.404a.215.215 0 0 0-.048-.04c-.008 0-.008-.009-.017-.009a.17.17 0 0 0-.048-.032h-.008a.397.397 0 0 0-.057-.025c-.008 0-.008 0-.016-.008a.15.15 0 0 0-.057-.016c-.016 0-.04-.008-.057-.008H.487A.488.488 0 0 0 0 3.046v25.946c0 .267.219.486.486.486h18.377a.488.488 0 0 0 .487-.486V8.459c.008-.008.008-.008 0-.016Zm-1.653-.47h-3.744V4.229l3.744 3.744ZM.972 28.513V3.542h12v4.918c0 .267.22.486.487.486h4.918v19.569H.972Z"/><path fill="#143D82" d="M15.76 11.951H3.598a.488.488 0 0 1-.486-.486c0-.267.219-.486.486-.486H15.76c.268 0 .487.219.487.486a.488.488 0 0 1-.487.486ZM15.76 15.225H3.598a.488.488 0 0 1-.486-.486c0-.268.219-.486.486-.486H15.76c.268 0 .487.219.487.486a.488.488 0 0 1-.487.486ZM9.853 18.498H3.598a.488.488 0 0 1-.486-.486c0-.267.219-.486.486-.486h6.255c.268 0 .487.219.487.486a.488.488 0 0 1-.487.486ZM15.76 18.498h-3.322a.488.488 0 0 1-.486-.486c0-.267.219-.486.486-.486h3.322c.268 0 .487.219.487.486a.488.488 0 0 1-.486.486ZM7.568 27.8c-.21 0-.421-.064-.616-.194-.413-.275-.656-.77-.615-1.24.064-.729.6-1.24 1.061-1.604.178-.146.357-.267.543-.389 0-.17 0-.34-.008-.502-.397.065-.81.008-1.175-.162-.203.162-.47.267-.762.283-.51.033-.964-.21-1.183-.616a.484.484 0 0 1 .203-.656.49.49 0 0 1 .656.203c.04.08.17.113.268.105.097-.008.226-.049.259-.138a.476.476 0 0 1 .34-.291.504.504 0 0 1 .438.105c.3.267.802.308 1.142.089a.48.48 0 0 1 .478-.024.48.48 0 0 1 .268.397c.016.202.032.413.032.616a5.336 5.336 0 0 0 1.296-1.16 1.546 1.546 0 0 1-.04-.429c.024-.583.308-1.248.745-1.766a.483.483 0 0 1 .454-.162c.17.032.308.146.373.3.292.745.008 1.531-.43 2.187.098.146.227.26.357.316.583.243 2.65.268 3.452-.016.251-.089.535.04.616.3a.486.486 0 0 1-.3.616c-.973.34-3.298.34-4.14 0a1.667 1.667 0 0 1-.608-.43c-.106.114-.211.22-.308.316-.446.438-.94.738-1.41 1.038a.329.329 0 0 1-.073.04 12.64 12.64 0 0 1-.17 1.564c-.049.267-.154.908-.689 1.191a.942.942 0 0 1-.454.113Zm.292-2.163c-.268.227-.527.51-.56.81-.007.114.074.268.187.34.008 0 .065.041.09.033.056-.032.129-.138.186-.494a9.4 9.4 0 0 0 .097-.689ZM25.565 8.548h-3.12a.488.488 0 0 1-.486-.486c0-.267.219-.486.486-.486h3.12c.267 0 .486.219.486.486a.488.488 0 0 1-.486.486Z"/><path fill="#143D82" d="M26.043 24.681c0-.008 0-.024.008-.032V8.062a.488.488 0 0 0-.486-.486.488.488 0 0 0-.486.486V24.09H22.93V8.062a.488.488 0 0 0-.486-.486.488.488 0 0 0-.486.486V24.592c0 .016 0 .032.008.049 0 .008 0 .024.008.032 0 .008 0 .016.008.024 0 .008.008.017.008.033v.008l1.564 4.424a.49.49 0 0 0 .924 0l1.564-4.424v-.008c0-.008.008-.025.008-.033-.016-.008-.016-.016-.008-.016ZM24 27.541l-.875-2.48h1.75l-.875 2.48Z"/><path fill="#143D82" d="M26.342 7.576h-.291v-.802c0-1.127-.916-2.05-2.05-2.05-1.127 0-2.05.915-2.05 2.05v1.288c0 .267.218.486.486.486h3.905c.527 0 .965.43.965.964v5.332c0 .268.219.486.486.486a.488.488 0 0 0 .486-.486V9.512c0-1.07-.867-1.936-1.937-1.936Zm-2.341-1.872c.591 0 1.077.486 1.077 1.078v.802h-2.147v-.802a1.065 1.065 0 0 1 1.07-1.078Z"/></svg>
+                {% elif (addon.icon == 'advanced_gx_score') %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><g fill="#143D82" clip-path="url(#a)"><path d="M25.167 2.24H2.353A2.351 2.351 0 0 0 0 4.593v22.814c0 1.3 1.052 2.353 2.353 2.353h22.814c1.3 0 2.353-1.052 2.353-2.353V4.593c0-1.3-1.052-2.353-2.353-2.353Zm-22.814.994h22.814c.746 0 1.359.613 1.359 1.359v1.905H.994V4.593c0-.754.605-1.359 1.359-1.359Zm22.814 25.532H2.353a1.36 1.36 0 0 1-1.359-1.359V7.484h25.532v19.923c0 .754-.605 1.359-1.359 1.359Z"/><path d="M7.796 5.487h-.009a.626.626 0 0 1-.621-.62c0-.34.282-.622.621-.622h.009c.34 0 .62.282.62.621 0 .34-.28.622-.62.622ZM3.132 5.487a.628.628 0 0 1-.63-.62c0-.34.282-.622.621-.622h.009c.34 0 .62.282.62.621 0 .34-.28.622-.62.622ZM5.46 5.487a.628.628 0 0 1-.63-.62c0-.34.281-.622.62-.622h.01a.62.62 0 1 1 0 1.243ZM7.158 20.929H4.656a.498.498 0 0 1-.497-.497V17.93c0-.273.223-.497.497-.497h2.502c.273 0 .497.224.497.497v2.502a.498.498 0 0 1-.497.497Zm-2.005-.994H6.66v-1.508H5.153v1.508ZM7.158 27.06H4.656a.499.499 0 0 1-.497-.498V24.06c0-.273.223-.496.497-.496h2.502c.273 0 .497.223.497.497v2.501a.499.499 0 0 1-.497.497Zm-2.005-.995H6.66v-1.507H5.153v1.507ZM12.849 19.67H9.974a.499.499 0 0 1-.497-.497c0-.273.224-.497.497-.497h2.875c.273 0 .497.224.497.497a.499.499 0 0 1-.497.497ZM22.044 19.67h-6.296a.498.498 0 0 1-.497-.497c0-.273.224-.497.497-.497h6.296c.273 0 .497.224.497.497a.498.498 0 0 1-.497.497ZM22.864 11.03H4.656a.499.499 0 0 1-.497-.497c0-.274.223-.498.497-.498h18.217c.273 0 .497.224.497.498a.506.506 0 0 1-.506.497ZM10.206 14.012h-5.55a.499.499 0 0 1-.497-.497c0-.274.223-.497.497-.497h5.55c.274 0 .497.223.497.497a.499.499 0 0 1-.497.497Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h32v32H0z"/></clipPath></defs></svg>
+                {% elif (addon.icon == 'api_webhook_access') %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><path fill="#143D82" d="M22.516 27.672H4.72C2.117 27.672 0 25.145 0 22.036V9.796C0 6.686 2.117 4.16 4.721 4.16h17.795c2.604 0 4.721 2.527 4.721 5.636v12.24c0 3.109-2.117 5.636-4.721 5.636ZM4.72 5.344C2.663 5.344.992 7.338.992 9.796v12.24c0 2.457 1.67 4.451 3.73 4.451h17.794c2.059 0 3.729-1.994 3.729-4.451V9.796c0-2.458-1.67-4.452-3.73-4.452H4.722Z"/><path fill="#143D82" d="M15.365 12.828h-1.747a.5.5 0 0 0-.497.497v5.157c0 .273.224.497.497.497a.498.498 0 0 0 .497-.497v-1.896h1.25c.53 0 1.027-.19 1.408-.538a1.79 1.79 0 0 0 .612-1.341c.008-1.035-.902-1.88-2.02-1.88Zm.745 2.492a1.097 1.097 0 0 1-.745.281h-1.25v-1.772h1.25c.571 0 1.027.398 1.027.886.008.215-.1.43-.282.605ZM11.416 17.017c0-.008 0-.008 0 0L9.786 13.1a.497.497 0 0 0-.456-.306.496.496 0 0 0-.464.298l-1.738 3.916-.563 1.266a.495.495 0 0 0 .257.654c.248.108.546 0 .654-.256l.438-.986h2.707l.406.969c.083.19.265.306.456.306a.377.377 0 0 0 .19-.041.489.489 0 0 0 .265-.646l-.522-1.258Zm-3.063-.307.96-2.16.895 2.16H8.353ZM19.248 12.828a.498.498 0 0 0-.497.496v5.158c0 .273.224.497.497.497a.498.498 0 0 0 .497-.497v-5.158a.498.498 0 0 0-.497-.496Z"/></svg>
+                {% elif (addon.icon == 'mobile_checkin') %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><path fill="#143D82" d="M11.273 24.35H2.428A2.43 2.43 0 0 1 0 21.92V3.388A2.43 2.43 0 0 1 2.428.96h8.845a2.43 2.43 0 0 1 2.429 2.428v10.38a.522.522 0 0 1-.217.418.49.49 0 0 1-.468.05l-2.928-1.135c-.042-.008-.142-.033-.384-.058-.017 0-.034 0-.042-.009a1.265 1.265 0 0 0-1.168.868 1.27 1.27 0 0 0 .8 1.61l4.073 1.403c.2.066.334.258.334.475v4.54a2.429 2.429 0 0 1-2.429 2.42ZM2.428 1.96c-.784 0-1.427.643-1.427 1.427v18.533c0 .785.643 1.427 1.427 1.427h8.845c.785 0 1.427-.642 1.427-1.427v-4.18l-3.738-1.285a2.277 2.277 0 0 1-1.427-2.88 2.266 2.266 0 0 1 2.161-1.543c.034 0 .075 0 .109.008h.008c.209.025.442.05.61.109.008 0 .016.008.016.008l2.253.876V3.388c0-.784-.643-1.427-1.427-1.427H2.428Z"/><path fill="#143D82" d="M8.461 4.223H5.232a.502.502 0 0 1-.5-.501c0-.276.225-.5.5-.5h3.23c.275 0 .5.224.5.5 0 .275-.225.5-.5.5ZM11.616 28.663a.493.493 0 0 1-.343-.133L6.61 24.216a.504.504 0 0 1-.125-.55.498.498 0 0 1 .467-.318h4.322c.785 0 1.427-.642 1.427-1.427v-4.18l-3.738-1.285a2.277 2.277 0 0 1-1.427-2.88 2.266 2.266 0 0 1 2.161-1.543c.034 0 .075 0 .109.008h.008c.209.025.442.05.61.109.008 0 .016.008.016.008l2.929 1.143 2.704.943c.024.009.058.025.083.034.542.292.951.792 1.118 1.385l1.294 4.614.9 2.787a.495.495 0 0 1-.2.568s-4.923 3.296-7.384 4.94a.4.4 0 0 1-.267.091ZM8.228 24.35l3.438 3.18c2.144-1.436 5.674-3.797 6.742-4.506l-.784-2.437c0-.008 0-.008-.009-.017l-1.301-4.63a1.271 1.271 0 0 0-.61-.768l-2.67-.935c-.008 0-.008 0-.017-.008L10.09 13.1c-.042-.008-.142-.033-.384-.058-.017 0-.034 0-.042-.009a1.265 1.265 0 0 0-1.168.868 1.27 1.27 0 0 0 .8 1.61l4.073 1.402c.2.067.334.26.334.476v4.54a2.43 2.43 0 0 1-2.429 2.428H8.228v-.009Z"/><path fill="#143D82" d="M13.118 30.917c-.034 0-.067 0-.1-.009a.49.49 0 0 1-.318-.208l-1.502-2.245a.503.503 0 0 1 .134-.693.503.503 0 0 1 .692.134l1.227 1.827 6.55-4.38-1.226-1.828a.503.503 0 0 1 .133-.693.503.503 0 0 1 .693.134l1.502 2.245a.503.503 0 0 1-.133.692l-7.377 4.94a.533.533 0 0 1-.275.084Z"/></svg>
+                {% elif (addon.icon == 'implementation_services') %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><g fill="#143D82" clip-path="url(#a)"><path d="M27.977 8.736a1.94 1.94 0 0 0-1.937 1.937v5.353a6.205 6.205 0 0 0-.224-.08c-.887-.26-2.116.053-2.484.484l-3.954 4.474a.524.524 0 0 0-.135.359v4.331h-1.255c-.18 0-.35.09-.448.242a.545.545 0 0 0-.045.511l1.793 4.206a.53.53 0 0 0 .493.323h6.385a.54.54 0 0 0 .538-.538v-4.206a.54.54 0 0 0-.538-.538h-.771v-1.3l4.385-5.111a.567.567 0 0 0 .134-.35v-8.16a1.94 1.94 0 0 0-1.937-1.937Zm-2.35 21.055H20.14l-1.336-3.13h6.824v3.13Zm3.211-11.164-4.385 5.11a.567.567 0 0 0-.134.35v1.498h-4V21.46l3.811-4.313c.189-.134.987-.35 1.48-.134.134.053.305.17.386.475l-2.511 2.896a.54.54 0 1 0 .816.709l2.69-3.094v-.009a.196.196 0 0 0 .045-.072s0-.009.009-.009c.018-.026.027-.053.036-.08v-.01l.027-.08v-.009c.008-.027.008-.063.008-.09v-6.976a.861.861 0 0 1 1.722 0v7.963ZM12.374 25.836a.534.534 0 0 0-.448-.242h-1.255v-4.331a.525.525 0 0 0-.135-.359L6.582 16.43c-.368-.44-1.596-.753-2.484-.484-.08.027-.152.053-.224.08v-5.353a1.94 1.94 0 0 0-1.937-1.937A1.94 1.94 0 0 0 0 10.673v8.16c0 .126.045.251.135.35l4.384 5.11v1.301h-.77a.54.54 0 0 0-.539.538v4.206a.54.54 0 0 0 .538.538h6.385a.53.53 0 0 0 .493-.323l1.793-4.206a.542.542 0 0 0-.045-.51Zm-6.904-2.09-4.385-5.11v-7.963a.861.861 0 0 1 1.722 0v6.976c0 .027 0 .063.009.09v.009l.027.08v.01a.319.319 0 0 0 .035.08l.01.01c.017.026.026.044.053.071v.009l2.69 3.094a.54.54 0 1 0 .816-.709l-2.52-2.896c.081-.305.252-.413.386-.475.493-.216 1.291 0 1.48.134l3.81 4.322v4.125H5.605v-1.497a.628.628 0 0 0-.134-.36Zm4.313 6.045H4.286v-3.13h6.824l-1.327 3.13ZM14.957 16.529c-.457 0-.915-.036-1.354-.126a.546.546 0 0 1-.421-.377l-.26-.87-.718.547a.536.536 0 0 1-.565.054 7.393 7.393 0 0 1-2.188-1.596.527.527 0 0 1-.116-.556l.305-.852-.906.027a.527.527 0 0 1-.484-.278 7.338 7.338 0 0 1-.834-2.582.526.526 0 0 1 .233-.511l.744-.511-.744-.512a.534.534 0 0 1-.233-.51 7.721 7.721 0 0 1 .834-2.583.555.555 0 0 1 .484-.287l.906.027-.305-.852a.553.553 0 0 1 .116-.556 7.801 7.801 0 0 1 2.188-1.596.54.54 0 0 1 .565.063l.718.555.25-.87a.534.534 0 0 1 .422-.376 7.634 7.634 0 0 1 2.708 0c.198.036.368.18.422.377l.25.87.718-.556a.557.557 0 0 1 .565-.063c.825.394 1.56.932 2.197 1.596a.527.527 0 0 1 .116.556l-.304.852.905-.027a.55.55 0 0 1 .494.287c.43.807.717 1.677.833 2.582a.526.526 0 0 1-.233.511l-.744.512.744.51c.17.117.26.315.233.512a7.722 7.722 0 0 1-.834 2.582.548.548 0 0 1-.475.287h-.018l-.905-.027.305.852a.553.553 0 0 1-.117.556 7.509 7.509 0 0 1-2.188 1.596.557.557 0 0 1-.565-.053l-.717-.547-.26.87a.521.521 0 0 1-.422.376c-.43.072-.888.117-1.345.117Zm-.843-1.13c.556.071 1.13.071 1.677 0l.377-1.292a.54.54 0 0 1 .843-.278l1.067.825c.493-.269.95-.6 1.354-.986l-.449-1.273a.513.513 0 0 1 .072-.493.552.552 0 0 1 .448-.225l1.346.036c.242-.51.412-1.049.52-1.596l-1.112-.762a.544.544 0 0 1-.234-.44c0-.17.09-.34.234-.439l1.112-.762a6.168 6.168 0 0 0-.52-1.596l-1.346.036a.518.518 0 0 1-.448-.225.54.54 0 0 1-.072-.493l.449-1.273a6.448 6.448 0 0 0-1.363-.986l-1.05.807a.515.515 0 0 1-.493.08.538.538 0 0 1-.35-.358L15.8 2.414a6.63 6.63 0 0 0-1.686 0l-.376 1.292a.54.54 0 0 1-.843.278l-1.067-.816c-.494.269-.95.6-1.363.986l.448 1.273c.063.17.036.35-.072.493a.552.552 0 0 1-.448.225l-1.345-.036a6.784 6.784 0 0 0-.52 1.596l1.112.762a.544.544 0 0 1 .233.44c0 .17-.09.34-.233.439l-1.112.762c.098.556.278 1.085.52 1.596l1.345-.036c.18-.009.35.081.448.225a.54.54 0 0 1 .072.493l-.448 1.273c.412.386.86.717 1.354.986l1.067-.825a.515.515 0 0 1 .493-.08c.17.053.296.188.35.358l.385 1.3Z"/><path d="M14.957 12a3.1 3.1 0 0 1-3.094-3.093 3.1 3.1 0 0 1 3.094-3.094 3.1 3.1 0 0 1 3.093 3.094A3.1 3.1 0 0 1 14.957 12Zm0-5.111a2.02 2.02 0 0 0-2.018 2.018 2.02 2.02 0 0 0 2.018 2.017 2.02 2.02 0 0 0 2.017-2.017 2.02 2.02 0 0 0-2.017-2.018Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h32v32H0z"/></clipPath></defs></svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none"><rect width="32" height="32" fill="#4570AE" rx="8"/><path stroke="#CDCDCF" stroke-linecap="round" d="m7.54 11.429 8.426-4.295 8.589 4.295v9.641l-8.589 4.295L7.54 21.07v-9.606"/><path stroke="#CDCDCF" stroke-dasharray="3 3" stroke-linecap="round" d="M15.885 7.945v4.699M8.106 11.834l3.723 2.264M24.473 11.348l-4.537 2.592M15.966 25.04v-5.752M7.701 20.827l4.7-2.917M24.473 20.908l-4.375-2.755"/><circle cx="15.882" cy="7.215" r="1.215" fill="#FAFCFF"/><circle cx="7.655" cy="11.382" r="1.215" fill="#FAFCFF" transform="rotate(-119.288 7.655 11.382)"/><circle r="1.215" fill="#FAFCFF" transform="scale(1 -1) rotate(60.712 21.89 15.093)"/><circle r="1.215" fill="#FAFCFF" transform="matrix(1 0 0 -1 15.966 24.878)"/><circle r="1.215" fill="#FAFCFF" transform="scale(-1 1) rotate(60.712 -21.649 3.717)"/><path fill="#FAFCFF" d="M24.933 21.732a1.215 1.215 0 1 1-1.189-2.12 1.215 1.215 0 0 1 1.19 2.12Z"/><path fill="#FAFCFF" fill-rule="evenodd" d="M18.925 15.095c-.1.16-.26.24-.44.24H13.52a.53.53 0 0 1-.52-.52c0-.08.02-.16.06-.24l.36-.741c.16-.3.48-.5.82-.5h3.504c.34 0 .66.2.82.52l.36.74c.101.14.101.34 0 .5ZM15.002 18.538h2.001v-1.802h-2.002v1.802Z" clip-rule="evenodd"/><path fill="#FAFCFF" fill-rule="evenodd" d="M13.6 15.735v2.202c0 .34.26.6.601.6h.4v-2.001c0-.12.08-.2.2-.2h2.403c.12 0 .2.08.2.2v2.002h.4c.34 0 .6-.26.6-.6v-2.203h-4.803Z" clip-rule="evenodd"/></svg>
+                {% endif %}
+              </div>
+              <div class="card__title">{{ addon.title }}</div>
+              <div class="card__content">{{ addon.content }}</div>
+              <div class="card__link"><a href="{{ addon.link_url.href }}">{{ addon.link_text }}</a></div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %} 
+  </div>
+</section>
+{% require_js %}
+  <script>
+
+    const btnBacktoTopEl = document.querySelector('#js-back-to-top-{{name}}');
+
+    /**
+    * Toggles the presence of a specified class on an HTML element based on a given condition.
+    * 
+    * @param {HTMLElement} element - The HTML element on which the class will be toggled.
+    * @param {string} className - The name of the class to be toggled.
+    * @param {boolean} condition - The condition that determines whether the class should be added or removed.
+    * @returns {void}
+    */
+    const toggleClass = (element, className, condition) => {
+        if (condition) {
+            element.classList.add(className);
+        } else {
+            element.classList.remove(className);
+        }
+    };
+
+    /**
+    * Toggles the visibility of an accordion element.
+    * 
+    * @param {HTMLElement} accordionHeader - The header element of the accordion.
+    */
+    const toggleAccordion = (accordionHeader) => {
+        const target = accordionHeader.nextElementSibling;
+        const svgElements = accordionHeader.querySelectorAll('svg');
+        const expanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+
+        accordionHeader.setAttribute('aria-expanded', !expanded);
+        target.classList.remove("hidden");
+        accordionHeader.classList.add("-open");
+        accordionHeader.classList.remove("-closed");
+        target.hidden = expanded;
+
+        svgElements.forEach((svgElement) => {
+            svgElement.classList.toggle("hidden");
+        });
+    };
+
+    /**
+    * Function to toggle fees.
+    * Adds event listeners to elements with the id 'js-fee-heading'.
+    * When one of these elements is clicked, it calls the 'toggleAccordion' function passing the clicked element as an argument.
+    */
+    const toggleFees = () => {
+        const feeHeadingElems = document.querySelectorAll('#js-fee-heading');
+
+        feeHeadingElems.forEach((accordionHeader) => {
+            accordionHeader.addEventListener('click', () => {
+                toggleAccordion(accordionHeader);
+            });
+        });
+    };
+
+    /**
+    * Handles the click event on an accordion header.
+    * @param {HTMLElement} accordionHeader - The header element of an accordion.
+    */
+    const handleAccordionClick = (accordionHeader) => {
+        toggleAccordion(accordionHeader);
+    };
+
+    /**
+    * Function to handle the change event of a select element and update the active currency on the page.
+    * @function selectUpdateCurrency
+    */
+    const selectUpdateCurrency = () => {
+        const selectVenue = document.querySelector("#currency");
+
+        selectVenue.addEventListener("change", (e) => {
+            const selectedCurrencyOption = e.target.options[e.target.selectedIndex];
+            const c = selectedCurrencyOption.getAttribute("data-curr");
+
+            const tileActiveElements = document.querySelectorAll(
+                "#js-rp-prices-{{name}} > span.-active"
+            );
+
+            tileActiveElements.forEach(function (tileActiveElement) {
+                tileActiveElement.classList.remove("-active");
+            });
+
+            const tileElements = document.querySelectorAll(
+                "#js-rp-prices-{{name}} > span.-" + c
+            );
+
+            tileElements.forEach(function (tileElement) {
+                tileElement.classList.add("-active");
+            });
+
+            tileElements.forEach((el) => {
+                const parentRow = el.closest('.row-item');
+
+                if (parentRow && el) {
+                    if (
+                        c &&
+                        !el.textContent.trim() &&
+                        el.classList.contains("-active") &&
+                        parentRow.classList.contains('notHeadingElem')
+                    ) {
+                        if (!parentRow.classList.contains("hidden")) {
+                            parentRow.classList.add("hidden");
+                        }
+                    } else {
+                        if (parentRow.classList.contains("hidden")) {
+                            parentRow.classList.remove("hidden");
+                        }
+                    }
+                }
+            });
+        });
+    };
+
+    /**
+    * Function to handle the loading of data and perform currency conversion and UI updates.
+    * @param {string} startingCurrency - The starting currency.
+    */
+    const handleLoad = () => {
+        if (startingCurrency) {
+            const selectPricesElements = document.querySelectorAll('#js-rp-prices-{{name}} > span');
+
+            const selectVenue = document.querySelector("#currency");
+            const selectOptions = selectVenue.children;
+
+            for (const option of selectOptions) {
+                if (option.getAttribute('data-curr') === startingCurrency) {
+                    document.querySelector(`#currency option[value='${startingCurrency}']`).selected = true;
+
+                    selectPricesElements.forEach((el) => {
+                        const isCurrencyMatch = el.classList.contains('-' + startingCurrency);
+                        toggleClass(el, '-active', isCurrencyMatch);
+                        
+                        const parentRow = el.parentNode.parentNode.parentNode;
+                        const isSpanEmpty = !el.textContent.trim();
+
+                        if (isSpanEmpty && isCurrencyMatch) {
+                            if (window.innerWidth >= 1032) {
+                                if (!parentRow.classList.contains('hidden') && parentRow.classList.contains('notHeadingElem')) {
+                                    parentRow.classList.add('hidden');
+                                }
+                            } else {
+                                const parentRowMobile = parentRow.parentNode.parentNode.parentNode;
+                                if (!parentRowMobile.classList.contains('hidden') && parentRowMobile.classList.contains('notHeadingElem')) {
+                                    parentRowMobile.classList.add('hidden');
+                                }
+                            }
+                        }
+                    });
+                    break;
+                }
+            }
+            selectUpdateCurrency();
+        }
+    }
+
+    /**
+    * This code snippet defines a function called `handleBackToTopClick` that is responsible for scrolling the page to a specific element when a button is clicked.
+    *
+    * @example
+    * handleBackToTopClick();
+    */
+    const handleBackToTopClick = () => {
+        const scrollToElement = (elId) => {
+            const targetEl = document.getElementById(elId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ block: "start", behavior: 'smooth'});
+            } else {
+                console.error(`Element with id ${elId} not found`);
+            }
+        };
+
+        scrollToElement("card-pricing-{{name}}");
+    };
+
+
+    /**
+    * @name initialize
+    * @description Initializes the code by adding a 'load' event listener to the window object.
+    * When the 'load' event is triggered, the 'handleLoad' function will be called.
+    */
+    const initialize = () => {
+        window.addEventListener('load', handleLoad);
+        window.addEventListener('load', toggleFees);
+        btnBacktoTopEl.addEventListener("click", handleBackToTopClick);
+    };
+
+    // Call the main initialize function
+    initialize();
+
+  </script>
+{% end_require_js%}

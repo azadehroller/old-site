@@ -1,0 +1,77 @@
+[ {
+  "id" : "23811f8c-a430-c912-4bd2-6b33d4a90944",
+  "name" : "form_field",
+  "label" : "Form",
+  "required" : false,
+  "locked" : false,
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "response_type" : "inline",
+    "message" : "Thanks for submitting the form."
+  }
+}, {
+  "id" : "76a316a7-7879-54b3-aba7-1647743ccd39",
+  "name" : "style",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "87c8eed5-8568-2847-db81-c8d4c37d7be3",
+    "name" : "toggle_background",
+    "label" : "Toggle Background",
+    "help_text" : "The default background colour is dark. Use this switch to use light background.",
+    "inline_help_text" : "The default background colour is dark. Use this switch to use light background.",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : true
+  }, {
+    "id" : "f3993d79-62e9-2c7f-7863-96117c6ee2e8",
+    "name" : "blue_background_button",
+    "label" : "Blue background button",
+    "help_text" : "Apply blue background.",
+    "required" : false,
+    "locked" : false,
+    "display" : "toggle",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  }, {
+    "id" : "71535e18-a3d2-0ad6-4593-847e428910cc",
+    "name" : "button_background",
+    "label" : "Button Background",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "blue", "Blue" ], [ "dark", "Dark" ], [ "gr_b_50", "Gradient Blue 50" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "toggle_background" : true,
+    "blue_background_button" : false
+  }
+}, {
+  "id" : "toggle_background",
+  "name" : "toggle_background",
+  "label" : "Enable dark mode",
+  "help_text" : "The default background colour is dark. Use this switch to use light background.",
+  "inline_help_text" : "The default background colour is dark. Use this switch to use light background.",
+  "required" : false,
+  "locked" : false,
+  "display" : "toggle",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+} ]

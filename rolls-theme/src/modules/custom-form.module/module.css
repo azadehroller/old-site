@@ -1,0 +1,147 @@
+/* form input[type='text'], form input[type='search'], form input[type='email'], form input[type='password'], form input[type='tel'], form input[type='number'], form input[type='file'], form select, form textarea{
+   
+  &::placeholdercolor{ color: var(--m-3-scout-navy-80, #9dbffb);}
+}
+form label{
+  var(--blue--40, #053994);
+} */
+.form-wrapper.dark-mode .hs-custom-form {
+      & .form-columns-2{
+      display: grid;
+      gap: 32px;
+    }
+    & .form-columns-2  .field.hs-form-field{width: 100% !important;}
+    & .form-columns-2  .field.hs-form-field:first-child{margin-bottom: 0;}
+    position: relative;
+    label{
+        color: var(--neutral-white);
+    }
+    & input[type='text'], & input[type='search'], & input[type='email'], & input[type='password'], & input[type='tel'], & input[type='number'], & input[type='file'], & select, & textarea{
+      &:not(.error){
+        border-bottom: 1px solid var(--blue--40, #074DC5);
+
+      }
+      border-bottom: 1px solid #FF290C;
+      color: var(--neutral-white);
+      caret-color: #FF290C;
+      &::placeholder{
+        color: #3A80F8;
+      }
+    }
+
+      .hs-error-msg.hs-main-font-element{color: var(--red-error-30, #FF8080);margin:0;}
+ 
+  
+/*     @media screen and (min-width: 768px ) {
+      & .hs_recaptcha {
+        position: absolute;
+        right: 0;
+        margin:0;
+      }
+  } */
+  & .input {
+      margin-right: 0 !important;
+  }
+  label{color: #9DBFFB;}
+ & input[type='text'], & input[type='search'], & input[type='email'], & input[type='password'], & input[type='tel'], & input[type='number'], & input[type='file'], & select, & textarea{
+      &:not(.error){
+        border-bottom: 1px solid #9DBFFB;
+
+      }
+  }
+          li:has(.hs-error-msg.hs-main-font-element){
+            position: relative;
+            display: grid;
+            align-items: center;
+            grid-template-columns: 12px 1fr;
+            gap: 6px;
+      
+       }
+}
+    
+.form-wrapper.dark-mode {
+  &.blue-button{
+      label{
+        color: var(--neutral-white);
+    }
+    .hs-button{
+      background-color: #011840;
+    }
+     .hs-button:hover{
+      background-color: #000C20;
+/*       color: #011840; */
+    }
+     input[type='text'], input[type='search'],  input[type='email'],  input[type='password'],  input[type='tel'],  input[type='number'], input[type='file'], select,  textarea{
+      caret-color: white;      
+      &:focus{
+        border-bottom: 1px solid #9DBFFB;
+      }
+      & .invalid{
+        border-bottom: 1px solid #FF290C;
+        
+      }
+  }
+  }
+  &.dark-button{
+    .hs-button{
+      background-color: #011840;
+    }
+     .hs-button:hover{
+       background-color: #000C20;
+      /*color: #011840; */
+    }
+  }
+  .hs-submit {display: grid;}
+  .hs-submit .hs-button {width: 100%;      height: 40px;}
+}
+.form-wrapper.gr-b-50 {
+  &.gr-b-50 {
+    .hs-button{
+      background-color: #0960F6;
+    }
+     .hs-button:hover{
+      background-color: #93BAFF;
+      color: #011840;
+    }
+     input[type='text'], input[type='search'],  input[type='email'],  input[type='password'],  input[type='tel'],  input[type='number'], input[type='file'], select,  textarea{
+      &:focus{
+        border-bottom: 1px solid white;
+      }
+      & .invalid{
+        border-bottom: 1px solid #FF290C;
+        
+      }
+ 
+  }
+
+  }
+  &.gr-b-50 {
+    .hs-button{
+      background-color: #011840;
+    }
+     .hs-button:hover{
+       background-color: #000C20;
+     /* color: #011840; */
+    }
+  }
+   &::placeholder{
+        color: #3A80F8;
+      }
+}
+.row-fluid-wrapper.row-depth-1.dnd-section:has(.form-wrapper.gr-b-50) {
+    background: linear-gradient(0deg, #9079F8 0%, #0960F6 15%, #011840 75%);
+}
+
+@media (min-width: 768px){
+
+  .form-wrapper.dark-mode .hs-custom-form{
+    & .form-columns-2{
+      grid-template-columns: 1fr 1fr;
+    }
+    & .form-columns-2  .field.hs-form-field:first-child{margin-bottom: 1.5rem;}
+    & .form-columns-2  .field.hs-form-field:last-child{margin-bottom: 0;}
+    .hs-submit {display: flex;}
+    .hs-submit .hs-button {width: inherit;}
+}
+
+}

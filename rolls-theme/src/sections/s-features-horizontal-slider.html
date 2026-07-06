@@ -1,0 +1,33 @@
+<!--
+  templateType: section
+  label: Features Horizontal Slider content
+  isAvailableForNewContent: true
+  screenshotPath: ../images/section-previews/features-horizontal-slider.png
+  description: "Section horizontal slider. With eyebrow, title and description, and includes the Module: Features Horizontal Slider"
+-->
+
+{% dnd_section
+    background_color='#EDF4FF',
+    vertical_alignment="MIDDLE"
+    class="s-layout s-features-horizontal-slider"
+%}
+    {% dnd_column
+    %}
+        {% dnd_row %}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+        {% dnd_row %}
+            {# Module: Fatures Horizontal Slider #}
+            {% dnd_module 
+                path="../modules/features-horizontal-slider",
+                label="Modules: Features Horizontal Slider",
+                offset=0,
+                width=12,
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+{% end_dnd_section %}

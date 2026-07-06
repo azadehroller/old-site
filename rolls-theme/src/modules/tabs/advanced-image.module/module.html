@@ -1,0 +1,71 @@
+{# Advanced Image Module #}
+{# Variables #}
+{% set img = module.image %}
+{% set button_link = module.button_link %}
+{% set button_text = module.button_text or "Learn More" %}
+{% set loading_type = module.loading_type or "lazy" %}
+{% set enable_fetchpriority = module.enable_fetchpriority %}
+{% set responsive_behavior = module.responsive_behavior or "fluid" %}
+{% set custom_width = module.custom_width %}
+{% set custom_height = module.custom_height %}
+{# Style field for alignment (style group) #}
+{% set alignment = module.alignment or "center" %}
+
+{# Calculate dimensions based on responsive behavior #}
+{% if responsive_behavior == "fixed" %}
+    {% set final_width = custom_width or img.width %}
+    {% set final_height = custom_height or img.height %}
+    {% set use_resize = custom_width or custom_height %}
+{% else %}
+    {# For fluid - use original image dimensions #}
+    {% set final_width = img.width %}
+    {% set final_height = img.height %}
+    {% set use_resize = false %}
+{% endif %}
+{% set alt_text = img.alt or "" %}
+
+{# Build CSS classes #}
+{% set base_classes = "hs-image-widget advanced-image" %}
+{% if responsive_behavior == "fluid" %}
+    {% set responsive_classes = "fluid-image" %}
+{% else %}
+    {% set responsive_classes = "fixed-image" %}
+{% endif %}
+{% set all_classes = [base_classes, responsive_classes]|join(" ")|trim %}
+
+{# Build style attribute #}
+{% set style_parts = [] %}
+{% if responsive_behavior == "fluid" %}
+    {% set style_parts = style_parts + ["max-width: 100%", "height: auto"] %}
+{% endif %}
+{# Don't add width/height to style - let HTML attributes handle sizing #}
+{% set style_attr = style_parts|join("; ") %}
+
+{# Render the image #}
+{% if img.src %}
+    <div class="advanced-image-wrapper{% if button_link %} has-link{% endif %} alignment-{{ alignment }}">
+        <img src="{% if use_resize %}{{ resize_image_url(img.src, final_width, final_height) }}{% else %}{{ img.src }}{% endif %}"
+             class="{{ all_classes }}"
+             {% if final_width %}width="{{ final_width }}"{% endif %}
+             {% if final_height %}height="{{ final_height }}"{% endif %}
+             {% if style_attr %}style="{{ style_attr }}"{% endif %}
+             {% if alt_text %}alt="{{ alt_text }}"{% endif %}
+             loading="{{ loading_type }}"
+             {% if loading_type == "eager" and enable_fetchpriority %}fetchpriority="high"{% endif %}
+        >
+        
+        {% if button_link %}
+            <a href="{{ button_link }}" 
+               target="_blank"
+               rel="noopener noreferrer"
+               class="image-overlay-button relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold transition ease-in-out duration-300 bg-secondary-50 hover:bg-secondary-70 rounded-3xl py-2 px-4 text-neutral-white font-serif">
+                {{ button_text }}
+            </a>
+        {% endif %}
+    </div>
+{% else %}
+    {# Placeholder when no image is selected #}
+    <div class="advanced-image-placeholder" style="width: {{ final_width }}px; height: {{ final_height }}px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #666;">
+        <span>Select an image</span>
+    </div>
+{% endif %}

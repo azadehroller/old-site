@@ -1,0 +1,108 @@
+{# Variables #}
+{% set eyebrow = module.content.eyebrow %}
+{% set title = module.content.title %}
+{% set text = module.content.text %}
+{% set features = module.feature %}
+{% set layout = module.styles.layout %}
+{% set content_layout = module.styles.content_layout %}
+{% set spacing = module.styles.spacing.margin.bottom.value %}
+
+
+{% macro content(eyebrow, title, text) %}
+    {% if title %}
+        <div class='flex flex-col gap-4 sm:flex-auto'>
+            <div class="text-secondary-50 uppercase font-extrabold">{{eyebrow | default('Deliver Superior Experience')}}</div>
+            <h3 class="text-primary-50 mb-0">{{ title | default('Sell online & in-venue') }}</h3>
+            <div class='text-primary-50 pb-3 md:pb-0'>{{text | default('Deliver superior experiences that keep guest coming back and referring your venue.')}}</div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro div_classes(layout, content_layout) %}
+    {% if layout == 'widget' and content_layout == 'default' or layout == 'integration' %}
+        {{ "text-left pt-4 md:pt-6 block lg:flex" }}
+    {% elif layout == 'widget' and  content_layout == 'two_column' %}
+    {{ "features_detail-grid-colimns" }}
+    {% else %}
+        {{ "text-left block lg:flex gap-4" }}
+    {% endif %}
+{% endmacro %}
+
+{# Section Markup #}
+<section id="features_detail_{{name}}" class="my-2 {% if layout == 'widget' %}mo-card bg-neutral-white rounded-[32px] box-shadow-onlight px-4 md:px-6 relative{% endif %}">
+    {% if layout == 'widget' and content_layout == 'default' or layout == 'integration'  %}
+        <div>
+            {{ content(eyebrow, title, text) }}
+        </div>
+    {% endif%}
+    
+    <div class='{{ div_classes(layout, content_layout) }}'>
+        {% if layout == 'widget' %}
+          {% if content_layout == 'column_item' or content_layout == 'two_column' %} 
+            <div class="flex basis-3/12">
+                {{ content(eyebrow, title, text) }}
+            </div>
+            {% endif%} 
+        {% endif%}
+        <div id="{% if layout == 'widget' %}js-features-list{% else %}features-list{% endif %}" 
+             class="{% if layout == 'widget' and content_layout == 'column_item' %}overflow-hidden max-h-0 sm:max-h-full sm:flex sm:basis-9/12 py-0 md:pt-7 lg:pt-0{% elif content_layout == 'default' %}overflow-hidden max-h-0 sm:max-h-full grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-4 gap-5 py-0 md:pt-0 lg:pt-0  {% elif   content_layout == 'two_column' %} features-details-grid-based {% else %}features-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5{% endif %}">
+        {% for item in features %}
+            {% set features_data = {
+                'title': item.title,
+                'icon': item.icon,
+                'overwrite_icon': item.icon_as_image,
+                'text': item.text,
+                'link': item.link,
+                'link_label': item.link_label,
+                'image': item.image,
+                'id': item.feature_id,
+            } %}
+            {# TODO: Check to the below using HS macros, avoid repetition #}
+            {% set href = features_data.link.url.href %}
+            {% if features_data.link.url.type == "EMAIL_ADDRESS" %}
+            {% set href = "mailto:" + href %}
+            {% endif %}
+            {% set rel = [] %}
+            {% if features_data.link.no_follow %}
+            {% do rel.append("nofollow") %}
+            {% endif %}
+            {% if features_data.link.open_in_new_tab %}
+            {% do rel.append("noopener") %}
+            {% endif %}
+
+        <div id="{{ features_data.id }}" class="relative {% if layout == 'widget' or layout == 'default'  %} before:absolute before:w-[2px] before:h-[100%] before:bg-secondary-50 before:top-0 before:left-0{% endif %} ps-3 pe-3 text-primary-50 flex flex-col flex-nowrap basis-1/3">
+                {% if layout == 'integration' %}
+                    <div>
+                        {% set sizeAttrs = 'width="{{ features_data.image.width }}" height="{{ features_data.image.height }}"' %}
+                        {% set loadingAttr = image.loading != 'disabled' ? 'loading="{{ features_data.image.loading }}"' : '' %}
+                        <img src='{{features_data.image.src || get_asset_url("../../images/grayscale-mountain.png")}}' alt="{{ features_data.image.alt }}" {{ loadingAttr }} {{ sizeAttrs }}>
+                    </div>
+                {% else %}
+                    {% if features_data.overwrite_icon %}
+                      <img src='{{ features_data.overwrite_icon.src }}' width="64" height="64" loading="lazy" alt="">
+                    {% else %}
+                      <div>{{ features_data.icon}}</div>
+                    {% endif %}
+                {% endif %}
+                {% if layout == 'integration' and href %}
+                    <a href="{{ href }}">
+                        <div class="py-4 font-semibold">{{ features_data.title }}</div>
+                    </a>
+                {% else %}
+                    <div class="py-4 font-semibold">{{ features_data.title }}</div>
+                {% endif %}
+                <div class="text-base block">{{ features_data.text }}</div>
+                {% if href and layout == 'widget' or layout == 'default' %}
+                    <a href="{{ href }}" class='mt-auto pt-5 underline'
+                        {% if link.open_in_new_tab %}target="_blank"{% endif %}
+                        {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                        >{{ features_data.link_label || 'Read more'}}</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+        {% if layout == 'widget' or layout == 'integration' %}
+            <button id='js-expand' class="btn-expand absolute bottom-[-18px] left-[50%] right-[50%] translate-x-[-50%] px-4 py-2 bg-secondary-50 focus:bg-secondary-50 hover:bg-secondary-70 rounded-3xl text-neutral-white flex sm:hidden rounded-[980px] font-semibold min-w-[174px] m-auto items-center justify-center">Show more</button>
+        {% endif %}
+    </div>
+</section>

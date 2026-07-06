@@ -1,0 +1,847 @@
+[ {
+  "id" : "eb09706b-cd29-4152-5e53-889d1cc17425",
+  "name" : "content",
+  "label" : "Content",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "32565510-0b0a-9c94-79d6-0b3f560908b7",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "CUSTOMIZED TO YOUR VENUE"
+  }, {
+    "id" : "629a4b71-5a3a-149a-c410-40db4ca59abe",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Implementation Services"
+  }, {
+    "id" : "67557ff6-6154-26c6-1676-0a9f31aac011",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice &amp; guided training sessions to get the most value from ROLLER."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "eyebrow" : "CUSTOMIZED TO YOUR VENUE",
+    "title" : "Implementation Services",
+    "text" : "Let our team of experts help you get up and running in your new ROLLER account as smoothly as possible. Accelerate your success with best practice advice &amp; guided training sessions to get the most value from ROLLER."
+  }
+}, {
+  "id" : "f66cae2e-f1ce-abbd-09b0-6a46c0a9aa5a",
+  "name" : "cards",
+  "label" : "Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : "464be62f-1bd5-efec-6dbb-0f7b79730ee0",
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "464be62f-1bd5-efec-6dbb-0f7b79730ee0",
+    "name" : "header",
+    "label" : "Header",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "162c1a10-5eb7-6e06-630a-442338993afa",
+      "name" : "content",
+      "label" : "Content",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "6a37e516-c26a-5fe4-ff7a-b5ce456f8d6a",
+        "name" : "title",
+        "label" : "Title",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "Features Name"
+      }, {
+        "id" : "99bda68c-83e3-fa62-343e-0a1debc54d8c",
+        "name" : "subtitle",
+        "label" : "Subtitle",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "For smaller venues with annual revenue of under $1million"
+      }, {
+        "id" : "54779db7-f892-b36c-ab96-d7e949725be0",
+        "name" : "network_fee",
+        "label" : "Network Fee",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null
+      }, {
+        "id" : "3f3fdd44-ef95-9a29-a5d8-c40faa261cc1",
+        "name" : "network_fee_anchor_link",
+        "label" : "Link",
+        "required" : false,
+        "locked" : false,
+        "supported_types" : [ "EXTERNAL", "CONTENT", "CALL_TO_ACTION" ],
+        "show_advanced_rel_options" : false,
+        "type" : "link",
+        "display_width" : null,
+        "default" : {
+          "url" : {
+            "content_id" : null,
+            "type" : "EXTERNAL",
+            "href" : ""
+          },
+          "open_in_new_tab" : false,
+          "no_follow" : false
+        }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "title" : "Features Name",
+        "subtitle" : "For smaller venues with annual revenue of under $1million",
+        "network_fee_anchor_link" : {
+          "url" : {
+            "content_id" : null,
+            "type" : "EXTERNAL",
+            "href" : ""
+          },
+          "open_in_new_tab" : false,
+          "no_follow" : false
+        }
+      }
+    }, {
+      "id" : "004650a8-0e3c-79da-af48-39e6ef4d73e7",
+      "name" : "price",
+      "label" : "Fees",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "7432ad04-0bf8-38a7-598b-87977fa5fd6d",
+        "name" : "credit_card_fees",
+        "label" : "Credit Card Fees",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "9579eb25-10f3-261d-ffcc-d1c0cdca027a",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "c0482746-e65f-ce3b-2060-1a5398775259",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "450"
+        }, {
+          "id" : "cbb24351-f76f-2c68-fbe9-7c7c494d5773",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "280"
+        }, {
+          "id" : "f423bcbc-064f-8b95-00b1-c846769d4a0e",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "250"
+        }, {
+          "id" : "3b0beba8-ce6c-07f3-8577-0cd1d7ecb946",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "360"
+        }, {
+          "id" : "84409c26-162a-de2c-6fd5-c765132e7ea5",
+          "name" : "tooltip",
+          "label" : "Tooltip",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : ""
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360",
+          "tooltip" : ""
+        }
+      }, {
+        "id" : "7f42177e-bc9b-36bc-a319-a48ea0c2a4d8",
+        "name" : "transaction_fees",
+        "label" : "Transaction Fees",
+        "required" : false,
+        "locked" : false,
+        "children" : [ {
+          "id" : "eeb6ee75-e2dc-20ec-0e94-dead39562b3e",
+          "name" : "usd",
+          "label" : "USD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "0b41587a-7072-7855-21e2-8f1527a8cadb",
+          "name" : "aud",
+          "label" : "AUD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "c0bd7053-76de-becc-7099-56863404a078",
+          "name" : "eur",
+          "label" : "EUR",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "1603c025-a47c-a473-c384-7db00cebe61c",
+          "name" : "gbp",
+          "label" : "GBP",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "300"
+        }, {
+          "id" : "9cafd07f-3810-cb86-47f4-bab552a984b5",
+          "name" : "cad",
+          "label" : "CAD",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : "200"
+        }, {
+          "id" : "89cce9e2-c413-b6c0-7793-0fffc77de962",
+          "name" : "tooltip",
+          "label" : "Tooltip",
+          "required" : false,
+          "locked" : false,
+          "allow_new_line" : false,
+          "type" : "text",
+          "display_width" : null,
+          "default" : ""
+        } ],
+        "tab" : "CONTENT",
+        "expanded" : false,
+        "group_occurrence_meta" : null,
+        "type" : "group",
+        "display_width" : null,
+        "default" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200",
+          "tooltip" : ""
+        }
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "credit_card_fees" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360",
+          "tooltip" : ""
+        },
+        "transaction_fees" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200",
+          "tooltip" : ""
+        }
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "content" : {
+        "title" : "Features Name",
+        "subtitle" : "For smaller venues with annual revenue of under $1million",
+        "network_fee_anchor_link" : {
+          "url" : {
+            "content_id" : null,
+            "type" : "EXTERNAL",
+            "href" : ""
+          },
+          "open_in_new_tab" : false,
+          "no_follow" : false
+        }
+      },
+      "price" : {
+        "credit_card_fees" : {
+          "usd" : "300",
+          "aud" : "450",
+          "eur" : "280",
+          "gbp" : "250",
+          "cad" : "360",
+          "tooltip" : ""
+        },
+        "transaction_fees" : {
+          "usd" : "300",
+          "aud" : "300",
+          "eur" : "300",
+          "gbp" : "300",
+          "cad" : "200",
+          "tooltip" : ""
+        }
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+}, {
+  "id" : "75491eac-b7d4-0aaf-a319-782bd085dbc2",
+  "name" : "table",
+  "label" : "Table Items",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : null,
+    "max" : null,
+    "sorting_label_field" : "96905e59-ba88-6167-017b-fe7fe4072dd2",
+    "default" : null
+  },
+  "children" : [ {
+    "id" : "96905e59-ba88-6167-017b-fe7fe4072dd2",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "f37d3c6c-c19b-9976-b412-fbc96217fd0a",
+      "name" : "heading",
+      "label" : "Heading",
+      "required" : false,
+      "locked" : false,
+      "display" : "toggle",
+      "type" : "boolean",
+      "display_width" : null,
+      "default" : true
+    }, {
+      "id" : "fcc2dcd8-4789-625c-bfee-55dadf86ea5f",
+      "name" : "title",
+      "label" : "Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Features Name"
+    }, {
+      "id" : "9273a803-24ee-2957-d9df-dab8ef6f083b",
+      "name" : "tooltip",
+      "label" : "Tooltip",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Lorem ipsum dolor sit amet consectetur. Facilisi pharetra risus nullam amet gravida volutpat. Est non imperdiet mi maurisfringilla."
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "heading" : true,
+      "title" : "Features Name",
+      "tooltip" : "Lorem ipsum dolor sit amet consectetur. Facilisi pharetra risus nullam amet gravida volutpat. Est non imperdiet mi maurisfringilla."
+    }
+  }, {
+    "id" : "f28d8065-4834-4769-9157-2ca4c3f26f15",
+    "name" : "fees",
+    "label" : "Fees",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "638c5bc9-c0d7-a5aa-2f6a-98bc2f964a6c",
+      "name" : "annually",
+      "label" : "Lite",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "06a3c571-5e9e-6dcc-2293-3c740dd58bc1",
+        "name" : "usd",
+        "label" : "USD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "300"
+      }, {
+        "id" : "babda123-5e17-6eca-65b7-12448b2da66f",
+        "name" : "aud",
+        "label" : "AUD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "450"
+      }, {
+        "id" : "f64a9d57-7f06-1294-c410-80d2b69ac7aa",
+        "name" : "eur",
+        "label" : "EUR",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "280"
+      }, {
+        "id" : "581b60ea-384c-f56a-c862-ad92cb6c0dd6",
+        "name" : "gbp",
+        "label" : "GBP",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "250"
+      }, {
+        "id" : "cf63bbde-17c8-0bc3-3b85-d064d504e765",
+        "name" : "cad",
+        "label" : "CAD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "360"
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "usd" : "300",
+        "aud" : "450",
+        "eur" : "280",
+        "gbp" : "250",
+        "cad" : "360"
+      }
+    }, {
+      "id" : "a82f90ab-69a7-9656-cd4b-0d83a77f6e63",
+      "name" : "pro",
+      "label" : "Pro",
+      "inline_help_text" : "*** Discontinued, the content is removed was removed in the FE ***",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "640e0264-b607-b980-2f3d-fd3dea5c91d0",
+        "name" : "usd",
+        "label" : "USD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "300"
+      }, {
+        "id" : "4cef89d4-911d-1edc-eb23-eda75fe24c92",
+        "name" : "aud",
+        "label" : "AUD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "450"
+      }, {
+        "id" : "e508eb8a-f6ad-84b7-b7c2-a195753576fe",
+        "name" : "eur",
+        "label" : "EUR",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "280"
+      }, {
+        "id" : "68455186-05d2-db87-6e6e-53682a28cd6e",
+        "name" : "gbp",
+        "label" : "GBP",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "250"
+      }, {
+        "id" : "01d300fe-eaee-6b27-0656-e773a454719e",
+        "name" : "cad",
+        "label" : "CAD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "360"
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "usd" : "300",
+        "aud" : "450",
+        "eur" : "280",
+        "gbp" : "250",
+        "cad" : "360"
+      }
+    }, {
+      "id" : "210fb99b-c1d2-11a4-3052-ffa04a52b94c",
+      "name" : "premium",
+      "label" : "Premium",
+      "inline_help_text" : "*** Discontinued, the content is removed was removed in the FE ***",
+      "required" : false,
+      "locked" : false,
+      "children" : [ {
+        "id" : "302c15ed-fcfc-89ba-a8ca-fc9d22260216",
+        "name" : "usd",
+        "label" : "USD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "300"
+      }, {
+        "id" : "f8cc33f5-e27c-e241-d8cb-a11d0fa59832",
+        "name" : "aud",
+        "label" : "AUD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "450"
+      }, {
+        "id" : "ed261215-383a-0614-3efb-15ce70c7ddc1",
+        "name" : "eur",
+        "label" : "EUR",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "280"
+      }, {
+        "id" : "7dea0be8-262d-96b6-3fa6-a42a4611f32e",
+        "name" : "gbp",
+        "label" : "GBP",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "250"
+      }, {
+        "id" : "e20cf14d-20eb-a7cb-5aa1-1a02c0168067",
+        "name" : "cad",
+        "label" : "CAD",
+        "required" : false,
+        "locked" : false,
+        "allow_new_line" : false,
+        "type" : "text",
+        "display_width" : null,
+        "default" : "360"
+      } ],
+      "tab" : "CONTENT",
+      "expanded" : false,
+      "group_occurrence_meta" : null,
+      "type" : "group",
+      "display_width" : null,
+      "default" : {
+        "usd" : "300",
+        "aud" : "450",
+        "eur" : "280",
+        "gbp" : "250",
+        "cad" : "360"
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "annually" : {
+        "usd" : "300",
+        "aud" : "450",
+        "eur" : "280",
+        "gbp" : "250",
+        "cad" : "360"
+      },
+      "pro" : {
+        "usd" : "300",
+        "aud" : "450",
+        "eur" : "280",
+        "gbp" : "250",
+        "cad" : "360"
+      },
+      "premium" : {
+        "usd" : "300",
+        "aud" : "450",
+        "eur" : "280",
+        "gbp" : "250",
+        "cad" : "360"
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+}, {
+  "id" : "4213c11c-5ad4-dc0b-8f49-35a5e621e7ae",
+  "name" : "styles",
+  "label" : "Styles",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "7da75c4c-a10d-78e9-aa85-9c650c7a4b50",
+    "name" : "button",
+    "label" : "Button",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "db5f805e-dcea-88fb-8868-3c28ce7fbbbb",
+      "name" : "kind",
+      "label" : "Kind",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "primary", "Primary" ], [ "secondary", "Secondary" ], [ "tertiary", "Tertiary" ], [ "ghost", "Ghost" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "primary"
+    }, {
+      "id" : "f6c048d7-bcc2-3ed1-01c4-b9841d115c9c",
+      "name" : "icon_position",
+      "label" : "Icon Position",
+      "required" : false,
+      "locked" : false,
+      "display" : "radio",
+      "choices" : [ [ "left", "Left" ], [ "right", "Right" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "kind" : "primary"
+    }
+  }, {
+    "id" : "cdc39eeb-05ff-d4c1-03c8-960482e28f81",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "c377fa2c-bd87-c0e5-753f-d2bff5bef425",
+      "name" : "theme",
+      "label" : "Theme",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "light", "OnDark" ], [ "dark", "OnLight" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "6df69da3-f8e0-85a7-b5f3-b450de4078a2",
+      "name" : "textalignment",
+      "label" : "Text alignment",
+      "required" : false,
+      "locked" : false,
+      "type" : "textalignment",
+      "display_width" : null,
+      "default" : {
+        "text_align" : "LEFT"
+      }
+    }, {
+      "id" : "fb4eee1c-0253-be19-ba06-3bc5f37fbc3a",
+      "name" : "eyebrow_type",
+      "label" : "Eyebrow Type",
+      "inline_help_text" : "Select the Heading Type, H1, H2, H3, H4 and etc. <br>\nFor more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ], [ "div", "div" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null,
+      "default" : "div"
+    }, {
+      "id" : "2ed3c8c0-13b8-63b5-9c84-1487a56f20a9",
+      "name" : "heading_type",
+      "label" : "Heading Type",
+      "inline_help_text" : "Select the Heading Type, H1, H2, H3, H4 and etc. <br>\nFor more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "bc5a99d7-dbb5-3375-c476-f4cfb7caf4c8",
+      "name" : "display_type",
+      "label" : "Display Type",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "h1", "H1" ], [ "h2", "H2" ], [ "h3", "H3" ], [ "h4", "H4" ], [ "h5", "H5" ], [ "h6", "H6" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "a682e108-3304-89c0-316f-d933ff04969a",
+      "name" : "text_type",
+      "label" : "Text Type",
+      "inline_help_text" : "For more details about font-size please <a href=\"https://www.figma.com/file/OZZPhDtGvUtHuzYIDZ5RWx/Website-library-2023?type=design&node-id=2548-100982&t=K73U6cZtqxAaMAiN-0\">visit</a>.",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "2xl", "S3" ], [ "lg", "S2" ], [ "base", "S1" ], [ "sm", "S0" ], [ "xs", "s00" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    } ],
+    "tab" : "STYLE",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "textalignment" : {
+        "text_align" : "LEFT"
+      },
+      "eyebrow_type" : "div"
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "button" : {
+      "kind" : "primary"
+    },
+    "content" : {
+      "textalignment" : {
+        "text_align" : "LEFT"
+      },
+      "eyebrow_type" : "div"
+    }
+  }
+} ]

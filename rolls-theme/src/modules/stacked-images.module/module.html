@@ -1,0 +1,16 @@
+<div class="stack-container" id="stack-{{ module._uid }}" style="width: {{ module.container_width }}px; height: {{ module.container_height }}px;">
+  {% for item in module.images %}
+    {% if item.image.src %}
+      <div class="card" style="width: {{ item.image.width }}px; height: {{ item.image.height }}px;">
+        <img
+          src="{{ item.image.src }}"
+          alt="{{ item.image.alt }}"
+          loading="{{ item.image.loading }}"
+          width="{{ item.image.width }}"
+          height="{{ item.image.height }}"
+          class="card-image"
+        />
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

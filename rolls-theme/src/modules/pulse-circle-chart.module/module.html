@@ -1,0 +1,127 @@
+<div class="pulse-circle-chart card chart-card fade-in-up chart-container">
+  <h3 class="font-semibold mb-4 flex items-center">
+    {% if module.chart_icon.name %}
+      <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-purple-900/50 mr-3">
+        {% icon name="{{ module.chart_icon.name }}" style="{{ module.chart_icon.type }}" %}
+      </span>
+    {% endif %}
+    {{ module.chart_title }}
+  </h3>
+  
+  <div class="flex items-center justify-center space-x-8">
+    <div class="relative w-40 h-40 donut-container">
+      <svg class="w-full h-full" viewBox="0 0 42 42">
+        <!-- Background circle -->
+        <circle cx="21" cy="21" r="15.915" fill="none" stroke="#1e1b3a" stroke-width="6"/>
+        
+        {% set total = 0 %}
+        {% for segment in module.segments %}
+          {% set offset = total %}
+          {% set total = total + segment.value %}
+          <!-- Segment {{ loop.index }}: {{ segment.segment_label }} ({{ segment.value }}%) -->
+          <circle class="chart-arc chart-element" 
+                  cx="21" cy="21" r="15.915" 
+                  fill="none" 
+                  stroke="{{ segment.color }}" 
+                  stroke-width="6" 
+                  stroke-dasharray="{{ segment.value }} {{ 100 - segment.value }}" 
+                  stroke-dashoffset="-{{ offset }}"
+                  data-tooltip="{{ segment.tooltip or (segment.value ~ '% - ' ~ segment.segment_label) }}"
+                  data-segment="{{ loop.index0 }}"
+                  style="transform: rotate(-90deg); transform-origin: 21px 21px; pointer-events: all;"/>
+        {% endfor %}
+      </svg>
+      
+      <!-- Center text -->
+      {% if module.center_text %}
+        <div class="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
+          <p class="text-sm font-semibold">{{ module.center_text|safe }}</p>
+        </div>
+      {% endif %}
+      
+      <!-- Tooltip element -->
+      <div class="donut-tooltip" id="donut-tooltip-{{ name }}"></div>
+    </div>
+    
+    {% if module.show_legend %}
+      <ul class="text-sm space-y-2 text-gray-300">
+        {% for segment in module.segments %}
+          <li class="flex items-center cursor-pointer hover:text-white transition-colors chart-element" 
+              data-tooltip="{{ segment.tooltip or (segment.value ~ '% - ' ~ segment.segment_label) }}">
+            <span class="w-3 h-3 rounded-full mr-2" style="background-color: {{ segment.color }};"></span>
+            {{ segment.segment_label }} ({{ segment.value }}%)
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+(function() {
+  const moduleId = 'donut-{{ name }}';
+  if (window[moduleId + '_initialized']) return;
+  window[moduleId + '_initialized'] = true;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('#donut-tooltip-{{ name }}').parentElement;
+    const segments = container.querySelectorAll('.chart-arc');
+    const tooltip = document.getElementById('donut-tooltip-{{ name }}');
+    
+    // Add hover interactions
+    segments.forEach((segment, index) => {
+      segment.addEventListener('mouseenter', function(e) {
+        const tooltipText = segment.getAttribute('data-tooltip');
+        if (tooltipText && tooltip) {
+          tooltip.textContent = tooltipText;
+          tooltip.style.opacity = '1';
+          tooltip.style.visibility = 'visible';
+        }
+        segment.style.filter = 'brightness(1.3)';
+        segment.style.strokeWidth = '7';
+      });
+      
+      segment.addEventListener('mouseleave', function(e) {
+        if (tooltip) {
+          tooltip.style.opacity = '0';
+          tooltip.style.visibility = 'hidden';
+        }
+        segment.style.filter = '';
+        segment.style.strokeWidth = '6';
+      });
+      
+      segment.addEventListener('click', function(e) {
+        // Optional: Add click interaction
+        const tooltipText = segment.getAttribute('data-tooltip');
+        console.log('Clicked:', tooltipText);
+      });
+    });
+    
+    // Animate chart on scroll
+    const chartObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Animate segments
+          const chartSegments = entry.target.querySelectorAll('.chart-arc:not(.animated)');
+          chartSegments.forEach((segment, index) => {
+            setTimeout(() => {
+              segment.style.opacity = '1';
+              segment.style.transform = 'rotate(-90deg) scale(1)';
+            }, 200 + (index * 100));
+            segment.classList.add('animated');
+          });
+          
+          chartObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    const chartContainer = document.querySelector('.pulse-circle-chart');
+    if (chartContainer) {
+      chartObserver.observe(chartContainer);
+    }
+  });
+})();
+</script>

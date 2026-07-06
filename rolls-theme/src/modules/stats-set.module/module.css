@@ -1,0 +1,20 @@
+.stats-set a{ color: #00b8ff; text-decoration: underline;
+}
+.stats-set.small-spacing{
+  padding: 2rem 0;
+  &:first-of-type{
+       border-top: 2px solid rgb(157 191 251 / var(--tw-divide-opacity, 1)); 
+  }
+  .stats-set-text:last-child{
+    margin-bottom: 0px;
+  }
+}
+@media (min-width: 991px){
+  .stats-set.small-spacing{
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
+  &:first-of-type{
+       border-top: 0; 
+  }
+  }
+}

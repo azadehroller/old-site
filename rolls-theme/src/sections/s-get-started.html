@@ -1,0 +1,48 @@
+<!--
+    templateType: section
+    label: Get started
+    isAvailableForNewContent: true
+    screenshotPath: ../images/section-previews/get-started.png
+    description: "Two columns section 50/50: Heading composition and form."
+-->
+
+{%  dnd_section
+    vertical_alignment="MIDDLE",
+    class="s-layout s-get-started"
+%}
+    {% dnd_column 
+        offset=0,
+        width=6,
+    %}
+        {% dnd_row %}
+            {# Module: Heading Composition #}
+            {% dnd_module path="../modules/heading-composition",
+                label="Modules: Header Composition",
+                content={
+                    "eyebrow":"VENUE MANAGEMENT SOFTWARE FOR ATTRACTIONS",
+                    "title":"Ready to get started?",
+                    "text": "We've built powerful, easy-to-use tools to help operators like you more effectively run their businesses, drive revenue growth, and deliver amazing guest experiences. Here's what ROLLER can help you accomplish: Increase online conversion rate Drive repeat visitation Save time managing multiple venues Deliver superior guest experiences Personalise marketing communication."
+                },
+                styles={
+                    "textalignment": {
+                        "text_align": "LEFT",
+                    },
+                    "heading_type":"h2",                
+                    "text_type":"base",                
+                }
+            %}
+            {% end_dnd_module %}
+        {% end_dnd_row %}
+    {% end_dnd_column %}
+    {% dnd_column 
+        offset=6,
+        width=6,
+    %}
+        {% dnd_row %}
+            <!-- Form module tag for use in templates -->
+            {% dnd_module path='@hubspot/form' %}
+            {% end_dnd_module %}
+
+        {% end_dnd_row %}
+    {% end_dnd_column%}
+{% end_dnd_section %}

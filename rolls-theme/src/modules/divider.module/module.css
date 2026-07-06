@@ -1,0 +1,48 @@
+/* Custom CSS - Parent selector with :has() cannot be done with Tailwind alone */
+
+/* Utility class for 2px height */
+.h-\[2px\] {
+    height: 2px;
+}
+
+/* When divider is shown */
+.dnd-section:has(.divider-shown) {
+    margin-block: 56px;
+}
+.dnd-section:has(.divider.light){
+  background-color: transparent;
+}
+.dnd-section:has(.divider.dark.divider-hidden){
+  background-color: #011840;
+  padding-block: 40px;
+  margin-block: 0px;
+}
+/* When divider is hidden */
+.dnd-section:has(.divider-hidden) {
+    margin-block: 40px;
+}
+
+@media (min-width: 768px) {
+      .dnd-section:has(.divider-shown) {
+        margin-block: 80px;
+    }
+    .dnd-section:has(.divider-hidden) {
+        margin-block: 60px;
+    }
+.dnd-section:has(.divider-hidden.short) {
+        margin-block: 40px;
+    }
+.dnd-section:has(.divider-hidden.tall) {
+        margin-block: 80px;
+    }
+  .dnd-section:has(.divider.dark.divider-hidden.short){
+  background-color: #011840;
+  padding-block: 40px;
+  margin-block: 0px;
+}
+  .dnd-section:has(.divider.dark.divider-hidden.tall){
+  background-color: #011840;
+  padding-block: 80px;
+  margin-block: 0px;
+}
+}

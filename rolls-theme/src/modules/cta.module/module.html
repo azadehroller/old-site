@@ -1,0 +1,40 @@
+{# Variables #}
+{% set heading = module.heading %}
+{% set description = module.description %}
+{% set button = module.button %}
+
+<section class="cta-module">
+  <div class="cta-content">
+    <h2 class="cta-heading">{{ heading }}</h2>
+    {% if description %}
+    <div class="cta-description">{{ description }}</div>
+    {% endif %}
+  </div>
+
+  {% if button.button_text %}
+    {% set href = button.button_link.url.href || '#' %}
+    {% set url_type = button.button_link.url.type %}
+    {% set new_tab = button.button_link.open_in_new_tab %}
+    {% set no_follow = button.button_link.no_follow %}
+    {% set rel = [] %}
+
+    {% if url_type is equalto 'EMAIL_ADDRESS' and button.button_link.url.href %}
+      {% set href = 'mailto:' + button.button_link.url.href %}
+    {% endif %}
+    {% if no_follow %}
+      {% do rel.append('nofollow') %}
+    {% endif %}
+    {% if new_tab %}
+      {% do rel.append('noopener') %}
+    {% endif %}
+
+    <a
+      class="button-all relative inline-flex items-center cursor-pointer select-none appearance-none no-underline tracking-tight leading-6 font-semibold text-md transition ease-in-out duration-300 w-full sm:w-auto  test whitespace-nowrap bg-neutral-white hover:bg-neutral-20 rounded-3xl py-2 px-4 text-primary-50 border-[1px] cta-button"
+      href="{{ href }}"
+      {% if new_tab %}target="_blank"{% endif %}
+      {% if rel %}rel="{{ rel|join(' ') }}"{% endif %}
+    >
+      {{ button.button_text }}
+    </a>
+  {% endif %}
+</section>

@@ -1,0 +1,44 @@
+.pulse-hero-title {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.pulse-hero-title__main {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.pulse-hero-title__sub {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.pulse-hero-title.animated .pulse-hero-title__main {
+  animation: titleFadeIn 1.2s ease-out;
+  animation-fill-mode: both;
+}
+
+.pulse-hero-title.animated .pulse-hero-title__sub {
+  animation: titleFadeIn 1.2s ease-out 0.3s;
+  animation-fill-mode: both;
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

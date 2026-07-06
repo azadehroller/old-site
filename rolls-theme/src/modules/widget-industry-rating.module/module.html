@@ -1,0 +1,58 @@
+{# Variables #}
+{% set eyebrow = module.content.eyebrow_text %}
+{% set title = module.content.title %}
+{% set badges = module.content.badges %}
+{% set image = module.image.thumbnail %}
+
+{# Section Markup #}
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-3 w-full bg-[#F6F9FF] shadow-2xl rounded-[32px] py-5 px-4 lg:p-6">
+    <div class="grid gap-4">
+        <div class="text-secondary-50 font-extrabold uppercase">{{eyebrow || 'USER REVIEWS'}}</div>
+        <h2 class="text-primary-50 m-0">{{title || 'See what other operators have to say'}}</h2>
+        <ul class="flex gap-2 md:gap-3 m-0">
+            {% for item in badges %}
+                {% set href = item.badge_link.url.href %}
+                {% if item.badge_link.url.type == "EMAIL_ADDRESS" %}
+                {% set href = "mailto:" + href %}
+                {% endif %}
+                {% set rel = [] %}
+                {% if item.badge_link.no_follow %}
+                {% do rel.append("nofollow") %}
+                {% endif %}
+                {% if item.badge_link.open_in_new_tab %}
+                {% do rel.append("noopener") %}
+                {% endif %}
+
+                <li class="w-[130px] md:w-[150px]">
+                    <a href="{{ href }}"
+                        {% if item.badge_link.open_in_new_tab %}target="_blank"{% endif %}
+                        {% if rel %}rel="{{ rel|join(" ") }}"{% endif %}
+                    >
+                        {# Image #}
+                        {% image 
+                            label='Image', 
+                            alt='{{item.badge.alt}}', 
+                            src='{{item.badge.src}}',
+                            loading="lazy",
+                            width={{item.badge.width}},
+                            no_wrapper=True
+                        %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="hidden lg:block max-w-[416px] m-auto [&>img]:spect-square [&>img]:w-full [&>img]:object-cover">
+        {# Image #}
+        {% image 
+            label='Image', 
+            alt='{{image.alt}}', 
+            src='{{image.src}}',
+            loading="lazy",
+            width={{image.width}},
+            no_wrapper=True
+        %}
+    </div>
+</section>
+
+

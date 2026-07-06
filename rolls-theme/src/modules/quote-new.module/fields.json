@@ -1,0 +1,312 @@
+[ {
+  "id" : "7c0df1b8-fc7a-f9da-1534-b30309d9759c",
+  "name" : "styles",
+  "label" : "Style",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "0777bc37-0b99-3ade-882e-cf12f6b2f7f3",
+    "name" : "alignment",
+    "label" : "Alignment",
+    "required" : false,
+    "locked" : false,
+    "alignment_direction" : "BOTH",
+    "type" : "alignment",
+    "display_width" : null,
+    "default" : { }
+  }, {
+    "id" : "5ed0b7d6-7277-ef79-ccec-2dc04c44c35a",
+    "name" : "theme",
+    "label" : "Theme",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "light", "OnDark" ], [ "dark", "OnLight" ], [ "gxscore", "GxScore" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "dark"
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "alignment" : { },
+    "theme" : "dark"
+  }
+}, {
+  "id" : "1222af36-bd80-00bd-5bc8-e2cbd3ec15a5",
+  "name" : "style_variant",
+  "label" : "Style Variant",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "85f39819-5780-f4da-fa1b-1da664e2f236",
+    "name" : "style",
+    "label" : "Style",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "extrabold", "Medium" ], [ "regular", "Small" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "extrabold"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "style" : "extrabold"
+  }
+}, {
+  "id" : "1439a93a-c94e-240e-9a4f-794bcd0b3200",
+  "name" : "quote_settings",
+  "label" : "Quote Settings",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "b62957d6-72d2-c5b5-d7f6-325b1ad39485",
+    "name" : "content",
+    "label" : "Content",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "f3a1db65-245f-8adc-487e-1acb1176bbab",
+      "name" : "quote_text",
+      "label" : "Text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "“Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus. Sed sagittis risus proin lacinia at viverra sed ut at. Metus pellentesque aliquam et lacus ultrices vulputate aliquet.”"
+    }, {
+      "id" : "0cb53ce6-5462-1ec4-5746-2ebdcd2b5a0d",
+      "name" : "quote_author",
+      "label" : "Author",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "John Smith"
+    }, {
+      "id" : "206571d5-374b-5908-71ae-4f2c14280b46",
+      "name" : "quote_title",
+      "label" : "Title",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Head of Wireframe, Universal Website Group"
+    }, {
+      "id" : "8fd1c4ff-1c20-d9bc-c022-31a2ce10cd2f",
+      "name" : "customer_story_link",
+      "label" : "Customer Story Link",
+      "required" : false,
+      "locked" : false,
+      "supported_types" : [ "EXTERNAL", "CONTENT" ],
+      "show_advanced_rel_options" : false,
+      "type" : "link",
+      "display_width" : null,
+      "default" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      }
+    }, {
+      "id" : "a3b18380-1d20-487e-c0bf-c7011fe4c62e",
+      "name" : "link_label",
+      "label" : "Link Label",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : "Read more"
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "quote_text" : "“Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus. Sed sagittis risus proin lacinia at viverra sed ut at. Metus pellentesque aliquam et lacus ultrices vulputate aliquet.”",
+      "quote_author" : "John Smith",
+      "quote_title" : "Head of Wireframe, Universal Website Group",
+      "customer_story_link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      },
+      "link_label" : "Read more"
+    }
+  }, {
+    "id" : "a1298fa4-c0c9-9d35-09e8-f33214b7c1ba",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "children" : [ {
+      "id" : "7a957bfe-645e-2348-b7d2-9b2281c97b30",
+      "name" : "image_options",
+      "label" : "Image Options",
+      "required" : false,
+      "locked" : false,
+      "display" : "select",
+      "choices" : [ [ "avatar", "Avatar" ], [ "logo", "Logo" ] ],
+      "multiple" : false,
+      "reordering_enabled" : true,
+      "preset" : null,
+      "type" : "choice",
+      "display_width" : null
+    }, {
+      "id" : "c5f4c08c-ecb9-31ce-84e1-01cbf8c57a95",
+      "name" : "quote_avatar",
+      "label" : "Avatar",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "quote_settings.image.image_options",
+        "controlling_value_regex" : "avatar",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "exact",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/dp.png",
+        "alt" : "Quote Image",
+        "loading" : "lazy",
+        "width" : 72,
+        "height" : 72,
+        "max_width" : 48,
+        "max_height" : 48
+      }
+    }, {
+      "id" : "eecd2946-d4bc-d51f-78e5-0e04f894bc00",
+      "name" : "quote_logo",
+      "label" : "Logo",
+      "required" : false,
+      "locked" : false,
+      "visibility" : {
+        "controlling_field" : null,
+        "controlling_field_path" : "quote_settings.image.image_options",
+        "controlling_value_regex" : "logo",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      },
+      "responsive" : true,
+      "resizable" : true,
+      "show_loading" : false,
+      "type" : "image",
+      "display_width" : null,
+      "default" : {
+        "size_type" : "exact",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Image-placeholder@2x-1.png",
+        "alt" : "Image-placeholder@2x-1",
+        "loading" : "lazy",
+        "width" : 192,
+        "height" : 103,
+        "max_width" : 384,
+        "max_height" : 208
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : {
+      "quote_avatar" : {
+        "size_type" : "exact",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/dp.png",
+        "alt" : "Quote Image",
+        "loading" : "lazy",
+        "width" : 72,
+        "height" : 72,
+        "max_width" : 48,
+        "max_height" : 48
+      },
+      "quote_logo" : {
+        "size_type" : "exact",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Image-placeholder@2x-1.png",
+        "alt" : "Image-placeholder@2x-1",
+        "loading" : "lazy",
+        "width" : 192,
+        "height" : 103,
+        "max_width" : 384,
+        "max_height" : 208
+      }
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "content" : {
+      "quote_text" : "“Quis ut dui neque turpis in. Velit urna montes mi eu nunc id porttitor venenatis. Varius ac cras diam aliquam ut ullamcorper rhoncus. Sed sagittis risus proin lacinia at viverra sed ut at. Metus pellentesque aliquam et lacus ultrices vulputate aliquet.”",
+      "quote_author" : "John Smith",
+      "quote_title" : "Head of Wireframe, Universal Website Group",
+      "customer_story_link" : {
+        "url" : {
+          "content_id" : null,
+          "type" : "EXTERNAL",
+          "href" : ""
+        },
+        "open_in_new_tab" : false,
+        "no_follow" : false
+      },
+      "link_label" : "Read more"
+    },
+    "image" : {
+      "quote_avatar" : {
+        "size_type" : "exact",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/dp.png",
+        "alt" : "Quote Image",
+        "loading" : "lazy",
+        "width" : 72,
+        "height" : 72,
+        "max_width" : 48,
+        "max_height" : 48
+      },
+      "quote_logo" : {
+        "size_type" : "exact",
+        "src" : "https://22392890.fs1.hubspotusercontent-na1.net/hubfs/22392890/Image-placeholder@2x-1.png",
+        "alt" : "Image-placeholder@2x-1",
+        "loading" : "lazy",
+        "width" : 192,
+        "height" : 103,
+        "max_width" : 384,
+        "max_height" : 208
+      }
+    }
+  }
+} ]

@@ -1,0 +1,73 @@
+[ {
+  "id" : "slider_label",
+  "name" : "slider_label",
+  "label" : "Slider Label",
+  "help_text" : "Accessible label for the slider (screen readers).",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Amount"
+}, {
+  "id" : "min_value",
+  "name" : "min_value",
+  "label" : "Minimum Value",
+  "help_text" : "Minimum value for the slider.",
+  "required" : true,
+  "locked" : false,
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 1000
+}, {
+  "id" : "max_value",
+  "name" : "max_value",
+  "label" : "Maximum Value",
+  "help_text" : "Maximum value for the slider.",
+  "required" : true,
+  "locked" : false,
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 25000
+}, {
+  "id" : "default_value",
+  "name" : "default_value",
+  "label" : "Default Value",
+  "help_text" : "Starting value when the page loads. Must be between min and max.",
+  "required" : true,
+  "locked" : false,
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 13000
+}, {
+  "id" : "step",
+  "name" : "step",
+  "label" : "Step",
+  "help_text" : "Increment between values (e.g. 100 steps by hundreds).",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 100
+}, {
+  "id" : "active_color",
+  "name" : "active_color",
+  "label" : "Active Track Color",
+  "help_text" : "Color of the filled (active) portion of the track.",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#1a56db",
+    "opacity" : 100
+  }
+} ]

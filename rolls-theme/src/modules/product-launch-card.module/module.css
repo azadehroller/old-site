@@ -1,0 +1,268 @@
+/* ==========================================================================
+   Product Launch Card Module
+   Pure CSS — no Tailwind. Uses custom properties, nesting, :has().
+   ========================================================================== */
+
+.plc-card {
+  --plc-max-width: 1312px; 
+  --plc-card-bg: #fff;
+  --plc-image-bg: #fff;
+  --plc-eyebrow-color: #0960f6;
+  --plc-title-color: #011840;
+  --plc-text-color: #011840;
+  --plc-feature-text-color: #0960f6;
+  --plc-feature-icon-bg: #ebf2fe;
+  --plc-feature-icon-color: #0960f6;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--plc-max-width);
+  margin-inline: auto;
+/*   background: var(--plc-card-bg); */
+  border-radius:  32px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 16px 0 rgba(7, 77, 197, 0.05),
+    0 24px 40px 0 rgba(7, 77, 197, 0.10);
+}
+
+.plc-image {
+  display: block;
+  background: var(--plc-image-bg);
+}
+
+/* Mobile image (≤ 991px): full-width, natural aspect ratio, min 300px tall */
+.plc-image.plc-image--mobile {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Desktop image: hidden below 992px */
+.plc-image.plc-image--desktop {
+  display: none;
+}
+
+.plc-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.plc-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.plc-eyebrow {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--plc-eyebrow-color);
+}
+
+.plc-title {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: -.32px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--plc-title-color);
+}
+
+.plc-description *{
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--plc-text-color);
+
+  
+}
+.plc-description  *:last-child {
+    margin: 0;
+
+  }
+/* ----- Features ---------------------------------------------------------- */
+
+.plc-features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.plc-feature {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.plc-feature-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+/*   width: 24px;
+  height: 24px;
+  padding: 0.25rem; */
+/*   border-radius: 50%; */
+/*   background: var(--plc-feature-icon-bg);
+  color: var(--plc-feature-icon-color); */
+
+  & img,
+  & svg,
+  & .fa {
+    object-fit: contain;
+    color: inherit;
+    fill: currentColor;
+  }
+}
+
+.plc-feature-text,
+.plc-feature-link {
+  margin: 0;
+  font-weight: 600;
+  color: var(--plc-feature-text-color);
+  align-self: flex-start;
+}
+
+.plc-feature-link {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ----- Button ------------------------------------------------------------ */
+
+.plc-button {
+  /* Per-instance button tokens, overridden by [data-kind] modifiers below */
+  --plc-button-bg: #0960f6;
+  --plc-button-bg-hover: #053D9E;
+  --plc-button-color: #fff;
+  --plc-button-border: transparent;
+
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  border: 1px solid var(--plc-button-border);
+  border-radius: 980px;
+  background: var(--plc-button-bg);
+  color: var(--plc-button-color);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--plc-button-bg-hover);
+  }
+
+  &[data-kind="primary"] {
+    --plc-button-bg: #ff290c;
+    --plc-button-bg-hover: #660c00;
+  }
+
+  &[data-kind="secondary"] {
+    --plc-button-bg: #033180;
+    --plc-button-bg-hover: #011332;
+  }
+
+  &[data-kind="tertiary"] {
+    --plc-button-bg: #fff;
+    --plc-button-bg-hover: #e5e5e4;
+    --plc-button-color: #033180;
+    --plc-button-border: currentColor;
+  }
+
+  &[data-kind="ghost"] {
+    --plc-button-bg: transparent;
+    --plc-button-bg-hover: transparent;
+    --plc-button-color: #033180;
+    padding-inline: 0;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+
+  &[data-kind="industry_report"] {
+    --plc-button-bg: #0960f6;
+    --plc-button-bg-hover: #032A6E;
+  }
+}
+
+.plc-button-arrow {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  transition: all .35s ease-in-out;
+
+  .plc-button:hover &,
+  .plc-button:focus-visible & {
+    transform: translateX(0.25rem);
+  }
+}
+
+/* ----- Desktop layout ---------------------------------------------------- */
+
+@media (min-width: 992px) {
+  .plc-card {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .plc-image.plc-image--mobile {
+    display: none;
+  }
+
+  .plc-image.plc-image--desktop {
+    display: block;
+    flex-shrink: 0;
+    width: 304px;
+    height: 100%;
+    align-self: stretch;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .plc-description * {
+    font-size: 18px;
+  }
+
+  .plc-button {
+    align-self: flex-start;
+    width: auto;
+  }
+}

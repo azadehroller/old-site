@@ -1,0 +1,89 @@
+/* Auto Play Slider — mobile-first */
+
+.aps {
+  --aps-transition-duration: 500ms;
+  position: relative;
+  width: 100%;
+}
+
+.aps__viewport {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.aps__track {
+  display: flex;
+  will-change: transform;
+}
+
+.aps__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  margin: 0;
+}
+
+.aps__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+}
+
+.aps .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ≥ 434px — larger border-radius */
+@media (min-width: 433px) {
+  .aps__viewport,
+  .aps__image {
+    border-radius: 16px;
+  }
+}
+
+
+/* Reduced motion handled in JS by skipping auto-play entirely */
+
+/* Dot navigation — commented out for now
+.aps__controls {
+  display: flex;
+  justify-content: center;
+  padding-block-start: 16px;
+}
+
+.aps__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.aps__dot {
+  appearance: none;
+  border: none;
+  background: #D1D5DB;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 250ms ease, transform 250ms ease;
+}
+
+.aps__dot:hover {
+  background: #9CA3AF;
+}
+
+.aps__dot--active {
+  background: #0960F6;
+  transform: scale(1.2);
+}
+*/

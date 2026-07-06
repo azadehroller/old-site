@@ -1,0 +1,128 @@
+{% set has_bg_video = module.background_video_url %}
+{% set has_modal = module.modal_video_id and module.watch_button_text %}
+{% set heading_tag = module.heading_tag | default('h1') %}
+{# Wistia preconnect — in body because HubSpot modules can't inject <head>.
+   Modern browsers honour resource hints wherever they appear in the document. #}
+{% if has_modal %}
+<link rel="preconnect" href="https://fast.wistia.com" crossorigin>
+<link rel="dns-prefetch" href="https://fast.wistia.net">
+{% endif %}
+<section
+  class="video-hero"
+  style="
+    --vh-focal-x: {{ module.poster_focal_x | default(50) }}%;
+    --vh-focal-y: {{ module.poster_focal_y | default(50) }}%;
+  "
+>
+  {# Poster rendered as a real <img> so the browser preload scanner discovers
+     it immediately and fetches at high priority — a CSS background-image is
+     invisible to the scanner until the stylesheet is parsed and applied. #}
+  {% if module.poster_image.src %}
+  <img
+    class="video-hero__poster"
+    src="{{ module.poster_image.src }}"
+    srcset="{{ module.poster_image.src }}?width=600 600w,
+            {{ module.poster_image.src }}?width=1200 1200w,
+            {{ module.poster_image.src }}?width=1920 1920w"
+    sizes="100vw"
+    alt=""
+    fetchpriority="high"
+    loading="eager"
+    decoding="async"
+    {% if module.poster_image.width %}width="{{ module.poster_image.width }}"{% endif %}
+    {% if module.poster_image.height %}height="{{ module.poster_image.height }}"{% endif %}
+  >
+  {% endif %}
+
+  {# Background video: sources use data-src so no video bytes are fetched
+     during the critical path. JS swaps them in after window.load. #}
+  {% if has_bg_video %}
+    <video
+      class="video-hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="none"
+      aria-hidden="true"
+      {% if module.poster_image.src %}poster="{{ module.poster_image.src }}"{% endif %}
+    >
+      {% if module.background_video_webm_url %}
+        <source data-src="{{ module.background_video_webm_url }}" type="video/webm">
+      {% endif %}
+      <source data-src="{{ module.background_video_url }}" type="video/mp4">
+    </video>
+  {% endif %}
+  <div class="video-hero__overlay" aria-hidden="true"></div>
+
+  <div class="video-hero__container">
+    <div class="video-hero__text">
+      {% if module.heading %}
+        <{{ heading_tag }} class="video-hero__heading">{{ module.heading }}</{{ heading_tag }}>
+      {% endif %}
+      {% if module.subheading %}
+        <p class="video-hero__sub">{{ module.subheading }}</p>
+      {% endif %}
+    </div>
+    {% if has_modal %}
+      <div class="video-hero__ctas">
+        <button
+          type="button"
+          class="video-hero__btn video-hero__btn--watch"
+          data-video-id="{{ module.modal_video_id }}"
+          aria-haspopup="dialog"
+        >
+          {{ module.watch_button_text }}
+          <svg class="video-hero__play-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if has_modal %}
+    <div
+      class="video-hero__modal"
+      id="video-hero-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ module.watch_button_text }}"
+      hidden
+    >
+      <div class="video-hero__modal-backdrop"></div>
+      <div class="video-hero__modal-dialog">
+        <button type="button" class="video-hero__modal-close" aria-label="Close video">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        <div class="video-hero__modal-video">
+          <div
+            class="wistia_embed wistia_async_{{ module.modal_video_id }} playerColor=011840"
+            style="height:100%;width:100%"
+          >&nbsp;</div>
+          {% if module.modal_end_cta.button_text %}
+            <div class="video-hero__end-cta" hidden>
+              {% if module.modal_end_cta.message %}
+                <p class="video-hero__end-cta-msg">{{ module.modal_end_cta.message }}</p>
+              {% endif %}
+              <div class="video-hero__end-cta-actions">
+                {% if module.modal_end_cta.button_link.url.href %}
+                  <a
+                    href="{{ module.modal_end_cta.button_link.url.href }}"
+                    class="video-hero__btn video-hero__btn--primary"
+                    {% if module.modal_end_cta.button_link.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                  >{{ module.modal_end_cta.button_text }}</a>
+                {% endif %}
+                <button type="button" class="video-hero__end-cta-replay">&#8635; Replay</button>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</section>
+{# Wistia script removed — loaded on demand by module.js on Watch button
+   hover/click, eliminating an eager cross-origin request on every page load. #}

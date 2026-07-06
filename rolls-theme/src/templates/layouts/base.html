@@ -1,0 +1,157 @@
+<!--
+  templateType: none
+-->
+<!doctype html>
+<html lang="{{ html_lang }}" {{ html_lang_dir }} class="scroll-smooth" data-location="{{request.country}}">
+  <head>
+    <meta charset="utf-8">
+    {% if page_meta.html_title or pageTitle %}<title>{{ page_meta.html_title or pageTitle }}</title>{% endif %}
+    {% if site_settings.favicon_src %}<link rel="shortcut icon" href="{{ site_settings.favicon_src }}" />{% endif %}
+    <meta name="description" content="{{ page_meta.meta_description }}">
+
+    {{ require_css(get_asset_url("../../build/index.css")) }}
+
+    {{ require_js(get_asset_url("../../build/index.js"), { defer: true, position: 'footer'} ) }}
+
+    {# Typekit #}
+    <!--     <link rel="preload" as="style" href="https://p.typekit.net/p.css?s=1&k=alp3nnm&ht=tk&f=169.170.173.174.175.176&a=20359433&app=typekit&e=css">
+    <link rel="preconnect" href="https://p.typekit.net">
+    <link rel="stylesheet" href="https://use.typekit.net/alp3nnm.css"> -->
+
+
+    <!-- Preconnect to Adobe Fonts -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin>
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin>
+
+
+
+    <!-- Load it non-blocking -->
+    <link rel="stylesheet" href="https://use.typekit.net/alp3nnm.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://use.typekit.net/alp3nnm.css"></noscript>
+
+
+    
+
+    {# This is intended to be used if a template requires template specific style sheets #}
+    {% if template_css %}
+      {{ require_css(get_asset_url(template_css)) }}
+    {% endif %}
+    {# {{ require_css(get_asset_url("../../css/theme-overrides.css")) }} #}
+    {# To see a full list of what is included via standard_header_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
+    {{ standard_header_includes }}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.roller.software/#organization",
+      "name": "ROLLER Software",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 4.4,
+        "reviewCount": 197,
+        "bestRating": 5,
+        "worstRating": 1
+      },
+    "legalName": "ROLLER Networks Pty Ltd",
+    "url": "https://www.roller.software",
+    "logo": "{{site_settings.logo_src}}",
+    "description": "ROLLER Software is a cloud-based venue management platform for attractions and FECs to streamline operations and improve guest experience.",
+    "sameAs": [
+      "https://www.facebook.com/ROLLERSOFTWARE/",
+      "https://www.youtube.com/channel/UC7k0OBldm_7etXYmUrJopvA",
+      "https://www.instagram.com/rollersoftware/",
+      "https://www.linkedin.com/company/roller/"
+    ],
+    "foundingDate": "2010",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "Worldwide",
+        "url": "https://www.roller.software/support"
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "US",
+        "telephone": "+1 855 939 3313",
+        "url": "https://www.roller.software/support"
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "UK",
+        "telephone": "+44 808 258 0167",
+        "url": "https://www.roller.software/support"
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "areaServed": "AU",
+        "telephone": "+61 3 8592 6384",
+        "url": "https://www.roller.software/support"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "ROLLER Software Solutions",
+      "itemListElement": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.roller.software/#software",
+          "name": "ROLLER Software",
+          "applicationCategory": "Venue Management Software",
+          "operatingSystem": "Web",
+          "publisher": {
+            "@id": "https://www.roller.software/#organization"
+          },
+          "description": "{{ content.meta_description }}",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": 4.3,
+            "reviewCount": 55,
+            "bestRating": 5,
+            "worstRating": 1
+          },
+          "potentialAction": {
+            "@type": "Action",
+            "name": "Get Started with ROLLER",
+            "target": "https://www.roller.software/get-started/"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  </head>
+  <body class="font-body antialiased break-words leading-snug {{ builtin_body_classes }} {% if body_classes %}{{ body_classes }}{% endif %}  tpl-{{ content.template_path|split('/')|last|replace('.html','')|regex_replace('[^a-zA-Z0-9_-]','-')|lower|escape_attr }}">
+    <div class="body-wrapper {{ builtin_body_classes }}">
+      <div class="relative">
+      {% block header %}
+        {% module "module_168869697798612" path="/rolls-theme/modules/announcement", label="Module: Announcement" %}
+        {% global_partial path="../partials/header.html"  %}
+        {% module "module_16805022321563" path="/rolls-theme/modules/header-theme", label="Module: Header Theme" %}
+      {% endblock header %}
+
+      {# The main-content ID is used for the navigation skipper in the header.html file. More information on the navigation skipper can be found here: https://github.com/HubSpot/cms-theme-boilerplate/wiki/Accessibility #}
+
+      <main id="main-content" class="body-container-wrapper">
+        {% block body %}
+        {% endblock body %}
+      </main>
+
+      {% block footer %}
+        {% global_partial path="../partials/footer.html" %}
+      {% endblock footer %}
+
+      </div>
+    </div>
+    {# TODO: see to move this to another JS file #}
+    {% require_js %}
+      <script>let userCountryId='{{ request.geoip_country }}';const countriesObj={af:"Afghanistan",ax:"Åland Islands",al:"Albania",dz:"Algeria",ad:"Andorra",ao:"Angola",am:"Armenia",at:"Austria",az:"Azerbaijan",bh:"Bahrain",by:"Belarus",be:"Belgium",bj:"Benin",ba:"Bosnia and Herzegovina",bw:"Botswana",bv:"Bouvet Island",bg:"Bulgaria",bf:"Burkina Faso",bi:"Burundi",cm:"Cameroon",cv:"Cabo Verde",cf:"Central African Republic",td:"Chad",km:"Comoros",cd:"Congo (Democratic Republic of the)",cg:"Congo",ci:"Côte d’Ivoire",hr:"Croatia",cy:"Cyprus",cz:"Czech Republic",dk:"Denmark",dj:"Djibouti",eg:"Egypt",gq:"Equatorial Guinea",er:"Eritrea",ee:"Estonia",et:"Ethiopia",fk:"Falkland Islands",fo:"Faroe Islands",fi:"Finland",fr:"France",ga:"Gabon",gm:"Gambia",ge:"Georgia",de:"Germany",gh:"Ghana",gi:"Gibraltar",ge:"Greece",gl:"Greenland",gg:"Guernsey",gn:"Guinea",va:"Vatican City",hu:"Hungary",is:"Iceland",ir:"Iran",iq:"Iraq",ie:"Ireland",im:"Isle of Man",il:"Israel",it:"Italy",je:"Jersey",jo:"Jordan",kz:"Kazakhstan",ke:"Kenya",kv:"Korea (Democratic People’s Republic of)",kr:"Korea (Republic of)",kw:"Kuwait",lv:"Latvia",lb:"Lebanon",ls:"Lesotho",lr:"Liberia",ly:"Libya",li:"Liechtenstein",lt:"Lithuania",lx:"Luxembourg",mk:"Macedonia",mg:"Madagascar",mw:"Malawi",ml:"Mali",mt:"Malta",mr:"Mauritania",mu:"Mauritius",yt:"Mayotte",md:"Moldova",mc:"Monaco",me:"Montenegro",ma:"Morocco",mz:"Mozambique",mz:"Namibia",nl:"Netherlands",ne:"Niger",ng:"Nigeria",no:"Norway",om:"Oman",ps:"Palestine",pl:"Poland",pt:"Portugal",qa:"Qatar",re:"Réunion",ro:"Romania",ru:"Russia",rw:"Rwanda",sh:"Saint Helena",sm:"San Marino",st:"Sao Tome and Principe",sa:"Saudi Arabia",sn:"Senegal",rs:"Serbia",sc:"Seychelles",sl:"Sierra Leone",sk:"Slovakia",si:"Slovenia",so:"Somalia",za:"South Africa",gs:"South Georgia and the South Sandwich Islands",es:"Spain",sd:"Sudan",sj:"Svalbard",sz:"Swaziland",se:"Sweden",ch:"Switzerland",sy:"Syria",tz:"Tanzania",tg:"Togo",tn:"Tunisia",tr:"Turkey",ug:"Uganda",ug:"Ukraine",ae:"United Arab Emirates",eh:"Western Sahara",ye:"Yemen",zm:"Zambia",zw:"Zimbabwe",};const startingCurrencyLookup={au:"aud",nz:"aud",gb:"gbp",ca:"usd",us:"usd",};let startingCurrency;if(!userCountryId){startingCurrency="usd"}else if(countriesObj[userCountryId]){startingCurrency="eur"}else if(startingCurrencyLookup[userCountryId]){startingCurrency=startingCurrencyLookup[userCountryId]}else{startingCurrency="usd"}</script>
+    {% end_require_js %}
+    {# To see a full list of what is included via standard_footer_includes please reference this article: https://developers.hubspot.com/docs/cms/hubl/variables#required-page-template-variables #}
+    {{ standard_footer_includes }}
+  </body>
+</html>

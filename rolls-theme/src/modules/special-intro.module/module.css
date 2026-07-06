@@ -1,0 +1,183 @@
+/* Special Intro Module */
+/* Notebook paper styled intro component using semantic figure element */
+
+/* Google Font Import - Edu TAS Beginner */
+@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner:wght@400;500;600;700&display=swap');
+
+/* Container */
+.special-intro {
+  width: 100%;
+}
+
+/* Mobile-first base styles (formerly < 768px) */
+.special-intro__container {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow:
+    0px 8px 16px 0px rgba(7, 77, 197, 0.05),
+    0px 24px 40px 0px rgba(7, 77, 197, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Greeting Image (Top) */
+.special-intro__greeting-image {
+  max-height: 41px;
+  width: auto;
+  object-fit: contain;
+  align-self: flex-start;
+}
+
+/* Body Content / Figcaption with Notebook Lines (Middle) */
+/* Mobile: 16px font, 22.4px line-height (1.4 ratio) */
+.special-intro__body {
+  position: relative;
+  font-family: 'Edu TAS Beginner', cursive, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.32px;
+  color: #033180;
+}
+
+/* Notebook Paper Lines - Mobile */
+.special-intro__lines {
+/*   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(transparent,transparent 20.7px,#9dbffb 0,#9dbffb 21px);
+  background-position: 0 0;
+  pointer-events: none;
+  z-index: 0; */
+}
+
+.special-intro__content {
+  position: relative;
+  z-index: 1;
+}
+
+.special-intro__paragraph {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 22.4px;
+  white-space: pre-line;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: 11.5%;
+  text-underline-position: from-font;
+  text-decoration-color: #9dbffb;
+}
+
+/* Full-width dotted line after each paragraph (notebook rule) – same height as one line of text */
+.special-intro__paragraph-line {
+  display: block;
+  width: 100%;
+  height: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-bottom: 2px dotted #9dbffb;
+  line-height: inherit;
+  min-height: 1lh;
+  margin-top: 0.065em;
+  &:last-of-type{display: none;}
+}
+
+/* Signature Image (Bottom) */
+.special-intro__signature-image {
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+  align-self: flex-start;
+}
+
+/* ==========================================================================
+   Responsive Styles - Mobile First
+   ========================================================================== */
+
+/* Tablet (≥ 768px and < 1024px) - 20px font, 28px line-height */
+@media (min-width: 768px) {
+  .special-intro__container {
+    padding: 32px;
+    gap: 32px;
+    border-radius: 32px;
+  }
+
+  .special-intro__greeting-image {
+    max-height: 61px;
+  }
+
+  .special-intro__body {
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: -0.4px;
+  }
+
+  .special-intro__paragraph {
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  .special-intro__lines {
+/*     background-image: repeating-linear-gradient(
+      transparent,
+      transparent 26px,
+      #9DBFFB 25px,
+      #9DBFFB 26px
+    ); */
+  }
+      .special-intro__lines {
+/*         background-image: repeating-linear-gradient(transparent, transparent 26px, #9dbffb 0, #9dbffb 27px); */
+    }
+
+  .special-intro__signature-image {
+    max-height: 56px;
+  }
+}
+
+/* Desktop (≥ 1024px) - 24px font, 33.6px line-height */
+@media (min-width: 1024px) {
+  .special-intro__container {
+    padding: 48px;
+    gap: 32px;
+    border-radius: 32px;
+  }
+
+  .special-intro__greeting-image {
+    max-height: 92px;
+  }
+
+  .special-intro__body {
+    font-size: 24px;
+    line-height: 140%;;
+    letter-spacing: -0.48px;
+  }
+
+  .special-intro__paragraph {
+    font-size: 24px;
+    line-height: 140%;
+  }
+
+  .special-intro__lines {
+/*     background-image: repeating-linear-gradient(
+      transparent,
+      transparent 31.6px,
+      #9DBFFB 32.6px,
+      #9DBFFB 32.6px
+    ); */
+  }
+
+  .special-intro__signature-image {
+    max-height: 72px;
+  }
+}

@@ -1,0 +1,27 @@
+{# Macros #}
+{% import "../../templates/macros/macros.html" as macro %}
+
+{# Variables #}
+{% set stats = module.stats %}
+{% set theme = module.styles.theme %}
+{% set text_type = module.styles.text_type %}
+{% set spacing_style = module.styles.spacing_style %}
+
+{# Section Markup #}
+<div id="stats-set-{{name}}">
+        <div class="stats-set-non-global flex md:grid md:grid-cols-1 lg:flex flex-col md:flex-row justify-center content-center m-auto w-full gap-y-0 divide-y-2 lg:divide-y-0 divide-x-0 lg:divide-x-2 divide-navy-80 {{ macro.setTextColor(theme, 'divide-navy-80', 'divide-neutral-white', '') }}">
+            {% for stat in stats %}
+            {% set tag = stat.tag %}
+            {% set number = stat.stats_number %}
+            {% set text = stat.stats_text %}
+            <div class="stats-set   {% if spacing_style == "small" %} small-spacing {% endif %} flex flex-col items-center gap-2 ps-4 pe-4 text-center py-6 md:py-4 lg:py-0 relative {{ macro.setTextColor(theme, 'text-primary-50', 'text-neutral-white', '') }}">                {% if tag %}
+                <div class="bg-neutral-white flex py-1 px-2">
+                    <span class="uppercase font-bold">{{ tag || "Tag Name" }}</span>
+                </div>
+                {% endif %}
+                <strong class="font-bold text-[2.5rem] lg:text-[4rem] md:leading-[3.75rem] lg:leading-[4.5rem]">{{ number || "10%" }}</strong>
+                <p class="text-{{ text_type || "xl" }} md:max-w-[18rem] stats-set-text">{{text}}</p>
+            </div>
+            {% endfor %}
+        </div>
+</div>
